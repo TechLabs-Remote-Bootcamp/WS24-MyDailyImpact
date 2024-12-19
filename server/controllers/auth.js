@@ -1,84 +1,70 @@
-import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
-import User from '../models/User.js';
+import User from '../models/user.js';
 import generateToken from '../../src/utils/generateToken.js';
+import { ApiError } from '../../src/utils/errorHandler.js';
 
 export const register = async (req, res) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ 
-        message: 'Validation failed', 
-        errors: errors.array() 
-      });
-    }
-
-    const { email, password, name } = req.body;
-
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
-
-    const token = generateToken(user._id);
-
-    res.status(201).json({
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (error) {
-    console.error('Register error:', error);
-    res.status(500).json({ 
-      message: 'Server error',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw new ApiError(400, 'Validation failed', errors.array());
   }
+
+  const { email, password, name, birthday, gender } = req.body;
+
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    throw new ApiError(400, 'User already exists');
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+    birthday,
+    gender
+  });
+
+  const token = generateToken(user._id);
+
+  res.status(201).json({
+    token,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      birthday: user.birthday,
+      gender: user.gender
+    },
+  });
 };
 
 export const login = async (req, res) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ 
-        message: 'Validation failed', 
-        errors: errors.array() 
-      });
-    }
-
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
-    if (!user || !(await user.comparePassword(password))) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    const token = generateToken(user._id);
-
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ 
-      message: 'Server error',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw new ApiError(400, 'Validation failed', errors.array());
   }
+
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email }).select('+password');
+  if (!user || !(await user.comparePassword(password))) {
+    throw new ApiError(401, 'Invalid email or password');
+  }
+
+  await user.updateLastLogin();
+
+  const token = generateToken(user._id);
+
+  res.json({
+    token,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      birthday: user.birthday,
+      gender: user.gender
+    },
+  });
 };

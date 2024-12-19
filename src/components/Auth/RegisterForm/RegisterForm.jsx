@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, KeyRound, Loader2 } from 'lucide-react';
+import { User, Mail, KeyRound, Calendar, Users, Loader2 } from 'lucide-react';
 import styles from './RegisterForm.module.scss';
 
 export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
@@ -8,6 +8,8 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
     email: '',
     password: '',
     confirmPassword: '',
+    birthday: '',
+    gender: '',
   });
   const [validationError, setValidationError] = useState(null);
 
@@ -53,6 +55,39 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
+        </div>
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label htmlFor="birthday">Birthday</label>
+        <div className={styles.inputWrapper}>
+          <Calendar className={styles.icon} />
+          <input
+            id="birthday"
+            type="date"
+            required
+            value={formData.birthday}
+            onChange={(e) => setFormData({ ...formData, birthday: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label htmlFor="gender">Gender</label>
+        <div className={styles.inputWrapper}>
+          <Users className={styles.icon} />
+          <select
+            id="gender"
+            required
+            value={formData.gender}
+            onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+            className={styles.select}
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
         </div>
       </div>
 
