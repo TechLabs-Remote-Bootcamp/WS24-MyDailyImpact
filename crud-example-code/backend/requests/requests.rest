@@ -1,0 +1,14 @@
+POST http://localhost:5001/api/images/6762949dc2dbfd16f0fd35ac/comments
+Content-Type: application/json
+
+{
+    "comment": "I love this dish!",
+    "image": "6762949dc2dbfd16f0fd35ac"
+}
+###
+
+GET http://localhost:5001/api/images/6762949dc2dbfd16f0fd35ac/comments
+###
+
+GET http://localhost:5001/api/images
+###
