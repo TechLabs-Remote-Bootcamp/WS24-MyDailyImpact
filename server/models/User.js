@@ -53,6 +53,7 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
+    console.log(error);
     next(error);
   }
 });
@@ -62,6 +63,7 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
   try {
     return await bcrypt.compare(candidatePassword, this.password);
   } catch (error) {
+    console.log(error);
     throw new Error('Password comparison failed');
   }
 };
