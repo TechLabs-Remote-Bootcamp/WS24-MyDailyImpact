@@ -6,7 +6,7 @@ dotenv.config();
 const connectDB = async () => {
   try {
     const options = {
-      dbName: 'mdi_db', // Updated to match your database name
+      dbName: 'mydailyimpact_db', // Updated to match your database name
     };
 
     const conn = await mongoose.connect(process.env.MONGODB_URI, options);
