@@ -41,3 +41,7 @@ The system generates a JavaScript object containing:
 ## Integration with Frontend
 
 ## Testing
+
+## responsible Team Members
+- Kate
+- Ella
