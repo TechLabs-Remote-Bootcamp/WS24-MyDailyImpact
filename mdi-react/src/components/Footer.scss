@@ -1,7 +1,5 @@
-$primary-medium: #5055ba;
-$grey-100: #A4A2AA;
-$white: #fff;
-/*These will be changed to vars and added to a separate scss file dedicated to colors */
+@import "../styles/colors.scss";
+@import "../styles/fonts.scss";
 
 .footer {
   background-color: $primary-medium;
@@ -13,7 +11,7 @@ $white: #fff;
   position: relative;
   bottom: 0;
   width: 100%;
-  font-family: "Manrope", serif;
+  font-family: $font-family-general;
   display: inline-block;
 }
 
@@ -36,8 +34,8 @@ ul {
 }
 
 li {
-    margin-left: 1rem;
-    cursor: pointer;
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 a {
