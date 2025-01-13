@@ -1,0 +1,128 @@
+:root {
+  --primary: #050b8c;
+  --primary-medium: #5055ba;
+  --primary-light: #9b9ed7;
+  --primary-extralight: #e6e7f5;
+  --primary-dark: #03075e;
+  --secondary: #9abf49;
+  --secondary-medium: #6c8633;
+  --secondary-light: #b8d280;
+  --secondary-extralight: #e1ecc8;
+  --secondary-dark: #3e4c1d;
+  --red: #d10025;
+}
+
+.outer-grid-container {
+  display: grid;
+  min-height: 0;
+  padding: 0.8rem 1.2rem 0;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "logo heaven none"
+    "logo leaves none"
+    ". plant-stem blossom";
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  grid-area: logo;
+  margin-right: -3rem;
+
+  img {
+    width: 10rem;
+  }
+}
+
+.heaven-stripe {
+  grid-area: heaven;
+  height: 2.5rem;
+  margin: 0 1rem 1rem 8rem;
+  border-radius: 1.2rem;
+  background-color: var(--primary-medium);
+  opacity: 70%;
+  box-shadow: 0 0 6px 3px var(--primary-medium);
+}
+
+.plant-stem {
+  grid-area: plant-stem;
+  background-color: var(--secondary-medium);
+  height: 0.5rem;
+}
+
+.leaves {
+  grid-area: leaves;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-color: purple;
+  margin: 0 2.6rem 0 30rem;
+
+  .single {
+    display: grid;
+    grid-template-columns: 1rem 3rem 4rem;
+    grid-template-rows: 3rem 1.5rem;
+    justify-content: center;
+    margin-top: -1.5rem;
+
+    a {
+      font-weight: 500;
+      color: #fff;
+      text-decoration: inherit;
+    }
+    a:hover {
+      color: #fff;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .leaf-surface {
+        background-color: var(--secondary-medium);
+        box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
+      }
+      .leaf-stem {
+        border-right: solid var(--secondary-medium) 0.5rem;
+        opacity: 80%;
+      }
+    }
+
+    .leaf-surface {
+      grid-column: 2 / 4;
+      grid-row: 1 / 2;
+      background-color: var(--secondary);
+      border-radius: 50%;
+      transform: rotate(-20deg);
+      align-content: center;
+      margin-left: -0.8rem;
+      z-index: 100;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: auto;
+      }
+    }
+
+    .leaf-stem {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      width: 0.5rem;
+      justify-self: end;
+      margin-right: -0.1rem;
+      border-right: solid var(--secondary) 0.5rem;
+    }
+  }
+}
+
+.blossom {
+  grid-area: blossom;
+  background-color: red;
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 50%;
+  align-content: end;
+  margin-top: -0.9rem;
+  margin-left: -0.5rem;
+}
