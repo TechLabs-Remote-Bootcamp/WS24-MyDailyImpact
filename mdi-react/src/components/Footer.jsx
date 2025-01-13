@@ -1,4 +1,5 @@
 import "./Footer.scss";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -10,13 +11,13 @@ export default function Footer() {
         <nav>
           <ul className="footer-nav">
             <li className="footer-nav-item">
-              <a href="">Contact Us</a>
+              <Link to="/contact-us">Contact Us</Link>
             </li>
             <li className="footer-nav-item">
-              <a href="">Imprint</a>
+              <Link to="/imprint">Imprint</Link>
             </li>
             <li className="footer-nav-item">
-              <a href="">Privacy</a>
+              <Link to="/privacy">Privacy</Link>
             </li>
           </ul>
         </nav>
