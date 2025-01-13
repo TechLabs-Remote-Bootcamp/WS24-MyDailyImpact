@@ -1,0 +1,48 @@
+@import "../styles/colors.scss";
+@import "../styles/fonts.scss";
+
+.footer {
+  background-color: $primary-medium;
+  padding: 0;
+  text-align: center;
+  color: $white;
+  font-size: 0.75rem;
+  margin-top: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-family: $font-family-general;
+  display: inline-block;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 1rem;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+li {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+a {
+  color: $white;
+  text-decoration: none;
+  transition: all 150ms ease-out;
+  &:hover {
+    color: $grey-100;
+  }
+}
