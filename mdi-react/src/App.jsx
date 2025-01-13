@@ -16,7 +16,6 @@ function App() {
     <>
       <Header />
       <div>
-        Hello world
         <Routes>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
