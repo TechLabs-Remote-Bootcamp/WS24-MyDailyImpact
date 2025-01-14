@@ -11,9 +11,9 @@ export default function Header() {
       <div className="heaven-stripe"></div>
       <nav className="leaves">
         <li className="single">
-          <a href="/" className="leaf-surface">
+          <Link to="/" className="leaf-surface">
             <span>Home</span>
-          </a>
+          </Link>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
