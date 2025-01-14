@@ -7,6 +7,7 @@ import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import About from "./components/pages/About";
 import Community from "./components/pages/Community";
+import Content_LR from "./components/Content_LR";
 
 function App() {
   // I didn't delete this code yet because of orientation in the framework.
@@ -17,7 +18,7 @@ function App() {
       <Header />
       <div>
         <Routes>
-          <Route path="/home" element={<Home />}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/community" element={<Community />}></Route>
           <Route path="/login" element={<Login />}></Route>
