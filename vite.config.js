@@ -32,6 +32,7 @@
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import 'dotenv/config'
 
 export default defineConfig({
   plugins: [react()],
@@ -41,11 +42,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:5000', 
+        target: `http://127.0.0.1:${import.meta.env.VITE_API_PORT || '5000'}`,
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
-})
+  }
+)
