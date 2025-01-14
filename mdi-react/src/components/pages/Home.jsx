@@ -1,6 +1,6 @@
 import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
-import Community from "./Community";
+import RC_home from "../RC_home";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       LeftComponent={
         <LC_bigImage rotationOn={false} overflowText="My Daily Impact" />
       }
-      RightComponent={<Community />}
+      RightComponent={<RC_home />}
     />
   );
 }
