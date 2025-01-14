@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div className="outer-grid-container">
+    <div className="outer-header-grid">
       <div className="logo">
         <img src={logo} />
       </div>
       <div className="heaven-stripe"></div>
       <nav className="leaves">
         <li className="single">
-          <a href="/" className="leaf-surface">
+          <Link to="/" className="leaf-surface">
             <span>Home</span>
-          </a>
+          </Link>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
