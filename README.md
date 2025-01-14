@@ -1,94 +1,53 @@
-# Login/Register Feature with Authentication System
+# WS24-MyDailyImpact
 
-A secure authentication system built with React, Node.js, and MongoDB, featuring user registration and login functionality.
+A simple app to track your contribution to a sustainable plant-based lifestyle.
 
-## Features
+# Git Workflow Guidelines
 
-- **User Registration:** Create new accounts with:
-  - Full name
-  - Email
-  - Password
-  - Birthday
-  - Gender selection
+## Always Create a New Branch ➡️
 
-- **User Login:** Secure authentication with:
-  - Email/password login
-  - Remember me option
-  - JWT-based authentication
-  - Session management
+Never commit directly to the main branch.🚨⚠️
 
-- **Security Features:**
-  - Password hashing
-  - JWT token authentication
-  - Protected routes
-  - Input validation
+Always create a new `feature`, `fix`, `docs`, `test`, `design`, or `refactor` branch off the main before starting any work. This ensures that the main branch remains stable and production-ready.
 
-## Tech Stack
+```bash
+git checkout -b feature/short_description
+```
 
-- Frontend:
-  - React
-  - TailwindCSS
-  - Lucide Icons
-  - JWT handling
+[Read more about branch naming conventions](https://medium.com/@abhay.pixolo/naming-conventions-for-git-branches-a-cheatsheet-8549feca2534)
 
-- Backend:
-  - Node.js
-  - Express
-  - MongoDB
-  - Bcrypt for password hashing
+---
 
-## Installation
+## Commit Message Format 🫂
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/TechLabs-Remote-Bootcamp/WS24-MyDailyImpact
-   cd WS24-MyDailyImpact
-   ```
+### Structure:
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+Commit messages must strictly follow this format:
 
-3. Create a `.env` file in the root directory with the following variables:
-   ```
-   PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   ```
+```
+ <type>: <Message>
+```
 
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### Components:
 
-## API Endpoints
+- **<type>**: The type of change. Options:
+  - `feature`: For new features or functionalities.
+  - `fix`: For bug fixes.
+  - `docs`: For documentation updates.
+  - `test`: For test cases or testing updates.
+  - `refactor`: For refactoring code.
+- **<Message>**: A short, clear description of the change made.
 
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login existing user
+### Examples:
 
-## Environment Variables
+- ` feature: add user authentication`
+- ` fix: resolve login issue on empty password`
+- ` docs: update API documentation for user endpoints`
+- ` test: add test cases for payment module`
+- ` refactor: optimize database queries in reports`
 
-- `PORT`: Server port (default: 5000)
-- `MONGODB_URI`: MongoDB connection string
-- `JWT_SECRET`: Secret key for JWT token generation
+---
 
-## Contributing
+## Clean up 🧹
 
-1. Create a new branch for your feature:
-   ```bash
-   git checkout -b feature-name
-   ```
-
-2. Make your changes and commit:
-   ```bash
-   git add .
-   git commit -m "Description of changes"
-   ```
-
-3. Push to your branch:
-   ```bash
-   git push origin feature-name
-   ```
-
-4. Create a Pull Request from your branch to main
+After you have merged your code to the main branch, **please delete that branch**.
