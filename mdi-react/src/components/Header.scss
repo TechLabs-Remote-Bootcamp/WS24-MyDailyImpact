@@ -15,6 +15,7 @@
 .outer-header-grid {
   display: grid;
   min-height: 0;
+  max-width: 100vw;
   padding: 0.8rem 1.2rem 0;
   grid-template-columns: auto 1fr auto;
   grid-template-areas:
@@ -42,12 +43,14 @@
   background-color: var(--primary-medium);
   opacity: 70%;
   box-shadow: 0 0 6px 3px var(--primary-medium);
+  max-width: 100%;
 }
 
 .plant-stem {
   grid-area: plant-stem;
   background-color: var(--secondary-medium);
   height: 0.5rem;
+  max-width: 100%;
 }
 
 .leaves {
@@ -57,6 +60,7 @@
   justify-content: space-around;
   border-color: purple;
   margin: 0 2.6rem 0 30rem;
+  max-width: 100%;
 
   .single {
     display: grid;

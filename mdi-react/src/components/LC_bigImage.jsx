@@ -7,7 +7,7 @@ function LC_bigImage({ overflowText, textClass }) {
         src={treeworld}
         alt="A painted earth with many different trees along its circumfence line"
       />
-      <p className={textClass}>{overflowText}</p>
+      {/* <p className={textClass}>{overflowText}</p> */}
     </div>
   );
 }
