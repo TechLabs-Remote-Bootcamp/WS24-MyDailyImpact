@@ -1,5 +1,5 @@
 import "./Header.scss";
-import logo from "../images/MDI_logo.png";
+import logo from "../images/mdi_logo.png";
 import { Link } from "react-router-dom";
 
 export default function Header() {
