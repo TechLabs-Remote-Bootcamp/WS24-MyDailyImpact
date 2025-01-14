@@ -38,7 +38,8 @@ export default [
   js.configs.recommended,
   {
     rules: {
-      "no-unused-vars": "warn"
+      "no-unused-vars": "warn",
+      "react/prop-types": 0  //  0=off, 1=warn, 2=error
     }
   }
 ]

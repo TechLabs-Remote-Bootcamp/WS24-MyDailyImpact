@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div className="outer-grid-container">
+    <div className="outer-header-grid">
       <div className="logo">
         <img src={logo} />
       </div>
