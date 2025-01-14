@@ -3,9 +3,9 @@
 
 .content-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 4fr 1fr 5fr;
+  grid-template-columns: 1fr 1fr 10fr 1fr 4fr;
   grid-template-rows: repeat(3);
-  width: 500px;
+  width: 600px;
   color: $white;
 
   div {
