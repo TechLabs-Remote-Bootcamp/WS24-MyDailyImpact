@@ -3,6 +3,7 @@ import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
 import RC_login from "../RC_login.jsx";
 import Button from "../Button.jsx";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -10,12 +11,15 @@ export default function Login() {
       LeftComponent={
         <LC_bigImage rotationOn={false} overflowText="My Daily Impact" />
       }
-      RightComponent= {
-      <>
-      <RC_login />
-      <Button>Log in</Button>
-      </>
+      RightComponent={
+        <>
+          <RC_login />
+          <p>
+            New User? <Link to="/sign-up" className="link">Sign up</Link>
+          </p>
+          <Button>Log in</Button>
+        </>
       }
-      />
+    />
   );
 }

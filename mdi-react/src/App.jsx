@@ -4,9 +4,10 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
-import Login from "./components/pages/Login";
 import About from "./components/pages/About";
 import Community from "./components/pages/Community";
+import Login from "./components/pages/Login";
+import SignUp from "./components/pages/SignUp";
 import Content_LR from "./components/Content_LR";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/community" element={<Community />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/sign-up" element={<SignUp />} />
       </Routes>
       <Footer />
     </>

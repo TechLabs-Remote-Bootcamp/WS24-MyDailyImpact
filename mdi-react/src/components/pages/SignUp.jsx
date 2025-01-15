@@ -1,11 +1,11 @@
-import "./Sign-up.scss";
+import "./SignUp.scss";
 import Content_LR from "../Content_LR.jsx";
 import LC_bigImage from "../LC_bigImage.jsx";
-import RC_login from "../RC_login.jsx";
+import RC_signup from "../RC_signup.jsx";
 import Button from "../Button.jsx";
 
 
-export default function SignUp() {
+export default function Signup() {
   return (
     <Content_LR
       LeftComponent={
@@ -13,7 +13,7 @@ export default function SignUp() {
       }
       RightComponent={
         <>
-          <RC_login />
+          <RC_signup />
           <Button>Sign up</Button>
         </>
       }

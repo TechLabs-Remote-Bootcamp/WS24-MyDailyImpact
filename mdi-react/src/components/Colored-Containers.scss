@@ -1,0 +1,33 @@
+.colored-containers {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.box {
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.h2-box {
+  background-color: green;
+  color: white;
+  z-index: 3;
+}
+
+.h3-box {
+  background-color: lightgreen;
+  color: white;
+  margin-top: -1rem; // Adjust this value to control the overlap
+  z-index: 2;
+}
+
+.text-box {
+  background-color: palegreen;
+  color: black;
+  margin-top: -1rem; // Adjust this value to control the overlap
+  z-index: 1;
+}

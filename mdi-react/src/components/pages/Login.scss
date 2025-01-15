@@ -1,5 +1,8 @@
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+
 h2 {
-  color: blueviolet;
+  color: $primary-medium;
 }
 
 form {
@@ -8,4 +11,14 @@ form {
   align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
+}
+
+.link {
+  color: $primary-medium;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $secondary;
+  }
 }
