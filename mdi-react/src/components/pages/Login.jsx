@@ -14,7 +14,7 @@ export default function Login() {
       RightComponent={
         <>
           <RC_login />
-          <p>
+          <p className="sign-up-suggestion">
             New User? <Link to="/sign-up" className="link">Sign up</Link>
           </p>
           <Button>Log in</Button>
