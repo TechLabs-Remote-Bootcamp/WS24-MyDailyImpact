@@ -1,3 +1,7 @@
+# 20240115
+# Anna von Bank
+# Data from https://data.subak.org/dataset/su-eatable-life-a-comprehensive-database-of-carbon-and-water-footprints-of-food-commodities/resource/d7103775-5400-4676-a279-b026d134dc9b
+
 import pandas as pd
 
 # File path to the dataset
