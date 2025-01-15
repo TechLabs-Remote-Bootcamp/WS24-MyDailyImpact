@@ -8,7 +8,6 @@ import About from "./components/pages/About";
 import Community from "./components/pages/Community";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
-import Content_LR from "./components/Content_LR";
 
 function App() {
   // I didn't delete this code yet because of orientation in the framework.
