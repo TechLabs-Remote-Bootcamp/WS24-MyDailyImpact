@@ -3,14 +3,14 @@
 
 .content-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 10fr 1fr 4fr;
+  grid-template-columns: 1fr 1fr 10fr 1fr 3fr;
   grid-template-rows: repeat(3);
-  width: 600px;
+  max-width: 1000px;
   color: $white;
 
   div {
     border-radius: 30px;
-    padding: 0.6rem 1rem;
+    padding: 1rem 1.8rem;
   }
 
   .green-box {
@@ -19,6 +19,9 @@
     background-color: $secondary;
     font-family: $font-family-title;
     font-size: 3rem;
+    z-index: 100;
+    padding-bottom: 1.5rem;
+    line-height: 3.3rem;
   }
 
   .blue-box {
@@ -27,6 +30,11 @@
     background-color: $primary-medium;
     font-family: $font-family-page-title;
     font-size: 2.6rem;
+    margin-top: -2rem;
+    z-index: 60;
+    padding-top: 2.8rem;
+    padding-bottom: 1.4rem;
+    line-height: 2.4rem;
   }
 
   .text-box {
@@ -36,5 +44,9 @@
     font-family: $font-family-general;
     color: $grey-700;
     font-size: 1rem;
+    z-index: 10;
+    margin-top: -2rem;
+    z-index: 50;
+    padding-top: 2rem;
   }
 }
