@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "server": "node server/index.js",
+    "server": "node backend/index.js",
     "preview": "vite preview",
     "view-users": "node src/utils/viewUsers.js"
   },
