@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div className="outer-header-grid">
+    <header className="outer-header-grid">
       <div className="logo">
         <img src={logo} />
       </div>
@@ -37,6 +37,6 @@ export default function Header() {
       </nav>
       <div className="plant-stem"></div>
       <div className="blossom"></div>
-    </div>
+    </header>
   );
 }
