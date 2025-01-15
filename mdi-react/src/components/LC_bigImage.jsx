@@ -1,4 +1,4 @@
-import treeworld from "../images/treeWorld.png";
+import treeworld from "../images/treeWorld800.png";
 
 function LC_bigImage({ overflowText, textClass }) {
   return (
