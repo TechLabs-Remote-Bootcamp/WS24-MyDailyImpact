@@ -1,7 +1,7 @@
 import { validationResult } from 'express-validator';
 import User from '../models/user.js';
-import generateToken from '../../src/utils/generateToken.js';
-import { ApiError } from '../../src/utils/errorHandler.js';
+import generateToken from '../../frontend/src/utils/generateToken.js';
+import { ApiError } from '../../frontend/src/utils/errorHandler.js';
 
 export const register = async (req, res) => {
   const errors = validationResult(req);
