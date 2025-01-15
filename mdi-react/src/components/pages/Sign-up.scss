@@ -1,0 +1,14 @@
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+
+h2 {
+  color: $primary-medium;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
