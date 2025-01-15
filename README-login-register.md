@@ -52,7 +52,7 @@ A secure authentication system built with React, Node.js, and MongoDB, featuring
 
 3. Create a `.env` file in the root directory with the following variables:
    ```
-   PORT=5000
+   APP_PORT=5000
    MONGODB_URI=mongodb_connection_string
    JWT_SECRET=your_jwt_secret
    ```
