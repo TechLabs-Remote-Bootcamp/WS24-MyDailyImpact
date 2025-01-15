@@ -38,6 +38,7 @@ export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return defineConfig({
+    root: 'frontend',
     plugins: [react()],
     optimizeDeps: {
       exclude: ['lucide-react'],
