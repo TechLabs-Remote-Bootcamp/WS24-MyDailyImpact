@@ -11,12 +11,16 @@
   --secondary-dark: #3e4c1d;
   --red: #d10025;
 }
+
+/* Will update the above to match our universal styles using $variable format */
+
 header {
   position: sticky;
   top: 0;
   background-color: #fff;
   z-index: 1000;
 }
+
 .outer-header-grid {
   display: grid;
   min-height: 0;

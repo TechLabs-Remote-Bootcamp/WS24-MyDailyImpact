@@ -35,7 +35,7 @@ export default function Header() {
           <div className="leaf-stem"></div>
         </li>
       </nav>
-      <div className="plant-stem">The stem</div>
+      <div className="plant-stem"></div>
       <div className="blossom"></div>
     </header>
   );

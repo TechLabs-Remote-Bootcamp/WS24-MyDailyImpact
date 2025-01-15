@@ -1,17 +1,30 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-function Button ({ Component, children }) {
+// function Button ({ Component, children }) {
+//   return (
+//     <>
+//     <Component/>
+//     <p>{children}</p>
+//     </>
+//   );
+// }
+
+// Button.propTypes = {
+//     children: PropTypes.node,
+//     Component: PropTypes.Component
+// }
+
+// export default Button;
+
+import React from "react";
+import "./Button.scss"
+
+const Button = ({ children, onClick, disabled = false }) => {
   return (
-    <>
-    <Component/>
-    <p>{children}</p>
-    </>
+    <button className="primary-button" onClick={onClick} disabled={disabled}>
+      {children}
+    </button>
   );
-}
-
-Button.propTypes = {
-    children: PropTypes.node,
-    Component: PropTypes.Component
-}
+};
 
 export default Button;

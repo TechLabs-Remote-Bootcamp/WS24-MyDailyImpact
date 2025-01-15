@@ -1,21 +1,22 @@
+import React from "react";
+import ColoredContainers from "./Colored-Containers";
 import "../styles/rc_general.scss";
+import "./Colored-Containers.scss";
 
-export default function RC_home() {
+export default function RC_Home() {
   return (
-    <div className="content-container">
-      <div className="green-box">Join us for our impact journey</div>
-      <div className="blue-box">Every plant-based meal counts</div>
-      <div className="text-box">
-        <p>
-          Cupcake ipsum dolor sit amet. Tiramisu cake sweet soufflé dessert.
-          Chocolate cake tootsie roll tart cheesecake fruitcake biscuit
-          tiramisu. Cotton tiramisu cheesecake donut.
-        </p>
-        <p>
-          Muffin lollipop dessert liquorice jelly jelly beans powder. Fruitcake
-          jelly topping biscuit dragée cupcake.
-        </p>
-      </div>
+    <div>
+      <ColoredContainers
+      h2Text="Get ready for your impact journey"
+      h3Text="Every plant-based meal counts"
+      >
+      <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+      </p>
+      </ColoredContainers>
     </div>
   );
 }
