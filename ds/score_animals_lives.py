@@ -14,7 +14,9 @@ The following assumptions are made:
 
 1. Less meat is eaten for breakfast than for lunch or dinner. The assumption is that only 15% of a daily amount should be consumed as breakfast.
 2. For lunch or dinner, 100% of the average daily consumption of meat is assumed. 
-3. This calculation does not (yet) differentiate by gender. However, it can be assumed that men eat more meat than women. In a later step, meat consumption could therefore be weighted differently depending on gender.
+3. Since chickens are the most slaughtered animal species (see FAO data, 2022), the number of animals saved per kilogram is based on this (75.21 billion, next 3.19 billion ducks).  Since a chicken can weigh between 2-4kg, I assume 3kg per chicken. Based on the previously calculated value for meat consumption per kg for breakfast, lunch and dinner, the number of animals is calculated.
+The term land animal is used instead of chicken so that users are not confused if they do not eat chicken.
+4. This calculation does not (yet) differentiate by gender. However, it can be assumed that men eat more meat than women. In a later step, meat consumption could therefore be weighted differently depending on gender.
 
 The example of Germany makes this clear: average daily consumption is 76.59 kg (rounded). 
 Converted to a day, this corresponds to 210 grams of meat per day over 365 days, which is a common amount for a meal. 
@@ -68,14 +70,14 @@ country_input = 'Albania'
 try:
     meat_per_day = get_meat_per_day(df, country_input)
     
-    animal_saved_breakfast = meat_per_day * 0.15
-    animal_saved_lunch = meat_per_day * 1
-    animal_saved_dinner = meat_per_day * 1
+    animal_saved_breakfast = (meat_per_day * 0.15) / 3
+    animal_saved_lunch = (meat_per_day * 1) / 3
+    animal_saved_dinner = (meat_per_day * 1) / 3
 
-    print(f"Daily meat consumption per person in {country_input}: {meat_per_day:.2f} kg")
-    print(f"Animal saved for breakfast: {animal_saved_breakfast:.2f} kg") 
-    print(f"Animal saved for lunch: {animal_saved_lunch:.2f} kg") 
-    print(f"Animal saved for dinner: {animal_saved_dinner:.2f} kg")
+    print(f"Daily meat consumption per person in {country_input}: {meat_per_day:.2f}")
+    print(f"Land animal saved for breakfast: {animal_saved_breakfast:.2f}") 
+    print(f"Land animal saved for lunch: {animal_saved_lunch:.2f}") 
+    print(f"Land animal saved for dinner: {animal_saved_dinner:.2f}")
 except (ValueError, IndexError) as e:
     print(e)
 
