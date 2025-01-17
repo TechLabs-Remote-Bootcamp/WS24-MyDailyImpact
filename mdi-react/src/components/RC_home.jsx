@@ -12,7 +12,7 @@ export default function RC_Home() {
         h3Text="Every plant-based meal counts"
       >
         <div className="home-text">
-          <p>Did you know that</p>
+          <p>Did you know that:</p>
           <ul className="home-list">
             <li>
               by switching out meat-based meals with plant-based ones, you can
@@ -30,7 +30,9 @@ export default function RC_Home() {
             swapping out meat- for plant-based meals!
           </p>
           <Button>
-            <Link to="/sign-up">Join us!</Link>
+            <Link to="/sign-up" className="sign-up-button">
+              Join us!
+            </Link>
           </Button>
         </div>
       </ColoredContainers>
