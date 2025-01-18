@@ -8,6 +8,7 @@ import About from "./components/pages/About";
 import Community from "./components/pages/Community";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
+import Dashboard from "./components/pages/Dashboard";//+
 
 function App() {
   // I didn't delete this code yet because of orientation in the framework.
@@ -22,6 +23,7 @@ function App() {
         <Route path="/community" element={<Community />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </>

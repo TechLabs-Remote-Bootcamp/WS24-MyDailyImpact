@@ -1,5 +1,5 @@
-/* import { jwt } from './jwt';
- */
+import { jwt } from './jwt';
+
 const API_BASE_URL = '/api';
 
 export class ApiError extends Error {

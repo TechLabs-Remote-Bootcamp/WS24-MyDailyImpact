@@ -1,22 +1,30 @@
 import React, { useState } from "react";
 import { api } from "../utils/api";
 import ColoredContainers from './Colored-Containers';
+import { useAuth } from '../hooks/useAuth';
+import { Navigate } from "react-router-dom";
+
 
 export default function RC_login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isAuthenticated, user, login } = useAuth();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await api.login({ email, password });
       console.log("Login successful", response);
-      // Handle successful login (e.g., store token, redirect)
+      await login({ email, password });
     } catch (error) {
       console.error("Login failed", error);
-      // Handle login error (e.g., show error message)
     }
   };
+
+  if (isAuthenticated && user) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <div className="login-container">
