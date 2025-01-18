@@ -12,18 +12,3 @@ form {
   gap: 1rem;
   margin-bottom: 2rem;
 }
-
-.link {
-  color: $primary-medium;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $secondary;
-  }
-}
-
-.sign-up-suggestion {
-  margin-top: -1rem;
-  ;
-}

@@ -1,19 +1,19 @@
 import "./Header.scss";
-import logo from "../images/MDI_logo.png";
+import logo from "../images/mdi_logo.png";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div className="outer-grid-container">
+    <header className="outer-header-grid">
       <div className="logo">
         <img src={logo} />
       </div>
       <div className="heaven-stripe"></div>
       <nav className="leaves">
         <li className="single">
-          <a href="/" className="leaf-surface">
+          <Link to="/" className="leaf-surface">
             <span>Home</span>
-          </a>
+          </Link>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
@@ -35,8 +35,8 @@ export default function Header() {
           <div className="leaf-stem"></div>
         </li>
       </nav>
-      <div className="plant-stem">The stem</div>
+      <div className="plant-stem"></div>
       <div className="blossom"></div>
-    </div>
+    </header>
   );
 }

@@ -1,24 +1,15 @@
-import PropTypes from 'prop-types';
-import './Content_LR.scss'
+import "./Content_LR.scss";
 
-function Content_LR({LeftComponent, RightComponent}) {
+function Content_LR(props) {
+  const leftComponent = props.LeftComponent;
+  const rightComponent = props.RightComponent;
 
-    return (
-        <div className="lr-container">
-            <div>
-                <LeftComponent className="left-box" />
-            </div>
-            <div>
-                <RightComponent className="right-box" />
-            </div>
-        </div>
-    );
-}
-
-
-Content_LR.propTypes = {
-    LeftComponent : PropTypes.Component,
-    RightComponent : PropTypes.Component
+  return (
+    <div className="lr-container">
+      <div className="left-box">{leftComponent}</div>
+      <div className="right-box">{rightComponent}</div>
+    </div>
+  );
 }
 
 export default Content_LR;
