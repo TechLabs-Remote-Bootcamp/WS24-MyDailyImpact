@@ -5,10 +5,10 @@ function Content_LR(props) {
   const rightComponent = props.RightComponent;
 
   return (
-    <div className="lr-container">
+    <section className="lr-container">
       <div className="left-box">{leftComponent}</div>
       <div className="right-box">{rightComponent}</div>
-    </div>
+    </section>
   );
 }
 
