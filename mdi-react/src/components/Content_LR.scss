@@ -1,9 +1,45 @@
 .lr-container {
   position: relative;
   display: flex;
-  flex-direction: row;
-  column-gap: 4rem;
+  flex-wrap: nowrap;
+  column-gap: 2rem;
   padding: 0 2rem;
+  justify-content: center;
   align-items: center;
-  max-height: fit-content;
+  max-height: 80vh;
+}
+
+@media only screen and (min-width: 1000px) {
+  .right-box {
+    width: 50rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .right-box {
+    width: 40rem;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .lr-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1em;
+    padding: 0 2rem;
+    justify-content: center;
+    align-items: center;
+    align-items: flex-start;
+  }
+  .right-box {
+    width: 40rem;
+    height: 20rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .right-box {
+    width: 20rem;
+  }
 }
