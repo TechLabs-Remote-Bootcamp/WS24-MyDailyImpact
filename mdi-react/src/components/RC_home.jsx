@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function RC_Home() {
   return (
-    <>
+    <div className="home">
       <ColoredContainers
         h2Text="Get ready for your impact journey"
         h3Text="Every plant-based meal counts"
@@ -35,6 +35,6 @@ export default function RC_Home() {
           Join us!
         </Link>
       </Button>
-    </>
+    </div>
   );
 }
