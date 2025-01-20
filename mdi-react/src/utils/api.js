@@ -72,7 +72,8 @@ export const api = {
         credentials: 'include',
         body: JSON.stringify(data),
       });
-      
+      console.log('Server response:', response); // Add this line
+
       return handleResponse(response);
     } catch (error) {
       console.error('Register error:', error);

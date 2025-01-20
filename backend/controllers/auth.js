@@ -9,20 +9,27 @@ export const register = async (req, res) => {
     throw new ApiError(400, 'Validation failed', errors.array());
   }
 
-  const { email, password, name, birthday, gender } = req.body;
+  const { salutation, email, password, firstName, lastName, birthday, gender } = req.body;
 
   const userExists = await User.findOne({ email });
   if (userExists) {
     throw new ApiError(400, 'User already exists');
   }
 
-  const user = await User.create({
-    name,
-    email,
-    password,
-    birthday,
-    gender
-  });
+  let user;
+  try {
+    user = await User.create({
+      salutation,
+      firstName,
+      lastName,
+      email,
+      password,
+      birthday,
+      gender
+    });
+  } catch (error) {
+    throw new ApiError(500, 'Error creating user', error.message);
+  }
 
   const token = generateToken(user._id);
 
@@ -30,9 +37,10 @@ export const register = async (req, res) => {
     token,
     user: {
       id: user._id,
-      name: user.name,
+      salutation: user.salutation,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
-      role: user.role,
       birthday: user.birthday,
       gender: user.gender
     },
@@ -60,9 +68,10 @@ export const login = async (req, res) => {
     token,
     user: {
       id: user._id,
-      name: user.name,
+      salutation: user.salutation,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
-      role: user.role,
       birthday: user.birthday,
       gender: user.gender
     },
