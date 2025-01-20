@@ -67,7 +67,7 @@ header {
 
   .single {
     display: grid;
-    grid-template-columns: 1rem 3rem 4rem;
+    grid-template-columns: 1fr 3fr 4fr;
     grid-template-rows: 3rem 1.5rem;
     justify-content: center;
     margin-top: -1.5rem;
@@ -76,12 +76,14 @@ header {
       font-weight: 500;
       color: #fff;
       text-decoration: inherit;
-    }
-    a:hover {
-      color: #fff;
+
+      &:hover {
+        font-weight: 600;
+      }
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       cursor: pointer;
 
       .leaf-surface {
@@ -97,11 +99,13 @@ header {
     .leaf-surface {
       grid-column: 2 / 4;
       grid-row: 1 / 2;
+      position: relative;
+      top: 0.2rem;
+      right: 0.6rem;
       background-color: var(--secondary);
       border-radius: 50%;
       transform: rotate(-20deg);
       align-content: center;
-      margin-left: -0.8rem;
       z-index: 100;
 
       span {
@@ -115,9 +119,10 @@ header {
     .leaf-stem {
       grid-column: 1 / 2;
       grid-row: 2 / 3;
+      position: relative;
+      left: 0.1rem;
       width: 0.5rem;
       justify-self: end;
-      margin-right: -0.1rem;
       border-right: solid var(--secondary) 0.5rem;
     }
   }
@@ -148,5 +153,27 @@ header {
     transform: rotate(40deg);
     margin-left: -10px;
     margin-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .logo {
+    margin-right: -2rem;
+
+    img {
+      width: 7rem;
+    }
+  }
+
+  .leaves {
+    margin: 0 1rem 0 2rem;
+
+    li {
+      margin-left: 0.2rem;
+    }
+
+    .single .leaf-stem {
+      left: 0.2rem;
+    }
   }
 }

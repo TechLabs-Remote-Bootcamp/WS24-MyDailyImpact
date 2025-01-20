@@ -34,6 +34,12 @@ export default function Header() {
           </Link>
           <div className="leaf-stem"></div>
         </li>
+        <li className="single">
+          <Link to="/sign-up" className="leaf-surface">
+            <span>Sign up</span>
+          </Link>
+          <div className="leaf-stem"></div>
+        </li>
       </nav>
       <div className="plant-stem"></div>
       <div className="blossom">
