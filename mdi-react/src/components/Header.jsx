@@ -23,8 +23,8 @@ export default function Header() {
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/community" className="leaf-surface">
-            <span>Community</span>
+          <Link to="/recipeBot" className="leaf-surface">
+            <span>Recipe Bot</span>
           </Link>
           <div className="leaf-stem"></div>
         </li>
