@@ -36,7 +36,11 @@ export default function Header() {
         </li>
       </nav>
       <div className="plant-stem"></div>
-      <div className="blossom"></div>
+      <div className="blossom">
+        <div className="b-1"></div>
+        <div className="b-2"></div>
+        <div className="b-3"></div>
+      </div>
     </header>
   );
 }

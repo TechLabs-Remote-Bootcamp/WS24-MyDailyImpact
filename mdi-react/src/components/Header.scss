@@ -63,7 +63,6 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-color: purple;
   margin: 0 2.6rem 0 auto;
 
   .single {
@@ -126,11 +125,28 @@ header {
 
 .blossom {
   grid-area: blossom;
-  background-color: red;
-  height: 2.2rem;
-  width: 2.2rem;
-  border-radius: 50%;
+  display: grid;
+  grid-template-rows: repeat(3, 1.5rem);
+  width: 3.2rem;
   align-content: end;
-  margin-top: -0.9rem;
-  margin-left: -0.5rem;
+  margin-top: -2rem;
+
+  .b-1,
+  .b-2,
+  .b-3 {
+    border-radius: 50%;
+    background-color: #b92167;
+  }
+
+  .b-1 {
+    transform: rotate(-40deg);
+    margin-left: -10px;
+    margin-top: 5px;
+  }
+
+  .b-3 {
+    transform: rotate(40deg);
+    margin-left: -10px;
+    margin-bottom: 5px;
+  }
 }
