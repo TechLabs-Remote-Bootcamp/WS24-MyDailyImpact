@@ -1,6 +1,6 @@
 import "./Header.scss";
 import logo from "../images/mdi_logo.png";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -11,33 +11,33 @@ export default function Header() {
       <div className="heaven-stripe"></div>
       <nav className="leaves">
         <li className="single">
-          <Link to="/" className="leaf-surface">
+          <NavLink to="/" className="leaf-surface">
             <span>Home</span>
-          </Link>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/about" className="leaf-surface">
+          <NavLink to="/about" className="leaf-surface">
             <span>About us</span>
-          </Link>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/recipeBot" className="leaf-surface">
+          <NavLink to="/recipeBot" className="leaf-surface">
             <span>Recipe Bot</span>
-          </Link>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/login" className="leaf-surface">
+          <NavLink to="/login" className="leaf-surface">
             <span>Login</span>
-          </Link>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/sign-up" className="leaf-surface">
+          <NavLink to="/sign-up" className="leaf-surface">
             <span>Sign up</span>
-          </Link>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
       </nav>
