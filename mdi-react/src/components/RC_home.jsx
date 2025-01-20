@@ -1,5 +1,5 @@
 import ColoredContainers from "./Colored-Containers";
-import "../styles/rc_general.scss";
+// import "../styles/rc_general.scss";
 import "./Colored-Containers.scss";
 
 export default function RC_Home() {
