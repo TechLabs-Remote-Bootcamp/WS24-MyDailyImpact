@@ -2,3 +2,25 @@
   max-width: 100%;
   height: auto;
 }
+
+@media only screen and (min-width: 850px) {
+  #treeWorld-small {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  #treeWorld-big {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #treeWorld-big {
+    display: none;
+  }
+
+  #treeWorld-small {
+    width: 40%;
+  }
+}
