@@ -14,7 +14,7 @@ export default function RC_about() {
             each meat-based meal for a plant-based one.
           </p>
           <p>
-            The purpose of this app is to
+            The purpose of this app is to{" "}
             <span className="bold">
               encourage people to incorporate more plant-based meals into their
               day by displaying the number of animals and amount of CO2, forest
