@@ -23,8 +23,8 @@ export default function Header() {
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/community" className="leaf-surface">
-            <span>Community</span>
+          <Link to="/recipeBot" className="leaf-surface">
+            <span>Recipe Bot</span>
           </Link>
           <div className="leaf-stem"></div>
         </li>
@@ -34,9 +34,19 @@ export default function Header() {
           </Link>
           <div className="leaf-stem"></div>
         </li>
+        <li className="single">
+          <Link to="/sign-up" className="leaf-surface">
+            <span>Sign up</span>
+          </Link>
+          <div className="leaf-stem"></div>
+        </li>
       </nav>
       <div className="plant-stem"></div>
-      <div className="blossom"></div>
+      <div className="blossom">
+        <div className="b-1"></div>
+        <div className="b-2"></div>
+        <div className="b-3"></div>
+      </div>
     </header>
   );
 }

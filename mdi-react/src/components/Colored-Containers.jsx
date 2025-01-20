@@ -1,3 +1,5 @@
+import "./Colored-Containers.scss";
+
 export default function ColoredContainers({ h2Text, h3Text, children }) {
   return (
     <div className="color-container">
