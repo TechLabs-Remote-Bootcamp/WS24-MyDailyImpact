@@ -1,5 +1,4 @@
-//import "./Colored-Containers.scss";
-import "../styles/rc_general.scss";
+import "./Colored-Containers.scss";
 
 export default function ColoredContainers({ h2Text, h3Text, children }) {
   return (
