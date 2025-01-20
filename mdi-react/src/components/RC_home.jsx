@@ -28,13 +28,13 @@ export default function RC_Home() {
             lives and how much forest land, CO2 emission, and water you save by
             swapping out meat- for plant-based meals!
           </p>
-          <Button>
-            <Link to="/sign-up" className="sign-up-button">
-              Join us!
-            </Link>
-          </Button>
         </div>
       </ColoredContainers>
+      <Button>
+        <Link to="/sign-up" className="sign-up-button">
+          Join us!
+        </Link>
+      </Button>
     </>
   );
 }
