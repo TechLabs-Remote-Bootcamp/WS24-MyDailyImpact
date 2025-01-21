@@ -8,6 +8,7 @@ import About from "./components/pages/About";
 import RecipeBot from "./components/pages/RecipeBot";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
+import Navbar from "./components/Navbar";
 
 function App() {
   // I didn't delete this code yet because of orientation in the framework.
@@ -15,15 +16,16 @@ function App() {
   // urderstanding other code
   return (
     <>
-      <Header />
-      <Routes>
+      <Header className="header" />
+      <Navbar className="navbar-flower" />
+      <Routes className="content">
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/recipeBot" element={<RecipeBot />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
-      <Footer />
+      <Footer className="footer" />
     </>
   );
 }
