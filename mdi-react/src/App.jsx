@@ -8,6 +8,7 @@ import About from "./components/pages/About";
 import RecipeBot from "./components/pages/RecipeBot";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
+import ContactUs from "./components/pages/ContactUs";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/recipeBot" element={<RecipeBot />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/contact-us" element={<ContactUs />}></Route>
       </Routes>
       <Footer />
     </>

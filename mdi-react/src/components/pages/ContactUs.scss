@@ -1,0 +1,29 @@
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+
+.contact-us-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .contact-form {
+    width: 100%;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 75%;
+  }
+  .input-label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .input {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid;
+  }
+}
