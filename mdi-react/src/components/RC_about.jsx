@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.scss";
-import { Link } from "react-router-dom";
 
 export default function RC_about() {
   return (
@@ -13,7 +13,7 @@ export default function RC_about() {
             impact they have on animals and the environment when they switch
             each meat-based meal for a plant-based one.
           </p>
-          <p>
+          <p className="primary">
             The purpose of this app is to{" "}
             <span className="bold">
               encourage people to incorporate more plant-based meals into their
