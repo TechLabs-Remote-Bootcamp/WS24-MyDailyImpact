@@ -1,10 +1,4 @@
 .image-box {
   max-width: 100%;
-  height: auto;
-}
-
-@media only screen and (max-width: 850px) {
-  #treeWorld-big {
-    width: 80%;
-  }
+  max-height: calc(100vh - 18rem);
 }
