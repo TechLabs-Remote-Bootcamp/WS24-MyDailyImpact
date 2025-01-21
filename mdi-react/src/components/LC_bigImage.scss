@@ -8,3 +8,9 @@
     max-height: calc(100vh - 30rem);
   }
 }
+
+@media only screen and (max-width: 810px) {
+  #treeWorld {
+    visibility: hidden;
+  }
+}
