@@ -9,6 +9,7 @@ import RecipeBot from "./components/pages/RecipeBot";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import ContactUs from "./components/pages/ContactUs";
+import Imprint from "./components/pages/Imprint";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/contact-us" element={<ContactUs />}></Route>
+        <Route path="/imprint" element={<Imprint />}></Route>
       </Routes>
       <Footer />
     </>
