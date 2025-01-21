@@ -25,6 +25,7 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />}></Route>
         <Route path="/imprint" element={<Imprint />}></Route>
         <Route path="/privacy" element={<Privacy />}></Route>
+        <Route path="/recipeBot" element={<RecipeBot />}></Route>
       </Routes>
       <Footer />
     </>
