@@ -12,40 +12,12 @@
   display: flex;
   justify-content: center;
   height: fit-content;
-
-  img {
-    min-width: 100%;
-  }
 }
 
 .right-box {
   display: flex;
   justify-content: left;
 }
-
-// @media only screen and (min-width: 1500px) {
-//   .left-box {
-//     width: 90rem;
-//   }
-// }
-
-// @media only screen and (min-width: 1500px) {
-//   .right-box {
-//     width: 40rem;
-//   }
-// }
-
-// @media only screen and (max-width: 1300px) {
-//   .right-box {
-//     width: 40rem;
-//   }
-// }
-
-// @media only screen and (max-width: 1000px) {
-//   .right-box {
-//     width: 40rem;
-//   }
-// }
 
 @media only screen and (max-width: 850px) {
   .lr-container {
