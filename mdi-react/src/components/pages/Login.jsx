@@ -2,6 +2,7 @@ import "./Login.scss";
 import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
 import RC_login from "../RC_login.jsx";
+import "./Login.scss";
 import Button from "../Button.jsx";
 import { Link } from "react-router-dom";
 
@@ -14,10 +15,15 @@ export default function Login() {
       RightComponent={
         <>
           <RC_login />
-          <p className="sign-up-suggestion">
-            New User? <Link to="/sign-up" className="link">Sign up</Link>
-          </p>
-          <Button>Log in</Button>
+          <div className="login-footer">
+            <p className="sign-up-suggestion">
+              New User?{" "}
+              <Link to="/sign-up" className="link">
+                Sign up
+              </Link>
+            </p>
+            <Button>Log in</Button>
+          </div>
         </>
       }
     />

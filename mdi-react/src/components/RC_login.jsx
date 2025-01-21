@@ -10,12 +10,18 @@ export default function RC_login() {
       >
         <div className="login-form">
           <form className="form log-in" action="">
-            <input className="email input" type="email" placeholder="Email" />
-            <input
-              className="password input"
-              type="password"
-              placeholder="Password"
-            />
+            <label className="input-label">
+              Email:
+              <input className="email login-input" type="email" placeholder="Email" />
+            </label>
+            <label className="input-label">
+              Password:
+              <input
+                className="password login-input"
+                type="password"
+                placeholder="Password"
+              />
+            </label>
           </form>
         </div>
       </ColoredContainers>
