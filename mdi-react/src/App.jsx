@@ -10,6 +10,7 @@ import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import ContactUs from "./components/pages/ContactUs";
 import Imprint from "./components/pages/Imprint";
+import Privacy from "./components/pages/Privacy";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/contact-us" element={<ContactUs />}></Route>
         <Route path="/imprint" element={<Imprint />}></Route>
+        <Route path="/privacy" element={<Privacy />}></Route>
       </Routes>
       <Footer />
     </>
