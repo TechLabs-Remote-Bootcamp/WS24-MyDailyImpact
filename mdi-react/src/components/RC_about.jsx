@@ -27,7 +27,10 @@ export default function RC_about() {
           </p>
           <p>
             This app was developed by a team of
-            <Link to="https://www.techlabs.org/"> TechLabs </Link>
+            <Link to="https://www.techlabs.org/" target="_blank">
+              {" "}
+              TechLabs{" "}
+            </Link>
             bootcamp students for the winter 2024/2025 semester. The team
             comprises of data science, artificial intelligence/deep learning,
             front-end web development, and back-end web development students.
