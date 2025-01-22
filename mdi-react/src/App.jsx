@@ -9,11 +9,11 @@ import RecipeBot from "./components/pages/RecipeBot";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import Navbar from "./components/Navbar";
+import ContactUs from "./components/pages/ContactUs";
+import Imprint from "./components/pages/Imprint";
+import Privacy from "./components/pages/Privacy";
 
 function App() {
-  // I didn't delete this code yet because of orientation in the framework.
-  // It's a main way to learn coding by reading and - more from time to time -
-  // urderstanding other code
   return (
     <>
       <Header className="header" />
@@ -24,6 +24,10 @@ function App() {
         <Route path="/recipeBot" element={<RecipeBot />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/contact-us" element={<ContactUs />}></Route>
+        <Route path="/imprint" element={<Imprint />}></Route>
+        <Route path="/privacy" element={<Privacy />}></Route>
+        <Route path="/recipeBot" element={<RecipeBot />}></Route>
       </Routes>
       <Footer className="footer" />
     </>

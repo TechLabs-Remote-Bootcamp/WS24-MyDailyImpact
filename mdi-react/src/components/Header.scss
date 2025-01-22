@@ -82,19 +82,20 @@ header {
       }
     }
 
-    &:hover,
-    &:focus {
-      cursor: pointer;
+    // &:hover {
+    //   cursor: pointer;
 
-      .leaf-surface {
-        background-color: var(--secondary-medium);
-        box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
-      }
-      .leaf-stem {
-        border-right: solid var(--secondary-medium) 0.5rem;
-        opacity: 80%;
-      }
-    }
+    //   .leaf-surface {
+    //     background-color: var(--secondary-medium);
+    //     box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
+    //   }
+    //   .leaf-stem {
+    // border-right: solid var(--secondary-medium) 0.5rem;
+    // opacity: 80%;
+    //   }
+    // }
+
+    // **************The above code, when &:focus is added to it, &:focus does not work!*******
 
     .leaf-surface {
       grid-column: 2 / 4;
@@ -107,12 +108,25 @@ header {
       transform: rotate(-20deg);
       align-content: center;
       z-index: 100;
+      transition: background-color 250ms ease-in-out;
 
       span {
         display: flex;
         align-items: center;
         justify-content: center;
         padding: auto;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: var(--secondary-medium);
+        box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
+      }
+
+      &:hover ~ .leaf-stem,
+      &:focus ~ .leaf-stem {
+        border-right: solid var(--secondary-medium) 0.5rem;
+        opacity: 80%;
       }
     }
 
@@ -124,6 +138,7 @@ header {
       width: 0.5rem;
       justify-self: end;
       border-right: solid var(--secondary) 0.5rem;
+      transition: all 250ms ease-in-out;
     }
   }
 }

@@ -1,15 +1,15 @@
 import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
-import RC_recipeBot from "../RC_recipeBot"
-import "./RecipeBot.scss";
+import RC_imprint from "../RC_imprint.jsx";
+import "./Imprint.scss";
 
-export default function RecipeBot() {
+export default function Imprint() {
   return (
     <Content_LR
       LeftComponent={
         <LC_bigImage rotationOn={false} overflowText="My Daily Impact" />
       }
-      RightComponent={<RC_recipeBot />}
+      RightComponent={<RC_imprint />}
     />
   );
 }

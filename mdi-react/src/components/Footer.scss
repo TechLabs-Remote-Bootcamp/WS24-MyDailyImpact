@@ -36,13 +36,13 @@ ul {
 li {
   margin-left: 1rem;
   cursor: pointer;
-}
-
-a {
-  color: $white;
-  text-decoration: none;
-  transition: all 150ms ease-out;
-  &:hover {
-    color: $grey-100;
+  a {
+    color: $white;
+    text-decoration: none;
+    transition: all 150ms ease-out;
+    &:hover,
+    &:focus {
+      color: $grey-100;
+    }
   }
 }
