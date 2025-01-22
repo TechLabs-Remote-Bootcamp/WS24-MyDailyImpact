@@ -1,20 +1,2 @@
 @use "../../styles/colors.scss" as *;
 @use "../../styles/fonts.scss" as *;
-
-li {
-  margin-left: 1rem;
-  cursor: default;
-  list-style: none;
-  color: $primary-dark;
-}
-
-.home-text {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-}
-
-.home {
-  display: flex;
-  flex-direction: column;
-}

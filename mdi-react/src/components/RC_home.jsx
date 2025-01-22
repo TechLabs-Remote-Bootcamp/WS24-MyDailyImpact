@@ -1,5 +1,6 @@
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.scss";
+import "./RC_home.scss";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
