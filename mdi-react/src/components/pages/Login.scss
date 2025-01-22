@@ -1,16 +1,21 @@
 @import "../../styles/colors.scss";
 @import "../../styles/fonts.scss";
 
-h2 {
-  color: $primary-medium;
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-form {
+.log-in {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .link {
@@ -24,6 +29,15 @@ form {
 }
 
 .sign-up-suggestion {
-  margin-top: -1rem;
-  ;
+  margin: 0.5rem 0rem 0.25rem 0rem;
+}
+
+.right-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .login-footer {
+    display: flex;
+    flex-direction: column;
+  }
 }

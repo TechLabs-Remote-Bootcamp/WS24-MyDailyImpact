@@ -63,12 +63,11 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-color: purple;
   margin: 0 2.6rem 0 auto;
 
   .single {
     display: grid;
-    grid-template-columns: 1rem 3rem 4rem;
+    grid-template-columns: 1fr 3fr 4fr;
     grid-template-rows: 3rem 1.5rem;
     justify-content: center;
     margin-top: -1.5rem;
@@ -77,33 +76,39 @@ header {
       font-weight: 500;
       color: #fff;
       text-decoration: inherit;
-    }
-    a:hover {
-      color: #fff;
-    }
 
-    &:hover {
-      cursor: pointer;
-
-      .leaf-surface {
-        background-color: var(--secondary-medium);
-        box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
-      }
-      .leaf-stem {
-        border-right: solid var(--secondary-medium) 0.5rem;
-        opacity: 80%;
+      &:hover {
+        font-weight: 600;
       }
     }
+
+    // &:hover {
+    //   cursor: pointer;
+
+    //   .leaf-surface {
+    //     background-color: var(--secondary-medium);
+    //     box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
+    //   }
+    //   .leaf-stem {
+    // border-right: solid var(--secondary-medium) 0.5rem;
+    // opacity: 80%;
+    //   }
+    // }
+
+    // **************The above code, when &:focus is added to it, &:focus does not work!*******
 
     .leaf-surface {
       grid-column: 2 / 4;
       grid-row: 1 / 2;
+      position: relative;
+      top: 0.2rem;
+      right: 0.6rem;
       background-color: var(--secondary);
       border-radius: 50%;
       transform: rotate(-20deg);
       align-content: center;
-      margin-left: -0.8rem;
       z-index: 100;
+      transition: background-color 250ms ease-in-out;
 
       span {
         display: flex;
@@ -111,26 +116,83 @@ header {
         justify-content: center;
         padding: auto;
       }
+
+      &:hover,
+      &:focus {
+        background-color: var(--secondary-medium);
+        box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
+      }
+
+      &:hover ~ .leaf-stem,
+      &:focus ~ .leaf-stem {
+        border-right: solid var(--secondary-medium) 0.5rem;
+        opacity: 80%;
+      }
     }
 
     .leaf-stem {
       grid-column: 1 / 2;
       grid-row: 2 / 3;
+      position: relative;
+      left: 0.1rem;
       width: 0.5rem;
       justify-self: end;
-      margin-right: -0.1rem;
       border-right: solid var(--secondary) 0.5rem;
+      transition: all 250ms ease-in-out;
     }
   }
 }
 
 .blossom {
   grid-area: blossom;
-  background-color: red;
-  height: 2.2rem;
-  width: 2.2rem;
-  border-radius: 50%;
+  display: grid;
+  grid-template-rows: repeat(3, 1.5rem);
+  width: 3.2rem;
   align-content: end;
-  margin-top: -0.9rem;
-  margin-left: -0.5rem;
+  margin-top: -2rem;
+
+  .b-1,
+  .b-2,
+  .b-3 {
+    border-radius: 50%;
+    background-color: #b92167;
+  }
+
+  .b-1 {
+    transform: rotate(-40deg);
+    margin-left: -10px;
+    margin-top: 5px;
+  }
+
+  .b-3 {
+    transform: rotate(40deg);
+    margin-left: -10px;
+    margin-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .logo {
+    margin-right: -2rem;
+
+    img {
+      width: 7rem;
+    }
+  }
+
+  .heaven-stripe {
+    margin-left: 4rem;
+    margin-right: 0;
+  }
+  .leaves {
+    margin: 0 1rem 0 2rem;
+
+    li {
+      margin-left: 0.2rem;
+    }
+
+    .single .leaf-stem {
+      left: 0.2rem;
+    }
+  }
 }

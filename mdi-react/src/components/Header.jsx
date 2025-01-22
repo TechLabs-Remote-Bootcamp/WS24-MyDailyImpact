@@ -1,6 +1,6 @@
 import "./Header.scss";
 import logo from "../images/mdi_logo.png";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -11,32 +11,42 @@ export default function Header() {
       <div className="heaven-stripe"></div>
       <nav className="leaves">
         <li className="single">
-          <Link to="/" className="leaf-surface">
+          <NavLink to="/" className="leaf-surface">
             <span>Home</span>
-          </Link>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/about" className="leaf-surface">
+          <NavLink to="/about" className="leaf-surface">
             <span>About us</span>
-          </Link>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/community" className="leaf-surface">
-            <span>Community</span>
-          </Link>
+          <NavLink to="/recipeBot" className="leaf-surface">
+            <span>Recipe Bot</span>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
         <li className="single">
-          <Link to="/login" className="leaf-surface">
+          <NavLink to="/login" className="leaf-surface">
             <span>Login</span>
-          </Link>
+          </NavLink>
+          <div className="leaf-stem"></div>
+        </li>
+        <li className="single">
+          <NavLink to="/sign-up" className="leaf-surface">
+            <span>Sign up</span>
+          </NavLink>
           <div className="leaf-stem"></div>
         </li>
       </nav>
       <div className="plant-stem"></div>
-      <div className="blossom"></div>
+      <div className="blossom">
+        <div className="b-1"></div>
+        <div className="b-2"></div>
+        <div className="b-3"></div>
+      </div>
     </header>
   );
 }

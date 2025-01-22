@@ -1,0 +1,17 @@
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+
+.messages {
+  width: 35rem;
+  height: 15rem;
+  background-color: $beige-light;
+  margin: 1rem;
+}
+
+.input-questions {
+  width: 35rem;
+  height: 2rem;
+  border: 2px solid $primary;
+  border-radius: 20px;
+  padding: 0rem 1rem;
+}

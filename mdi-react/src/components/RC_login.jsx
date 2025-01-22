@@ -3,7 +3,7 @@ import { api } from "../utils/api";
 import ColoredContainers from './Colored-Containers';
 import { useAuth } from '../hooks/useAuth';
 import { Navigate } from "react-router-dom";
-
+import "./Colored-Containers.scss";
 
 export default function RC_login() {
   const [email, setEmail] = useState("");
@@ -34,13 +34,18 @@ export default function RC_login() {
       >
         <div className="login-form">
           <form className="form log-in" onSubmit={handleSubmit}>
+            <label className="input-label">
+              Email:
             <input
-              className="email input"
+              className="email login-input"
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            </label>
+            <label className="input-label">
+              Password:
             <input
               className="password input"
               type="password"
@@ -48,9 +53,11 @@ export default function RC_login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            </label>
             <button type="submit">Login</button>
           </form>
         </div>
+
       </ColoredContainers>
     </div>
   );

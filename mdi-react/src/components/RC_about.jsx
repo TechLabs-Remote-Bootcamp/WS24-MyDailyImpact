@@ -1,8 +1,7 @@
 import React from "react";
-import ColoredContainers from "./Colored-Containers";
-import "../styles/rc_general.scss";
-import "./Colored-Containers.scss";
 import { Link } from "react-router-dom";
+import ColoredContainers from "./Colored-Containers";
+import "./Colored-Containers.scss";
 
 export default function RC_about() {
   return (
@@ -14,7 +13,7 @@ export default function RC_about() {
             impact they have on animals and the environment when they switch
             each meat-based meal for a plant-based one.
           </p>
-          <p>
+          <p className="primary">
             The purpose of this app is to{" "}
             <span className="bold">
               encourage people to incorporate more plant-based meals into their
@@ -28,7 +27,10 @@ export default function RC_about() {
           </p>
           <p>
             This app was developed by a team of
-            <Link to="https://www.techlabs.org/"> TechLabs </Link>
+            <Link to="https://www.techlabs.org/" target="_blank">
+              {" "}
+              TechLabs{" "}
+            </Link>
             bootcamp students for the winter 2024/2025 semester. The team
             comprises of data science, artificial intelligence/deep learning,
             front-end web development, and back-end web development students.

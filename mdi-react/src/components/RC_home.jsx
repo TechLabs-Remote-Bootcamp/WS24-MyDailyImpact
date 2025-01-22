@@ -1,4 +1,3 @@
-import React from "react";
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.scss";
 import Button from "./Button";
@@ -9,7 +8,7 @@ export default function RC_Home() {
 
 
   return (
-    <div>
+    <div className="home">
       <ColoredContainers
         h2Text="Get ready for your impact journey"
         h3Text="Every plant-based meal counts"
@@ -32,13 +31,13 @@ export default function RC_Home() {
             lives and how much forest land, CO2 emission, and water you save by
             swapping out meat- for plant-based meals!
           </p>
-          <Button>
-            <Link to="/sign-up" className="sign-up-button">
-              Join us!
-            </Link>
-          </Button>
         </div>
       </ColoredContainers>
+      <Button>
+        <Link to="/sign-up" className="sign-up-button">
+          Join us!
+        </Link>
+      </Button>
     </div>
   );
 }

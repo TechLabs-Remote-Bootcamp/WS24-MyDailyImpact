@@ -13,6 +13,13 @@ console.log('Path:', __dirname);
 export default defineConfig({
     plugins: [react()],
     base: './',
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        },
+      },
+    },
     server: {
       proxy: {
         '/api': {
