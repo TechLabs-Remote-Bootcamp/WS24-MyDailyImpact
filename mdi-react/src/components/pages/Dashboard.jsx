@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Navigate } from 'react-router-dom';
 import ColoredContainers from '../Colored-Containers';
@@ -6,9 +6,20 @@ import Button from '../Button';
 import './Dashboard.scss'; 
 
 export default function Dashboard() {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, user, logout, loading, initializeAuth } = useAuth();
 
-  if (!isAuthenticated || !user) {
+  useEffect(() => {
+    console.log('Dashboard useEffect - isAuthenticated:', isAuthenticated, 'user:', user, 'loading:', loading);
+    if (!isAuthenticated && !loading) {
+      initializeAuth();
+    }
+  }, [isAuthenticated, loading, initializeAuth, user]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
@@ -16,11 +27,13 @@ export default function Dashboard() {
     logout();
   };
 
+  const welcomeMessage = user?.firstName || user?.email || 'User';
+
   return (
     <div className="dashboard">
       <ColoredContainers
         h2Text="My Daily Impact Dashboard"
-        h3Text={`Welcome, ${user.name || user.email}!`}
+        h3Text={`Welcome, ${welcomeMessage}!`}
       >
         <div className="dashboard-content">
           <div className="stats">

@@ -27,7 +27,7 @@ function App() {
         <Route path="/imprint" element={<Imprint />}></Route>
         <Route path="/privacy" element={<Privacy />}></Route>
         <Route path="/recipeBot" element={<RecipeBot />}></Route>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
       <Footer />
     </>

@@ -41,26 +41,35 @@ async function handleResponse(response) {
 }
 
 export const api = {
-  async login(credentials) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          email: credentials.email,
-          password: credentials.password,
-        }),
-      });
+    async login(credentials) {
+        try {
+            console.log('Credentials received in api.login:', credentials);
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          });
+          
+          console.log('Login response status:', response.status);
+          const data = await response.json();
+          console.log('Login response data:', data);
       
-      return handleResponse(response);
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
-    }
-  },
+          if (!response.ok) {
+            throw new ApiError(response.status, data.message || 'Login failed');
+          }
+      
+          return data;
+        } catch (error) {
+          console.error('Login error:', error);
+          throw error;
+        }
+      },
 
   async register(data) {
     try {
