@@ -2,17 +2,18 @@
 @use "../styles/fonts.scss" as *;
 
 .footer {
+  display: inline-block;
   background-color: $primary-medium;
   padding: 0;
   text-align: center;
   color: $white;
   font-size: 0.75rem;
-  margin-top: 20px;
+  margin-top: 1.5rem;
   position: relative;
   bottom: 0;
-  width: 100%;
+  height: fit-content;
+  width: 100vw;
   font-family: $font-family-general;
-  display: inline-block;
 }
 
 .footer-content {
@@ -25,24 +26,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+  z-index: 100;
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-}
+  li {
+    margin-left: 1rem;
 
-li {
-  margin-left: 1rem;
-  cursor: pointer;
-  a {
-    color: $white;
-    text-decoration: none;
-    transition: all 150ms ease-out;
-    &:hover,
-    &:focus {
-      color: $grey-100;
+    a {
+      color: $white;
+      cursor: pointer;
+      &:hover,
+      &:focus {
+        color: $grey-100;
+      }
     }
   }
 }
