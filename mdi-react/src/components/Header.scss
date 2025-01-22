@@ -122,12 +122,6 @@ header {
         background-color: var(--secondary-medium);
         box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
       }
-
-      &:hover ~ .leaf-stem,
-      &:focus ~ .leaf-stem {
-        border-right: solid var(--secondary-medium) 0.5rem;
-        opacity: 80%;
-      }
     }
 
     .leaf-stem {
@@ -139,6 +133,12 @@ header {
       justify-self: end;
       border-right: solid var(--secondary) 0.5rem;
       transition: all 250ms ease-in-out;
+
+      &:hover,
+      &:focus {
+        border-right: solid var(--secondary-medium) 0.5rem;
+        opacity: 80%;
+      }
     }
   }
 }
