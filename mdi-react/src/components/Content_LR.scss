@@ -1,5 +1,5 @@
-@import "../styles/colors.scss";
-@import "../styles/fonts.scss";
+@use "../styles/colors.scss" as *;
+@use "../styles/fonts.scss" as *;
 
 .lr-container {
   position: relative;
@@ -26,8 +26,8 @@
   }
 }
 
-// @media only screen and (max-width: 810px) {
-//   .right-box {
-//     width: 20rem;
-//   }
-// }
+@media only screen and (max-width: 810px) {
+  .right-box {
+    max-width: 20rem;
+  }
+}
