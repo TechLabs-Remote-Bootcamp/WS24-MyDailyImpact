@@ -1,0 +1,62 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.container {
+  text-align: center;
+}
+
+.avatar {
+  margin-bottom: $spacing-6;
+
+  .circle {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto;
+    background-color: $gray-100;
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: $primary-color;
+    }
+  }
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: $font-bold;
+  color: $text-primary;
+  margin-bottom: $spacing-2;
+}
+
+.email {
+  color: $text-secondary;
+  margin-bottom: $spacing-2;
+}
+
+.role {
+  font-size: $text-sm;
+  color: $text-secondary;
+  margin-bottom: $spacing-6;
+}
+
+.logoutButton {
+  @include button-base;
+  background-color: $primary-color;
+  color: $white;
+  padding: $spacing-2 $spacing-4;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+  }
+
+  .icon {
+    margin-right: $spacing-2;
+    width: 1rem;
+    height: 1rem;
+  }
+}

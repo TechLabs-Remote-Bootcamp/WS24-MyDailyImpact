@@ -1,24 +1,20 @@
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
-const port = process.env.APP_PORT;
-console.log('Server running on port'+ port);
-console.log('Path:', __dirname);
 
-export default defineConfig({
+export default ({ mode }) => {
+  const port = process.env.APP_PORT;
+
+  return defineConfig({
+    root: 'frontend',
     plugins: [react()],
-    base: './',
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-        },
-      },
+    optimizeDeps: {
+      exclude: ['lucide-react'],
     },
     server: {
       proxy: {
@@ -31,3 +27,4 @@ export default defineConfig({
       }
     }
   });
+};

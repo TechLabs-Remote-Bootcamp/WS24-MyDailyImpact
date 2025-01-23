@@ -12,8 +12,9 @@ import Navbar from "./components/Navbar";
 import ContactUs from "./components/pages/ContactUs";
 import Imprint from "./components/pages/Imprint";
 import Privacy from "./components/pages/Privacy";
+import Dashboard from "./components/pages/Dashboard";
 
-function App() {
+export default function App() {
   return (
     <>
       <div className="head">
@@ -33,6 +34,7 @@ function App() {
           <Route path="/imprint" element={<Imprint />}></Route>
           <Route path="/privacy" element={<Privacy />}></Route>
           <Route path="/recipeBot" element={<RecipeBot />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
         </Routes>
       </div>
       <div className="foot">
@@ -42,5 +44,3 @@ function App() {
     </>
   );
 }
-
-export default App;

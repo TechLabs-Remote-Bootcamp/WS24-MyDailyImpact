@@ -4,7 +4,10 @@ import "./RC_home.module.scss";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
+
 export default function RC_Home() {
+
+
   return (
     <div className="home">
       <ColoredContainers
