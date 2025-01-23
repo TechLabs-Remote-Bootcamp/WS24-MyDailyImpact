@@ -17,12 +17,15 @@
 
 /* Will update the above to match our universal styles using $variable format */
 
-header {
-  font-family: $font-family-general;
-  color: #fff;
+#header-desktop {
+  display: block;
 }
 
-header#header-desktop {
+#header-mobile {
+  display: none;
+}
+
+.desktopHead {
   position: sticky;
   top: 0;
   background-color: #fff;
@@ -179,10 +182,6 @@ header#header-desktop {
   }
 }
 
-#header-mobile {
-  display: none;
-}
-
 @media only screen and (max-width: 1000px) {
   .logo {
     margin-right: -2rem;
@@ -209,17 +208,7 @@ header#header-desktop {
   }
 }
 
-@media only screen and (max-width: 810px) {
-  #header-mobile {
-    display: block;
-  }
-
-  #header-desktop {
-    display: none;
-  }
-}
-
-header#header-mobile {
+.desktopMobile {
   position: sticky;
   top: 0;
   background-color: var(--secondary);
@@ -241,7 +230,7 @@ header#header-mobile {
     }
   }
 
-  .user-links {
+  .userLinks {
     grid-area: user-links;
     display: flex;
     flex-direction: row;
@@ -260,5 +249,15 @@ header#header-mobile {
       border-radius: 1em;
       transition: none;
     }
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  #header-mobile {
+    display: block;
+  }
+
+  #header-desktop {
+    display: none;
   }
 }

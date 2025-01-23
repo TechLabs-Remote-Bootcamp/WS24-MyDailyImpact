@@ -1,12 +1,12 @@
 import treeworld_big from "../images/treeWorld1250.png";
-import "./LC_bigImage.module.scss";
+import styles from "./LC_bigImage.module.scss";
 
 function LC_bigImage({ overflowText, textClass }) {
   return (
     <>
       <img
-        id="treeWorld"
-        className="image-box"
+        id={styles["treeWorld"]}
+        className={styles["image-box"]}
         src={treeworld_big}
         alt="A painted earth with many different trees along its circumfence line"
       />
