@@ -10,12 +10,7 @@ export default function Signup() {
       LeftComponent={
         <LC_bigImage rotationOn={false} overflowText="My Daily Impact" />
       }
-      RightComponent={
-        <>
-          <RC_signup />
-          <Button>Sign up</Button>
-        </>
-      }
+      RightComponent={<RC_signup />}
     />
   );
 }
