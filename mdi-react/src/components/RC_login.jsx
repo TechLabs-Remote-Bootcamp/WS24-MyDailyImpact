@@ -1,5 +1,6 @@
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.module.scss";
+import "./RC_login.module.scss";
 
 export default function RC_login() {
   return (

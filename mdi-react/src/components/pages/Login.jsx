@@ -1,4 +1,3 @@
-import "./Login.module.scss";
 import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
 import RC_login from "../RC_login.jsx";

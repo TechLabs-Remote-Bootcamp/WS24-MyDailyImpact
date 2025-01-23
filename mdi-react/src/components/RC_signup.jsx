@@ -1,5 +1,7 @@
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.module.scss";
+import "./RC_signup.module.scss";
+
 export default function RC_signup() {
   return (
     <div className="login-container">
