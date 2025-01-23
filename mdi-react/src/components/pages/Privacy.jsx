@@ -1,7 +1,7 @@
 import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
 import RC_privacy from "../RC_privacy.jsx";
-import "./Privacy.scss";
+import "./Privacy.module.scss";
 
 export default function Privacy() {
   return (

@@ -16,8 +16,7 @@
 
 // export default Button;
 
-import React from "react";
-import "./Button.scss"
+import "./Button.module.scss";
 
 const Button = ({ children, onClick, disabled = false }) => {
   return (

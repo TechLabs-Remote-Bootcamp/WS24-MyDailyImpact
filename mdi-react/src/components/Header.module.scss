@@ -1,3 +1,6 @@
+@use "../styles/colors.scss" as *;
+@use "../styles/fonts.scss" as *;
+
 :root {
   --primary: #050b8c;
   --primary-medium: #5055ba;
@@ -14,14 +17,22 @@
 
 /* Will update the above to match our universal styles using $variable format */
 
-header {
+#header-desktop {
+  display: block;
+}
+
+#header-mobile {
+  display: none;
+}
+
+.desktopHead {
   position: sticky;
   top: 0;
   background-color: #fff;
   z-index: 1000;
 }
 
-.outer-header-grid {
+.flower-header-grid {
   display: grid;
   min-height: 0;
   margin-right: 1rem;
@@ -122,12 +133,6 @@ header {
         background-color: var(--secondary-medium);
         box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
       }
-
-      &:hover ~ .leaf-stem,
-      &:focus ~ .leaf-stem {
-        border-right: solid var(--secondary-medium) 0.5rem;
-        opacity: 80%;
-      }
     }
 
     .leaf-stem {
@@ -139,6 +144,12 @@ header {
       justify-self: end;
       border-right: solid var(--secondary) 0.5rem;
       transition: all 250ms ease-in-out;
+
+      &:hover,
+      &:focus {
+        border-right: solid var(--secondary-medium) 0.5rem;
+        opacity: 80%;
+      }
     }
   }
 }
@@ -194,5 +205,59 @@ header {
     .single .leaf-stem {
       left: 0.2rem;
     }
+  }
+}
+
+.desktopMobile {
+  position: sticky;
+  top: 0;
+  background-color: var(--secondary);
+  height: fit-content;
+  width: 100vw;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 2fr 4fr auto;
+  grid-template-areas: ". logo user-links";
+
+  .logo {
+    grid-area: logo;
+    align-self: center;
+    justify-self: center;
+
+    img {
+      height: 2.5rem;
+      width: auto;
+    }
+  }
+
+  .userLinks {
+    grid-area: user-links;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1.2rem;
+    font-size: 0.8rem;
+    color: $white;
+  }
+
+  .single {
+    transition: none;
+    padding: 0.6em 1.2em;
+    &:hover {
+      background-color: var(--primary-medium);
+      border-radius: 1em;
+      transition: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  #header-mobile {
+    display: block;
+  }
+
+  #header-desktop {
+    display: none;
   }
 }

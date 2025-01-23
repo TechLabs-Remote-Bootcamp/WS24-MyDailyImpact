@@ -1,15 +1,15 @@
-import "./Colored-Containers.scss";
+import styles from "./Colored-Containers.module.scss";
 
 export default function ColoredContainers({ h2Text, h3Text, children }) {
   return (
-    <div className="color-container">
-      <div className="green-box">
+    <div className={styles.colorContainer}>
+      <div className={styles.greenBox}>
         <h2>{h2Text}</h2>
       </div>
-      <div className="blue-box">
+      <div className={styles.blueBox}>
         <h3>{h3Text}</h3>
       </div>
-      <div className="text-box">{children}</div>
+      <div className={styles.textBox}>{children}</div>
     </div>
   );
 }

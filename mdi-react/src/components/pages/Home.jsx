@@ -1,7 +1,6 @@
 import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
 import RC_home from "../RC_home";
-import "./Home.scss";
 
 export default function Home() {
   return (

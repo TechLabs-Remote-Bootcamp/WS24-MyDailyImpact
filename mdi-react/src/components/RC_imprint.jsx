@@ -1,5 +1,5 @@
 import ColoredContainers from "./Colored-Containers";
-import "./Colored-Containers.scss";
+import "./Colored-Containers.module.scss";
 
 export default function RC_imprint() {
   return (
@@ -24,7 +24,7 @@ export default function RC_imprint() {
             TechLabs & team members listed above
           </p>
           <p>
-            <span className="bold">Copyright: </span> &copy;2025 MyDailyImpact 
+            <span className="bold">Copyright: </span> &copy;2025 MyDailyImpact
             &copy;2024 TechLabs; All rights reserved. Text, images, graphics,
             sounds, animations and videos as well as their arrangement on the
             website are protected by copyright and other protective laws. The
