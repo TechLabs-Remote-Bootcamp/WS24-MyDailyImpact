@@ -1,7 +1,7 @@
 import treeworld_big from "../images/treeWorld1250.png";
 import styles from "./LC_bigImage.module.scss";
 
-function LC_bigImage({ overflowText, textClass }) {
+function LC_bigImage({ props }) {
   return (
     <>
       <img
