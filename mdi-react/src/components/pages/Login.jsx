@@ -21,7 +21,6 @@ export default function Login() {
                 Sign up
               </Link>
             </p>
-            <Button>Log in</Button>
           </div>
         </>
       }
