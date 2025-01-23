@@ -2,6 +2,8 @@
 
 A simple app to track your contribution to a sustainable plant-based lifestyle.
 
+Mid-semester presentation slide deck: https://docs.google.com/presentation/d/19eviPtRrXohpU70myDsvSQLJWN2Gb-aLzX_i8klLoLE/edit?usp=sharing
+
 # Git Workflow Guidelines
 
 ## Always Create a New Branch ➡️
