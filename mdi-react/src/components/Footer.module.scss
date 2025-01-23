@@ -2,48 +2,43 @@
 @use "../styles/fonts.scss" as *;
 
 .footer {
-  display: inline-block;
-  background-color: $primary-medium;
-  padding: 0;
-  text-align: center;
-  color: $white;
-  font-size: 0.75rem;
-  margin-top: 1.5rem;
-  position: relative;
-  bottom: 0;
-  height: fit-content;
-  width: 100vw;
-  font-family: $font-family-general;
-}
-
-.footer-content {
   display: flex;
   justify-content: space-between;
-  padding: 0.25rem 1rem;
+  padding: 0 1em;
+  background-color: $primary-medium;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
-.footer-nav {
+.footer-links {
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
 
-  li {
-    margin-left: 1rem;
-
-    a {
-      color: $white;
-      cursor: pointer;
-    }
+  a {
+    color: $white;
+    cursor: pointer;
   }
 }
 
 .footer-nav-item {
-  padding: 0.2em 1em;
+  padding: 0.4em 1em;
   &:hover,
   &:focus {
     background-color: $secondary;
     border-radius: 1em;
     transition: none;
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  .footer {
+    height: 2.4rem;
+  }
+
+  .footer-nav-item {
+    padding: 0.2em 1em;
   }
 }
