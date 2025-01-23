@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.scss";
 import { api } from "../utils/api";
 
 export default function RC_signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     salutation: "",
     firstName: "",
@@ -40,6 +42,7 @@ export default function RC_signup() {
       const response = await api.register(dataToSend);
       if (response) {
         console.log('Signup successful');
+        navigate('/login');
       } else {
         console.error('Signup failed');
       }
