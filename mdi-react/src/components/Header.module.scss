@@ -1,3 +1,6 @@
+@use "../styles/colors.scss" as *;
+@use "../styles/fonts.scss" as *;
+
 :root {
   --primary: #050b8c;
   --primary-medium: #5055ba;
@@ -15,6 +18,11 @@
 /* Will update the above to match our universal styles using $variable format */
 
 header {
+  font-family: $font-family-general;
+  color: #fff;
+}
+
+header#header-desktop {
   position: sticky;
   top: 0;
   background-color: #fff;
@@ -208,5 +216,49 @@ header {
 
   #header-desktop {
     display: none;
+  }
+}
+
+header#header-mobile {
+  position: sticky;
+  top: 0;
+  background-color: var(--secondary);
+  height: fit-content;
+  width: 100vw;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 2fr 4fr auto;
+  grid-template-areas: ". logo user-links";
+
+  .logo {
+    grid-area: logo;
+    align-self: center;
+    justify-self: center;
+
+    img {
+      height: 2.5rem;
+      width: auto;
+    }
+  }
+
+  .user-links {
+    grid-area: user-links;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1.2rem;
+    font-size: 0.8rem;
+    color: $white;
+  }
+
+  .single {
+    transition: none;
+    padding: 0.6em 1.2em;
+    &:hover {
+      background-color: var(--primary-medium);
+      border-radius: 1em;
+      transition: none;
+    }
   }
 }
