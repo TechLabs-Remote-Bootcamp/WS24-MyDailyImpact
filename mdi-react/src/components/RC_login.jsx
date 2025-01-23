@@ -1,5 +1,5 @@
 import ColoredContainers from "./Colored-Containers";
-import "./Colored-Containers.scss";
+import "./Colored-Containers.module.scss";
 
 export default function RC_login() {
   return (
@@ -12,7 +12,11 @@ export default function RC_login() {
           <form className="form log-in" action="">
             <label className="input-label">
               Email:
-              <input className="email login-input" type="email" placeholder="Email" />
+              <input
+                className="email login-input"
+                type="email"
+                placeholder="Email"
+              />
             </label>
             <label className="input-label">
               Password:

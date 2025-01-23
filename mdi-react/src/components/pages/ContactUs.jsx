@@ -1,7 +1,7 @@
 import Content_LR from "../Content_LR";
 import LC_bigImage from "../LC_bigImage";
 import RC_contactUs from "../RC_contactUs";
-import "./ContactUs.scss";
+import "./ContactUs.module.scss";
 
 export default function ContactUs() {
   return (

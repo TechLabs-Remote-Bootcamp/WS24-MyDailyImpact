@@ -1,5 +1,5 @@
 import treeworld_big from "../images/treeWorld1250.png";
-import "./LC_bigImage.scss";
+import "./LC_bigImage.module.scss";
 
 function LC_bigImage({ overflowText, textClass }) {
   return (

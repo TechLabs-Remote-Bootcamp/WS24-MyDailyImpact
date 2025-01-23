@@ -1,5 +1,5 @@
 import ColoredContainers from "./Colored-Containers";
-import "./Colored-Containers.scss";
+import "./Colored-Containers.module.scss";
 import Button from "./Button";
 
 export default function RC_contactUs() {

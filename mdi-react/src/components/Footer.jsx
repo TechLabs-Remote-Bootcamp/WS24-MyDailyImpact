@@ -1,4 +1,4 @@
-import "./Footer.scss";
+import "./Footer.module.scss";
 import { NavLink } from "react-router-dom";
 
 export default function Footer() {
@@ -11,7 +11,7 @@ export default function Footer() {
         <nav>
           <ul className="footer-nav">
             <li className="footer-nav-item">
-              <NavLink to="/contact-us">Contact Us</NavLink>
+              <NavLink to="/contact-us">Contact</NavLink>
             </li>
             <li className="footer-nav-item">
               <NavLink to="/imprint">Imprint</NavLink>

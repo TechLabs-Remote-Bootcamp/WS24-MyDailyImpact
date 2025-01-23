@@ -1,4 +1,4 @@
-import "./Header.scss";
+import "./Header.module.scss";
 import logo from "../images/mdi_logo.png";
 import { NavLink } from "react-router-dom";
 
@@ -50,7 +50,22 @@ export default function Header() {
         </div>
       </header>
       <header id="header-mobile">
-        <h2>Hello</h2>
+        <div className="logo">
+          <img src={logo} />
+        </div>
+        <nav className="user-links">
+          <li className="single">
+            <NavLink to="/login" className="">
+              <span>Login</span>
+            </NavLink>
+            <div className="leaf-stem"></div>
+          </li>
+          <li className="single">
+            <NavLink to="/sign-up" className="">
+              <span>Sign up</span>
+            </NavLink>
+          </li>
+        </nav>
       </header>
     </>
   );
