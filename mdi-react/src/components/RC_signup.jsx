@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ColoredContainers from "./Colored-Containers";
-import "./Colored-Containers.module.scss";
 import { api } from "../utils/api";
 
 export default function RC_signup() {
