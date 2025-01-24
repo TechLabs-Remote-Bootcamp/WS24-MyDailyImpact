@@ -25,10 +25,10 @@ export default function RC_contactUs() {
                 placeholder="Write your message here"
               />
             </label>
+            <button type="submit">Send</button>
           </form>
         </div>
       </ColoredContainers>
-      <Button>Submit</Button>
     </div>
   );
 }
