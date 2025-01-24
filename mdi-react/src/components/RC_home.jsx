@@ -2,10 +2,7 @@ import ColoredContainers from "./Colored-Containers";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
-
 export default function RC_Home() {
-
-
   return (
     <div className="home">
       <ColoredContainers
@@ -31,12 +28,12 @@ export default function RC_Home() {
             swapping out meat- for plant-based meals!
           </p>
         </div>
+        <Button>
+          <Link to="/sign-up">
+            Join us!
+          </Link>
+        </Button>
       </ColoredContainers>
-      <Button>
-        <Link to="/sign-up" className="sign-up-button">
-          Join us!
-        </Link>
-      </Button>
     </div>
   );
 }
