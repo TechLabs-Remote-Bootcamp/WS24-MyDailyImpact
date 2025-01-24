@@ -3,7 +3,6 @@ import { api } from "../utils/api";
 import ColoredContainers from './Colored-Containers';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from "react-router-dom";
-import "./Colored-Containers.module.scss";
 
 export default function RC_login() {
   const [email, setEmail] = useState("");
