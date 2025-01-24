@@ -1,5 +1,4 @@
 import ColoredContainers from "./Colored-Containers";
-import "./RC_home.module.scss";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
@@ -26,7 +25,7 @@ export default function RC_Home() {
             </li>
             <li>every meal you eat counts?</li>
           </ul>
-          <p className="bold">
+          <p>
             Join us at MyDailyImpact, where you can track how many animals’
             lives and how much forest land, CO2 emission, and water you save by
             swapping out meat- for plant-based meals!
