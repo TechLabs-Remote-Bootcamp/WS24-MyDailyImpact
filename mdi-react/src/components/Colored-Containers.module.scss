@@ -55,14 +55,9 @@
     font-size: 1rem;
     z-index: 10;
     padding-top: 1.8em;
-    a {
-      text-decoration: none;
-      color: $primary-dark;
-      transition: all 150ms ease-out;
-      &:hover {
-        color: $secondary;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
