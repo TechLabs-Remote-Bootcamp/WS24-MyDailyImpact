@@ -3,6 +3,7 @@ import { api } from "../utils/api";
 import ColoredContainers from './Colored-Containers';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 export default function RC_login() {
   const [email, setEmail] = useState("");
@@ -69,7 +70,7 @@ export default function RC_login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <button type="submit">Login</button>
+            <Button type="submit">Login</Button>
           </form>
         </div>
       </ColoredContainers>

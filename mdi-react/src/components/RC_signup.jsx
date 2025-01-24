@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ColoredContainers from "./Colored-Containers";
 import { api } from "../utils/api";
+import Button from "./Button";
 
 export default function RC_signup() {
   const navigate = useNavigate();
@@ -125,7 +126,7 @@ export default function RC_signup() {
                 placeholder="Confirm Password"
               />
             </label>
-            <button type="submit">Sign Up</button>
+            <Button type="submit">Sign Up</Button>
           </form>
         </div>
       </ColoredContainers>
