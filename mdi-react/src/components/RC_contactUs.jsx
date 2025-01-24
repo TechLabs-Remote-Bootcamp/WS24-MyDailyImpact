@@ -1,5 +1,4 @@
 import ColoredContainers from "./Colored-Containers";
-import Button from "./Button";
 
 export default function RC_contactUs() {
   return (
