@@ -30,4 +30,10 @@ export default defineConfig({
         }
       }
     }
+    build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: path.resolve(__dirname, './index.html'), // Ensure the entry point is correctly set
+    },
+  },
   });
