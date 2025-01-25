@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ColoredContainers from "./Colored-Containers";
 import { api } from "../utils/api";
 import Button from "./Button";
+import styles from "./Colored-Containers.module.scss";
 
 export default function RC_signup() {
   const navigate = useNavigate();
@@ -28,29 +29,28 @@ export default function RC_signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      console.error('Passwords do not match');
+      console.error("Passwords do not match");
       return;
     }
-    
+
     try {
       const { confirmPassword, ...dataToSend } = formData;
       dataToSend.birthday = new Date(dataToSend.birthday);
 
-      console.log('Data being sent:', dataToSend); // Add this line
+      console.log("Data being sent:", dataToSend); // Add this line
 
-      
       const response = await api.register(dataToSend);
       if (response) {
-        console.log('Signup successful');
-        navigate('/login');
+        console.log("Signup successful");
+        navigate("/login");
       } else {
-        console.error('Signup failed');
+        console.error("Signup failed");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       if (error instanceof ApiError) {
-        console.error('API Error Status:', error.status);
-        console.error('API Error Message:', error.message);
+        console.error("API Error Status:", error.status);
+        console.error("API Error Message:", error.message);
       }
     }
   };
@@ -62,7 +62,12 @@ export default function RC_signup() {
           <form className="form sign-up" onSubmit={handleSubmit}>
             <label>
               Salutation:
-              <select className="input" name="salutation" value={formData.salutation} onChange={handleChange}>
+              <select
+                className={styles["input"]}
+                name="salutation"
+                value={formData.salutation}
+                onChange={handleChange}
+              >
                 <option value="">Salutation</option>
                 <option value="Mr">Mr</option>
                 <option value="Mrs">Mrs</option>
@@ -73,7 +78,12 @@ export default function RC_signup() {
             </label>
             <label>
               Gender:
-              <select className="input" name="gender" value={formData.gender} onChange={handleChange}>
+              <select
+                className={styles["input"]}
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+              >
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -82,16 +92,30 @@ export default function RC_signup() {
             </label>
             <label>
               First Name:
-              <input className="input" type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" />
+              <input
+                className={styles["input"]}
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First Name"
+              />
             </label>
             <label>
               Last Name:
-              <input className="input" type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" />
+              <input
+                className={styles["input"]}
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name"
+              />
             </label>
             <label>
               Date of Birth:
               <input
-                className="input"
+                className={styles["input"]}
                 type="date"
                 name="birthday"
                 value={formData.birthday}
@@ -109,16 +133,30 @@ export default function RC_signup() {
             </label> */}
             <label>
               Email:
-              <input className="input" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+              <input
+                className={styles["input"]}
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
+              />
             </label>
             <label>
               Password:
-              <input className="input" type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" />
+              <input
+                className={styles["input"]}
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Password"
+              />
             </label>
             <label>
               Confirm Password:
               <input
-                className="input"
+                className={styles["input"]}
                 type="password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -126,7 +164,9 @@ export default function RC_signup() {
                 placeholder="Confirm Password"
               />
             </label>
-            <Button type="submit">Sign Up</Button>
+            <Button className={styles["button-input"]} type="submit">
+              Sign Up
+            </Button>
           </form>
         </div>
       </ColoredContainers>

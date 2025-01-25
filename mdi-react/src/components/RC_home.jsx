@@ -2,10 +2,11 @@ import React from "react";
 import ColoredContainers from "./Colored-Containers";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import styles from "./Colored-Containers.module.scss";
 
 export default function RC_Home() {
   return (
-    <div className="home">
+    <div className="RC_home">
       <ColoredContainers
         h2Text="Get ready for your impact journey"
         h3Text="Every plant-based meal counts"
@@ -29,7 +30,7 @@ export default function RC_Home() {
             swapping out meat- for plant-based meals!
           </p>
         </div>
-        <div className="primary-button">
+        <div className={styles["primary-button"]}>
           <Link to="/sign-up">
             <Button>Join us!</Button>
           </Link>
