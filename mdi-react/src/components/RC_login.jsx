@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../utils/api";
-import ColoredContainers from './Colored-Containers';
-import { useAuth } from '../hooks/useAuth';
+import ColoredContainers from "./Colored-Containers";
+import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import styles from "./Colored-Containers.module.scss";
 
 export default function RC_login() {
   const [email, setEmail] = useState("");
@@ -12,12 +13,12 @@ export default function RC_login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Auth state changed - isAuthenticated:', isAuthenticated);
-    console.log('Auth state changed - user:', user);
+    console.log("Auth state changed - isAuthenticated:", isAuthenticated);
+    console.log("Auth state changed - user:", user);
 
     if (isAuthenticated && user && user.email) {
-      console.log('Navigating to dashboard');
-      navigate('/dashboard');
+      console.log("Navigating to dashboard");
+      navigate("/dashboard");
     }
   }, [isAuthenticated, user, navigate]);
 
@@ -26,7 +27,7 @@ export default function RC_login() {
     try {
       const response = await login({ email, password });
       console.log("Login API response:", response);
-      
+
       /* if (response && response.token && response.user) {
         const success = await login(response.token, response.user);
         if (success) {
@@ -43,27 +44,27 @@ export default function RC_login() {
   };
 
   return (
-    <div className="login-container">
+    <>
       <ColoredContainers
         h2Text="Your daily impact"
         h3Text="Sign in to your account"
       >
-        <div className="login-form">
-          <form className="form log-in" onSubmit={handleSubmit}>
-            <label className="input-label">
+        <div>
+          <form className={styles["login-form"]} onSubmit={handleSubmit}>
+            <label>
               Email:
               <input
-                className="email login-input"
+                className={styles["input"]}
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
-            <label className="input-label">
+            <label>
               Password:
               <input
-                className="password input"
+                className={styles["input"]}
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -74,6 +75,6 @@ export default function RC_login() {
           </form>
         </div>
       </ColoredContainers>
-    </div>
+    </>
   );
 }

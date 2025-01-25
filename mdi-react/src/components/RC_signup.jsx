@@ -56,10 +56,10 @@ export default function RC_signup() {
   };
 
   return (
-    <div className="login-container">
+    <>
       <ColoredContainers h2Text="Create your account" h3Text="">
-        <div className="sign-up-form">
-          <form className="form sign-up" onSubmit={handleSubmit}>
+        <div>
+          <form className={styles["sign-up-form"]} onSubmit={handleSubmit}>
             <label>
               Salutation:
               <select
@@ -170,6 +170,6 @@ export default function RC_signup() {
           </form>
         </div>
       </ColoredContainers>
-    </div>
+    </>
   );
 }
