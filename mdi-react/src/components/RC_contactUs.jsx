@@ -1,32 +1,34 @@
 import ColoredContainers from "./Colored-Containers";
+import Button from "./Button";
+import styles from "./Colored-Containers.module.scss";
 
 export default function RC_contactUs() {
   return (
-    <div className="contact-us-container">
+    <>
       <ColoredContainers h2Text="Contact Us" h3Text="">
-        <div className="contact-form">
-          <form className="form " action="">
-            <label className="input-label">
+        <div>
+          <form className={styles["contact-us-form"]} action="">
+            <label>
               Name:
-              <input className="name input" placeholder="Name" />
+              <input className={styles["input"]} placeholder="Name" />
             </label>
-            <label className="input-label">
+            <label>
               Email:
-              <input className="email input" type="email" placeholder="Email" />
+              <input className={styles["input"]} type="email" placeholder="Email" />
             </label>
-            <label className="input-label">
+            <label>
               Message:
               <textarea
-                className="message input"
+                className={styles["input"]}
                 cols="50"
                 rows="10"
                 placeholder="Write your message here"
               />
             </label>
-            <button type="submit">Send</button>
+            <Button type="submit">Send</Button>
           </form>
         </div>
       </ColoredContainers>
-    </div>
+    </>
   );
 }
