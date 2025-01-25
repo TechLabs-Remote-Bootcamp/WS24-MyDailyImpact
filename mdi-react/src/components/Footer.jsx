@@ -9,15 +9,15 @@ export default function Footer() {
       </div>
       <nav>
         <ul className={styles["footer-links"]}>
-          <li className={styles["footer-nav-item"]}>
-            <NavLink to="/contact-us">Contact</NavLink>
-          </li>
-          <li className={styles["footer-nav-item"]}>
-            <NavLink to="/imprint">Imprint</NavLink>
-          </li>
-          <li className={styles["footer-nav-item"]}>
-            <NavLink to="/privacy">Privacy</NavLink>
-          </li>
+          <NavLink to="/contact-us">
+            <li className={styles["footer-nav-item"]}>Contact</li>
+          </NavLink>
+          <NavLink to="/imprint">
+            <li className={styles["footer-nav-item"]}>Imprint</li>
+          </NavLink>
+          <NavLink to="/privacy">
+            <li className={styles["footer-nav-item"]}>Privacy</li>
+          </NavLink>
         </ul>
       </nav>
     </footer>
