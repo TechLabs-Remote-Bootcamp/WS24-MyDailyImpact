@@ -1,6 +1,8 @@
 @use "../styles/colors.scss" as *;
 @use "../styles/fonts.scss" as *;
 
+//General color containers styling
+
 .colorContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 10fr 1fr 3fr;
@@ -63,21 +65,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    ul {
-      list-style-type: none;
-      padding: 0;
-      li {
-        list-style-image: url("../images/Leaf_small.png");
-        margin-left: 2rem;
-        margin-bottom: 1rem;
-        font-weight: bold;
-        color: $primary-dark;
-      }
-      :last-child {
-        margin-bottom: 1.5rem;
-      }
+  }
+
+  // Home page RC content
+
+  .home-list {
+    list-style-type: none;
+    padding: 0;
+    li {
+      list-style-image: url("../images/Leaf_small.png");
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: $primary-dark;
+    }
+    :last-child {
+      margin-bottom: 1.5rem;
     }
   }
+
+  // Pages with forms (general)
 
   form {
     display: grid;
@@ -96,7 +103,7 @@
     }
   }
 
-  //Sign-up form
+  //Sign-up page form
 
   .sign-up-form {
     label:nth-child(1) {
@@ -136,7 +143,7 @@
     }
   }
 
-  // Login form
+  // Login page form
 
   .login-form {
     label:nth-child(1) {

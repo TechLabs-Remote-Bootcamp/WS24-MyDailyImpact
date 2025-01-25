@@ -11,9 +11,9 @@ export default function RC_Home() {
         h2Text="Get ready for your impact journey"
         h3Text="Every plant-based meal counts"
       >
-        <div className="home-text">
+        <div>
           <p>Did you know that:</p>
-          <ul className="home-list">
+          <ul className={styles["home-list"]}>
             <li>
               by switching out meat-based meals with plant-based ones, you can
               have a positive impact on the environment and animals’ lives?
