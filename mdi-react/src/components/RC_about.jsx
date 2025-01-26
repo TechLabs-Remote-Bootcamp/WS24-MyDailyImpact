@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import ColoredContainers from "./Colored-Containers";
-import "./Colored-Containers.module.scss";
 
 export default function RC_about() {
   return (
