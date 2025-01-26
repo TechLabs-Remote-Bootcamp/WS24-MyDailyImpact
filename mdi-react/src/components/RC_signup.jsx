@@ -1,6 +1,6 @@
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.module.scss";
-import "./RC_signup.module.scss";
+import styles from "./RC_signup.module.scss";
 
 export default function RC_signup() {
   return (

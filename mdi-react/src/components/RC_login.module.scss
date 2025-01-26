@@ -1,0 +1,43 @@
+@use "../styles/colors.scss" as *;
+@use "../styles/fonts.scss" as *;
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.log-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.link {
+  color: $primary-medium;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.sign-up-suggestion {
+  margin: 0.5rem 0rem 0.25rem 0rem;
+}
+
+.right-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .login-footer {
+    display: flex;
+    flex-direction: column;
+  }
+}
