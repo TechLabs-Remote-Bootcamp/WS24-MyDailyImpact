@@ -13,6 +13,7 @@ import ContactUs from "./components/pages/ContactUs";
 import Imprint from "./components/pages/Imprint";
 import Privacy from "./components/pages/Privacy";
 import Dashboard from "./components/pages/Dashboard";
+import ForgotPassword from "./components/pages/ForgotPassword";
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/imprint" element={<Imprint />}></Route>
           <Route path="/privacy" element={<Privacy />}></Route>
           <Route path="/recipeBot" element={<RecipeBot />}></Route>
+          <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
         </Routes>
       </div>

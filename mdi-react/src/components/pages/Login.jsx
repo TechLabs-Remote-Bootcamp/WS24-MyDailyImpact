@@ -15,10 +15,10 @@ export default function Login() {
           <RC_login />
           <div>
             <p>
-              New User?{" "}
-              <Link to="/sign-up">
-                Sign up
-              </Link>
+              New User? <Link to="/sign-up">Sign up</Link>
+            </p>
+            <p>
+              <Link to="/forgot-password">Forgot password?</Link>
             </p>
           </div>
         </div>
