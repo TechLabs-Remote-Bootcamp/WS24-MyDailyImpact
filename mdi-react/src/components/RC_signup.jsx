@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ApiError } from '../utils/api';
 import ColoredContainers from "./Colored-Containers";
 import { api } from "../utils/api";
 import Button from "./Button";
 import styles from "./Colored-Containers.module.scss";
+import { countriesApi } from "../utils/countriesApi";
 
 export default function RC_signup() {
   const navigate = useNavigate();
@@ -16,13 +18,42 @@ export default function RC_signup() {
     confirmPassword: "",
     birthday: "",
     gender: "",
+    country: ""
   });
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    fetchCountries();
+  }, []);
+
+  useEffect(() => {
+    console.log('Countries state updated:', countries);
+  }, [countries]);
+
+  const fetchCountries = async () => {
+    try {
+      console.log('Fetching countries...');
+      const data = await countriesApi.getCountries();
+      console.log('Raw countries response:', data);
+      setCountries(data);
+    } catch (error) {
+      console.error("Error fetching countries:", error.message);
+      setCountries([]); // Set empty array on error
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleCountryChange = (e) => {
+    setFormData(prevData => ({
+      ...prevData,
+      country: e.target.value
     }));
   };
 
@@ -37,7 +68,7 @@ export default function RC_signup() {
       const { confirmPassword, ...dataToSend } = formData;
       dataToSend.birthday = new Date(dataToSend.birthday);
 
-      console.log("Data being sent:", dataToSend); // Add this line
+      console.log("Data being sent:", dataToSend);
 
       const response = await api.register(dataToSend);
       if (response) {
@@ -122,16 +153,23 @@ export default function RC_signup() {
                 onChange={handleChange}
                 placeholder="Date of Birth"
               />
-            </label>
-            {/* <label>
-              Country:
-              <select className="input" name="country" value={formData.country} onChange={handleChange}>
-                <option value="">Select Country</option>
-                <option value="Country">Country Name</option>
-                <option value="Other">Other</option>
-              </select>
-            </label> */}
-            <label>
+              <label>
+                Country:
+                <select
+                  className={styles["input"]}
+                  name="country"
+                  value={formData.country}
+                  onChange={handleCountryChange}
+                >
+                  <option value="">Select Country</option>
+                  {countries.map((country) => (
+                    <option key={country.Code} value={country.Code}>
+                      {country.Country}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
               Email:
               <input
                 className={styles["input"]}
