@@ -1,19 +1,19 @@
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.module.scss";
-import "./RC_home.module.scss";
+import styles from "./RC_home.module.scss";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
 export default function RC_Home() {
   return (
-    <div className="home">
+    <>
       <ColoredContainers
         h2Text="Get ready for your impact journey"
         h3Text="Every plant-based meal counts"
       >
-        <div className="home-text">
+        <div className={styles["home-text"]}>
           <p>Did you know that:</p>
-          <ul className="home-list">
+          <ul className={styles["home-list"]}>
             <li>
               by switching out meat-based meals with plant-based ones, you can
               have a positive impact on the environment and animals’ lives?
@@ -24,7 +24,7 @@ export default function RC_Home() {
             </li>
             <li>every meal you eat counts?</li>
           </ul>
-          <p className="bold">
+          <p>
             Join us at MyDailyImpact, where you can track how many animals’
             lives and how much forest land, CO2 emission, and water you save by
             swapping out meat- for plant-based meals!
@@ -32,10 +32,8 @@ export default function RC_Home() {
         </div>
       </ColoredContainers>
       <Button>
-        <Link to="/sign-up" className="sign-up-button">
-          Join us!
-        </Link>
+        <Link to="/sign-up">Join us!</Link>
       </Button>
-    </div>
+    </>
   );
 }
