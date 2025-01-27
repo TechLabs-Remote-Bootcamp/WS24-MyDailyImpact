@@ -13,16 +13,13 @@ export default function RC_about() {
             each meat-based meal for a plant-based one.
           </p>
           <p className="primary">
-            The purpose of this app is to{" "}
-            <span className="bold">
-              encourage people to incorporate more plant-based meals into their
-              day by displaying the number of animals and amount of CO2, forest
-              land, and water they have saved over the course of their impact
-              journey
-            </span>
-            . Our aim is to make people feel inspired to make more sustainable,
-            compassionate changes–whether they plan to go fully plant-based or
-            simply aim to reduce their meat consumption.
+            The purpose of this app is to encourage people to incorporate more
+            plant-based meals into their day by displaying the number of animals
+            and amount of CO2, forest land, and water they have saved over the
+            course of their impact journey . Our aim is to make people feel
+            inspired to make more sustainable, compassionate changes–whether
+            they plan to go fully plant-based or simply aim to reduce their meat
+            consumption.
           </p>
           <p>
             This app was developed by a team of
