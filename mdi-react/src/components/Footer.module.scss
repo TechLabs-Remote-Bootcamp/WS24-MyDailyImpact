@@ -9,6 +9,7 @@
   align-items: center;
   font-size: 0.8rem;
   font-weight: 600;
+  height: auto;
 }
 
 .footer-links {
@@ -35,7 +36,7 @@
 
 @media only screen and (max-width: 810px) {
   .footer {
-    height: 2.4rem;
+    height: auto;
   }
 
   .footer-nav-item {
