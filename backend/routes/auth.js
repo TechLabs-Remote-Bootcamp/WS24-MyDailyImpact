@@ -1,7 +1,7 @@
 import express from 'express';
 import { check } from 'express-validator';
 import { register, login } from '../controllers/auth.js';
-import asyncHandler from '../../frontend/src/utils/asyncHandler.js';
+import asyncHandler from '../../mdi-react/src/utils/asyncHandler.js';
 
 const router = express.Router();
 
