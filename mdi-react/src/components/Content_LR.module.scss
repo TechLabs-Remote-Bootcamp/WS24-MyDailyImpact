@@ -27,12 +27,14 @@
 }
 
 @media only screen and (max-width: 810px) {
+  .lrContainer {
+    padding: 0;
+  }
   .leftBox {
     display: none;
   }
   .rightBox {
-    margin: 1.5rem;
-    max-width: 20rem;
-    max-height: 70vh;
+    margin: 1.5rem 0;
+    min-height: 70vh;
   }
 }

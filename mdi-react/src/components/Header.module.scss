@@ -26,9 +26,7 @@
 }
 
 .desktopHead {
-  position: sticky;
-  top: 0;
-  background-color: #fff;
+  background-color: $white;
   z-index: 1000;
 }
 
@@ -85,28 +83,12 @@
 
     a {
       font-weight: 500;
-      color: #fff;
       text-decoration: inherit;
 
       &:hover {
         font-weight: 600;
       }
     }
-
-    // &:hover {
-    //   cursor: pointer;
-
-    //   .leaf-surface {
-    //     background-color: var(--secondary-medium);
-    //     box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
-    //   }
-    //   .leaf-stem {
-    // border-right: solid var(--secondary-medium) 0.5rem;
-    // opacity: 80%;
-    //   }
-    // }
-
-    // **************The above code, when &:focus is added to it, &:focus does not work!*******
 
     .leaf-surface {
       grid-column: 2 / 4;
@@ -238,12 +220,13 @@
     justify-content: flex-end;
     padding-right: 1.2rem;
     font-size: 0.8rem;
-    color: $white;
+    font-weight: 600;
   }
 
   .single {
     transition: none;
     padding: 0.6em 1.2em;
+
     &:hover {
       background-color: var(--primary-medium);
       border-radius: 1em;
