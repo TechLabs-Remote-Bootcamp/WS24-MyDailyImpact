@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
 import countryRouter from './routes/country.js';
-import { errorHandler } from '../mdi-react/src/utils/errorHandler.js';
+import { errorHandler } from './utils/errorHandler.js';
 
 dotenv.config();
 
