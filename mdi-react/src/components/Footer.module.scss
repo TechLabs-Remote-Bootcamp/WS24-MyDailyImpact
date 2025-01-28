@@ -9,7 +9,7 @@
   align-items: center;
   font-size: 0.8rem;
   font-weight: 600;
-  height: auto;
+  color: $beige;
 }
 
 .footer-links {
@@ -36,7 +36,7 @@
 
 @media only screen and (max-width: 810px) {
   .footer {
-    height: auto;
+    height: 2.4rem;
   }
 
   .footer-nav-item {
