@@ -1,0 +1,22 @@
+@use "../styles/colors.scss" as *;
+
+// Home page RC content
+
+.home-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-list {
+  list-style-type: none;
+  padding: 0;
+  li {
+    list-style-image: url("../images/Leaf_small.png");
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    color: $primary-dark;
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
