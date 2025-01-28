@@ -26,7 +26,9 @@
 }
 
 .desktopHead {
-  background-color: $white;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
   z-index: 1000;
 }
 
@@ -83,6 +85,7 @@
 
     a {
       font-weight: 500;
+      color: #fff;
       text-decoration: inherit;
 
       &:hover {
@@ -220,13 +223,12 @@
     justify-content: flex-end;
     padding-right: 1.2rem;
     font-size: 0.8rem;
-    font-weight: 600;
+    color: $white;
   }
 
   .single {
     transition: none;
     padding: 0.6em 1.2em;
-
     &:hover {
       background-color: var(--primary-medium);
       border-radius: 1em;
