@@ -4,7 +4,7 @@ import ColoredContainers from "./Colored-Containers";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
-import styles from "./Colored-Containers.module.scss";
+import styles from "../styles/forms.module.scss";
 
 export default function RC_login() {
   const [email, setEmail] = useState("");

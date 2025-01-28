@@ -1,10 +1,9 @@
 import React from "react";
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.module.scss";
-import styles from "./RC_home.module.scss";
 import Button from "./Button";
 import { Link } from "react-router-dom";
-import styles from "./Colored-Containers.module.scss";
+import styles from "./RC_home.module.scss";
 
 export default function RC_Home() {
   return (
