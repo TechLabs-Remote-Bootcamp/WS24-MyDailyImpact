@@ -93,21 +93,6 @@
       }
     }
 
-    // &:hover {
-    //   cursor: pointer;
-
-    //   .leaf-surface {
-    //     background-color: var(--secondary-medium);
-    //     box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
-    //   }
-    //   .leaf-stem {
-    // border-right: solid var(--secondary-medium) 0.5rem;
-    // opacity: 80%;
-    //   }
-    // }
-
-    // **************The above code, when &:focus is added to it, &:focus does not work!*******
-
     .leaf-surface {
       grid-column: 2 / 4;
       grid-row: 1 / 2;
