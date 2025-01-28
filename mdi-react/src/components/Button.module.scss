@@ -2,7 +2,7 @@
 @use "../styles/fonts.scss" as *;
 
 .primary-button {
-  background-color: $primary;
+  background-color: $primary-medium;
   font-family: $font-family-general;
   margin: 1rem auto;
   padding: 0.6em 1.2em;
@@ -14,7 +14,7 @@
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: $primary-medium;
+    background-color: $secondary;
   }
 
   a {
