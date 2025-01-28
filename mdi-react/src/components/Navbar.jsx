@@ -16,11 +16,15 @@ export default function Navbar() {
         </NavLink>
         <div className={styles["plant-stem"]}></div>
         <NavLink to="/about" className={styles.single}>
-          <span>About us</span>
+          <span>About</span>
         </NavLink>
         <div className={styles["plant-stem"]}></div>
         <NavLink to="/recipeBot" className={styles.single}>
-          <span>Recipe Bot</span>
+          <span>
+            Recipe
+            <br />
+            Bot
+          </span>
         </NavLink>
         <div className={styles["plant-stem"]}></div>
         <NavLink to="/login" className={styles.single}>

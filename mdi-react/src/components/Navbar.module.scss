@@ -62,19 +62,24 @@
 
     .single {
       grid-column: 1/4;
+      display: flex;
       background-color: $secondary;
       border-radius: 50%;
       min-width: 4.3rem;
-      min-height: 1.6rem;
+      min-height: 1.8rem;
       align-items: center;
+      justify-content: center;
       padding: 0.2em;
 
       span {
+        padding: 0.2em 0;
         color: $white;
         font-size: 0.8rem;
         display: flex;
         align-self: center;
         justify-content: center;
+        text-align: center;
+        line-height: 0.9rem;
       }
 
       &:hover,
