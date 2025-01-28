@@ -1,8 +1,10 @@
+import React from "react";
 import ColoredContainers from "./Colored-Containers";
 import "./Colored-Containers.module.scss";
 import styles from "./RC_home.module.scss";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import styles from "./Colored-Containers.module.scss";
 
 export default function RC_Home() {
   return (
@@ -29,6 +31,11 @@ export default function RC_Home() {
             lives and how much forest land, CO2 emission, and water you save by
             swapping out meat- for plant-based meals!
           </p>
+        </div>
+        <div className={styles["primary-button"]}>
+          <Link to="/sign-up">
+            <Button>Join us!</Button>
+          </Link>
         </div>
       </ColoredContainers>
       <Button>
