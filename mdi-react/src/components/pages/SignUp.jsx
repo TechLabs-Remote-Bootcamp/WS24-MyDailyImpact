@@ -1,4 +1,3 @@
-import "./SignUp.module.scss";
 import Content_LR from "../Content_LR.jsx";
 import LC_bigImage from "../LC_bigImage.jsx";
 import RC_signup from "../RC_signup.jsx";
