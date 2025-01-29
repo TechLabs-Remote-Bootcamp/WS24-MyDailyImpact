@@ -19,6 +19,8 @@
 
 #header-desktop {
   display: block;
+  position: sticky;
+  top: 0;
 }
 
 #header-mobile {
@@ -26,8 +28,6 @@
 }
 
 .desktopHead {
-  position: sticky;
-  top: 0;
   background-color: #fff;
   z-index: 1000;
 }
@@ -240,6 +240,8 @@
 @media only screen and (max-width: 810px) {
   #header-mobile {
     display: block;
+    position: sticky;
+    top: 0;
   }
 
   #header-desktop {

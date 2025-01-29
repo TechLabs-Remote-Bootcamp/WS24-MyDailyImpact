@@ -1,11 +1,16 @@
 @use "./styles/colors.scss" as *;
 @use "./styles/fonts.scss" as *;
 
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+
 @media only screen and (min-width: 810px) {
   #root {
     width: 100%;
     margin: 0 auto;
-    min-height: 0;
     display: grid;
     grid-template-rows: auto auto auto;
     // grid-template-columns: 100vw;   //This was causing horizontal scroll bar!
@@ -52,9 +57,6 @@ header {
 
   .head {
     grid-area: mobile-header;
-    position: sticky;
-    top: 0;
-    z-index: 500;
   }
 
   .content {
