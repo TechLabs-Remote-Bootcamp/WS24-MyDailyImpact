@@ -4,7 +4,7 @@ import ColoredContainers from "./Colored-Containers";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
-import styles from "../styles/forms.module.scss";
+import form from "../styles/forms.module.scss";
 
 export default function RC_login() {
   const [email, setEmail] = useState("");
@@ -50,11 +50,11 @@ export default function RC_login() {
         h3Text="Sign in to your account"
       >
         <div>
-          <form className={styles["login-form"]} onSubmit={handleSubmit}>
+          <form className={form["login-form"]} onSubmit={handleSubmit}>
             <label>
               Email:
               <input
-                className={styles["input"]}
+                className={form["input"]}
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -64,7 +64,7 @@ export default function RC_login() {
             <label>
               Password:
               <input
-                className={styles["input"]}
+                className={form["input"]}
                 type="password"
                 placeholder="Password"
                 value={password}
