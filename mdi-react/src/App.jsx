@@ -14,6 +14,7 @@ import Imprint from "./components/pages/Imprint";
 import Privacy from "./components/pages/Privacy";
 import Dashboard from "./components/pages/Dashboard";
 import ForgotPassword from "./components/pages/ForgotPassword";
+import MealLogging from "./components/pages/MealLogging";
 
 export default function App() {
   return (
@@ -27,7 +28,8 @@ export default function App() {
       <div className="content">
         <Routes className="content">
           <Route path="/" element={<Home />}></Route>
-          <Route path="/about" element={<About />}></Route>
+          {/* <Route path="/about" element={<About />}></Route> */}
+          <Route path="/meal-logging" element={<MealLogging />}></Route>
           <Route path="/recipeBot" element={<RecipeBot />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/sign-up" element={<SignUp />} />

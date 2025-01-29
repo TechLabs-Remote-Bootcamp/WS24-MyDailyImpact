@@ -3,13 +3,6 @@
   max-height: calc(100vh - 8rem);
 }
 
-// Maybe we need this code later
-//@media only screen and (max-width: 850px) {
-//   .image-box {
-//     max-height: calc(100vh - 30rem);
-//   }
-// }
-
 @media only screen and (max-width: 810px) {
   #treeWorld {
     visibility: hidden;

@@ -20,11 +20,17 @@ export default function Header() {
                 <div className={styles["leaf-stem"]}></div>
               </li>
               <li className={styles.single}>
+                <NavLink to="/meal-logging" className={styles["leaf-surface"]}>
+                  <span>Meal Log</span>
+                </NavLink>
+                <div className={styles["leaf-stem"]}></div>
+              </li>
+              {/* <li className={styles.single}>
                 <NavLink to="/about" className={styles["leaf-surface"]}>
                   <span>About us</span>
                 </NavLink>
                 <div className={styles["leaf-stem"]}></div>
-              </li>
+              </li> */}
               <li className={styles.single}>
                 <NavLink to="/recipeBot" className={styles["leaf-surface"]}>
                   <span>Recipe Bot</span>
