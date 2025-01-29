@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ColoredContainers from "./Colored-Containers";
 import { ApiError, api } from "../utils/api";
 import Button from "./Button";
-import styles from "../styles/forms.module.scss";
+import form from "../styles/forms.module.scss";
 
 export default function RC_signup() {
   const navigate = useNavigate();
@@ -59,11 +59,11 @@ export default function RC_signup() {
     <>
       <ColoredContainers h2Text="Create your account">
         <div>
-          <form className={styles["sign-up-form"]} onSubmit={handleSubmit}>
+          <form className={form["sign-up-form"]} onSubmit={handleSubmit}>
             <label>
               Salutation:
               <select
-                className={styles.input}
+                className={form.input}
                 name="salutation"
                 value={formData.salutation}
                 onChange={handleChange}
@@ -75,7 +75,7 @@ export default function RC_signup() {
             <label>
               Gender:
               <select
-                className={styles.input}
+                className={form.input}
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
@@ -88,7 +88,7 @@ export default function RC_signup() {
             <label>
               First Name:
               <input
-                className={styles.input}
+                className={form.input}
                 type="text"
                 name="firstName"
                 value={formData.firstName}
@@ -99,7 +99,7 @@ export default function RC_signup() {
             <label>
               Last Name:
               <input
-                className={styles.input}
+                className={form.input}
                 type="text"
                 name="lastName"
                 value={formData.lastName}
@@ -110,7 +110,7 @@ export default function RC_signup() {
             <label>
               Date of Birth:
               <input
-                className={styles.input}
+                className={form.input}
                 type="date"
                 name="birthday"
                 value={formData.birthday}
@@ -129,7 +129,7 @@ export default function RC_signup() {
             <label>
               Email:
               <input
-                className={styles.input}
+                className={form.input}
                 type="email"
                 name="email"
                 value={formData.email}
@@ -140,7 +140,7 @@ export default function RC_signup() {
             <label>
               Password:
               <input
-                className={styles.input}
+                className={form.input}
                 type="password"
                 name="password"
                 value={formData.password}
@@ -151,7 +151,7 @@ export default function RC_signup() {
             <label>
               Confirm Password:
               <input
-                className={styles.input}
+                className={form.input}
                 type="password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -159,7 +159,7 @@ export default function RC_signup() {
                 placeholder="Confirm Password"
               />
             </label>
-            <Button className={styles["button-input"]} type="submit">
+            <Button className={form["button-input"]} type="submit">
               Sign Up
             </Button>
           </form>
