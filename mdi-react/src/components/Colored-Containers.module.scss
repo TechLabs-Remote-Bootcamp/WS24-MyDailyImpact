@@ -102,10 +102,28 @@
         padding: 0.25rem;
         border-radius: 0.25rem;
         border: 1px solid $grey-700;
+        &.error {
+          border-color: $red;
+        }
+      }
+    }
+
+    .errorText {
+      color: $red;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+      font-family: $font-family-general;
+    }
+
+    button {
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background-color: $grey-700;
       }
     }
   }
-
+  
   //Sign-up page form
 
   .sign-up-form {
