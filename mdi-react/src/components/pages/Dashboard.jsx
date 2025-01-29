@@ -1,15 +1,22 @@
-import { useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { Navigate } from 'react-router-dom';
-import ColoredContainers from '../Colored-Containers';
-import Button from '../Button';
-import './Dashboard.scss'; 
+import { useEffect } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
+import ColoredContainers from "../Colored-Containers";
+import Button from "../Button";
+import "./Dashboard.scss";
 
 export default function Dashboard() {
   const { isAuthenticated, user, logout, loading, initializeAuth } = useAuth();
 
   useEffect(() => {
-    console.log('Dashboard useEffect - isAuthenticated:', isAuthenticated, 'user:', user, 'loading:', loading);
+    console.log(
+      "Dashboard useEffect - isAuthenticated:",
+      isAuthenticated,
+      "user:",
+      user,
+      "loading:",
+      loading
+    );
     if (!isAuthenticated && !loading) {
       initializeAuth();
     }
@@ -23,11 +30,15 @@ export default function Dashboard() {
     return <Navigate to="/login" />;
   }
 
+  const goMealLogging = () => {
+    return <Navigate to="/meal-logging" />;
+  };
+
   const handleLogout = () => {
     logout();
   };
 
-  const welcomeMessage = user?.firstName || user?.email || 'User';
+  const welcomeMessage = user?.firstName || user?.email || "User";
 
   return (
     <div className="dashboard">
@@ -55,8 +66,10 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="actions">
-            <Button onClick={() => alert('Track a meal')}>Track Meal</Button>
-            <Button onClick={() => alert('View detailed stats')}>View Stats</Button>
+            <Button onClick={goMealLogging}>Log Meal</Button>
+            <Button onClick={() => alert("View detailed stats")}>
+              View Stats
+            </Button>
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         </div>
