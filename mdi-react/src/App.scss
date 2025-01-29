@@ -3,7 +3,6 @@
 
 @media only screen and (min-width: 810px) {
   #root {
-    max-width: 2100px;
     width: 100%;
     margin: 0 auto;
     min-height: 0;
@@ -13,7 +12,7 @@
     min-height: 100vh;
     grid-template-areas:
       "header"
-      "conten"        //Spelling mistake or on purpose?
+      "conten" //Spelling mistake or on purpose?
       "footer";
     min-height: 100vh;
   }
