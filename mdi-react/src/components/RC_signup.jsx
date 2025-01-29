@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ColoredContainers from "./Colored-Containers";
-import styles from "./Colored-Containers.module.scss";
-import { api } from "../utils/api";
+import { ApiError, api } from "../utils/api";
 import Button from "./Button";
+import styles from "../styles/forms.module.scss";
 
 export default function RC_signup() {
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ export default function RC_signup() {
 
   return (
     <>
-      <ColoredContainers h2Text="Create your account" h3Text="">
+      <ColoredContainers h2Text="Create your account">
         <div>
           <form className={styles["sign-up-form"]} onSubmit={handleSubmit}>
             <label>
@@ -68,12 +68,8 @@ export default function RC_signup() {
                 value={formData.salutation}
                 onChange={handleChange}
               >
-                <option value="">Salutation</option>
                 <option value="Mr">Mr</option>
                 <option value="Mrs">Mrs</option>
-                <option value="Ms">Ms</option>
-                <option value="Dr">Dr</option>
-                <option value="Not Specified">Not Specified</option>
               </select>
             </label>
             <label>
@@ -84,10 +80,9 @@ export default function RC_signup() {
                 value={formData.gender}
                 onChange={handleChange}
               >
-                <option value="">Select Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="diverse">Diverse</option>
               </select>
             </label>
             <label>
