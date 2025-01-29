@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { api } from "../utils/api";
 import ColoredContainers from "./Colored-Containers";
 import { useAuth } from "../hooks/useAuth";
@@ -54,7 +54,7 @@ export default function RC_login() {
             <label>
               Email:
               <input
-                className={styles.input}
+                className={styles["input"]}
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -64,7 +64,7 @@ export default function RC_login() {
             <label>
               Password:
               <input
-                className={styles.input}
+                className={styles["input"]}
                 type="password"
                 placeholder="Password"
                 value={password}

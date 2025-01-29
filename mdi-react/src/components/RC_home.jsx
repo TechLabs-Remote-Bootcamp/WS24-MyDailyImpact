@@ -1,18 +1,17 @@
 import React from "react";
 import ColoredContainers from "./Colored-Containers";
-import "./Colored-Containers.module.scss";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import styles from "./RC_home.module.scss";
 
 export default function RC_Home() {
   return (
-    <>
+    <div className="RC_home">
       <ColoredContainers
         h2Text="Get ready for your impact journey"
         h3Text="Every plant-based meal counts"
       >
-        <div className={styles["home-text"]}>
+        <div>
           <p>Did you know that:</p>
           <ul className={styles["home-list"]}>
             <li>
@@ -31,15 +30,10 @@ export default function RC_Home() {
             swapping out meat- for plant-based meals!
           </p>
         </div>
-        <div className={styles["primary-button"]}>
-          <Link to="/sign-up">
-            <Button>Join us!</Button>
-          </Link>
-        </div>
       </ColoredContainers>
-      <Button>
+      <Button className={styles["primary-button"]}>
         <Link to="/sign-up">Join us!</Link>
       </Button>
-    </>
+    </div>
   );
 }
