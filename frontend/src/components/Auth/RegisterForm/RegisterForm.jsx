@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { User, Mail, KeyRound, Calendar, Users, Loader2 } from 'lucide-react';
-import styles from './RegisterForm.module.scss';
+import { useState } from "react";
+import { User, Mail, KeyRound, Calendar, Users, Loader2 } from "lucide-react";
+import styles from "./RegisterForm.module.scss";
 
 export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    birthday: '',
-    gender: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    birthday: "",
+    gender: "",
   });
   const [validationError, setValidationError] = useState(null);
 
@@ -53,7 +53,9 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
             required
             placeholder="you@example.com"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
           />
         </div>
       </div>
@@ -67,7 +69,9 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
             type="date"
             required
             value={formData.birthday}
-            onChange={(e) => setFormData({ ...formData, birthday: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, birthday: e.target.value })
+            }
           />
         </div>
       </div>
@@ -80,7 +84,9 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
             id="gender"
             required
             value={formData.gender}
-            onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, gender: e.target.value })
+            }
             className={styles.select}
           >
             <option value="">Select gender</option>
@@ -101,7 +107,9 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
             required
             placeholder="••••••••"
             value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
           />
         </div>
       </div>
@@ -116,7 +124,9 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
             required
             placeholder="••••••••"
             value={formData.confirmPassword}
-            onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, confirmPassword: e.target.value })
+            }
           />
         </div>
       </div>
@@ -127,18 +137,14 @@ export function RegisterForm({ onSubmit, onShowLogin, loading, error }) {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className={styles.submitButton}
-      >
+      <button type="submit" disabled={loading} className={styles.submitButton}>
         {loading ? (
           <>
             <Loader2 className={styles.spinner} />
             Creating account...
           </>
         ) : (
-          'Create account'
+          "Create account"
         )}
       </button>
 

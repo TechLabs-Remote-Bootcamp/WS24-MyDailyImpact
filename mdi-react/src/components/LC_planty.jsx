@@ -1,4 +1,3 @@
-import React from "react";
 import plantyImage from "../images/RecipeBotPlanty.png";
 import plantyImageBlink from "../images/RecipeBotPlantyBlink.png";
 import styles from "./pages/RecipeBot.module.scss";

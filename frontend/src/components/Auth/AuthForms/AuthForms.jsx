@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { LoginForm } from '../LoginForm/LoginForm';
-import { RegisterForm } from '../RegisterForm/RegisterForm';
-import styles from './AuthForms.module.scss';
+import { useState } from "react";
+import { LoginForm } from "../LoginForm/LoginForm";
+import { RegisterForm } from "../RegisterForm/RegisterForm";
+import styles from "./AuthForms.module.scss";
 
 export function AuthForms({ onLogin, onRegister, loading, error }) {
   const [showLogin, setShowLogin] = useState(true);

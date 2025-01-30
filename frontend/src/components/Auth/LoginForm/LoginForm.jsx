@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { KeyRound, Mail, Loader2 } from 'lucide-react';
-import styles from './LoginForm.module.scss';
+import { useState } from "react";
+import { KeyRound, Mail, Loader2 } from "lucide-react";
+import styles from "./LoginForm.module.scss";
 
 export function LoginForm({ onSubmit, onShowRegister, loading, error }) {
   const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     rememberMe: false,
   });
 
@@ -26,7 +26,9 @@ export function LoginForm({ onSubmit, onShowRegister, loading, error }) {
             required
             placeholder="you@example.com"
             value={credentials.email}
-            onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+            onChange={(e) =>
+              setCredentials({ ...credentials, email: e.target.value })
+            }
           />
         </div>
       </div>
@@ -41,7 +43,9 @@ export function LoginForm({ onSubmit, onShowRegister, loading, error }) {
             required
             placeholder="••••••••"
             value={credentials.password}
-            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+            onChange={(e) =>
+              setCredentials({ ...credentials, password: e.target.value })
+            }
           />
         </div>
       </div>
@@ -52,7 +56,9 @@ export function LoginForm({ onSubmit, onShowRegister, loading, error }) {
             id="remember-me"
             type="checkbox"
             checked={credentials.rememberMe}
-            onChange={(e) => setCredentials({ ...credentials, rememberMe: e.target.checked })}
+            onChange={(e) =>
+              setCredentials({ ...credentials, rememberMe: e.target.checked })
+            }
           />
           <label htmlFor="remember-me">Remember me</label>
         </div>
@@ -68,18 +74,14 @@ export function LoginForm({ onSubmit, onShowRegister, loading, error }) {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className={styles.submitButton}
-      >
+      <button type="submit" disabled={loading} className={styles.submitButton}>
         {loading ? (
           <>
             <Loader2 className={styles.spinner} />
             Signing in...
           </>
         ) : (
-          'Sign in'
+          "Sign in"
         )}
       </button>
 

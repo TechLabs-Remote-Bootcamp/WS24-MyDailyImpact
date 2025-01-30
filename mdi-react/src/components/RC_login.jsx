@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../utils/api";
 import ColoredContainers from "./Colored-Containers";
 import { useAuth } from "../hooks/useAuth";
