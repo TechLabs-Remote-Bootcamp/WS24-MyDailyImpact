@@ -30,10 +30,12 @@ export default function RC_Home() {
             swapping out meat- for plant-based meals!
           </p>
         </div>
+        <div className={styles["primary-button"]}>
+          <Link to="/sign-up">
+            <Button>Join us!</Button>
+          </Link>
+        </div>
       </ColoredContainers>
-      <Button className={styles["primary-button"]}>
-        <Link to="/sign-up">Join us!</Link>
-      </Button>
     </div>
   );
 }

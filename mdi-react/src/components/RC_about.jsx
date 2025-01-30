@@ -25,7 +25,11 @@ export default function RC_about() {
           </p>
           <p>
             This app was developed by a team of
-            <Link to="https://www.techlabs.org/" target="_blank">
+            <Link
+              to="https://www.techlabs.org/"
+              target="_blank"
+              className="bold"
+            >
               {" "}
               TechLabs{" "}
             </Link>

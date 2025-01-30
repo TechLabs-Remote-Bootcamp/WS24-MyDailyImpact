@@ -233,9 +233,8 @@ export default function RC_signup() {
               </span>
             )}
           </label>
-
           <Button
-            className={styles["button-input"]}
+            className={styles["primary-button"]}
             type="submit"
           >
             Sign Up
