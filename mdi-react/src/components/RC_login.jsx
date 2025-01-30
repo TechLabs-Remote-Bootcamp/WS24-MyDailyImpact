@@ -49,8 +49,9 @@ export default function RC_login() {
         h2Text="Your daily impact"
         h3Text="Sign in to your account"
       >
+        <h2>Hallo</h2>
         <div>
-          <form className={form["login-form"]} onSubmit={handleSubmit}>
+          <form className={form["form-container"]} onSubmit={handleSubmit}>
             <label>
               Email:
               <input

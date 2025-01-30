@@ -14,7 +14,11 @@ export default function LC_imageUpload() {
         />
         <div className={styles.uploadField}>
           <GrUpload className={styles.uploadIcon} />
-          <p>Upload meal image</p>
+          <p>
+            Upload meal image
+            <br />
+            {"(optional)"}
+          </p>
         </div>
       </div>
     </>
