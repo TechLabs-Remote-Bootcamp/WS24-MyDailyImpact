@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ColoredContainers from "./Colored-Containers";
-import styles from "./Colored-Containers.module.scss";
-import { api } from "../utils/api";
+import { ApiError, api } from "../utils/api";
 import Button from "./Button";
+import styles from "../styles/forms.module.scss";
 
 export default function RC_signup() {
   const navigate = useNavigate();
