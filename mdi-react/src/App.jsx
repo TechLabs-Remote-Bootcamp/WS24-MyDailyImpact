@@ -21,9 +21,9 @@ export default function App() {
       <div className="head">
         <Header />
       </div>
-      <div className="navbarFlower">
-        <Navbar />
-      </div>
+      {/* <div className="navbarFlower">
+        <Navbar /> */}
+      {/* </div> */}
       <div className="content">
         <Routes className="content">
           <Route path="/" element={<Home />}></Route>

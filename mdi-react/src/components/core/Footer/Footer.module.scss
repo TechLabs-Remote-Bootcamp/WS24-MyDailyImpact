@@ -8,15 +8,16 @@
   background-color: $primary-medium;
   align-items: center;
   font-size: 0.8rem;
+  min-height: 3rem;
   font-weight: 600;
   color: $beige;
 }
 
 .footer-links {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 100;
+  margin: 0;
+
 
   a {
     color: $white;

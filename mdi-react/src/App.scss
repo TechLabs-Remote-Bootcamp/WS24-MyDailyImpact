@@ -8,24 +8,31 @@
     margin: 0 auto;
     min-height: 0;
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
     // grid-template-columns: 100vw;   //This was causing horizontal scroll bar!
-    min-height: 100vh;
     grid-template-areas:
       "header"
-      "conten"        //Spelling mistake or on purpose?
+      "content"
       "footer";
     min-height: 100vh;
+  }
+
+  .content {
+    grid-area: content;
+    min-height: 0;
+    // width: 100%;
   }
 
   .navbarFlower {
     display: none;
   }
-  .foot {
-    grid-area: footer;
-    align-self: end;
-    max-height: fit-content;
-  }
+}
+
+.foot {
+  grid-area: footer;
+  align-self: end;
+  max-height: fit-content;
+  width: 100%;
 }
 
 header {
@@ -37,18 +44,12 @@ header {
   #root {
     display: grid;
     grid-template-columns: 110px auto;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
       "mobile-header mobile-header"
-      "navbar-flower vertical-content"
+      "vertical-content vertical-content"
       "mobile-footer mobile-footer";
     min-height: 100vh;
-    width: 100vw;
-  }
-
-  .navbarFlower {
-    grid-area: navbar-flower;
-    display: block;
   }
 
   .head {
@@ -56,14 +57,18 @@ header {
     position: sticky;
     top: 0;
     z-index: 500;
+    width: inherit;
   }
 
   .content {
     grid-area: vertical-content;
+    min-height: 0;
+    // width: 100%;
   }
 
   .foot {
     grid-area: mobile-footer;
     align-self: end;
+    // width: 100%;
   }
 }

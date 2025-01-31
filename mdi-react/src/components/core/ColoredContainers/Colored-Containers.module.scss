@@ -70,47 +70,39 @@
     }
   }
 }
- 
-@media only screen and (max-width: 810px) {
-  .colorContainer {
-    div {
-      padding: 1em 1em;
-    }
 
+@media only screen and (max-width: 950px) {
+  .colorContainer {
     .greenBox {
       h2 {
-        font-size: 1.4rem;
+        font-size: 2.2rem;
       }
     }
 
     .blueBox h3 {
-      font-size: 1.3rem;
+      font-size: 2rem;
     }
 
     .textBox {
-      font-size: 0.9rem;
+      font-size: 1.3rem;
     }
   }
 }
 
-@media only screen and (max-width: 810px) {
+@media only screen and (max-width: 600px) {
   .colorContainer {
-    div {
-      padding: 1em 1em;
-    }
-
     .greenBox {
       h2 {
-        font-size: 1.4rem;
+        font-size: 2rem;
       }
     }
 
     .blueBox h3 {
-      font-size: 1.3rem;
+      font-size: 2rem;
     }
 
     .textBox {
-      font-size: 0.9rem;
+      font-size: 1.3rem;
     }
   }
 }
