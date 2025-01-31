@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ApiError, api } from "../../../utils/api";
@@ -233,10 +232,7 @@ export default function RC_signup() {
               </span>
             )}
           </label>
-          <Button
-            className={styles["primary-button"]}
-            type="submit"
-          >
+          <Button className={styles["primary-button"]} type="submit">
             Sign Up
           </Button>
         </form>
