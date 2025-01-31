@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ApiError, api } from "../../../utils/api";
-import ColoredContainers from "../../PageComponents/ColoredContainers/Colored-Containers";
-import Button from "../../PageComponents/Button/Button";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
+import Button from "../../core/Button/Button";
 import styles from "../../../styles/forms.module.scss";
 
 export default function RC_signup() {

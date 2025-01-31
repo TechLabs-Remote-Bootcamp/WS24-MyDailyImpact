@@ -1,5 +1,5 @@
-import Content_LR from "../../PageComponents/ContentLR/Content_LR.jsx";
-import LC_bigImage from "../../PageComponents/LC/LC_bigImage.jsx";
+import Content_LR from "../../core/ContentLR/Content_LR.jsx";
+import LC_bigImage from "../../core/LC/LC_bigImage.jsx";
 import RC_privacy from "./RC_privacy.jsx";
 import "./Privacy.module.scss";
 

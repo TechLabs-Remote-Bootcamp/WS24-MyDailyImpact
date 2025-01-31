@@ -1,6 +1,6 @@
 import React from "react";
-import ColoredContainers from "../../PageComponents/ColoredContainers/Colored-Containers";
-import Button from "../../PageComponents/Button/Button";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
+import Button from "../../core/Button/Button";
 import { Link } from "react-router-dom";
 import styles from "./RC_home.module.scss";
 

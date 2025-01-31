@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../../utils/api";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import ColoredContainers from "../../PageComponents/ColoredContainers/Colored-Containers";
-import Button from "../../PageComponents/Button/Button";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
+import Button from "../../core/Button/Button";
 import styles from "../../../styles/forms.module.scss";
 
 export default function RC_login() {

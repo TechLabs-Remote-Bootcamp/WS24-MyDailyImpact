@@ -1,5 +1,5 @@
-import Content_LR from "../../PageComponents/ContentLR/Content_LR.jsx";
-import LC_Planty from "../../PageComponents/LC/LC_planty.jsx";
+import Content_LR from "../../core/ContentLR/Content_LR.jsx";
+import LC_Planty from "../../core/LC/LC_planty.jsx";
 import RC_recipeBot from "./RC_recipeBot.jsx";
 import "./RecipeBot.module.scss";
 

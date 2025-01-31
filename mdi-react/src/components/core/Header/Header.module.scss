@@ -1,22 +1,6 @@
 @use "../../../styles/colors.scss" as *;
 @use "../../../styles/fonts.scss" as *;
 
-:root {
-  --primary: #050b8c;
-  --primary-medium: #5055ba;
-  --primary-light: #9b9ed7;
-  --primary-extralight: #e6e7f5;
-  --primary-dark: #03075e;
-  --secondary: #9abf49;
-  --secondary-medium: #6c8633;
-  --secondary-light: #b8d280;
-  --secondary-extralight: #e1ecc8;
-  --secondary-dark: #3e4c1d;
-  --red: #d10025;
-}
-
-/* Will update the above to match our universal styles using $variable format */
-
 #header-desktop {
   display: block;
 }
@@ -58,14 +42,14 @@
   height: 2.5rem;
   margin: 0 1rem 1rem 8rem;
   border-radius: 1.2rem;
-  background-color: var(--primary-medium);
+  background-color: $primary-medium;
   opacity: 70%;
-  box-shadow: 0 0 6px 3px var(--primary-medium);
+  box-shadow: 0 0 6px 3px $primary-medium;
 }
 
 .plant-stem {
   grid-area: plant-stem;
-  background-color: var(--secondary-medium);
+  background-color: $secondary-medium;
   height: 0.5rem;
 }
 
@@ -99,7 +83,7 @@
       position: relative;
       top: 0.2rem;
       right: 0.6rem;
-      background-color: var(--secondary);
+      background-color: $secondary;
       border-radius: 50%;
       transform: rotate(-20deg);
       align-content: center;
@@ -115,8 +99,8 @@
 
       &:hover,
       &:focus {
-        background-color: var(--secondary-medium);
-        box-shadow: inset 0 0 0.8rem 4px var(--secondary-light);
+        background-color: $secondary-medium;
+        box-shadow: inset 0 0 0.8rem 4px $secondary-light;
       }
     }
 
@@ -127,12 +111,12 @@
       left: 0.1rem;
       width: 0.5rem;
       justify-self: end;
-      border-right: solid var(--secondary) 0.5rem;
+      border-right: solid $secondary 0.5rem;
       transition: all 250ms ease-in-out;
 
       &:hover,
       &:focus {
-        border-right: solid var(--secondary-medium) 0.5rem;
+        border-right: solid $secondary-medium 0.5rem;
         opacity: 80%;
       }
     }
@@ -196,7 +180,7 @@
 .desktopMobile {
   position: sticky;
   top: 0;
-  background-color: var(--secondary);
+  background-color: $secondary;
   height: fit-content;
   width: 100vw;
   z-index: 1000;
@@ -230,7 +214,7 @@
     transition: none;
     padding: 0.6em 1.2em;
     &:hover {
-      background-color: var(--primary-medium);
+      background-color: $primary-medium;
       border-radius: 1em;
       transition: none;
     }

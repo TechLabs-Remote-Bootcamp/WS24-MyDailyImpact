@@ -1,6 +1,6 @@
-import ColoredContainers from "../../PageComponents/ColoredContainers/Colored-Containers";
-import Button from "../../PageComponents/Button/Button";
-import styles from "../../PageComponents/ColoredContainers/Colored-Containers.module.scss";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
+import Button from "../../core/Button/Button";
+import styles from "../../core/ColoredContainers/Colored-Containers.module.scss";
 
 export default function RC_forgotPassword() {
   return (

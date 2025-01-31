@@ -1,19 +1,19 @@
 import { useState } from "react";
 import "./App.scss";
-import Header from "../src/components/PageComponents/Header/Header";
-import Footer from "../src/components/PageComponents/Footer/Footer";
+import Header from "../src/components/core/Header/Header";
+import Footer from "../src/components/core/Footer/Footer";
 import { Route, Routes } from "react-router-dom";
 import Home from "../src/components/pages/Home/Home";
 import About from "../src/components/pages/About/About";
 import RecipeBot from "../src/components/pages/RecipeBot/RecipeBot";
 import Login from "../src/components/pages/Login/Login";
 import SignUp from "../src/components/pages/SignUp/SignUp";
-import Navbar from "../src/components/PageComponents/Navbar/Navbar";
+import Navbar from "../src/components/core/Navbar/Navbar";
 import ContactUs from "./components/pages/ContactUs/ContactUs";
 import Imprint from "../src/components/pages/Imprint/Imprint";
 import Privacy from "../src/components/pages/Privacy/Privacy";
 import Dashboard from "../src/components/pages/Dashboard/Dashboard";
-import ForgotPassword from "./components/pages/ForgotPassword/ForgotPassword";
+import ForgotPassword from "../src/components/pages/ForgotPassword/ForgotPassword";
 
 export default function App() {
   return (

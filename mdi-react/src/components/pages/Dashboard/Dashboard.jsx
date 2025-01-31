@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
-import ColoredContainers from "../../PageComponents/ColoredContainers/Colored-Containers";
-import Button from "../../PageComponents/Button/Button";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
+import Button from "../../core/Button/Button";
 import "./Dashboard.scss";
 
 export default function Dashboard() {

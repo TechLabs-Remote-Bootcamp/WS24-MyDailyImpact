@@ -1,4 +1,4 @@
-import ColoredContainers from "../../PageComponents/ColoredContainers/Colored-Containers";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 
 export default function RC_privacy() {
   return (

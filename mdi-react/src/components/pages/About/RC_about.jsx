@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ColoredContainers from "../../PageComponents/ColoredContainers/Colored-Containers";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 
 export default function RC_about() {
   return (
