@@ -1,19 +1,19 @@
 import { useState } from "react";
 import "./App.scss";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "../src/components/core/Header/Header";
+import Footer from "../src/components/core/Footer/Footer";
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/pages/Home";
-import About from "./components/pages/About";
-import RecipeBot from "./components/pages/RecipeBot";
-import Login from "./components/pages/Login";
-import SignUp from "./components/pages/SignUp";
-import Navbar from "./components/Navbar";
-import ContactUs from "./components/pages/ContactUs";
-import Imprint from "./components/pages/Imprint";
-import Privacy from "./components/pages/Privacy";
-import Dashboard from "./components/pages/Dashboard";
-import ForgotPassword from "./components/pages/ForgotPassword";
+import Home from "../src/components/pages/Home/Home";
+import About from "../src/components/pages/About/About";
+import RecipeBot from "../src/components/pages/RecipeBot/RecipeBot";
+import Login from "../src/components/pages/Login/Login";
+import SignUp from "../src/components/pages/SignUp/SignUp";
+import Navbar from "../src/components/core/Navbar/Navbar";
+import ContactUs from "./components/pages/ContactUs/ContactUs";
+import Imprint from "../src/components/pages/Imprint/Imprint";
+import Privacy from "../src/components/pages/Privacy/Privacy";
+import Dashboard from "../src/components/pages/Dashboard/Dashboard";
+import ForgotPassword from "../src/components/pages/ForgotPassword/ForgotPassword";
 
 export default function App() {
   return (

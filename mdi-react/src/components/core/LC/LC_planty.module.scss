@@ -1,0 +1,30 @@
+.plantyImageContainer {
+  position: relative;
+  width: 30rem;
+  height: auto;
+}
+
+.plantyImageLC {
+  position: absolute;
+  top: -15rem;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.eyesClosed {
+  opacity: 0;
+  animation: blink 5s infinite none;
+}
+
+@keyframes blink {
+  0%,
+  98%,
+  100% {
+    opacity: 0;
+  }
+
+  99% {
+    opacity: 1;
+  }
+}
