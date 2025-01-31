@@ -1,0 +1,29 @@
+/* The following block can be included in a custom.scss */
+
+/* make the customizations */
+
+// Color system
+$theme-colors: (
+  "primary": #5055ba,
+  "secondary": #9abf49,
+  "success": #6c8633,
+  "info": #050b8c,
+  "warning": #d10025,
+  "danger": #d10025,
+  "light": #9b9ed7,
+  "dark": #03075e,
+);
+
+// scss-docs-start gray-color-variables
+$gray-100: #d2d1d5;
+$gray-200: #a4a2aa;
+$gray-300: #6d6a76;
+$gray-400: #5a5865;
+$gray-500: #484554;
+$gray-600: #3a3743;
+$gray-700: #32303b;
+$gray-800: #2b2932;
+$gray-900: #24232a;
+
+/* import bootstrap to set changes */
+@use "C:/Users/Christine/Documents/GitHub/WS24-MyDailyImpact/mdi-react/node_modules/bootstrap/scss/bootstrap.scss";
