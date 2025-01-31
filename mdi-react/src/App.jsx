@@ -14,6 +14,7 @@ import Imprint from "../src/components/pages/Imprint/Imprint";
 import Privacy from "../src/components/pages/Privacy/Privacy";
 import Dashboard from "../src/components/pages/Dashboard/Dashboard";
 import ForgotPassword from "../src/components/pages/ForgotPassword/ForgotPassword";
+import MealLogging from "./components/pages/MealLogging/MealLogging";
 
 export default function App() {
   return (

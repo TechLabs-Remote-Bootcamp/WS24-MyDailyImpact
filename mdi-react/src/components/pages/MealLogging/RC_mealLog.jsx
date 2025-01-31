@@ -1,4 +1,4 @@
-import ColoredContainers from "./Colored-Containers";
+import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import styles from "./RC_mealLog.module.scss";
 
 export default function RC_MealLog() {
