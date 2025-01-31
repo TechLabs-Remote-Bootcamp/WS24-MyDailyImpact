@@ -1,8 +1,6 @@
 @use "../../../styles/colors.scss" as *;
 @use "../../../styles/fonts.scss" as *;
 
-//Right side of the page
-
 .messages {
   padding: 1rem;
   height: 14rem;
@@ -57,38 +55,5 @@
   }
   button {
     margin: 0;
-  }
-}
-
-//Left side of the page (image)
-
-.plantyImageContainer {
-  position: relative;
-  width: 30rem;
-  height: auto;
-}
-
-.plantyImageLC {
-  position: absolute;
-  top: -15rem;
-  left: 0;
-  width: 100%;
-  height: auto;
-}
-
-.eyesClosed {
-  opacity: 0;
-  animation: blink 5s infinite none;
-}
-
-@keyframes blink {
-  0%,
-  98%,
-  100% {
-    opacity: 0;
-  }
-
-  99% {
-    opacity: 1;
   }
 }

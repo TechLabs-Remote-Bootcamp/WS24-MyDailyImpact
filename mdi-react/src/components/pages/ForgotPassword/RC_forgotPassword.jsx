@@ -1,6 +1,6 @@
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
-import styles from "../../core/ColoredContainers/Colored-Containers.module.scss";
+import styles from "../../../styles/forms.module.scss";
 
 export default function RC_forgotPassword() {
   return (
@@ -10,7 +10,7 @@ export default function RC_forgotPassword() {
         h3Text="Enter your email and we'll send you your password"
       >
         <div>
-          <form className={styles["forgot-password-links"]} action="">
+          <form className={styles["forgot-password-input"]} action="">
             <label>
               Email:
               <input
