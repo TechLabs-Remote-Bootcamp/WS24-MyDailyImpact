@@ -1,0 +1,11 @@
+@use "../styles/colors.scss" as *;
+@use "../styles/fonts.scss" as *;
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+// .radiobuttons {
+//   flex-direction: row;
+// }
