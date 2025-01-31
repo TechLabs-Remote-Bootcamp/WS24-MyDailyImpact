@@ -2,7 +2,6 @@
 @use "../../../styles/fonts.scss" as *;
 
 .messages {
-  padding: 1rem;
   height: auto;
   max-height: 30rem;
   width: 100%;
@@ -10,7 +9,7 @@
   .message {
     display: flex;
     align-items: flex-start;
-    padding: 0;
+    padding: 0rem;
   }
 
   .plantyMessage {
@@ -28,6 +27,7 @@
     padding: 0.5rem 1rem;
     border-radius: 10px;
     max-width: 70%;
+    font-size: 1.15rem;
   }
 
   .userMessage p {
@@ -45,7 +45,7 @@
   display: flex;
   border-top: 1px solid #ddd;
   width: 100%;
-  height: 3rem;
+  height: 5rem;
   input {
     flex: 1;
     border: 1px solid $beige-dark;
@@ -57,4 +57,12 @@
   button {
     margin: 0;
   }
+}
+
+@media only screen and (max-width: 600px) {
+.messages {
+  .message p {
+    font-size: 1rem;
+  }
+}
 }

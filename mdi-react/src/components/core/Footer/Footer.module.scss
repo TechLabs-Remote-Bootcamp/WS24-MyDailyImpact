@@ -11,13 +11,14 @@
   min-height: 3rem;
   font-weight: 600;
   color: $beige;
+  width: 100%;
+  flex-shrink: 1;
 }
 
 .footer-links {
   display: flex;
   z-index: 100;
   margin: 0;
-
 
   a {
     color: $white;
