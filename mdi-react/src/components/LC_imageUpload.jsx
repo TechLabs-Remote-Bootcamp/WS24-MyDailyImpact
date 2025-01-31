@@ -1,8 +1,11 @@
+import { useState, useEffect } from "react";
 import treeworld_big from "../images/treeWorld1250.png";
 import { GrUpload } from "react-icons/gr";
 import styles from "./LC_imageUpload.module.scss";
 
 export default function LC_imageUpload() {
+  const [image, setImage] = useState("");
+
   return (
     <>
       <div className={styles.uploadContainer}>
