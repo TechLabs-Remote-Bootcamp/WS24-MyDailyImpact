@@ -290,15 +290,13 @@
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .dropdown-item {
+    font-size: 1.25rem;
+  }
+}
+
 @media only screen and (max-width: 500px) {
-  #header-mobile {
-    display: block;
-  }
-
-  #header-desktop {
-    display: none;
-  }
-
   .desktopMobile {
     height: 7rem;
     .logo {
@@ -309,7 +307,7 @@
     }
   }
 
-.dropdown-item {
-    font-size: 1.75rem;
+  .dropdown-item {
+    font-size: 1.5rem;
   }
 }

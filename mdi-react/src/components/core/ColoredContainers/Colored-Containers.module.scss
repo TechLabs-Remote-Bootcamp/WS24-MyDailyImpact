@@ -73,7 +73,6 @@
 
 @media only screen and (max-width: 600px) {
   .colorContainer {
-
     .greenBox {
       h2 {
         font-size: 1.75rem;
@@ -91,6 +90,30 @@
       grid-row: 4 / 6;
       border: 2px solid $primary-medium;
       font-size: 1.25rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .colorContainer {
+
+    .greenBox {
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .blueBox {
+      h3 {
+        font-size: 1.75rem;
+      }
+    }
+
+    .textBox {
+      grid-column: 1 / 6;
+      grid-row: 4 / 6;
+      border: 2px solid $primary-medium;
+      font-size: 1.5rem;
   }
 }
 }
