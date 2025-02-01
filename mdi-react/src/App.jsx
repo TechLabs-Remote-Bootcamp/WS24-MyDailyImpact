@@ -8,7 +8,7 @@ import About from "../src/components/pages/About/About";
 import RecipeBot from "../src/components/pages/RecipeBot/RecipeBot";
 import Login from "../src/components/pages/Login/Login";
 import SignUp from "../src/components/pages/SignUp/SignUp";
-import Navbar from "../src/components/core/Navbar/Navbar";
+// import Navbar from "../src/components/core/Navbar/Navbar";
 import ContactUs from "./components/pages/ContactUs/ContactUs";
 import Imprint from "../src/components/pages/Imprint/Imprint";
 import Privacy from "../src/components/pages/Privacy/Privacy";
