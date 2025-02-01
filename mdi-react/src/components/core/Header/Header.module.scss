@@ -17,7 +17,7 @@
 }
 
 .desktopHead {
-  position: sticky; 
+  position: sticky;
   top: 0;
   background-color: #fff;
   z-index: 1000;
@@ -273,9 +273,6 @@
 @media only screen and (max-width: 810px) {
   .desktopMobile {
     padding: 0.5rem;
-    .userLinks {
-      font-size: 1.25rem;
-    }
     .logo {
       img {
         height: 4rem;
@@ -290,5 +287,29 @@
 
   #header-desktop {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #header-mobile {
+    display: block;
+  }
+
+  #header-desktop {
+    display: none;
+  }
+
+  .desktopMobile {
+    height: 7rem;
+    .logo {
+      img {
+        height: 5.5rem;
+        width: auto;
+      }
+    }
+  }
+
+.dropdown-item {
+    font-size: 1.75rem;
   }
 }

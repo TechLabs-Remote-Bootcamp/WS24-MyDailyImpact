@@ -76,6 +76,7 @@ export default function Header() {
                 as={NavLink}
                 to="/"
                 onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
               >
                 Home
               </Dropdown.Item>
@@ -83,6 +84,7 @@ export default function Header() {
                 as={NavLink}
                 to="/about"
                 onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
               >
                 About Us
               </Dropdown.Item>
@@ -90,6 +92,7 @@ export default function Header() {
                 as={NavLink}
                 to="/recipeBot"
                 onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
               >
                 Recipe Bot
               </Dropdown.Item>
@@ -97,6 +100,7 @@ export default function Header() {
                 as={NavLink}
                 to="/login"
                 onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
               >
                 Login
               </Dropdown.Item>
@@ -104,6 +108,7 @@ export default function Header() {
                 as={NavLink}
                 to="/sign-up"
                 onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
               >
                 Sign up
               </Dropdown.Item>
