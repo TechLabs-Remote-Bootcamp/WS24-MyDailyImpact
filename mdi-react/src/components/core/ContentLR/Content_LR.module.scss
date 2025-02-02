@@ -4,21 +4,24 @@
 .lrContainer {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
-  margin: 0 2rem 2rem 2rem;
+  margin: 0 2rem 4rem 2rem;
   justify-content: space-evenly;
   align-items: center;
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 950px) {
   .lrContainer {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex: 1 1;
     row-gap: 1em;
     padding: 0 2rem;
     justify-content: center;
-    align-items: center;
+  }
+
+  .leftBox {
+    img {
+      max-width: 40rem;
+    }
   }
 
   .rightBox {
@@ -29,12 +32,10 @@
 @media only screen and (max-width: 810px) {
   .lrContainer {
     padding: 0;
-  }
-  .leftBox {
-    display: none;
+    margin: 2rem 4rem 4rem;
   }
   .rightBox {
-    margin: 1.5rem 0;
+    margin: auto 0;
     min-height: 70vh;
   }
 }

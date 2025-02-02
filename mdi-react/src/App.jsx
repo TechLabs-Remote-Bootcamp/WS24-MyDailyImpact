@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../src/components/core/Header/Header";
 import Footer from "../src/components/core/Footer/Footer";
 import { Route, Routes } from "react-router-dom";
@@ -8,7 +9,7 @@ import About from "../src/components/pages/About/About";
 import RecipeBot from "../src/components/pages/RecipeBot/RecipeBot";
 import Login from "../src/components/pages/Login/Login";
 import SignUp from "../src/components/pages/SignUp/SignUp";
-import Navbar from "../src/components/core/Navbar/Navbar";
+// import Navbar from "../src/components/core/Navbar/Navbar";
 import ContactUs from "./components/pages/ContactUs/ContactUs";
 import Imprint from "../src/components/pages/Imprint/Imprint";
 import Privacy from "../src/components/pages/Privacy/Privacy";
@@ -21,9 +22,9 @@ export default function App() {
       <div className="head">
         <Header />
       </div>
-      <div className="navbarFlower">
-        <Navbar />
-      </div>
+      {/* <div className="navbarFlower">
+        <Navbar /> */}
+      {/* </div> */}
       <div className="content">
         <Routes className="content">
           <Route path="/" element={<Home />}></Route>

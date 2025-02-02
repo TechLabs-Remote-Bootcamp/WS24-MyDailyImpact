@@ -24,8 +24,8 @@ export default function RC_recipeBot() {
   return (
     <div className={styles["recipe-bot-container"]}>
       <ColoredContainers
-        h2Text="Let me help you find a recipe!"
-        h3Text="Planty is here to answer your plant-based recipe questions"
+        h2Text="Recipe Bot"
+        h3Text="Tell our recipe bot Planty what ingredients you have and they'll send you a plant-based recipe"
       >
         <div className={styles["messages"]}>
           {messages.map((msg, index) => (
@@ -53,7 +53,7 @@ export default function RC_recipeBot() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Tell Planty what ingredients you have and he'll help suggest a recipe!"
+            placeholder="I have carrots and mushrooms..."
           />
           <Button onClick={handleSend}>Send</Button>
         </div>

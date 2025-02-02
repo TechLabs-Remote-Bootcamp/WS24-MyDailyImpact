@@ -1,7 +1,6 @@
-import React from "react";
 import plantyImage from "../../../images/RecipeBotPlanty.png";
 import plantyImageBlink from "../../../images/RecipeBotPlantyBlink.png";
-import styles from "./LC_planty.module.scss"
+import styles from "./LC_planty.module.scss";
 
 export default function LC_Planty() {
   return (

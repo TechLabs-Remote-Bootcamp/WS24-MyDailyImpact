@@ -1,12 +1,13 @@
 @use "../../../styles/colors.scss" as *;
 @use "../../../styles/fonts.scss" as *;
 
-.form-container {
+.login-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   p {
     text-align: center;
+    font-size: 1remq;
   }
   a {
     color: $primary;

@@ -1,8 +1,11 @@
 import styles from "./Header.module.scss";
 import logo from "../../../images/MDI_logo.png";
 import { NavLink } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
+import { useState } from "react";
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <header id={styles["header-desktop"]}>
@@ -55,22 +58,66 @@ export default function Header() {
       </header>
       <header id={styles["header-mobile"]}>
         <div className={styles.desktopMobile}>
-          <div></div>
+          <Dropdown
+            className={styles.menuContainer}
+            show={isOpen}
+            onToggle={(isOpen) => setIsOpen(isOpen)}
+          >
+            <Dropdown.Toggle
+              variant="transparent"
+              id="nav-dropdown"
+              className={styles.menuButton}
+            >
+              ☰
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className={styles.dropdownMenu}>
+              <Dropdown.Item
+                as={NavLink}
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
+              >
+                Home
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={NavLink}
+                to="/about"
+                onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
+              >
+                About Us
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={NavLink}
+                to="/recipeBot"
+                onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
+              >
+                Recipe Bot
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={NavLink}
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
+              >
+                Login
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={NavLink}
+                to="/sign-up"
+                onClick={() => setIsOpen(false)}
+                className={styles["dropdown-item"]}
+              >
+                Sign up
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
           <div className={styles.logo}>
-            <img src={logo} />
+            <img src={logo} alt="Logo" />
           </div>
-          <nav className={styles.userLinks}>
-            <li className={styles.single}>
-              <NavLink to="/login" className="">
-                <span>Login</span>
-              </NavLink>
-            </li>
-            <li className={styles.single}>
-              <NavLink to="/sign-up" className="">
-                <span>Sign up</span>
-              </NavLink>
-            </li>
-          </nav>
         </div>
       </header>
     </>
