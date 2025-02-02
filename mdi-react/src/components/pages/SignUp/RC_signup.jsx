@@ -19,7 +19,6 @@ export default function RC_signup() {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      salutation: "",
       firstName: "",
       lastName: "",
       email: "",
@@ -73,29 +72,6 @@ export default function RC_signup() {
           className={styles["sign-up-form"]}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label>
-            Salutation:
-            <select
-              className={`${styles.input} ${
-                errors.salutation ? styles.error : ""
-              }`}
-              {...register("salutation", {
-                required: "Salutation is required",
-              })}
-            >
-              <option value="">Salutation</option>
-              <option value="Mr">Mr</option>
-              <option value="Mrs">Mrs</option>
-              <option value="Ms">Ms</option>
-              <option value="Dr">Dr</option>
-              <option value="Not Specified">Not Specified</option>
-            </select>
-            {errors.salutation && (
-              <span className={styles.errorText}>
-                {errors.salutation.message}
-              </span>
-            )}
-          </label>
 
           <label>
             Gender:
