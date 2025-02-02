@@ -72,7 +72,7 @@ export default function RC_signup() {
           className={styles["sign-up-form"]}
           onSubmit={handleSubmit(onSubmit)}
         >
-
+          
           <label>
             Gender:
             <select
