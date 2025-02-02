@@ -9,7 +9,7 @@ export class ApiError extends Error {
   }
 }
 
-async function handleResponse(response) {
+export async function handleResponse(response) {
   let data;
   try {
     const contentType = response.headers.get('content-type');
@@ -89,7 +89,7 @@ export const api = {
       throw error;
     }
   },
-
+  
   setAuthHeader(token) {
     return {
       'Authorization': token ? `Bearer ${token}` : '',

@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Gender is required'],
     enum: ['male', 'female', 'other'],
   },
+  country: {
+    type: String,
+    required: [true, 'Country is required']
+  },
   role: {
     type: String,
     enum: ['user', 'admin'],
