@@ -19,7 +19,7 @@ export default function RC_login() {
     if (isAuthenticated && user && user.email) {
       console.log("Navigating to dashboard");
       navigate("/dashboard");
-    }
+    } 
   }, [isAuthenticated, user, navigate]);
 
   const handleSubmit = async (e) => {

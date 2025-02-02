@@ -67,7 +67,7 @@ export default function RC_signup() {
 
   return (
     <ColoredContainers h2Text="Create your account" h3Text="">
-      <div className="sign-up-container">
+      <div>
         <form
           className={styles["sign-up-form"]}
           onSubmit={handleSubmit(onSubmit)}

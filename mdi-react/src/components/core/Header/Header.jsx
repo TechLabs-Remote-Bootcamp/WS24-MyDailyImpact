@@ -1,51 +1,95 @@
 import styles from "./Header.module.scss";
 import logo from "../../../images/MDI_logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <>
       <header id={styles["header-desktop"]}>
         <div className={styles.desktopHead}>
           <div className={styles["flower-header-grid"]}>
-            <div className={styles.logo}>
+            <NavLink to="/" className={styles.logo}>
               <img src={logo} />
-            </div>
+            </NavLink>
             <div className={styles["heaven-stripe"]}></div>
             <nav className={styles.leaves}>
-              <li className={styles.single}>
-                <NavLink to="/" className={styles["leaf-surface"]}>
-                  <span>Home</span>
-                </NavLink>
-                <div className={styles["leaf-stem"]}></div>
-              </li>
-              <li className={styles.single}>
-                <NavLink to="/about" className={styles["leaf-surface"]}>
-                  <span>About us</span>
-                </NavLink>
-                <div className={styles["leaf-stem"]}></div>
-              </li>
-              <li className={styles.single}>
-                <NavLink to="/recipeBot" className={styles["leaf-surface"]}>
-                  <span>Recipe Bot</span>
-                </NavLink>
-                <div className={styles["leaf-stem"]}></div>
-              </li>
-              <li className={styles.single}>
-                <NavLink to="/login" className={styles["leaf-surface"]}>
-                  <span>Login</span>
-                </NavLink>
-                <div className={styles["leaf-stem"]}></div>
-              </li>
-              <li className={styles.single}>
-                <NavLink to="/sign-up" className={styles["leaf-surface"]}>
-                  <span>Sign up</span>
-                </NavLink>
-                <div className={styles["leaf-stem"]}></div>
-              </li>
+              {isAuthenticated ? (
+                <>
+                  <li className={styles.single}>
+                    <NavLink to="/dashboard" className={styles["leaf-surface"]}>
+                      <span>Dashboard</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink to="/meal-log" className={styles["leaf-surface"]}>
+                      <span>Log a Meal</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink
+                      to="/meal-history"
+                      className={styles["leaf-surface"]}
+                    >
+                      <span>Meal History</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink to="/recipeBot" className={styles["leaf-surface"]}>
+                      <span>Recipe Bot</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink to="/profile" className={styles["leaf-surface"]}>
+                      <span>Profile</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className={styles.single}>
+                    <NavLink to="/" className={styles["leaf-surface"]}>
+                      <span>Home</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink to="/about" className={styles["leaf-surface"]}>
+                      <span>About us</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink to="/recipeBot" className={styles["leaf-surface"]}>
+                      <span>Recipe Bot</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink to="/login" className={styles["leaf-surface"]}>
+                      <span>Login</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                  <li className={styles.single}>
+                    <NavLink to="/sign-up" className={styles["leaf-surface"]}>
+                      <span>Sign up</span>
+                    </NavLink>
+                    <div className={styles["leaf-stem"]}></div>
+                  </li>
+                </>
+              )}
             </nav>
             <div className={styles["plant-stem"]}></div>
             <div className={styles.blossom}>
@@ -72,46 +116,93 @@ export default function Header() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className={styles.dropdownMenu}>
-              <Dropdown.Item
-                as={NavLink}
-                to="/"
-                onClick={() => setIsOpen(false)}
-                className={styles["dropdown-item"]}
-              >
-                Home
-              </Dropdown.Item>
-              <Dropdown.Item
-                as={NavLink}
-                to="/about"
-                onClick={() => setIsOpen(false)}
-                className={styles["dropdown-item"]}
-              >
-                About Us
-              </Dropdown.Item>
-              <Dropdown.Item
-                as={NavLink}
-                to="/recipeBot"
-                onClick={() => setIsOpen(false)}
-                className={styles["dropdown-item"]}
-              >
-                Recipe Bot
-              </Dropdown.Item>
-              <Dropdown.Item
-                as={NavLink}
-                to="/login"
-                onClick={() => setIsOpen(false)}
-                className={styles["dropdown-item"]}
-              >
-                Login
-              </Dropdown.Item>
-              <Dropdown.Item
-                as={NavLink}
-                to="/sign-up"
-                onClick={() => setIsOpen(false)}
-                className={styles["dropdown-item"]}
-              >
-                Sign up
-              </Dropdown.Item>
+              {isAuthenticated ? (
+                <>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Dashboard
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/meal-log"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Log a Meal
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/meal-history"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Meal History
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/recipeBot"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Recipe Bot
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/profile"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Profile
+                  </Dropdown.Item>
+                </>
+              ) : (
+                <>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Home
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/about"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    About Us
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/recipeBot"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Recipe Bot
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/login"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Login
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={NavLink}
+                    to="/sign-up"
+                    onClick={() => setIsOpen(false)}
+                    className={styles["dropdown-item"]}
+                  >
+                    Sign up
+                  </Dropdown.Item>
+                </>
+              )}
             </Dropdown.Menu>
           </Dropdown>
 
