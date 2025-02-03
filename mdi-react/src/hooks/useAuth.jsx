@@ -157,3 +157,42 @@ export function useAuth() {
     initializeAuth,
   };
 }
+
+// import { createContext, useContext, useState } from "react";
+
+// const AuthContext = createContext(null);
+
+// export const AuthProvider = ({ children }) => {
+//   const [isAuthenticated, setIsAuthenticated] = useState(false);
+//   const [user, setUser] = useState(null);
+
+//   const login = async (credentials) => {
+//     try {
+//       const response = await api.post("/login", credentials);
+//       setIsAuthenticated(true);
+//       setUser(response.data.user);
+//       return response;
+//     } catch (error) {
+//       throw error;
+//     }
+//   };
+
+//   const logout = () => {
+//     setIsAuthenticated(false);
+//     setUser(null);
+//   };
+
+//   return (
+//     <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export const useAuth = () => {
+//   const context = useContext(AuthContext);
+//   if (!context) {
+//     throw new Error("useAuth must be used within an AuthProvider");
+//   }
+//   return context;
+// };
