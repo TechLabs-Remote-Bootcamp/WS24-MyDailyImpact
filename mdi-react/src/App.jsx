@@ -9,12 +9,14 @@ import About from "../src/components/pages/About/About";
 import RecipeBot from "../src/components/pages/RecipeBot/RecipeBot";
 import Login from "../src/components/pages/Login/Login";
 import SignUp from "../src/components/pages/SignUp/SignUp";
-// import Navbar from "../src/components/core/Navbar/Navbar";
 import ContactUs from "./components/pages/ContactUs/ContactUs";
 import Imprint from "../src/components/pages/Imprint/Imprint";
 import Privacy from "../src/components/pages/Privacy/Privacy";
-import Dashboard from "../src/components/pages/Dashboard/Dashboard";
 import ForgotPassword from "../src/components/pages/ForgotPassword/ForgotPassword";
+import Dashboard from "../src/components/pages/Dashboard/Dashboard";
+import MealLog from "../src/components/pages/MealLog/MealLog";
+import MealHistory from "../src/components/pages/MealHistory/MealHistory";
+import Profile from "../src/components/pages/Profile/Profile";
 
 export default function App() {
   return (
@@ -22,9 +24,6 @@ export default function App() {
       <div className="head">
         <Header />
       </div>
-      {/* <div className="navbarFlower">
-        <Navbar /> */}
-      {/* </div> */}
       <div className="content">
         <Routes className="content">
           <Route path="/" element={<Home />}></Route>
@@ -38,6 +37,9 @@ export default function App() {
           <Route path="/recipeBot" element={<RecipeBot />}></Route>
           <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/meal-log" element={<MealLog />}></Route>
+          <Route path="/meal-history" element={<MealHistory />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
         </Routes>
       </div>
       <div className="foot">
