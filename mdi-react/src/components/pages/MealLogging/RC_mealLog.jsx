@@ -1,10 +1,13 @@
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
-import DefaultExample from "../../core/Dropdown/Dropdown";
+import CustomSelect from "../../core/CustomSelect/CustomSelect";
 import styles from "./RC_mealLog.module.scss";
 import form from "../../../styles/forms.module.scss";
 
 export default function RC_MealLog() {
+  const handleChange = (selectedOption) => {
+    console.log("Selected:", selectedOption);
+  };
   return (
     <>
       <ColoredContainers
@@ -37,7 +40,11 @@ export default function RC_MealLog() {
             </div>
             <div className={form.inputSection}>
               <label>Comment</label>
-              <DefaultExample></DefaultExample>
+              <CustomSelect
+                options={["Rot", "Grün", "Blau"]}
+                defaultValue="Rot"
+                onChange={handleChange}
+              ></CustomSelect>
             </div>
           </section>
           <section className={form.buttonSection}>
