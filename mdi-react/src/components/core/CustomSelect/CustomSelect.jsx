@@ -7,10 +7,11 @@ const dropdownStyles = {
     width: "250px",
   },
   button: {
-    width: "100%",
+    fontSize: "1.2rem",
+    width: "15rem",
     padding: "8px 16px",
     textAlign: "left",
-    backgroundColor: "white",
+    backgroundColor: "#e6e7f5",
     border: "1px solid #5055ba",
     borderRadius: "4px",
     boxShadow: "0 1px 2px rgba(0, 0, 0, 0.05)",
@@ -18,7 +19,7 @@ const dropdownStyles = {
     position: "relative",
   },
   buttonHover: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#e6e7f5",
   },
   arrow: {
     position: "absolute",
@@ -31,22 +32,26 @@ const dropdownStyles = {
   },
   dropdown: {
     position: "absolute",
-    top: "calc(100% + 4px)",
-    left: "0",
-    width: "100%",
-    backgroundColor: "white",
+    padding: "0.2em 0",
+    // top: "calc(100% + 4px)",
+    // left: "0",
+    width: "15rem",
+    backgroundColor: "#e6e7f5",
     border: "1px solid #ccc",
     borderRadius: "4px",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
     zIndex: 1000,
   },
   option: {
-    padding: "8px 16px",
+    borderRadius: "10px",
+    padding: "0.3em 1em",
     cursor: "pointer",
     transition: "background-color 0.2s",
+    margin: "0",
   },
   optionHover: {
-    backgroundColor: "#f0f7ff",
+    backgroundColor: "#9b9ed7",
+    color: "#fff",
   },
 };
 
