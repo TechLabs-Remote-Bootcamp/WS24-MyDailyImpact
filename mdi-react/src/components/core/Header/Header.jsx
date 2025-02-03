@@ -7,7 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
   return (
