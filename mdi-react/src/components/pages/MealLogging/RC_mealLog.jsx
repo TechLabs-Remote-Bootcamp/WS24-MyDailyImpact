@@ -41,8 +41,8 @@ export default function RC_MealLog() {
             <div className={form.inputSection}>
               <label>Comment</label>
               <CustomSelect
-                options={["Rot", "Grün", "Blau"]}
-                defaultValue="Rot"
+                options={["Breakfast", "Lunch", "Dinner"]}
+                defaultValue="Breakfast"
                 onChange={handleChange}
               ></CustomSelect>
             </div>
