@@ -3,27 +3,63 @@
 
 // General form css
 
-form {
+.formpage-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  label {
+  grid-template-rows: 4fr 1fr;
+  font-family: $font-family-general;
+}
+
+// form {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   flex-direction: column;
+//   align-items: center;
+//   gap: 1rem;
+//   label {
+//     display: flex;
+//     flex-direction: column;
+//
+//     .errorText {
+//       color: $red;
+//       font-size: 0.85rem;
+//       margin-top: 0.3rem;
+//       font-family: $font-family-general;
+//     }
+//   }
+// }
+
+.formSection {
+  .inputSection {
     display: flex;
-    flex-direction: column;
-    .input {
-      padding: 0.25rem;
-      border-radius: 0.25rem;
-      border: 1px solid $grey-700;
+    flex-direction: row;
+    column-gap: 1.5rem;
+    padding: 1.5rem 0;
+    align-items: baseline;
+  }
+
+  .input {
+    background-color: $primary-extra-light;
+    height: 3rem;
+
+    width: 15rem;
+    padding: 0.1em 1em;
+
+    border-radius: 10px;
+    border: 1px solid $primary-medium;
+    font-size: 1.2rem;
+
+    &:focus-visible {
+      outline: 2px solid $primary-medium;
     }
-    .errorText {
-      color: $red;
-      font-size: 0.85rem;
-      margin-top: 0.3rem;
-      font-family: $font-family-general;
+    .option:hover {
+      box-shadow: 0 0 10px 100px #7d1646 inset;
     }
   }
+}
+
+.buttonSection {
+  justify-self: right;
+  margin-right: -1.5rem;
 }
 
 .form-container {
