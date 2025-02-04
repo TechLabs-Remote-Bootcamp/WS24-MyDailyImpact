@@ -16,19 +16,21 @@ export default function RC_login() {
     // console.log("Auth state changed - isAuthenticated:", isAuthenticated);
     // console.log("Auth state changed - user:", user);
 
-    if (isAuthenticated && user && user.email) {
+    if (isAuthenticated && user) {
       console.log("Navigating to dashboard");
       navigate("/dashboard");
-    } 
+    }
   }, [isAuthenticated, user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await login({ email, password });
-       if (response && response.success) {
-         console.log("Login successful");
-       }
+      if (response && response.success) {
+        console.log("Login successful");
+        // setIsUserAuthenticated(true);
+        // navigate("/dashboard")
+      }
     } catch (error) {
       console.error("Login failed", error);
     }

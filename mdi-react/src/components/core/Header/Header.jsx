@@ -5,22 +5,174 @@ import HeaderNotLoggedIn from "./HeaderNotLoggedIn";
 
 const Header = () => {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const { isAuthenticated, user, loading } = useAuth();
+  const { user, isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (!loading) {
-      setIsUserAuthenticated(isAuthenticated && user !== null);
-    }
-  }, [isAuthenticated, user, loading]);
+    setIsUserAuthenticated(isAuthenticated && user !== null);
+  }, [user, isAuthenticated]);
 
-  if (loading) {
-    return null;
-  }
-  
   return isUserAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
 };
 
 export default Header;
+
+// import { useState, useEffect } from "react";
+// import { useAuth } from "../../../hooks/useAuth";
+// import HeaderLoggedIn from "./HeaderLoggedIn";
+// import HeaderNotLoggedIn from "./HeaderNotLoggedIn";
+
+// const Header = () => {
+//   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const { user, isAuthenticated } = useAuth();
+
+//   useEffect(() => {
+//     // Add immediate check for authentication status
+//     const checkAuth = () => {
+//       setIsUserAuthenticated(isAuthenticated && user !== null);
+//     };
+
+//     checkAuth();
+
+//     // Optional: Add event listener for auth changes
+//     window.addEventListener('auth-change', checkAuth);
+
+//     return () => {
+//       window.removeEventListener('auth-change', checkAuth);
+//     };
+//   }, [user, isAuthenticated]);
+
+//   // Pass setIsUserAuthenticated to child components
+//   return isUserAuthenticated ?
+//     <HeaderLoggedIn setIsUserAuthenticated={setIsUserAuthenticated} /> :
+//     <HeaderNotLoggedIn />;
+// };
+
+// export default Header;
+
+// const Header = () => {
+//   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const { isAuthenticated, user } = useAuth();
+
+//   useEffect(() => {
+//     if (isAuthenticated && user) {
+//       setIsUserAuthenticated(true);
+//       console.log("User is authenticated:", user.email);
+//     } else {
+//       setIsUserAuthenticated(false);
+//       console.log("User is not authenticated");
+//     }
+//   }, [isAuthenticated, user, isUserAuthenticated]);
+
+//   return isUserAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
+// };
+
+// export default Header;
+
+// const Header = () => {
+//   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const { isAuthenticated, user } = useAuth();
+
+//   useEffect(() => {
+//     if (isAuthenticated && user) {
+//       setIsUserAuthenticated(true);
+//       console.log("User is authenticated:", user.email);
+//     } else {
+//       setIsUserAuthenticated(false);
+//       console.log("User is not authenticated");
+//     }
+//   }, [isAuthenticated, user, isUserAuthenticated]);
+
+//   return isUserAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
+// };
+
+// export default Header;
+
+// const Header = () => {
+//   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   useEffect(() => {
+//     const { isAuthenticated, user, loading } = useAuth();
+
+//     if (!loading) {
+//       setIsUserAuthenticated(isAuthenticated && user !== null);
+//       setIsLoading(false);
+//     }
+//   }, [isUserAuthenticated]); // Re-run when auth state changes
+
+//   if (isLoading) {
+//     return null;
+//   }
+
+//   return isUserAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
+// };
+
+// export default Header;
+
+// const Header = () => {
+//   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const { isAuthenticated, user, loading } = useAuth();
+
+//   useEffect(() => {
+//     if (!loading) {
+//       setIsUserAuthenticated(isAuthenticated && user !== null);
+//     }
+//   }, [isAuthenticated, user, loading]);
+
+//   if (loading) {
+//     return null;
+//   }
+
+//   return isUserAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
+// };
+
+// export default Header;
+
+// const Header = () => {
+//   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const { isAuthenticated, user, login, logout } = useAuth();
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     setIsUserAuthenticated(isAuthenticated && user !== null);
+//   }, [isAuthenticated, user]);
+
+//   const handleLogin = async (credentials) => {
+//     await login(credentials);
+//   };
+
+//   const handleLogout = () => {
+//     logout();
+//     navigate("/");
+//   };
+
+//   return isUserAuthenticated ? (
+//     <HeaderLoggedIn onLogout={handleLogout} />
+//   ) : (
+//     <HeaderNotLoggedIn onLogin={handleLogin} />
+//   );
+// };
+
+// export default Header;
+
+// const Header = () => {
+//   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const { isAuthenticated, user, loading } = useAuth();
+
+//   useEffect(() => {
+//     if (!loading) {
+//       setIsUserAuthenticated(isAuthenticated && user !== null);
+//     }
+//   }, [isAuthenticated, user, loading]);
+
+//   if (loading) {
+//     return null;
+//   }
+
+//   return isUserAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
+// };
+
+// export default Header;
 
 // import styles from "./Header.module.scss";
 // import logo from "../../../images/MDI_logo.png";

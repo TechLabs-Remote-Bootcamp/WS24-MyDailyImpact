@@ -115,7 +115,7 @@ export default function HeaderLoggedIn() {
       <header id={styles["header-desktop"]}>
         <div className={styles.desktopHead}>
           <div className={styles["flower-header-grid"]}>
-            <NavLink to="/" className={styles.logo}>
+            <NavLink to="/dashboard" className={styles.logo}>
               <img src={logo} alt="logo" />
             </NavLink>
             <div className={styles["heaven-stripe"]}></div>
@@ -149,7 +149,7 @@ export default function HeaderLoggedIn() {
             </Dropdown.Menu>
           </Dropdown>
 
-          <NavLink to="/" className={styles.logo}>
+          <NavLink to="/dashboard" className={styles.logo}>
             <img src={logo} alt="logo" />
           </NavLink>
         </div>
