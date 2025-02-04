@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ApiError, api } from "../../../utils/api";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import styles from "../../../styles/forms.module.scss";
+import { countriesApi } from "../../../utils/countriesApi";
 
 export default function RC_signup() {
   const navigate = useNavigate();
+  const [countries, setCountries] = useState([]);
 
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid, isDirty },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      salutation: "",
       firstName: "",
       lastName: "",
       email: "",
@@ -25,10 +26,25 @@ export default function RC_signup() {
       confirmPassword: "",
       birthday: "",
       gender: "",
+      country: "",
     },
   });
 
   const password = watch("password");
+
+  useEffect(() => {
+    fetchCountries();
+  }, []);
+
+  const fetchCountries = async () => {
+    try {
+      const data = await countriesApi.getCountries();
+      setCountries(data);
+    } catch (error) {
+      console.error("Error fetching countries:", error.message);
+      setCountries([]);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -56,41 +72,14 @@ export default function RC_signup() {
           className={styles["sign-up-form"]}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label>
-            Salutation:
-            <select
-              className={`${styles.input} ${
-                errors.salutation ? styles.error : ""
-              }`}
-              {...register("salutation", {
-                required: "Salutation is required",
-              })}
-            >
-              <option value="" disabled selected>
-                Salutation
-              </option>
-              <option value="Mr">Mr</option>
-              <option value="Mrs">Mrs</option>
-              <option value="Ms">Ms</option>
-              <option value="Dr">Dr</option>
-              <option value="Not Specified">Not Specified</option>
-            </select>
-            {errors.salutation && (
-              <span className={styles.errorText}>
-                {errors.salutation.message}
-              </span>
-            )}
-          </label>
-
+          
           <label>
             Gender:
             <select
               className={`${styles.input} ${errors.gender ? styles.error : ""}`}
               {...register("gender", { required: "Gender is required" })}
             >
-              <option value="" disabled selected>
-                Select Gender
-              </option>
+              <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -153,17 +142,32 @@ export default function RC_signup() {
               }`}
               {...register("birthday", {
                 required: "Date of birth is required",
-                validate: (value) => {
-                  const birthDate = new Date(value);
-                  const today = new Date();
-                  const age = today.getFullYear() - birthDate.getFullYear();
-                },
               })}
             />
             {errors.birthday && (
               <span className={styles.errorText}>
                 {errors.birthday.message}
               </span>
+            )}
+          </label>
+
+          <label>
+            Country:
+            <select
+              className={`${styles.input} ${
+                errors.country ? styles.error : ""
+              }`}
+              {...register("country", { required: "Country is required" })}
+            >
+              <option value="">Select Country</option>
+              {countries.map((country) => (
+                <option key={country.Code} value={country.Code}>
+                  {country.Country}
+                </option>
+              ))}
+            </select>
+            {errors.country && (
+              <span className={styles.errorText}>{errors.country.message}</span>
             )}
           </label>
 
@@ -233,10 +237,8 @@ export default function RC_signup() {
               </span>
             )}
           </label>
-          <Button
-            className={styles["primary-button"]}
-            type="submit"
-          >
+
+          <Button className={styles["button-input"]} type="submit">
             Sign Up
           </Button>
         </form>

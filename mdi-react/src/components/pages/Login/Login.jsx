@@ -14,7 +14,7 @@ export default function Login() {
       RightComponent={
         <div className={styles["login-form-container"]}>
           <RC_login />
-          <div>
+          <div className={styles["login-extra-info"]}>
             <p>
               New User? <Link to="/sign-up">Sign up</Link>
             </p>
