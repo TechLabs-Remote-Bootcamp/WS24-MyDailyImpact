@@ -17,34 +17,20 @@ export default function RC_MealLog() {
         <div className={form["formpage-grid"]}>
           <section className={form.formSection}>
             <div className={form.inputSection}>
-              <label>Meal name</label>
+              <label className={styles.label}>Meal name</label>
               <input className={form.input}></input>
             </div>
             <div className={form.inputSection}>
-              <label>Meal of the day</label>
-              <select className={form.input}>
-                <option className={form.option} value="breakfast">
-                  Breakfast
-                </option>
-                <option className={form.option} value="lunch">
-                  Lunch
-                </option>
-                <option className={form.option} value="dinner">
-                  Dinner
-                </option>
-              </select>
-            </div>
-            <div className={form.inputSection}>
-              <label>Comment</label>
-              <input className={form.input}></input>
-            </div>
-            <div className={form.inputSection}>
-              <label>Comment</label>
+              <label className={styles.label}>Meal of the day</label>
               <CustomSelect
-                options={["Rot", "Grün", "Blau"]}
-                defaultValue="Rot"
+                options={["Breakfast", "Lunch", "Dinner"]}
+                defaultValue="Breakfast"
                 onChange={handleChange}
               ></CustomSelect>
+            </div>
+            <div className={form.inputSection}>
+              <label className={styles.label}>Comment</label>
+              <input className={form.input}></input>
             </div>
           </section>
           <section className={form.buttonSection}>
