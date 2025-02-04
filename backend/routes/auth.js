@@ -8,7 +8,6 @@ const router = express.Router();
 router.post(
   '/register',
   [
-    check('salutation', 'Salutation is required').notEmpty().isIn(['Mr', 'Mrs', 'Ms', 'Dr', 'Not Specified']),
     check('firstName', 'First Name is required').notEmpty(),
     check('lastName', 'Last Name is required').notEmpty(),
     check('email', 'Please include a valid email').isEmail(),

@@ -9,7 +9,7 @@ export const register = async (req, res) => {
     throw new ApiError(400, 'Validation failed', errors.array());
   }
 
-  const { salutation, email, password, firstName, lastName, birthday, gender, country } = req.body;
+  const { email, password, firstName, lastName, birthday, gender, country } = req.body;
 
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -19,7 +19,6 @@ export const register = async (req, res) => {
   let user;
   try {
     user = await User.create({
-      salutation,
       firstName,
       lastName,
       email,
@@ -38,7 +37,6 @@ export const register = async (req, res) => {
     token,
     user: {
       id: user._id,
-      salutation: user.salutation,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
@@ -70,7 +68,6 @@ export const login = async (req, res) => {
     token,
     user: {
       id: user._id,
-      salutation: user.salutation,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
