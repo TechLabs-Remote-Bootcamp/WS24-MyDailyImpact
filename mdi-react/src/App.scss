@@ -7,7 +7,7 @@
     max-width: 2100px;
     width: 100%;
     margin: 0 auto;
-    min-height: 0;
+    // min-height: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
     // grid-template-columns: 100vw;   //This was causing horizontal scroll bar!
@@ -15,12 +15,12 @@
       "header"
       "content"
       "footer";
-    min-height: 100vh;
+    // min-height: 100vh;
   }
 
   .content {
     grid-area: content;
-    min-height: 0;
+    // min-height: 0;
     // width: 100%;
   }
 
