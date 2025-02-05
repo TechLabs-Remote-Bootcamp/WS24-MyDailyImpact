@@ -1,72 +1,18 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./CustomSelect.module.scss";
-
-// const dropdownStyles = {
-//   container: {
-//     position: "relative",
-//     display: "inline-block",
-//     width: "250px",
-//   },
-//   button: {
-//     fontSize: "1.2rem",
-//     width: "15rem",
-//     padding: "8px 16px",
-//     textAlign: "left",
-//     backgroundColor: "#e6e7f5",
-//     border: "1px solid #5055ba",
-//     borderRadius: "4px",
-//     boxShadow: "0 1px 2px rgba(0, 0, 0, 0.05)",
-//     cursor: "pointer",
-//     position: "relative",
-//   },
-//   buttonHover: {
-//     backgroundColor: "#e6e7f5",
-//   },
-//   arrow: {
-//     position: "absolute",
-//     right: "8px",
-//     top: "50%",
-//     transform: "translateY(-50%)",
-//     width: "20px",
-//     height: "20px",
-//     fill: "#666",
-//   },
-//   dropdown: {
-//     position: "absolute",
-//     padding: "0.2em 0",
-//     // top: "calc(100% + 4px)",
-//     // left: "0",
-//     width: "15rem",
-//     backgroundColor: "#e6e7f5",
-//     border: "1px solid #ccc",
-//     borderRadius: "4px",
-//     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-//     zIndex: 1000,
-//   },
-//   option: {
-//     borderRadius: "10px",
-//     padding: "0.3em 1em",
-//     cursor: "pointer",
-//     transition: "background-color 0.2s",
-//     margin: "0",
-//   },
-//   optionHover: {
-//     backgroundColor: "#9b9ed7",
-//     color: "#fff",
-//   },
-// };
-
-// CustomSelect.jsx
+import form from "../../../styles/forms.module.scss";
 
 export default function CustomSelect({
   options = ["Option 1", "Option 2", "Option 3"],
   defaultValue = null,
-  onChange = () => {},
+  onSelectChange,
+  // onChange = () => {},
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(
     defaultValue || (options.length > 0 ? options[0] : "")
   );
+
   const [hoveredOption, setHoveredOption] = useState(null);
   const dropdownRef = useRef(null);
 
@@ -81,6 +27,12 @@ export default function CustomSelect({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleChange = (event) => {
+    setIsOpen(false);
+    const selectedValue = event.target.value;
+    onSelectChange(selectedValue); // Ruft die Callback-Funktion der Elternkomponente auf
+  };
+
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
@@ -88,10 +40,15 @@ export default function CustomSelect({
   };
 
   return (
-    <div ref={dropdownRef} className={styles.dropdown}>
+    <div
+      ref={dropdownRef}
+      className={`${styles.dropdown} ${form.inputSection}`}
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`${styles.dropdownButton} ${isOpen ? styles.active : ""}`}
+        className={`${form.input} ${styles.dropdownButton} ${
+          isOpen ? styles.active : ""
+        }`}
       >
         <span className={styles.selectedOption}>
           {selectedOption || "Select an option"}
@@ -109,7 +66,7 @@ export default function CustomSelect({
               className={`${styles.option} ${
                 hoveredOption === index ? styles.optionHovered : ""
               }`}
-              onClick={() => handleSelect(option)}
+              onClick={() => handleChange(option)}
               onMouseEnter={() => setHoveredOption(index)}
               onMouseLeave={() => setHoveredOption(null)}
             >
