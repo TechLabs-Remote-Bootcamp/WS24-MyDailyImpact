@@ -6,7 +6,7 @@ export default function CustomSelect({
   options = ["Option 1", "Option 2", "Option 3"],
   defaultValue = null,
   onSelectChange,
-  // onChange = () => {},
+  onChange = () => {},
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(
@@ -27,16 +27,11 @@ export default function CustomSelect({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleChange = (event) => {
-    setIsOpen(false);
-    const selectedValue = event.target.value;
-    onSelectChange(selectedValue); // Ruft die Callback-Funktion der Elternkomponente auf
-  };
-
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
-    onChange(option);
+    onSelectChange(option); // Ruft die Callback-Funktion der Elternkomponente auf
+    onChange(option); // Ruft die onChange-Funktion auf, falls vorhanden
   };
 
   return (
@@ -66,7 +61,7 @@ export default function CustomSelect({
               className={`${styles.option} ${
                 hoveredOption === index ? styles.optionHovered : ""
               }`}
-              onClick={() => handleChange(option)}
+              onClick={() => handleSelect(option)}
               onMouseEnter={() => setHoveredOption(index)}
               onMouseLeave={() => setHoveredOption(null)}
             >
