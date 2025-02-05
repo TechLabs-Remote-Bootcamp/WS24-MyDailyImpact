@@ -1,6 +1,14 @@
 .dashboard {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 0rem;
+  .colorContainer {
+    align-items: center;
+  }
   .dashboard-content {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
@@ -8,6 +16,7 @@
     .stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: auto;
       gap: 1rem;
 
       .stat-item {
@@ -15,6 +24,8 @@
         padding: 1rem;
         border-radius: 8px;
         text-align: center;
+        place-content: center;
+        height: 15rem;
 
         h4 {
           margin-bottom: 0.5rem;
@@ -24,12 +35,28 @@
           font-size: 1.5rem;
           font-weight: bold;
         }
+        .dashboard-img {
+          height: 5rem;
+          width: auto;
+        }
       }
     }
 
     .actions {
       display: flex;
       gap: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  .dashboard {
+    margin-top: 2rem;
+    .dashboard-content {
+      .stats {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 }
