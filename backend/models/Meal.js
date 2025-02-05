@@ -6,10 +6,6 @@ const mealSchema = new mongoose.Schema({
     required: [true, 'Meal name is required'],
     trim: true
   },
-  calories: {
-    type: Number,
-    required: [true, 'Calories are required'],
-  },
   ingredients: {
     type: [String],
     default: [],
