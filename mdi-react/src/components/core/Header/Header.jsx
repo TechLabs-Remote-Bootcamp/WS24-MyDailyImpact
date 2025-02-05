@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import HeaderLoggedIn from "./HeaderLoggedIn";
 import HeaderNotLoggedIn from "./HeaderNotLoggedIn";
 
 const Header = () => {
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const { user, isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
 
-  useEffect(() => {
-    setIsUserAuthenticated(isAuthenticated && user !== null);
-  }, [user, isAuthenticated]);
-
-  return isUserAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
+  if (loading) {
+    return null;
+  }
+  return isAuthenticated ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />;
 };
 
 export default Header;
