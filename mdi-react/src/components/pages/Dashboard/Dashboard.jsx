@@ -70,9 +70,9 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="actions">
-            <Button onClick={() => alert("Track a meal")}>Track Meal</Button>
-            <Button onClick={() => alert("View detailed stats")}>
-              View Stats
+            <Button onClick={() => alert("Log a Meal")}>Log a Meal</Button>
+            <Button onClick={() => alert("View my Meal History")}>
+              Meal History
             </Button>
             <Button onClick={handleLogout}>Logout</Button>
           </div>
