@@ -1,4 +1,4 @@
-import UserMealLog from "../models/UserMealLog";
+import UserMealLog from "../models/UserMealLog.js";
 
 export const getAllUserMealLogs = async (req, res) => {
   try {
