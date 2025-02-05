@@ -12,6 +12,7 @@ export default function HeaderLoggedIn() {
 
   const handleLogout = () => {
     logout();
+    navigate(0);
     navigate("/");
   };
 
