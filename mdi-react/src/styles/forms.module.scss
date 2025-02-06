@@ -15,22 +15,34 @@
     padding-top: 1.5rem;
 
     .inputSection {
-      display: flex;
-      flex-direction: row;
-      column-gap: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      column-gap: 1.4rem;
       user-select: text;
       align-items: baseline;
       min-width: 0;
-      //min-height: 0;
-      //overflow: hidden;
       width: 95%;
     }
 
+    .radioGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+
+      align-items: baseline;
+      width: 100%;
+    }
+
+    .radioLabel {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
     .input {
-      flex-grow: 3;
       background-color: $primary-extra-light;
       height: 3rem;
-      width: 80%;
+
       padding: 0.2 1em;
       border-radius: 10px;
       border: 1px solid $primary-medium;
@@ -39,32 +51,13 @@
       &:focus-visible {
         outline: 2px solid $primary-medium;
       }
-
-      .radioGroup {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 15px;
-        align-items: baseline;
-        width: 100%;
-      }
-
-      .radioLabel {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-
-        // input {
-        //   margin-right: 50px;
-        // }
-      }
     }
 
     .label {
-      flex-grow: 1;
       white-space: nowrap;
       font-weight: 700;
       letter-spacing: 1px;
+      justify-self: end;
     }
   }
 
