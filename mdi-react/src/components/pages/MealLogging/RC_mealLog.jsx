@@ -1,42 +1,100 @@
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
-import CustomSelect from "../../core/CustomSelect/CustomSelect";
-import styles from "./RC_mealLog.module.scss";
+import "./RC_mealLog.scss";
 import form from "../../../styles/forms.module.scss";
+import { useState, useEffect } from "react";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export default function RC_MealLog() {
-  const handleChange = (selectedOption) => {
-    console.log("Selected:", selectedOption);
+  const {
+    register,
+    formState,
+    formState: { errors, isSubmitSuccessful },
+    handleSubmit,
+    reset,
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      mealName: "",
+      mealType: "Breakfast",
+      comment: "",
+    },
+  });
+
+  const mealTypes = ["Breakfast", "Lunch", "Dinner"];
+
+  const onSubmitting = (data) => {
+    data.preventDefault();
+    console.log(data);
   };
+
+  // useEffect(() => {
+  //   if (formState.isSubmitSuccessful) {
+  //     reset();
+  //   }
+  // }, [formState, submittedData, reset]);
+
   return (
     <>
       <ColoredContainers
         h2Text="What are you eating today?"
         h3Text="Choose the right input and save."
       >
-        <div className={form["formpage-grid"]}>
+        <form
+          className={form["formpage-grid"]}
+          onSubmit={handleSubmit(onSubmitting)}
+        >
           <section className={form.formSection}>
             <div className={form.inputSection}>
-              <label className={styles.label}>Meal name</label>
-              <input className={form.input}></input>
+              <label className={form.label}>Meal name</label>
+              <input
+                className={form.input}
+                name="mealName"
+                {...register("mealName", { required: true, maxLength: 50 })}
+              ></input>
             </div>
             <div className={form.inputSection}>
-              <label className={styles.label}>Meal of the day</label>
-              <CustomSelect
-                options={["Breakfast", "Lunch", "Dinner"]}
-                defaultValue="Breakfast"
-                onChange={handleChange}
-              ></CustomSelect>
+              <label className={form.label}>Meal of the day</label>
+              <div className={form.radioGroup}>
+                {mealTypes.map((meal) => (
+                  <label key={meal} className={form.radioLabel}>
+                    <input
+                      type="radio"
+                      name="mealType"
+                      value={meal}
+                      {...register("mealType", { required: true })}
+                    />
+                    {meal}
+                  </label>
+                ))}
+              </div>
             </div>
             <div className={form.inputSection}>
-              <label className={styles.label}>Comment</label>
-              <input className={form.input}></input>
+              <label className={form.label}>Comment</label>
+              <textarea
+                className={form.input}
+                style={{ height: "unset" }}
+                maxLength={500}
+                rows={5}
+                name="comment"
+                {...register("comment", { required: false, maxLength: 150 })}
+              ></textarea>
             </div>
           </section>
           <section className={form.buttonSection}>
-            <Button>Save</Button>
+            <Button
+              type="submit"
+              onClick={() => {
+                reset((formValues) => ({
+                  ...formValues,
+                }));
+              }}
+            >
+              Save
+            </Button>
           </section>
-        </div>
+        </form>
       </ColoredContainers>
     </>
   );
