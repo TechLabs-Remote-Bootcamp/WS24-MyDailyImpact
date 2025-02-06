@@ -76,10 +76,12 @@
     justify-content: center;
     margin-top: -1.5rem;
 
-    a {
+    a,
+    button {
       font-weight: 500;
       color: #fff;
       text-decoration: inherit;
+      border: none;
 
       &:hover {
         font-weight: 600;
