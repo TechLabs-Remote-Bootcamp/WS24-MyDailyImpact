@@ -81,7 +81,7 @@ export default function RC_MealLog() {
                 {...register("comment", { required: false, maxLength: 150 })}
               ></textarea>
             </div>
-          </form>
+          </section>
           <section className={form.buttonSection}>
             <Button
               type="submit"
