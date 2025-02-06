@@ -30,6 +30,7 @@ export default function CustomSelect({
   const handleSelect = (option) => {
     setIsOpen(false);
     setSelectedOption(option);
+    setIsOpen(false);
     onSelectChange(option); // Ruft die Callback-Funktion der Elternkomponente auf
     onChange(option); // Ruft die onChange-Funktion auf, falls vorhanden
   };
