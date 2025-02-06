@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import PigImg from "../../../images/Pig.png";
@@ -66,10 +66,12 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="actions">
-            <Button onClick={() => alert("Log a Meal")}>Log a Meal</Button>
-            <Button onClick={() => alert("View my Meal History")}>
-              Meal History
-            </Button>
+            <NavLink to={"/meal-log"}>
+              <Button>Log a Meal</Button>
+            </NavLink>
+            <NavLink to={"/meal-history"}>
+              <Button>Meal History</Button>
+            </NavLink>
           </div>
         </div>
       </ColoredContainers>
