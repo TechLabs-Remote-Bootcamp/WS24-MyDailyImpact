@@ -34,10 +34,6 @@ export default function Dashboard() {
     return <Navigate to="/login" />;
   }
 
-  const handleLogout = () => {
-    logout();
-  };
-
   const welcomeMessage = user?.firstName || user?.email || "User";
 
   return (
@@ -74,7 +70,6 @@ export default function Dashboard() {
             <Button onClick={() => alert("View my Meal History")}>
               Meal History
             </Button>
-            <Button onClick={handleLogout}>Logout</Button>
           </div>
         </div>
       </ColoredContainers>
