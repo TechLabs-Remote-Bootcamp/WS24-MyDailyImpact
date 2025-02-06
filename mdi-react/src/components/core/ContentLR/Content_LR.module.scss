@@ -8,6 +8,18 @@
   margin: 0 2rem 2rem 2rem;
   justify-content: space-evenly;
   align-items: center;
+  width: 90vw;
+
+  .leftBox {
+    flex-grow: 1;
+    max-width: 40vw;
+  }
+
+  .rightBox {
+    flex-grow: 4;
+    max-width: 50vw;
+    margin-right: 1rem;
+  }
 }
 
 @media only screen and (max-width: 850px) {
@@ -19,10 +31,6 @@
     padding: 0 2rem;
     justify-content: center;
     align-items: center;
-  }
-
-  .rightBox {
-    margin-top: -1.3rem;
   }
 }
 
