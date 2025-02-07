@@ -13,7 +13,11 @@ export default function RC_login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // console.log("Auth state changed - isAuthenticated:", isAuthenticated);
+    // console.log("Auth state changed - user:", user);
+
     if (isAuthenticated && user && user.email) {
+      navigate("/dashboard");
       navigate(0);
     }
   }, [isAuthenticated, user, navigate]);
@@ -21,9 +25,11 @@ export default function RC_login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const success = await login({ email, password });
-      if (success) {
-        navigate("/dashboard");
+      const response = await login({ email, password });
+      if (response && response.success) {
+        console.log("Login successful");
+        // setIsUserAuthenticated(true);
+        // navigate("/dashboard")
       }
     } catch (error) {
       console.error("Login failed", error);
