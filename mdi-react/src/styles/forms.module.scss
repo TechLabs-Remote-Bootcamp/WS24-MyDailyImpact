@@ -1,8 +1,26 @@
 @use "../styles/colors.scss" as *;
 @use "../styles/fonts.scss" as *;
 
-// General form css
+// This is an outer div containing the formpage-grid div
+// if there's some content under the colored boxes
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    text-align: center;
+  }
+  a {
+    color: $primary;
+    font-weight: bold;
+    transition: all 100ms ease-in-out;
+    &:hover {
+      color: $secondary-medium;
+    }
+  }
+}
 
+// General form css
 .formpage-grid {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -69,22 +87,7 @@
   .buttonSection {
     justify-self: right;
     margin-top: 1rem;
-  }
-}
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  p {
-    text-align: center;
-  }
-  a {
-    color: $primary;
-    font-weight: bold;
-    transition: all 100ms ease-in-out;
-    &:hover {
-      color: $secondary-medium;
-    }
+    margin-right: 2rem;
   }
 }
 
