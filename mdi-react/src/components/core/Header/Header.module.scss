@@ -17,8 +17,6 @@
 }
 
 .desktopHead {
-  position: sticky;
-  top: 0;
   background-color: #fff;
   z-index: 1000;
   width: 100%;
@@ -66,12 +64,13 @@
   grid-area: leaves;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin: 0 2.6rem 0 auto;
+  justify-content: right;
+  margin-left: 2.6rem;
+  margin-right: 2rem;
 
   .single {
     display: grid;
-    grid-template-columns: 1fr 3fr 4fr;
+    grid-template-columns: 2rem 8rem;
     grid-template-rows: 3rem 1.5rem;
     justify-content: center;
     margin-top: -1.5rem;
@@ -163,7 +162,7 @@
   }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
   .logo {
     margin-right: -2rem;
 
@@ -183,8 +182,11 @@
       margin-left: 0.2rem;
     }
 
-    .single .leaf-stem {
-      left: 0.2rem;
+    .single {
+      grid-template-columns: 1rem 6rem;
+      .leaf-stem {
+        left: 0.3rem;
+      }
     }
   }
 }
@@ -284,6 +286,8 @@
 
   #header-mobile {
     display: block;
+    position: sticky;
+    top: 0;
   }
 
   #header-desktop {

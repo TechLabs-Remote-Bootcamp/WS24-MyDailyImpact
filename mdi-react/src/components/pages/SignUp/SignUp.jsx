@@ -1,6 +1,7 @@
 import Content_LR from "../../core/ContentLR/Content_LR.jsx";
 import LC_bigImage from "../../core/LC/LC_bigImage.jsx";
 import RC_signup from "./RC_signup.jsx";
+import styles from "./SignUp.module.scss";
 
 export default function Signup() {
   return (

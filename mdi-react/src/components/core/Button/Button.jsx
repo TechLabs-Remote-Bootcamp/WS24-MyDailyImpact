@@ -1,12 +1,13 @@
 import styles from "./Button.module.scss";
 
-const Button = ({ children, onClick, disabled = false }) => {
+const Button = ({
+  children,
+  onClick,
+  disabled = false,
+  className = "primary-button",
+}) => {
   return (
-    <button
-      className={styles["primary-button"]}
-      onClick={onClick}
-      disabled={disabled}
-    >
+    <button className={styles[className]} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

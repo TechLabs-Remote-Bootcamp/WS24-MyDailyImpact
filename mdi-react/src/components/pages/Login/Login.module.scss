@@ -1,32 +1,38 @@
 @use "../../../styles/colors.scss" as *;
 @use "../../../styles/fonts.scss" as *;
 
-.login-form-container {
-  display: flex;
-  flex-direction: column;
+.form-container {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  width: 100%;
   align-items: center;
-  .login-extra-info {
-    margin-top: 1rem;
-  }
-  p {
+  font-family: $font-family-general;
+
+  .additionalLinks {
+    margin-top: 2rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
-  a {
+
+  .link {
     text-decoration: none;
     color: $primary;
-    font-weight: bold;
+    font-weight: 700;
     transition: all 100ms ease-in-out;
+    line-height: 1.5rem;
+
     &:hover {
       color: $secondary-medium;
+      text-shadow: $secondary-light 1px 1px;
+      font-size: 1.3rem;
     }
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .login-form-container {
-    p {
-      font-size: 1.15rem;
-    }
-  }
-}
+// @media only screen and (max-width: 600px) {
+//   .login-form-container {
+//     p {
+//       font-size: 1.15rem;
+//     }
+//   }
+// }
