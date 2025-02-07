@@ -3,7 +3,6 @@ import Content_LR from "../../core/ContentLR/Content_LR.jsx";
 import LC_bigImage from "../../core/LC/LC_bigImage.jsx";
 import RC_login from "./RC_login.jsx";
 import { Link } from "react-router-dom";
-//import form from "../../styles/forms.module.scss";
 
 export default function Login() {
   return (
