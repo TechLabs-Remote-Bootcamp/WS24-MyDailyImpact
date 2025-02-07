@@ -75,21 +75,6 @@ export default function RC_signup() {
       >
         <section className={form.formSection}>
           <div className={form.inputSection}>
-            <label className={form.label}>Gender:</label>
-            <select
-              className={`${form.input} ${errors.gender ? styles.error : ""}`}
-              {...register("gender", { required: "Gender is required" })}
-            >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            {errors.gender && (
-              <span className={styles.errorText}>{errors.gender.message}</span>
-            )}
-          </div>
-          <div className={form.inputSection}>
             <label className={form.label}>First Name:</label>
             <input
               className={`${form.input} ${
@@ -143,30 +128,46 @@ export default function RC_signup() {
                 {errors.birthday.message}
               </span>
             )}
-          </label>
-
-          <label>
-            Country:
-            <select
-              className={`${styles.input} ${
-                errors.country ? styles.error : ""
-              }`}
-              {...register("country", { required: "Country is required" })}
-            >
-              <option value="">Select Country</option>
-              {countries.map((country) => (
-                <option key={country.Code} value={country.Code}>
-                  {country.Country}
-                </option>
-              ))}
-            </select>
-            {errors.country && (
-              <span className={styles.errorText}>{errors.country.message}</span>
-            )}
-          </label>
-
-          <label>
-            Email:
+            <div className={form.inputSection}>
+              <label className={form.label}>Gender:</label>
+              <select
+                className={`${form.input} ${errors.gender ? styles.error : ""}`}
+                {...register("gender", { required: "Gender is required" })}
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              {errors.gender && (
+                <span className={styles.errorText}>
+                  {errors.gender.message}
+                </span>
+              )}
+            </div>
+            <div className={form.inputSection}>
+              <label>Country:</label>
+              <select
+                className={`${styles.input} ${
+                  errors.country ? styles.error : ""
+                }`}
+                {...register("country", { required: "Country is required" })}
+              >
+                <option value="">Select Country</option>
+                {countries.map((country) => (
+                  <option key={country.Code} value={country.Code}>
+                    {country.Country}
+                  </option>
+                ))}
+              </select>
+              {errors.country && (
+                <span className={styles.errorText}>
+                  {errors.country.message}
+                </span>
+              )}
+            </div>
+            <div className={form.inputSection}></div>
+            <label>Email:</label>
             <input
               className={`${form.input} ${errors.email ? styles.error : ""}`}
               {...register("email", {
