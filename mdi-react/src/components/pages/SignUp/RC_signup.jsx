@@ -4,6 +4,7 @@ import { ApiError, api } from "../../../utils/api";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import styles from "../../../styles/forms.module.scss";
+import form from "../../../styles/forms.module.scss";
 
 export default function RC_signup() {
   const navigate = useNavigate();
@@ -50,15 +51,16 @@ export default function RC_signup() {
 
   return (
     <ColoredContainers h2Text="Create your account" h3Text="">
-      <div>
-        <form
-          className={styles["sign-up-form"]}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <label>
-            Salutation:
+      <form
+        className={form["formpage-grid"]}
+        //className={styles["sign-up-form"]}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <section className={form.formSection}>
+          <div className={form.inputSection}>
+            <label className={form.label}>Salutation:</label>
             <select
-              className={`${styles.input} ${
+              className={`${form.input} ${
                 errors.salutation ? styles.error : ""
               }`}
               {...register("salutation", {
@@ -79,12 +81,11 @@ export default function RC_signup() {
                 {errors.salutation.message}
               </span>
             )}
-          </label>
-
-          <label>
-            Gender:
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>Gender:</label>
             <select
-              className={`${styles.input} ${errors.gender ? styles.error : ""}`}
+              className={`${form.input} ${errors.gender ? styles.error : ""}`}
               {...register("gender", { required: "Gender is required" })}
             >
               <option value="" disabled selected>
@@ -97,12 +98,11 @@ export default function RC_signup() {
             {errors.gender && (
               <span className={styles.errorText}>{errors.gender.message}</span>
             )}
-          </label>
-
-          <label>
-            First Name:
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>First Name:</label>
             <input
-              className={`${styles.input} ${
+              className={`${form.input} ${
                 errors.firstName ? styles.error : ""
               }`}
               {...register("firstName", {
@@ -119,14 +119,11 @@ export default function RC_signup() {
                 {errors.firstName.message}
               </span>
             )}
-          </label>
-
-          <label>
-            Last Name:
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>Last Name:</label>
             <input
-              className={`${styles.input} ${
-                errors.lastName ? styles.error : ""
-              }`}
+              className={`${form.input} ${errors.lastName ? styles.error : ""}`}
               {...register("lastName", {
                 required: "Last name is required",
                 minLength: {
@@ -141,15 +138,12 @@ export default function RC_signup() {
                 {errors.lastName.message}
               </span>
             )}
-          </label>
-
-          <label>
-            Date of Birth:
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>Date of Birth:</label>
             <input
               type="date"
-              className={`${styles.input} ${
-                errors.birthday ? styles.error : ""
-              }`}
+              className={`${form.input} ${errors.birthday ? styles.error : ""}`}
               {...register("birthday", {
                 required: "Date of birth is required",
                 validate: (value) => {
@@ -164,12 +158,11 @@ export default function RC_signup() {
                 {errors.birthday.message}
               </span>
             )}
-          </label>
-
-          <label>
-            Email:
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>Email:</label>
             <input
-              className={`${styles.input} ${errors.email ? styles.error : ""}`}
+              className={`${form.input} ${errors.email ? styles.error : ""}`}
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -182,15 +175,12 @@ export default function RC_signup() {
             {errors.email && (
               <span className={styles.errorText}>{errors.email.message}</span>
             )}
-          </label>
-
-          <label>
-            Password:
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>Password:</label>
             <input
               type="password"
-              className={`${styles.input} ${
-                errors.password ? styles.error : ""
-              }`}
+              className={`${form.input} ${errors.password ? styles.error : ""}`}
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -210,13 +200,12 @@ export default function RC_signup() {
                 {errors.password.message}
               </span>
             )}
-          </label>
-
-          <label>
-            Confirm Password:
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>Confirm Password:</label>
             <input
               type="password"
-              className={`${styles.input} ${
+              className={`${form.input} ${
                 errors.confirmPassword ? styles.error : ""
               }`}
               {...register("confirmPassword", {
@@ -231,12 +220,14 @@ export default function RC_signup() {
                 {errors.confirmPassword.message}
               </span>
             )}
-          </label>
+          </div>
+        </section>
+        <section className={form.buttonSection}>
           <Button className={styles["primary-button"]} type="submit">
             Sign Up
           </Button>
-        </form>
-      </div>
+        </section>
+      </form>
     </ColoredContainers>
   );
 }
