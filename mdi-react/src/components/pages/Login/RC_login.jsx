@@ -17,8 +17,8 @@ export default function RC_login() {
     // console.log("Auth state changed - user:", user);
 
     if (isAuthenticated && user && user.email) {
-      navigate(0);
       navigate("/dashboard");
+      navigate(0);
     }
   }, [isAuthenticated, user, navigate]);
 

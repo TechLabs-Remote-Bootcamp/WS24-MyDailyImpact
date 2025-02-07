@@ -1,8 +1,8 @@
+import { useState } from "react";
 import styles from "./Header.module.scss";
 import logo from "../../../images/MDI_logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
-import { useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 
 export default function HeaderLoggedIn() {
@@ -12,8 +12,8 @@ export default function HeaderLoggedIn() {
 
   const handleLogout = () => {
     logout();
-    navigate(0);
     navigate("/");
+    navigate(0);
   };
 
   const renderNavItems = () => (
