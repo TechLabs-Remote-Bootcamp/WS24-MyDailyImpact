@@ -14,12 +14,19 @@ export default function Login() {
       RightComponent={
         <div className={styles["form-container"]}>
           <RC_login />
-          <div>
+          <div className={styles.additionalLinks}>
             <p>
-              New User? <Link to="/sign-up">Sign up</Link>
+              <span>
+                New here? Join us and{" "}
+                <Link className={styles.link} to="/sign-up">
+                  sign up!
+                </Link>
+              </span>
             </p>
             <p>
-              <Link to="/forgot-password">Forgot password?</Link>
+              <Link className={styles.link} to="/forgot-password">
+                Forgot password?
+              </Link>
             </p>
           </div>
         </div>
