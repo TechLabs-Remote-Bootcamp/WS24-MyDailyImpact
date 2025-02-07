@@ -1,6 +1,6 @@
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
-import "./RC_mealLog.scss";
+
 import form from "../../../styles/forms.module.scss";
 import { useState, useEffect } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
@@ -25,7 +25,6 @@ export default function RC_MealLog() {
   const mealTypes = ["Breakfast", "Lunch", "Dinner"];
 
   const onSubmitting = (data) => {
-    data.preventDefault();
     console.log(data);
   };
 
@@ -64,6 +63,10 @@ export default function RC_MealLog() {
                       name="mealType"
                       value={meal}
                       {...register("mealType", { required: true })}
+                      style={{
+                        height: "1.2rem",
+                        width: "1.2rem",
+                      }}
                     />
                     {meal}
                   </label>
