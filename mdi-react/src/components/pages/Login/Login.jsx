@@ -11,7 +11,7 @@ export default function Login() {
         <LC_bigImage rotationOn={false} overflowText="My Daily Impact" />
       }
       RightComponent={
-        <div className={styles["login-form-container"]}>
+        <div className={styles["form-container"]}>
           <RC_login />
           <div className={styles.additionalLinks}>
             <p>
