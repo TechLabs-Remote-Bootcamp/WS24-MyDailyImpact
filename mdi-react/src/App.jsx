@@ -38,7 +38,7 @@ export default function App() {
           <Route path="/recipeBot" element={<RecipeBot />}></Route>
           <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/meal-log" element={<MealLogging />}></Route>
+          {/* <Route path="/meal-log" element={<MealLogging />}></Route> */}
           <Route path="/meal-history" element={<MealHistory />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
         </Routes>
