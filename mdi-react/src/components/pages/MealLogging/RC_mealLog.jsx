@@ -46,7 +46,7 @@ export default function RC_MealLog() {
         >
           <section className={form.formSection}>
             <div className={form.inputSection}>
-              <label className={form.label}>Meal name</label>
+              <label className={form.label}>Meal name:</label>
               <input
                 className={form.input}
                 name="mealName"
@@ -54,7 +54,7 @@ export default function RC_MealLog() {
               ></input>
             </div>
             <div className={form.inputSection}>
-              <label className={form.label}>Meal of the day</label>
+              <label className={form.label}>Meal of the day:</label>
               <div className={form.radioGroup}>
                 {mealTypes.map((meal) => (
                   <label key={meal} className={form.radioLabel}>
@@ -74,7 +74,7 @@ export default function RC_MealLog() {
               </div>
             </div>
             <div className={form.inputSection}>
-              <label className={form.label}>Comment</label>
+              <label className={form.label}>Comment:</label>
               <textarea
                 className={form.input}
                 style={{ height: "unset" }}
