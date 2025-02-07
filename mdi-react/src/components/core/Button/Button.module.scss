@@ -12,10 +12,11 @@
   border-radius: 0.75rem;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   font-weight: 600;
 
   &:hover {
-    background-color: $secondary-medium;
+    background-color: $secondary;
+    text-shadow: $secondary-medium 0 0 25px;
   }
 }
