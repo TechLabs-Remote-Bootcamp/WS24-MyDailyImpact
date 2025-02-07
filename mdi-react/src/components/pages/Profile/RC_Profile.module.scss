@@ -1,0 +1,13 @@
+@use "../../../styles/colors.scss" as *;
+@use "../../../styles/fonts.scss" as *;
+
+.user-information-container {
+  min-width: 10%;
+  .user-information {
+    margin-bottom: 0.5rem;
+    .input {
+      color: $secondary-medium;
+      font-weight: bold;
+    }
+  }
+}

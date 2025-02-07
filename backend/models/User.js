@@ -3,11 +3,6 @@ import bcrypt from 'bcryptjs';
 import { AUTH_CONFIG } from '../config/constants.js';
 
 const userSchema = new mongoose.Schema({
-  salutation: {
-    type: String,
-    required: [true, 'Salutation is required'],
-    enum: ['Mr', 'Mrs', 'Ms', 'Dr', 'Not Specified'],
-  },
   firstName: {
     type: String,
     required: [true, 'First Name is required'],
@@ -39,6 +34,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Gender is required'],
     enum: ['male', 'female', 'other'],
+  },
+  country: {
+    type: String,
+    required: [true, 'Country is required']
   },
   role: {
     type: String,

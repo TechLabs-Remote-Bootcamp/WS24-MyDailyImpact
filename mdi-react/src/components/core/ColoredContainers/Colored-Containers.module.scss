@@ -72,44 +72,69 @@
 
 @media only screen and (max-width: 810px) {
   .colorContainer {
-    div {
-      padding: 1em 1em;
-    }
-
     .greenBox {
       h2 {
-        font-size: 1.4rem;
+        font-size: 1.75rem;
       }
     }
 
-    .blueBox h3 {
-      font-size: 1.3rem;
+    .blueBox {
+      h3 {
+        font-size: 1.5rem;
+      }
     }
 
     .textBox {
-      font-size: 0.9rem;
+      grid-column: 1 / 6;
+      grid-row: 4 / 6;
+      border: 2px solid $primary-medium;
+      font-size: 1.25rem;
     }
   }
 }
 
-@media only screen and (max-width: 810px) {
+@media only screen and (max-width: 600px) {
   .colorContainer {
-    div {
-      padding: 1em 1em;
-    }
-
     .greenBox {
       h2 {
-        font-size: 1.4rem;
+        font-size: 1.75rem;
       }
     }
 
-    .blueBox h3 {
-      font-size: 1.3rem;
+    .blueBox {
+      h3 {
+        font-size: 1.5rem;
+      }
     }
 
     .textBox {
-      font-size: 0.9rem;
+      grid-column: 1 / 6;
+      grid-row: 4 / 6;
+      border: 2px solid $primary-medium;
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .colorContainer {
+    .greenBox {
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .blueBox {
+      h3 {
+        font-size: 1.75rem;
+      }
+    }
+
+    .textBox {
+      grid-column: 1 / 6;
+      grid-row: 4 / 6;
+      border: 2px solid $primary-medium;
+      font-size: 1.25rem;
     }
   }
 }

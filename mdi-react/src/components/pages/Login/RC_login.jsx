@@ -13,11 +13,11 @@ export default function RC_login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Auth state changed - isAuthenticated:", isAuthenticated);
-    console.log("Auth state changed - user:", user);
+    // console.log("Auth state changed - isAuthenticated:", isAuthenticated);
+    // console.log("Auth state changed - user:", user);
 
     if (isAuthenticated && user && user.email) {
-      console.log("Navigating to dashboard");
+      navigate(0);
       navigate("/dashboard");
     }
   }, [isAuthenticated, user, navigate]);
@@ -26,18 +26,11 @@ export default function RC_login() {
     e.preventDefault();
     try {
       const response = await login({ email, password });
-      console.log("Login API response:", response);
-
-      /* if (response && response.token && response.user) {
-        const success = await login(response.token, response.user);
-        if (success) {
-          console.log('Login successful');
-        } else {
-          console.log('Login failed in useAuth');
-        }
-      } else {
-        console.error("Invalid login response format");
-      } */
+      if (response && response.success) {
+        console.log("Login successful");
+        // setIsUserAuthenticated(true);
+        // navigate("/dashboard")
+      }
     } catch (error) {
       console.error("Login failed", error);
     }

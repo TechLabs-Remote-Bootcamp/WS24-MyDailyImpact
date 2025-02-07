@@ -3,7 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
-import { errorHandler } from '../frontend/src/utils/errorHandler.js';
+import countryRouter from './routes/country.js';
+import { errorHandler } from './utils/errorHandler.js';
 
 dotenv.config();
 
@@ -28,6 +29,10 @@ const startServer = async () => {
 
     // Routes
     app.use('/auth', authRoutes); 
+
+    console.log('countryRouter:', countryRouter);
+
+    app.use('/api', countryRouter);
 
     // Error handling middleware
     app.use(errorHandler);

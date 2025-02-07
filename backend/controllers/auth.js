@@ -1,7 +1,7 @@
 import { validationResult } from 'express-validator';
-import User from '../models/user.js';
-import generateToken from '../../frontend/src/utils/generateToken.js';
-import { ApiError } from '../../frontend/src/utils/errorHandler.js';
+import User from '../models/User.js';
+import generateToken from '../utils/generateToken.js';
+import { ApiError } from '../utils/errorHandler.js';
 
 export const register = async (req, res) => {
   const errors = validationResult(req);
@@ -9,7 +9,7 @@ export const register = async (req, res) => {
     throw new ApiError(400, 'Validation failed', errors.array());
   }
 
-  const { salutation, email, password, firstName, lastName, birthday, gender } = req.body;
+  const { email, password, firstName, lastName, birthday, gender, country } = req.body;
 
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -19,13 +19,13 @@ export const register = async (req, res) => {
   let user;
   try {
     user = await User.create({
-      salutation,
       firstName,
       lastName,
       email,
       password,
       birthday,
-      gender
+      gender,
+      country
     });
   } catch (error) {
     throw new ApiError(500, 'Error creating user', error.message);
@@ -37,12 +37,12 @@ export const register = async (req, res) => {
     token,
     user: {
       id: user._id,
-      salutation: user.salutation,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       birthday: user.birthday,
-      gender: user.gender
+      gender: user.gender,
+      country: user.country
     },
   });
 };
@@ -68,12 +68,12 @@ export const login = async (req, res) => {
     token,
     user: {
       id: user._id,
-      salutation: user.salutation,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       birthday: user.birthday,
-      gender: user.gender
+      gender: user.gender,
+      country: user.country
     },
   });
 };
