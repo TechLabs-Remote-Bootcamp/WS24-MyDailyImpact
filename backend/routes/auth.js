@@ -1,6 +1,13 @@
 import express from 'express';
 import { check } from 'express-validator';
-import { register, login } from '../controllers/auth.js';
+import { protect } from '../middleware/auth.js';
+import { register, 
+          login, 
+          getUserProfile,
+          updateUserProfile,
+          changePassword,
+          deleteAccount,
+ } from '../controllers/auth.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
 const router = express.Router();
@@ -27,5 +34,32 @@ router.post(
   ],
   asyncHandler(login)
 );
+
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('sid');
+    res.json({ message: 'Logged out successfully' });
+  });
+});
+
+router.get('/current-user',
+  protect,
+  asyncHandler(getUserProfile)
+);
+
+router.put('/update-profile', 
+  protect, 
+  asyncHandler(updateUserProfile)
+);
+
+router.put('/change-password', 
+  protect, 
+  asyncHandler(changePassword));
+
+  router.delete('/delete-account', 
+    protect, 
+    asyncHandler(deleteAccount));
+
+
 
 export default router;

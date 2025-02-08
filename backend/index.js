@@ -1,9 +1,11 @@
+/* global process */
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
 import countryRouter from './routes/country.js';
+import userMealLogRouter from './routes/userMealLog.js';
 import { errorHandler } from './utils/errorHandler.js';
 
 dotenv.config();
@@ -28,17 +30,15 @@ const startServer = async () => {
     });
 
     // Routes
-    app.use('/auth', authRoutes); 
-
-    console.log('countryRouter:', countryRouter);
-
+    app.use('/auth', authRoutes);
     app.use('/api', countryRouter);
+    app.use('/api/meal-logs', userMealLogRouter);
 
     // Error handling middleware
     app.use(errorHandler);
 
     const PORT = process.env.APP_PORT || 5000;
-    app.listen(PORT, '127.0.0.1', () => { 
+    app.listen(PORT, '127.0.0.1', () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
