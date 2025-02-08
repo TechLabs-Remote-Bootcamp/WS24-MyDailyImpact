@@ -80,7 +80,7 @@ export const login = async (req, res) => {
 
 export const getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.params.userID);
+    const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -97,5 +97,32 @@ export const getUserProfile = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const updateUserProfile = async (req, res) => {
+  const user = await User.findById(req.user.id);
+
+  if (user) {
+    user.firstName = req.body.firstName || user.firstName;
+    user.lastName = req.body.lastName || user.lastName;
+    user.email = req.body.email || user.email;
+    user.birthday = req.body.birthday || user.birthday;
+    user.gender = req.body.gender || user.gender;
+    user.country = req.body.country || user.country;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      id: updatedUser._id,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      email: updatedUser.email,
+      birthday: updatedUser.birthday,
+      gender: updatedUser.gender,
+      country: updatedUser.country,
+    });
+  } else {
+    throw new ApiError(404, 'User not found');
   }
 };

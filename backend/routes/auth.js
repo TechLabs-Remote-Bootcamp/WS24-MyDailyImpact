@@ -1,6 +1,11 @@
 import express from 'express';
 import { check } from 'express-validator';
-import { register, login, getUserProfile } from '../controllers/auth.js';
+import { protect } from '../middleware/auth.js';
+import { register, 
+          login, 
+          getUserProfile,
+          updateUserProfile,
+ } from '../controllers/auth.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
 const router = express.Router();
@@ -35,9 +40,16 @@ router.get('/logout', (req, res) => {
   });
 });
 
-router.get('/current-user/:userID',
+router.get('/current-user',
+  protect,
   asyncHandler(getUserProfile)
 );
+
+router.put('/update-profile', 
+  protect, 
+  asyncHandler(updateUserProfile)
+);
+
 
 
 export default router;
