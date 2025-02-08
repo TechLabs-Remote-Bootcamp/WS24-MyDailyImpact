@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../../../utils/api";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
-import styles from "../../../styles/forms.module.scss";
+import form from "../../../styles/forms.module.scss";
 
 export default function RC_login() {
   const [email, setEmail] = useState("");
@@ -17,18 +17,20 @@ export default function RC_login() {
     // console.log("Auth state changed - user:", user);
 
     if (isAuthenticated && user && user.email) {
-      console.log("Navigating to dashboard");
       navigate("/dashboard");
-    } 
+      navigate(0);
+    }
   }, [isAuthenticated, user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await login({ email, password });
-       if (response && response.success) {
-         console.log("Login successful");
-       }
+      if (response && response.success) {
+        console.log("Login successful");
+        // setIsUserAuthenticated(true);
+        // navigate("/dashboard")
+      }
     } catch (error) {
       console.error("Login failed", error);
     }
@@ -40,31 +42,33 @@ export default function RC_login() {
         h2Text="Your daily impact"
         h3Text="Sign in to your account"
       >
-        <div>
-          <form className={styles["login-form"]} onSubmit={handleSubmit}>
-            <label>
-              Email:
+        <form className={form["formpage-grid"]} onSubmit={handleSubmit}>
+          <section className={form.formSection}>
+            <div className={form.inputSection}>
+              <label className={form.label}>Email:</label>
               <input
-                className={styles["input"]}
+                className={form.input}
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </label>
-            <label>
-              Password:
+            </div>
+            <div className={form.inputSection}>
+              <label className={form.label}>Password:</label>
               <input
-                className={styles["input"]}
+                className={form.input}
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </label>
+            </div>
+          </section>
+          <section className={form.buttonSection}>
             <Button type="submit">Login</Button>
-          </form>
-        </div>
+          </section>
+        </form>
       </ColoredContainers>
     </>
   );

@@ -1,8 +1,8 @@
+import { useState } from "react";
 import styles from "./Header.module.scss";
 import logo from "../../../images/MDI_logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
-import { useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 
 export default function HeaderLoggedIn() {
@@ -13,6 +13,7 @@ export default function HeaderLoggedIn() {
   const handleLogout = () => {
     logout();
     navigate("/");
+    navigate(0);
   };
 
   const renderNavItems = () => (
@@ -115,7 +116,7 @@ export default function HeaderLoggedIn() {
       <header id={styles["header-desktop"]}>
         <div className={styles.desktopHead}>
           <div className={styles["flower-header-grid"]}>
-            <NavLink to="/" className={styles.logo}>
+            <NavLink to="/dashboard" className={styles.logo}>
               <img src={logo} alt="logo" />
             </NavLink>
             <div className={styles["heaven-stripe"]}></div>
@@ -149,7 +150,7 @@ export default function HeaderLoggedIn() {
             </Dropdown.Menu>
           </Dropdown>
 
-          <NavLink to="/" className={styles.logo}>
+          <NavLink to="/dashboard" className={styles.logo}>
             <img src={logo} alt="logo" />
           </NavLink>
         </div>

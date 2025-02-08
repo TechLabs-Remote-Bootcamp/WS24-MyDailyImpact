@@ -1,0 +1,44 @@
+@use "../styles/colors.scss" as *;
+@use "../styles/fonts.scss" as *;
+
+.uploadContainer {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-rows: 2fr 4fr 2fr;
+  justify-items: center;
+}
+
+.treeworld {
+  grid-column: 1 / 4;
+  grid-row: 1 / 4;
+  max-width: 85%;
+  max-height: calc(100vh - 8rem);
+  opacity: 30%;
+}
+
+.uploadField {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  background-color: $grey-500;
+  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family-general;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.uploadIcon {
+  font-size: 3rem;
+  opacity: 1;
+  font-weight: 800;
+}
+
+@media only screen and (max-width: 810px) {
+}

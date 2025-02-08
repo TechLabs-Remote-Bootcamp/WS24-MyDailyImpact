@@ -4,9 +4,21 @@
 .lrContainer {
   position: relative;
   display: flex;
-  margin: 0 2rem 4rem 2rem;
+  flex-wrap: nowrap;
+  margin: 2rem 2.5rem 2rem 2.5rem;
   justify-content: space-evenly;
   align-items: center;
+
+  .leftBox {
+    flex-grow: 1;
+    max-width: 40vw;
+  }
+
+  .rightBox {
+    flex-grow: 4;
+    max-width: 50vw;
+    margin-right: 1rem;
+  }
 }
 
 @media only screen and (max-width: 950px) {
@@ -16,16 +28,12 @@
     row-gap: 1em;
     padding: 0 2rem;
     justify-content: center;
-  }
 
-  .leftBox {
-    img {
-      max-width: 40rem;
+    .leftBox {
+      img {
+        max-width: 40rem;
+      }
     }
-  }
-
-  .rightBox {
-    margin-top: -1.3rem;
   }
 }
 
@@ -33,9 +41,9 @@
   .lrContainer {
     padding: 0;
     margin: 2rem 4rem 4rem;
-  }
-  .rightBox {
-    margin: auto 0;
-    min-height: 70vh;
+    .rightBox {
+      margin: auto 0;
+      min-height: 70vh;
+    }
   }
 }

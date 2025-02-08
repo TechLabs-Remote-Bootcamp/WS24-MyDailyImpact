@@ -7,6 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 
 export default function HeaderNotLoggedIn() {
   const [isOpen, setIsOpen] = useState(false);
+  // const { setIsAuthenticated } = useAuth();
 
   const renderNavItems = () => (
     <>

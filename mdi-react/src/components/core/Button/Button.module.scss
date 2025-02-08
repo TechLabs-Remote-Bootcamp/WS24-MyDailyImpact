@@ -4,20 +4,19 @@
 .primary-button {
   background-color: $primary;
   font-family: $font-family-general;
+  letter-spacing: 1px;
   margin: 1rem auto;
   padding: 0.6em 1.2em;
   border: none;
   color: $white;
   border-radius: 0.75rem;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.2s ease;
+  font-weight: 600;
 
   &:hover {
-    background-color: $primary-medium;
-  }
-
-  a {
-    color: $white;
+    background-color: $secondary;
+    text-shadow: $secondary-medium 0 0 25px;
   }
 }

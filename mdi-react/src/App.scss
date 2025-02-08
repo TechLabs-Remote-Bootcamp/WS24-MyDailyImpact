@@ -1,13 +1,17 @@
 @use "./styles/colors.scss" as *;
 @use "./styles/fonts.scss" as *;
+@use "./custom.scss" as *;
+
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
 
 @media only screen and (min-width: 810px) {
-  
   #root {
-    max-width: 2100px;
     width: 100%;
     margin: 0 auto;
-    min-height: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
     // grid-template-columns: 100vw;   //This was causing horizontal scroll bar!
@@ -15,13 +19,12 @@
       "header"
       "content"
       "footer";
-    min-height: 100vh;
+    height: 100vh;
   }
 
   .content {
     grid-area: content;
-    min-height: 0;
-    // width: 100%;
+    align-content: center;
   }
 
   .navbarFlower {
@@ -32,8 +35,9 @@
 .foot {
   grid-area: footer;
   align-self: end;
-  max-height: fit-content;
+  height: fit-content;
   width: 100%;
+  font-family: $font-family-general;
 }
 
 header {
