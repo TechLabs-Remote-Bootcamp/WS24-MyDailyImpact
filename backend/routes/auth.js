@@ -5,6 +5,8 @@ import { register,
           login, 
           getUserProfile,
           updateUserProfile,
+          changePassword,
+          deleteAccount,
  } from '../controllers/auth.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
@@ -49,6 +51,14 @@ router.put('/update-profile',
   protect, 
   asyncHandler(updateUserProfile)
 );
+
+router.put('/change-password', 
+  protect, 
+  asyncHandler(changePassword));
+
+  router.delete('/delete-account', 
+    protect, 
+    asyncHandler(deleteAccount));
 
 
 

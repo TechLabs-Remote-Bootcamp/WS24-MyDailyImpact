@@ -126,3 +126,24 @@ export const updateUserProfile = async (req, res) => {
     throw new ApiError(404, 'User not found');
   }
 };
+
+export const changePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  const user = await User.findById(req.user.id).select('+password');
+
+  if (!(await user.comparePassword(currentPassword))) {
+    throw new ApiError(401, 'Current password is incorrect');
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  res.json({ message: 'Password updated successfully' });
+};
+
+export const deleteAccount = async (req, res) => {
+  await User.findByIdAndDelete(req.user.id);
+
+  res.json({ message: 'User deleted successfully' });
+};
