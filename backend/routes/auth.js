@@ -1,6 +1,6 @@
 import express from 'express';
 import { check } from 'express-validator';
-import { register, login } from '../controllers/auth.js';
+import { register, login, getUserProfile } from '../controllers/auth.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
 const router = express.Router();
@@ -27,5 +27,17 @@ router.post(
   ],
   asyncHandler(login)
 );
+
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('sid');
+    res.json({ message: 'Logged out successfully' });
+  });
+});
+
+router.get('/current-user/:userID',
+  asyncHandler(getUserProfile)
+);
+
 
 export default router;

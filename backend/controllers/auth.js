@@ -77,3 +77,25 @@ export const login = async (req, res) => {
     },
   });
 };
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userID);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json({
+      id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      birthday: user.birthday,
+      gender: user.gender,
+      country: user.country,
+      role: user.role,
+      lastLogin: user.lastLogin,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+};

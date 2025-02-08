@@ -29,10 +29,7 @@ const startServer = async () => {
     });
 
     // Routes
-    app.use('/auth', authRoutes); 
-
-    console.log('countryRouter:', countryRouter);
-
+    app.use('/auth', authRoutes);
     app.use('/api', countryRouter);
     app.use('/api/meal-logs', userMealLogRouter);
 
@@ -40,7 +37,7 @@ const startServer = async () => {
     app.use(errorHandler);
 
     const PORT = process.env.APP_PORT || 5000;
-    app.listen(PORT, '127.0.0.1', () => { 
+    app.listen(PORT, '127.0.0.1', () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
