@@ -238,7 +238,7 @@ rag_pipeline.connect("memory_retriever", "prompt_builder.memories")
 
 # %%
 # rag_pipeline.show()
-
+# rag_pipeline.draw("pipeline.png")
 
 while True:
     messages = [system_message, user_message]
@@ -249,6 +249,10 @@ while True:
     res = rag_pipeline.run(data={"query_rephrase_prompt_builder": {"query": question},
                              "prompt_builder": {"template": messages, "query": question},
                              "memory_joiner": {"values": [ChatMessage.from_user(question)]}},
-                            include_outputs_from=["llm"])
+                            include_outputs_from=["llm", "query_rephrase_llm"])
+    
+    search_query = res['query_rephrase_llm']['replies'][0]
+    print(f"🎃 [Rewritten search query: {search_query.text} ]")
+    
     assistant_resp = res['llm']['replies'][0]
     print(f"🤖 {assistant_resp.text}")
