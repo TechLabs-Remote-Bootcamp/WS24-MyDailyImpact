@@ -111,8 +111,14 @@ rephrase_llm = MistralChatGenerator(api_key=Secret.from_token(api_key),
                           model='mistral-large-latest')
 
 #%%
-chat_template = """Answer the following question based on the contents of the documents.\n
+chat_template = """Given the conversation history and the provided documents, give a brief answer to the question.\n
                 Question: {{query}}\n
+                
+                Conversation history:
+                {% for memory in memories %}
+                    {{ memory.text }}
+                {% endfor %}
+                
                 Documents: 
                 {% for document in documents %}
                     {{document.content}}
