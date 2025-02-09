@@ -1,5 +1,7 @@
+# pipeline.py
 import os
-from typing import Any, List
+from typing import Any, List, Dict
+from datetime import datetime
 from itertools import chain
 
 import requests
@@ -50,6 +52,113 @@ QUERY_REPHRASE_TEMPLATE = """
         Rewritten Query:
 """
 
+class Conversation:
+    def __init__(self, api_key: str, document_store: InMemoryDocumentStore):
+        self.pipeline = self._create_pipeline(api_key, document_store)
+        
+    def _create_pipeline(self, api_key: str, document_store: InMemoryDocumentStore) -> Pipeline:
+        pipeline = Pipeline()
+        memory_store = InMemoryChatMessageStore()
+
+        # Initialize components
+        text_embedder = MistralTextEmbedder(api_key=Secret.from_token(api_key))
+        retriever = InMemoryEmbeddingRetriever(document_store=document_store)
+        prompt_builder = ChatPromptBuilder(variables=["query", "documents", "memories"], 
+                                    required_variables=["query", "documents", "memories"])
+        llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
+        rephrase_llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
+
+        # Add components
+        pipeline.add_component("query_rephrase_prompt_builder", PromptBuilder(template=QUERY_REPHRASE_TEMPLATE))
+        pipeline.add_component("message_wrapper", ChatMessageWrapper())
+        pipeline.add_component("query_rephrase_llm", rephrase_llm)
+        pipeline.add_component("list_to_str_adapter", OutputAdapter(template="{{ replies[0] }}", output_type=str))
+        pipeline.add_component("text_embedder", text_embedder)
+        pipeline.add_component("retriever", retriever)
+        pipeline.add_component("prompt_builder", prompt_builder)
+        pipeline.add_component("llm", llm)
+        pipeline.add_component("memory_retriever", ChatMessageRetriever(memory_store))
+        pipeline.add_component("memory_writer", ChatMessageWriter(memory_store))
+        pipeline.add_component("memory_joiner", ListJoiner(List[ChatMessage]))
+
+        # Connect components
+        # Query rephrasing connections
+        pipeline.connect("memory_retriever", "query_rephrase_prompt_builder.memories")
+        pipeline.connect("query_rephrase_prompt_builder.prompt", "message_wrapper")
+        pipeline.connect("message_wrapper.messages", "query_rephrase_llm")
+        pipeline.connect("query_rephrase_llm.replies", "list_to_str_adapter")
+        pipeline.connect("list_to_str_adapter", "text_embedder")
+
+        # RAG connections
+        pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
+        pipeline.connect("retriever.documents", "prompt_builder.documents")
+        pipeline.connect("prompt_builder.prompt", "llm.messages")
+
+        # Memory connections
+        pipeline.connect("llm.replies", "memory_joiner")
+        pipeline.connect("memory_joiner", "memory_writer")
+        pipeline.connect("memory_retriever", "prompt_builder.memories")
+
+        return pipeline
+
+    def send_message(self, message: str) -> Dict[str, Any]:
+        """Send a message to the conversation and get the response."""
+        system_message = ChatMessage.from_system(
+            "You are a helpful AI assistant using provided supporting documents and conversation history to assist humans"
+        )
+        template_message = ChatMessage.from_user(CHAT_TEMPLATE)
+
+        result = self.pipeline.run(
+            data={
+                "query_rephrase_prompt_builder": {"query": message},
+                "prompt_builder": {
+                    "template": [system_message, template_message],
+                    "query": message
+                },
+                "memory_joiner": {"values": [ChatMessage.from_user(message)]}
+            },
+            include_outputs_from=["llm", "query_rephrase_llm"]
+        )
+
+        return {
+            "assistant_message": result["llm"]["replies"][0].text,
+            "rewritten_query": result["query_rephrase_llm"]["replies"][0].text
+        }
+
+    def get_history(self) -> List[ChatMessage]:
+        """Get the conversation history."""
+        memory_retriever = self.pipeline.get_component("memory_retriever")
+        return memory_retriever.run()["messages"]
+
+
+class ConversationStore:
+    def __init__(self, document_store: InMemoryDocumentStore, api_key: str):
+        self.conversations: Dict[str, Conversation] = {}
+        self.created_at: Dict[str, datetime] = {}
+        self.document_store = document_store
+        self.api_key = api_key
+    
+    def create_conversation(self, conversation_id: str) -> None:
+        self.conversations[conversation_id] = Conversation(self.api_key, self.document_store)
+        self.created_at[conversation_id] = datetime.utcnow()
+    
+    def get_conversation(self, conversation_id: str) -> Conversation:
+        if conversation_id not in self.conversations:
+            raise KeyError(f"Conversation {conversation_id} not found")
+        return self.conversations[conversation_id]
+
+    def delete_conversation(self, conversation_id: str) -> None:
+        if conversation_id not in self.conversations:
+            raise KeyError(f"Conversation {conversation_id} not found")
+        del self.conversations[conversation_id]
+        del self.created_at[conversation_id]
+
+    def get_created_at(self, conversation_id: str) -> datetime:
+        if conversation_id not in self.created_at:
+            raise KeyError(f"Conversation {conversation_id} not found")
+        return self.created_at[conversation_id]
+
+
 @component
 class ListJoiner:
     def __init__(self, _type: Any):
@@ -67,16 +176,21 @@ class ChatMessageWrapper:
     def run(self, text: str) -> List[ChatMessage]:
         return {"messages": [ChatMessage.from_user(text)]}
 
-def setup_environment():
+
+def setup_environment() -> str:
     load_dotenv()
     api_key = os.getenv("MISTRAL_API_KEY")
+    if not api_key:
+        raise ValueError("MISTRAL_API_KEY not found in environment variables")
     return api_key
+
 
 def load_sample_data():
     if not os.path.exists('essay.txt'):
         response = requests.get('https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt', timeout=10)
         with open('essay.txt', 'w', encoding='utf-8') as f:
             f.write(response.text)
+
 
 def setup_document_store(api_key: str) -> InMemoryDocumentStore:
     document_store = InMemoryDocumentStore()
@@ -86,82 +200,24 @@ def setup_document_store(api_key: str) -> InMemoryDocumentStore:
     DocumentWriter(document_store=document_store).run(documents=embeddings["documents"])
     return document_store
 
-def create_pipeline(api_key: str, document_store: InMemoryDocumentStore) -> Pipeline:
-    pipeline = Pipeline()
-    memory_store = InMemoryChatMessageStore()
-    
-    # Initialize components
-    text_embedder = MistralTextEmbedder(api_key=Secret.from_token(api_key))
-    retriever = InMemoryEmbeddingRetriever(document_store=document_store)
-    prompt_builder = ChatPromptBuilder(variables=["query", "documents", "memories"], 
-                                     required_variables=["query", "documents", "memories"])
-    llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
-    rephrase_llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
-    
-    # Add components
-    pipeline.add_component("query_rephrase_prompt_builder", PromptBuilder(template=QUERY_REPHRASE_TEMPLATE))
-    pipeline.add_component("message_wrapper", ChatMessageWrapper())
-    pipeline.add_component("query_rephrase_llm", rephrase_llm)
-    pipeline.add_component("list_to_str_adapter", OutputAdapter(template="{{ replies[0] }}", output_type=str))
-    pipeline.add_component("text_embedder", text_embedder)
-    pipeline.add_component("retriever", retriever)
-    pipeline.add_component("prompt_builder", prompt_builder)
-    pipeline.add_component("llm", llm)
-    pipeline.add_component("memory_retriever", ChatMessageRetriever(memory_store))
-    pipeline.add_component("memory_writer", ChatMessageWriter(memory_store))
-    pipeline.add_component("memory_joiner", ListJoiner(List[ChatMessage]))
+def chat_loop(conversation: Conversation):
+   while True:
+       question = input("Enter your question or Q to exit.\n🧑 ")
+       if question == "Q":
+           break
 
-    # Connect components
-    # Query rephrasing connections
-    pipeline.connect("memory_retriever", "query_rephrase_prompt_builder.memories")
-    pipeline.connect("query_rephrase_prompt_builder.prompt", "message_wrapper")
-    pipeline.connect("message_wrapper.messages", "query_rephrase_llm")
-    pipeline.connect("query_rephrase_llm.replies", "list_to_str_adapter")
-    pipeline.connect("list_to_str_adapter", "text_embedder")
+       result = conversation.send_message(question)
+       print(f"🎃 [Rewritten search query: {result['rewritten_query']} ]")
+       print(f"🤖 {result['assistant_message']}")
 
-    # RAG connections
-    pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
-    pipeline.connect("retriever.documents", "prompt_builder.documents")
-    pipeline.connect("prompt_builder.prompt", "llm.messages")
-
-    # Memory connections
-    pipeline.connect("llm.replies", "memory_joiner")
-    pipeline.connect("memory_joiner", "memory_writer")
-    pipeline.connect("memory_retriever", "prompt_builder.memories")
-    
-    return pipeline
-
-def chat_loop(pipeline: Pipeline):
-    system_message = ChatMessage.from_system("You are a helpful AI assistant using provided supporting documents and conversation history to assist humans")
-    user_message = ChatMessage.from_user(CHAT_TEMPLATE)
-    messages = [system_message, user_message]
-
-    while True:
-        question = input("Enter your question or Q to exit.\n🧑 ")
-        if question == "Q":
-            break
-
-        res = pipeline.run(
-            data={
-                "query_rephrase_prompt_builder": {"query": question},
-                "prompt_builder": {"template": messages, "query": question},
-                "memory_joiner": {"values": [ChatMessage.from_user(question)]}
-            },
-            include_outputs_from=["llm", "query_rephrase_llm"]
-        )
-        
-        search_query = res['query_rephrase_llm']['replies'][0]
-        print(f"🎃 [Rewritten search query: {search_query.text} ]")
-        
-        assistant_resp = res['llm']['replies'][0]
-        print(f"🤖 {assistant_resp.text}")
 
 def main():
-    api_key = setup_environment()
-    load_sample_data()
-    document_store = setup_document_store(api_key)
-    pipeline = create_pipeline(api_key, document_store)
-    chat_loop(pipeline)
+   api_key = setup_environment()
+   load_sample_data()
+   document_store = setup_document_store(api_key)
+   conversation = Conversation(api_key, document_store)
+   chat_loop(conversation)
+
 
 if __name__ == "__main__":
-    main()
+   main()
