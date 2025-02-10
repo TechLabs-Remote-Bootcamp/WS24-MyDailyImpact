@@ -43,6 +43,16 @@ export default function RC_Profile() {
 
   const getPasswordDots = (password) => "•".repeat(password?.length || 10);
 
+  const formatBirthday = (birthday) => {
+    if (!birthday) return "N/A";
+    const date = new Date(birthday);
+    return date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <div>
       <ColoredContainers h2Text="User profile">
@@ -50,7 +60,7 @@ export default function RC_Profile() {
           {[
             { label: "First Name", value: profileData.firstName },
             { label: "Last Name", value: profileData.lastName },
-            { label: "Birthday", value: profileData.birthday },
+            { label: "Birthday", value: formatBirthday(profileData.birthday) },
             { label: "Gender", value: profileData.gender },
             { label: "Country", value: profileData.country },
             { label: "Email", value: profileData.email },
