@@ -23,10 +23,10 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
     defaultValues: {
       firstName: "",
       lastName: "",
-      email: "",
       birthday: "",
       gender: "",
       country: "",
+      email: "",
     },
   });
 
@@ -121,23 +121,6 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
             )}
           </div>
           <div className={form.inputSection}>
-            <label className={form.label}>Email:</label>
-            <input
-              className={`${form.input} ${errors.email ? styles.error : ""}`}
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Please enter a valid email address",
-                },
-              })}
-              placeholder="Email"
-            />
-            {errors.email && (
-              <span className={styles.errorText}>{errors.email.message}</span>
-            )}
-          </div>
-          <div className={form.inputSection}>
             <label className={form.label}>Date of Birth:</label>
             <input
               type="date"
@@ -168,7 +151,7 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
             )}
           </div>
           <div className={form.inputSection}>
-            <label>Country:</label>
+            <label className={form.label}>Country:</label>
             <select
               className={`${styles.input} ${
                 errors.country ? styles.error : ""
@@ -184,6 +167,23 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
             </select>
             {errors.country && (
               <span className={styles.errorText}>{errors.country.message}</span>
+            )}
+          </div>
+          <div className={form.inputSection}>
+            <label className={form.label}>Email:</label>
+            <input
+              className={`${form.input} ${errors.email ? styles.error : ""}`}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email address",
+                },
+              })}
+              placeholder="Email"
+            />
+            {errors.email && (
+              <span className={styles.errorText}>{errors.email.message}</span>
             )}
           </div>
         </section>
