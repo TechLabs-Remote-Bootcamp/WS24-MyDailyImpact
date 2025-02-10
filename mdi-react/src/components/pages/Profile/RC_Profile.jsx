@@ -1,10 +1,13 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
+import Button from "../../core/Button/Button";
 import styles from "./RC_Profile.module.scss";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../utils/api";
 
-export default function RC_Profile() {
+export default function RC_Profile({ onEditClick }) {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
@@ -72,6 +75,7 @@ export default function RC_Profile() {
             </li>
           ))}
         </div>
+        <Button onClick={onEditClick}>Edit Profile</Button>
       </ColoredContainers>
     </div>
   );

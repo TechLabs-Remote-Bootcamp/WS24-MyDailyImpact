@@ -126,6 +126,62 @@ export const api = {
       throw error;
     }
   },
+
+  // New PUT method for updating profile
+  async put(endpoint, data) {
+    try {
+      const token = jwt.getToken();
+      console.log("Making PUT request to:", `${API_BASE_URL}${endpoint}`);
+      console.log("With data:", data);
+
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: this.setAuthHeader(token),
+        body: JSON.stringify(data),
+      });
+
+      console.log("Response status:", response.status);
+      console.log("Response headers:", [...response.headers.entries()]);
+
+      return handleResponse(response);
+    } catch (error) {
+      console.error("PUT request error:", error);
+      throw error;
+    }
+  },
+
+  // New method for getting current user profile
+  async getCurrentUser() {
+    return this.get("/auth/current-user");
+  },
+
+  // New method for updating user profile
+  async updateProfile(userData) {
+    return this.put("/auth/update-profile", userData);
+  },
+
+  // New method for changing password
+  async changePassword(passwordData) {
+    return this.put("/auth/change-password", passwordData);
+  },
+
+  // New method for deleting account
+  async deleteAccount() {
+    try {
+      const token = jwt.getToken();
+      const response = await fetch(`${API_BASE_URL}/auth/delete-account`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: this.setAuthHeader(token),
+      });
+
+      return handleResponse(response);
+    } catch (error) {
+      console.error("Delete account error:", error);
+      throw error;
+    }
+  },
 };
 
 // import { jwt } from './jwt';
