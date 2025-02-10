@@ -12,23 +12,20 @@ import { countriesApi } from "../../../utils/countriesApi";
 export default function RC_UpdateProfile({ onUpdateComplete }) {
   const [countries, setCountries] = useState([]);
   const [updateError, setUpdateError] = useState(null);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [originalData, setOriginalData] = useState({});
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm({
     mode: "onChange",
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      birthday: "",
-      gender: "",
-      country: "",
-      email: "",
-    },
   });
+
+  const watchedFields = watch();
 
   useEffect(() => {
     fetchCountries();
@@ -48,6 +45,7 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
   const fetchUserProfile = async () => {
     try {
       const userProfile = await api.getCurrentUser();
+      setOriginalData(userProfile);
       Object.keys(userProfile).forEach((key) => {
         if (key === "birthday") {
           setValue(key, new Date(userProfile[key]).toISOString().split("T")[0]);
@@ -64,15 +62,38 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
   const onSubmit = async (data) => {
     try {
       setUpdateError(null);
-      data.birthday = new Date(data.birthday);
-      const response = await api.put("/auth/update-profile", data);
+      setUpdateSuccess(false);
+
+      // Only include fields that have changed
+      const changedData = Object.keys(data).reduce((acc, key) => {
+        if (data[key] !== "" && data[key] !== originalData[key]) {
+          if (key === "birthday") {
+            acc[key] = new Date(data[key]);
+          } else {
+            acc[key] = data[key];
+          }
+        }
+        return acc;
+      }, {});
+
+      console.log("Submitting changed data:", changedData);
+
+      if (Object.keys(changedData).length === 0) {
+        setUpdateSuccess(true);
+        return;
+      }
+
+      const response = await api.updateProfile(changedData);
+      console.log("Update response:", response);
+
       if (response) {
         console.log("Profile update successful");
+        setUpdateSuccess(true);
         onUpdateComplete();
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      setUpdateError("Failed to update profile. Please try again.");
+      setUpdateError(`Failed to update profile: ${error.message}`);
     }
   };
 
@@ -87,7 +108,6 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
                 errors.firstName ? styles.error : ""
               }`}
               {...register("firstName", {
-                required: "First name is required",
                 minLength: {
                   value: 2,
                   message: "First name must be at least 2 characters",
@@ -106,7 +126,6 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
             <input
               className={`${form.input} ${errors.lastName ? styles.error : ""}`}
               {...register("lastName", {
-                required: "Last name is required",
                 minLength: {
                   value: 2,
                   message: "Last name must be at least 2 characters",
@@ -125,9 +144,7 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
             <input
               type="date"
               className={`${form.input} ${errors.birthday ? styles.error : ""}`}
-              {...register("birthday", {
-                required: "Date of birth is required",
-              })}
+              {...register("birthday")}
             />
             {errors.birthday && (
               <span className={styles.errorText}>
@@ -139,7 +156,7 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
             <label className={form.label}>Gender:</label>
             <select
               className={`${form.input} ${errors.gender ? styles.error : ""}`}
-              {...register("gender", { required: "Gender is required" })}
+              {...register("gender")}
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -156,7 +173,7 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
               className={`${styles.input} ${
                 errors.country ? styles.error : ""
               }`}
-              {...register("country", { required: "Country is required" })}
+              {...register("country")}
             >
               <option value="">Select Country</option>
               {countries.map((country) => (
@@ -174,7 +191,6 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
             <input
               className={`${form.input} ${errors.email ? styles.error : ""}`}
               {...register("email", {
-                required: "Email is required",
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   message: "Please enter a valid email address",
@@ -192,6 +208,9 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
         </section>
       </form>
       {updateError && <div className={styles.errorText}>{updateError}</div>}
+      {updateSuccess && (
+        <div className={styles.successText}>Profile updated successfully!</div>
+      )}
     </ColoredContainers>
   );
 }
