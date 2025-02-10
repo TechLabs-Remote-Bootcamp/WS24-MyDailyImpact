@@ -25,7 +25,7 @@ export default function HeaderLoggedIn() {
         <div className={styles["leaf-stem"]}></div>
       </li>
       <li className={styles.single}>
-        <NavLink to="/meal-log" className={styles["leaf-surface"]}>
+        <NavLink to="/meal-logging" className={styles["leaf-surface"]}>
           <span>Log a Meal</span>
         </NavLink>
         <div className={styles["leaf-stem"]}></div>
@@ -69,7 +69,7 @@ export default function HeaderLoggedIn() {
       </Dropdown.Item>
       <Dropdown.Item
         as={NavLink}
-        to="/meal-log"
+        to="/meal-logging"
         onClick={() => setIsOpen(false)}
         className={styles["dropdown-item"]}
       >
