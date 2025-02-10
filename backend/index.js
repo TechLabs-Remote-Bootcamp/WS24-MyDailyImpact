@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
 import countryRouter from './routes/country.js';
 import userMealLogRouter from './routes/userMealLog.js';
+import mealRouter from './routes/meal.js';
 import { errorHandler } from './utils/errorHandler.js';
 
 dotenv.config();
@@ -33,6 +34,7 @@ const startServer = async () => {
     app.use('/auth', authRoutes);
     app.use('/api', countryRouter);
     app.use('/api/meal-logs', userMealLogRouter);
+    app.use('/api/meals', mealRouter);
 
     // Error handling middleware
     app.use(errorHandler);
