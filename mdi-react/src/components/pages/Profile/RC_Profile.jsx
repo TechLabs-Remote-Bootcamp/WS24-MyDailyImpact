@@ -41,6 +41,31 @@ export default function RC_Profile() {
 
   const profileData = userDetails || user;
 
+  const getPasswordDots = (password) => "•".repeat(password?.length || 10);
+
+  return (
+    <div>
+      <ColoredContainers h2Text="User profile">
+        <div className={styles["user-information-container"]}>
+          {[
+            { label: "First Name", value: profileData.firstName },
+            { label: "Last Name", value: profileData.lastName },
+            { label: "Birthday", value: profileData.birthday },
+            { label: "Gender", value: profileData.gender },
+            { label: "Country", value: profileData.country },
+            { label: "Email", value: profileData.email },
+            { label: "Password", value: getPasswordDots(profileData.password) },
+          ].map(({ label, value }) => (
+            <li key={label} className={styles["user-information"]}>
+              <span className={styles["field"]}>{label}: </span>
+              <span className={styles["input"]}>{value || "N/A"}</span>
+            </li>
+          ))}
+        </div>
+      </ColoredContainers>
+    </div>
+  );
+
   // return (
   //   <div className="RC_home">
   //     <ColoredContainers h2Text="User profile">
@@ -89,27 +114,4 @@ export default function RC_Profile() {
   //     </ColoredContainers>
   //   </div>
   // );
-
-  return (
-    <div className="RC_home">
-      <ColoredContainers h2Text="User profile">
-        <div className={styles["user-information-container"]}>
-          {[
-            { label: "First Name", value: profileData.firstName },
-            { label: "Last Name", value: profileData.lastName },
-            { label: "Birthday", value: profileData.birthday },
-            { label: "Gender", value: profileData.gender },
-            { label: "Country", value: profileData.country },
-            { label: "Email", value: profileData.email },
-            { label: "Password", value: "••••••••" },
-          ].map(({ label, value }) => (
-            <li key={label} className={styles["user-information"]}>
-              <span className={styles["field"]}>{label}: </span>
-              <span className={styles["input"]}>{value || "N/A"}</span>
-            </li>
-          ))}
-        </div>
-      </ColoredContainers>
-    </div>
-  );
 }
