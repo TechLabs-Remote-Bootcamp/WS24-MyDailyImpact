@@ -43,7 +43,7 @@ export default function HeaderLoggedIn() {
         <div className={styles["leaf-stem"]}></div>
       </li>
       <li className={styles.single}>
-        <NavLink to="/profile" className={styles["leaf-surface"]}>
+        <NavLink to="/auth/current-user" className={styles["leaf-surface"]}>
           <span>Profile</span>
         </NavLink>
         <div className={styles["leaf-stem"]}></div>
@@ -93,7 +93,7 @@ export default function HeaderLoggedIn() {
       </Dropdown.Item>
       <Dropdown.Item
         as={NavLink}
-        to="/profile"
+        to="/auth/current-user"
         onClick={() => setIsOpen(false)}
         className={styles["dropdown-item"]}
       >
