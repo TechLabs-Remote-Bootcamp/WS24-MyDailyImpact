@@ -14,15 +14,21 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
   const [updateError, setUpdateError] = useState(null);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [originalData, setOriginalData] = useState({});
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
+    reset,
   } = useForm({
     mode: "onChange",
   });
+
+  const newPassword = watch("newPassword");
 
   useEffect(() => {
     fetchCountries();
@@ -58,12 +64,40 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
 
   const onSubmit = async (data) => {
     try {
+      setIsSubmitting(true);
       setUpdateError(null);
       setUpdateSuccess(false);
 
-      // Only include fields that have changed
-      const changedData = Object.keys(data).reduce((acc, key) => {
-        if (data[key] !== "" && data[key] !== originalData[key]) {
+      if (isChangingPassword && data.currentPassword && data.newPassword) {
+        try {
+          await api.changePassword({
+            currentPassword: data.currentPassword,
+            newPassword: data.newPassword,
+          });
+
+          // Reset password fields after successful password change
+          reset({
+            ...data,
+            currentPassword: "",
+            newPassword: "",
+            confirmPassword: "",
+          });
+        } catch (error) {
+          setUpdateError(`Failed to update password: ${error.message}`);
+          setIsSubmitting(false);
+          return;
+        }
+      }
+
+      // Handle profile update
+      const profileData = Object.keys(data).reduce((acc, key) => {
+        if (
+          !["currentPassword", "newPassword", "confirmPassword"].includes(
+            key
+          ) &&
+          data[key] !== "" &&
+          data[key] !== originalData[key]
+        ) {
           if (key === "birthday") {
             acc[key] = new Date(data[key]);
           } else {
@@ -73,24 +107,21 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
         return acc;
       }, {});
 
-      console.log("Submitting changed data:", changedData);
-
-      if (Object.keys(changedData).length === 0) {
-        setUpdateSuccess(true);
-        return;
+      if (Object.keys(profileData).length > 0) {
+        const response = await api.updateProfile(profileData);
+        if (!response) {
+          throw new Error("Profile update failed");
+        }
       }
 
-      const response = await api.updateProfile(changedData);
-      console.log("Update response:", response);
-
-      if (response) {
-        console.log("Profile update successful");
-        setUpdateSuccess(true);
-        onUpdateComplete();
-      }
+      setUpdateSuccess(true);
+      onUpdateComplete();
+      setIsChangingPassword(false);
     } catch (error) {
       console.error("Error updating profile:", error);
       setUpdateError(`Failed to update profile: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -199,6 +230,89 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
               <span className={styles.errorText}>{errors.email.message}</span>
             )}
           </div>
+          <div className={form.inputSection}>
+            <label className={`${form.label} ${styles.checkboxLabel}`}>
+              <input
+                type="checkbox"
+                onChange={(e) => {
+                  setIsChangingPassword(e.target.checked);
+                  if (!e.target.checked) {
+                    reset({
+                      ...watch(),
+                      currentPassword: "",
+                      newPassword: "",
+                      confirmPassword: "",
+                    });
+                  }
+                }}
+                checked={isChangingPassword}
+              />{" "}
+              Change Password
+            </label>
+          </div>
+
+          {isChangingPassword && (
+            <>
+              <div className={form.inputSection}>
+                <label className={form.label}>Current Password:</label>
+                <input
+                  type="password"
+                  className={`${form.input} ${
+                    errors.currentPassword ? styles.error : ""
+                  }`}
+                  {...register("currentPassword", {
+                    required: "Current password is required",
+                  })}
+                />
+                {errors.currentPassword && (
+                  <span className={styles.errorText}>
+                    {errors.currentPassword.message}
+                  </span>
+                )}
+              </div>
+
+              <div className={form.inputSection}>
+                <label className={form.label}>New Password:</label>
+                <input
+                  type="password"
+                  className={`${form.input} ${
+                    errors.newPassword ? styles.error : ""
+                  }`}
+                  {...register("newPassword", {
+                    required: "New password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Password must be at least 8 characters",
+                    },
+                  })}
+                />
+                {errors.newPassword && (
+                  <span className={styles.errorText}>
+                    {errors.newPassword.message}
+                  </span>
+                )}
+              </div>
+
+              <div className={form.inputSection}>
+                <label className={form.label}>Confirm New Password:</label>
+                <input
+                  type="password"
+                  className={`${form.input} ${
+                    errors.confirmPassword ? styles.error : ""
+                  }`}
+                  {...register("confirmPassword", {
+                    validate: (value) =>
+                      value === newPassword || "Passwords do not match",
+                  })}
+                />
+                {errors.confirmPassword && (
+                  <span className={styles.errorText}>
+                    {errors.confirmPassword.message}
+                  </span>
+                )}
+              </div>
+            </>
+          )}
         </section>
         <section className={form.buttonSection}>
           <Button type="submit">Update Profile</Button>
