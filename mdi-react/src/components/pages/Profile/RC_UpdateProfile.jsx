@@ -20,12 +20,9 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
   } = useForm({
     mode: "onChange",
   });
-
-  const watchedFields = watch();
 
   useEffect(() => {
     fetchCountries();
