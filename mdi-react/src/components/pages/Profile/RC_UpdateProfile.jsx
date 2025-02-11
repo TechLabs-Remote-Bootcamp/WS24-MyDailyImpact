@@ -15,6 +15,8 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [originalData, setOriginalData] = useState({});
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isCurrentPasswordCorrect, setIsCurrentPasswordCorrect] =
+    useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -28,12 +30,34 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
     mode: "onChange",
   });
 
+  const currentPassword = watch("currentPassword");
   const newPassword = watch("newPassword");
 
   useEffect(() => {
     fetchCountries();
     fetchUserProfile();
   }, []);
+
+  useEffect(() => {
+    const verifyCurrentPassword = async () => {
+      if (currentPassword) {
+        try {
+          // We're using the changePassword API here, but only to verify the current password
+          await api.changePassword({
+            currentPassword,
+            newPassword: currentPassword,
+          });
+          setIsCurrentPasswordCorrect(true);
+        } catch (error) {
+          setIsCurrentPasswordCorrect(false);
+        }
+      } else {
+        setIsCurrentPasswordCorrect(false);
+      }
+    };
+
+    verifyCurrentPassword();
+  }, [currentPassword]);
 
   const fetchCountries = async () => {
     try {
@@ -258,7 +282,10 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
                 <input
                   type="password"
                   className={`${form.input} ${
-                    errors.currentPassword ? styles.error : ""
+                    errors.currentPassword ||
+                    (!isCurrentPasswordCorrect && currentPassword)
+                      ? styles.error
+                      : ""
                   }`}
                   {...register("currentPassword", {
                     required: "Current password is required",
@@ -267,6 +294,11 @@ export default function RC_UpdateProfile({ onUpdateComplete }) {
                 {errors.currentPassword && (
                   <span className={styles.errorText}>
                     {errors.currentPassword.message}
+                  </span>
+                )}
+                {!isCurrentPasswordCorrect && currentPassword && (
+                  <span className={styles.errorText}>
+                    Current Password is incorrect
                   </span>
                 )}
               </div>
