@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, Navigate, Link } from "react-router";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import PigImg from "../../../images/Pig.png";
@@ -11,6 +11,7 @@ import "./Dashboard.scss";
 
 export default function Dashboard() {
   const { isAuthenticated, user, logout, loading, initializeAuth } = useAuth();
+  let userId = "";
 
   useEffect(() => {
     console.log(
@@ -21,6 +22,7 @@ export default function Dashboard() {
       "loading:",
       loading
     );
+    console.log(user);
     if (!isAuthenticated && !loading) {
       initializeAuth();
     }
@@ -34,7 +36,12 @@ export default function Dashboard() {
     return <Navigate to="/login" />;
   }
 
-  const welcomeMessage = user?.firstName || user?.email || "User";
+  if (isAuthenticated && !loading) {
+    userId = user.id;
+    console.log(userId);
+  }
+
+  const welcomeMessage = user?.firstName || user?.email || "impact fellow";
 
   return (
     <div className="dashboard">
@@ -66,9 +73,16 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="actions">
-            <NavLink to={"/meal-logging"}>
+            <Link
+              to="/meal-logging"
+              state={{ userId: { userId } }}
+              // to={{
+              //   pathname: "/meal-logging",
+              //   state: { from: "dashboard", additionalData: { userId } },
+              // }}
+            >
               <Button>Log Meal</Button>
-            </NavLink>
+            </Link>
             <NavLink to={"/meal-history"}>
               <Button>Meal History</Button>
             </NavLink>
