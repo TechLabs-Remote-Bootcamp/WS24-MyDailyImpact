@@ -73,14 +73,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="actions">
-            <Link
-              to="/meal-logging"
-              state={{ userId: { userId } }}
-              // to={{
-              //   pathname: "/meal-logging",
-              //   state: { from: "dashboard", additionalData: { userId } },
-              // }}
-            >
+            <Link to="/meal-logging" state={{ userId: { userId } }}>
               <Button>Log Meal</Button>
             </Link>
             <NavLink to={"/meal-history"}>
