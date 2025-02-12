@@ -35,6 +35,8 @@
 }
 
 .react-datepicker__input-container {
+  width: unset;
+
   input {
     border-color: $primary-medium;
     background-color: $primary-extra-light;
@@ -72,9 +74,20 @@
 
 .react-datepicker__input-container .react-datepicker__calendar-icon {
   top: 10%;
-  right: 5px;
+  right: 8px;
 }
 
 .react-datepicker__header {
   background-color: $grey-50;
+}
+
+.input-section {
+  .react-datepicker-popper {
+    transform: translate(50px, 40px) !important;
+    inset: 0 auto auto 0 !important;
+  }
+}
+
+#calendar-root .react-datepicker-popper {
+  z-index: 10;
 }

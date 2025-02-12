@@ -28,7 +28,6 @@ export default function RC_MealLog() {
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
-      user: "",
       mealName: "",
       category: "Breakfast",
       date: "",
@@ -74,17 +73,15 @@ export default function RC_MealLog() {
 
   const onSubmit = async (data) => {
     try {
-      const dataToSend = {
-        ...data,
-        user: user,
-      };
+      const dataToSend = data;
+
       console.log(dataToSend);
 
-      //   const response = await api.post("/meals", dataToSend);
-      //   if (response) {
-      //     console.log("Meal created");
-      //     navigate("/dashboard");
-      //   }
+      const response = await api.post("/meal-logs", dataToSend);
+      if (response) {
+        console.log("Meal created");
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Error:", error);
       if (error instanceof ApiError) {
@@ -152,10 +149,10 @@ export default function RC_MealLog() {
   return (
     <>
       <ColoredContainers
-        // h2Text="What are you eating today?"
-        // h3Text="Choose the right input and save."
-        h2Text={user}
-        h3Text="Hallo"
+        h2Text="What are you eating today?"
+        h3Text="Choose the right input and save."
+        // h2Text={user}
+        // h3Text="Hallo"
       >
         <form
           className={form["formpage-grid"]}
@@ -166,8 +163,8 @@ export default function RC_MealLog() {
               <label className={form.label}>Meal name:</label>
               <input
                 className={form.input}
-                name="meal"
-                {...register("name", { required: true, maxLength: 50 })}
+                name="mealName"
+                {...register("mealName", { required: true, maxLength: 50 })}
               ></input>
             </div>
             <div className={form.inputSection}>
@@ -178,8 +175,10 @@ export default function RC_MealLog() {
                 defaultValue={date}
                 render={() => (
                   <DatePicker
+                    portalId="calendar-root"
                     showIcon
-                    //portalId="root-portal"
+                    toggleCalendarOnIconClick
+                    popperPlacement="bottom"
                     style={{ padding: "0", margin: "0" }}
                     selected={date}
                     dateFormat="dd.MM.yyyy"
@@ -217,8 +216,8 @@ export default function RC_MealLog() {
                 style={{ height: "unset" }}
                 maxLength={500}
                 rows={5}
-                name="ingredients"
-                {...register("ingredients", {
+                name="notes"
+                {...register("notes", {
                   required: false,
                   maxLength: 150,
                 })}
