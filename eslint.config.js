@@ -24,6 +24,10 @@ export default [
       'react-refresh': reactRefresh,
     },
     rules: {
+
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+      "react/prop-types": 0, //  0=off, 1=warn, 2=error
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
