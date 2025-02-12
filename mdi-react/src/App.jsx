@@ -27,18 +27,16 @@ export default function App() {
       <div className="content">
         <Routes className="content">
           <Route path="/" element={<Home />}></Route>
-          {/* <Route path="/about" element={<About />}></Route> */}
-          <Route path="/meal-logging" element={<MealLogging />}></Route>
-          <Route path="/recipeBot" element={<RecipeBot />}></Route>
+          <Route path="/about" element={<About />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/contact-us" element={<ContactUs />}></Route>
           <Route path="/imprint" element={<Imprint />}></Route>
           <Route path="/privacy" element={<Privacy />}></Route>
-          <Route path="/recipeBot" element={<RecipeBot />}></Route>
           <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
-          {/* <Route path="/meal-log" element={<MealLogging />}></Route> */}
+          <Route path="/recipeBot" element={<RecipeBot />}></Route>
+          <Route path="/meal-logging" element={<MealLogging />}></Route>
           <Route path="/meal-history" element={<MealHistory />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
         </Routes>

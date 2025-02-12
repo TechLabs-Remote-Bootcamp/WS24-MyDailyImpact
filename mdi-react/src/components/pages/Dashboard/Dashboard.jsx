@@ -66,8 +66,8 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="actions">
-            <NavLink to={"/meal-log"}>
-              <Button>Log a Meal</Button>
+            <NavLink to={"/meal-logging"}>
+              <Button>Log Meal</Button>
             </NavLink>
             <NavLink to={"/meal-history"}>
               <Button>Meal History</Button>
