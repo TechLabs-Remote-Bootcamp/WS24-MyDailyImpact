@@ -19,7 +19,7 @@ export default function RC_MealLog() {
 
   const {
     register,
-    setValue,
+    // setValue,
     control,
     formState,
     formState: { errors, isSubmitSuccessful },
@@ -28,9 +28,11 @@ export default function RC_MealLog() {
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
+      userId: "", // actually getting from the dashboard via <Link>
+      mealId: "", // ?? Where do I get this? What type is it? Number?
       mealName: "",
       category: "Breakfast",
-      date: "",
+      date: date,
       notes: "",
       // name: "",
       // ingredients: "",
@@ -64,6 +66,7 @@ export default function RC_MealLog() {
   //const now = new Date();
 
   const handleChange = (dateChange) => {
+    // read in the react-form docs to avoid setValue -> have to ask AI for other solution
     setValue("date", dateChange, {
       shouldDirty: true,
     });
@@ -73,7 +76,12 @@ export default function RC_MealLog() {
 
   const onSubmit = async (data) => {
     try {
-      const dataToSend = data;
+      const dataToSend = {
+        ...data,
+        userId: user,
+        mealId: "0000123",
+        date: handleChange,
+      };
 
       console.log(dataToSend);
 
@@ -171,6 +179,7 @@ export default function RC_MealLog() {
               <label className={form.label}>Date:</label>
               <Controller
                 name="date"
+                // {...register("date")}
                 control={control}
                 defaultValue={date}
                 render={() => (
