@@ -5,8 +5,8 @@ const API_BASE_URL = 'http://localhost:5001/api';
 export const countriesApi = {
     async getCountries() {
       try {
-        console.log('Attempting to fetch countries from:', `${API_BASE_URL}/countries`);
-        const response = await axios.get(`${API_BASE_URL}/countries`);
+        console.log('Attempting to fetch countries from:', `${API_BASE_URL}/get-countries`);
+        const response = await axios.get(`${API_BASE_URL}/get-countries`);
         console.log('Raw response:', response);
   
         if (response.status !== 200) {
