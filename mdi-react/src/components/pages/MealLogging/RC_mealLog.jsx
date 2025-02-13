@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
 import { jwt } from "../../../utils/jwt";
 import { useForm, Controller } from "react-hook-form";
+import { ApiError, api } from "../../../utils/api";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import DatePicker from "react-datepicker";
-import { ApiError, api } from "../../../utils/api";
 import form from "../../../styles/forms.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "./RC_mealLog.scss";
@@ -19,7 +18,6 @@ export default function RC_MealLog() {
 
   const {
     register,
-    // setValue,
     control,
     formState,
     formState: { errors, isSubmitSuccessful },
@@ -105,48 +103,14 @@ export default function RC_MealLog() {
     }
   };
 
-  // const onSubmit = (data) => {
-  //   const dataToSend = {
-  //     ...data,
-  //     user: user,
-  //   };
-
-  //   console.log(data);
   //   const token = jwt.getToken();
   //   console.log(token);
-  //   try {
-  //     //setValue(dataToSend.date, now);
 
-  //     fetch("http://localhost:5001/api/meal-logs", {
-  //       method: "POST",
-  //       credentials: "include",
-  //       headers: {
-  //         Authorization: token ? `Bearer ${token}` : "",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(dataToSend),
-  //     }).then(() => {
-  //       console.log("Meal data successful transferred");
-  //       navigate("/dashboard");
-  //     });
-
-  //     if (response) {
-  //       console.log("Meal data successful transferred");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     if (error instanceof ApiError) {
-  //       console.error("API Error Status:", error.status);
-  //       console.error("API Error Message:", error.message);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (formState.isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [formState, submittedData, reset]);
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset();
+    }
+  }, [formState, submittedData, reset]);
 
   return (
     <>
