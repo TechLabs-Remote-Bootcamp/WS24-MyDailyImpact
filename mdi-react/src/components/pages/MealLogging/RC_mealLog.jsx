@@ -110,7 +110,7 @@ export default function RC_MealLog() {
     if (formState.isSubmitSuccessful) {
       reset();
     }
-  }, [formState, submittedData, reset]);
+  }, [formState, reset]);
 
   return (
     <>
