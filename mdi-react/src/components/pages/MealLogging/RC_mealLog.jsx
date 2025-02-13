@@ -29,7 +29,6 @@ export default function RC_MealLog() {
     mode: "onSubmit",
     defaultValues: {
       userId: "", // actually getting from the dashboard via <Link>
-      mealId: "", // ?? Where do I get this? What type is it? Number?
       mealName: "",
       category: "Breakfast",
       date: date,
@@ -76,7 +75,6 @@ export default function RC_MealLog() {
       const dataToSend = {
         ...data,
         userId: user,
-        mealId: "b239fa12589823986612589c",
         date: date,
       };
 
