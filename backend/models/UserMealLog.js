@@ -6,11 +6,6 @@ const userMealLogSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  mealId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Meal',
-    required: true
-  },
   mealName: {
     type: String,
     trim: true,
