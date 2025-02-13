@@ -33,9 +33,6 @@ export default function RC_MealLog() {
       category: "Breakfast",
       date: date,
       notes: "",
-      // name: "",
-      // ingredients: "",
-      // category: "Breakfast",
     },
   });
 
@@ -93,6 +90,8 @@ export default function RC_MealLog() {
       }
     }
   };
+
+  // just for testing the get request
   const onSubmit2 = async () => {
     try {
       const response = await api.get("/meal-logs");
@@ -154,8 +153,6 @@ export default function RC_MealLog() {
       <ColoredContainers
         h2Text="What are you eating today?"
         h3Text="Choose the right input and save."
-        // h2Text={user}
-        // h3Text="Hallo"
       >
         <form
           className={form["formpage-grid"]}
@@ -174,7 +171,6 @@ export default function RC_MealLog() {
               <label className={form.label}>Date:</label>
               <Controller
                 name="date"
-                // {...register("date")}
                 control={control}
                 defaultValue={date}
                 render={() => (
@@ -239,7 +235,7 @@ export default function RC_MealLog() {
             >
               Save
             </Button>
-            <Button onClick={onSubmit2}>Get data</Button>
+            <Button onClick={onSubmit2}>Get log data and print</Button>
           </section>
         </form>
       </ColoredContainers>
