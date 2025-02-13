@@ -67,9 +67,6 @@ export default function RC_MealLog() {
 
   const handleChange = (dateChange) => {
     // read in the react-form docs to avoid setValue -> have to ask AI for other solution
-    setValue("date", dateChange, {
-      shouldDirty: true,
-    });
     setDate(dateChange);
     console.log(dateChange);
   };
@@ -79,8 +76,8 @@ export default function RC_MealLog() {
       const dataToSend = {
         ...data,
         userId: user,
-        mealId: "0000123",
-        date: handleChange,
+        mealId: "b239fa12589823986612589c",
+        date: date,
       };
 
       console.log(dataToSend);
