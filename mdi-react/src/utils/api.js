@@ -1,7 +1,7 @@
 import { jwt } from './jwt';
 
 const API_LOGIN_URL = '/api';
-const API_BASE_URL = ' http://localhost:5001/api';
+const API_BASE_URL = 'http://localhost:5001/api';
 
 export class ApiError extends Error {
   constructor(status, message) {
