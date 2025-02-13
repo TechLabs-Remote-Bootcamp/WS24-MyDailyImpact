@@ -109,9 +109,7 @@ export default function RC_signup() {
               placeholder="Last Name"
             />
             {errors.lastName && (
-              <span className={styles.errorText}>
-                {errors.lastName.message}
-              </span>
+              <span className={form.errorText}>{errors.lastName.message}</span>
             )}
           </div>
           <div className={form.inputSection}>

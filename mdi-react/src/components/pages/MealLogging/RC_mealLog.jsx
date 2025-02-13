@@ -70,14 +70,11 @@ export default function RC_MealLog() {
       const dataToSend = {
         ...data,
         userId: user,
-        date: date,
       };
-
       console.log(dataToSend);
 
       const response = await api.post("/meal-logs", dataToSend);
       if (response) {
-        console.log("Meal created");
         navigate("/dashboard");
       }
     } catch (error) {
@@ -108,6 +105,7 @@ export default function RC_MealLog() {
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
+      console.log("Meal successfully logged");
       reset();
     }
   }, [formState, reset]);
@@ -128,8 +126,16 @@ export default function RC_MealLog() {
               <input
                 className={form.input}
                 name="mealName"
-                {...register("mealName", { required: true, maxLength: 50 })}
+                {...register("mealName", {
+                  required: "This input is required.",
+                  maxLength: 50,
+                })}
               ></input>
+              {/* empty div to move the error text in the second grid column under the input field */}
+              <div></div>
+              {errors.mealName && (
+                <p className={form.errorText}>{errors.mealName.message}</p>
+              )}
             </div>
             <div className={form.inputSection}>
               <label className={form.label}>Date:</label>

@@ -32,6 +32,12 @@
     flex-direction: column;
     padding-top: 1.5rem;
 
+    // Belongs to the class .errorText (see below) which is related to a <p> tag
+    p::before {
+      display: inline;
+      content: "⚠  ";
+    }
+
     .inputSection {
       display: grid;
       grid-template-columns: 1fr 3fr;
@@ -90,6 +96,13 @@
     margin-top: 1rem;
     margin-right: 2rem;
   }
+}
+
+.errorText {
+  color: $red;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  margin-bottom: 0;
 }
 
 // Contact Us form
