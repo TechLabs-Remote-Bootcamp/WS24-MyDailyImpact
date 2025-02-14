@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { jwt } from "../../../utils/jwt";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import { useForm, Controller } from "react-hook-form";
 import { ApiError, api } from "../../../utils/api";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
@@ -11,8 +11,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./RC_mealLog.scss";
 
 export default function RC_MealLog() {
-  const location = useLocation();
-  const user = location.state.userId.userId || "123456789";
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date(Date.now()));
 
@@ -34,33 +32,10 @@ export default function RC_MealLog() {
     },
   });
 
-  // useEffect(() => {
-  //   console.log(
-  //     "Dashboard useEffect - isAuthenticated:",
-  //     isAuthenticated,
-  //     "user:",
-  //     user,
-  //     "loading:",
-  //     loading
-  //   );
-  //   if (!isAuthenticated && !loading) {
-  //     initializeAuth();
-  //   }
-  // }, [isAuthenticated, loading, initializeAuth, user]);
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (!isAuthenticated) {
-  //   navigate("/login");
-  // }
-
   const mealTypes = ["Breakfast", "Lunch", "Dinner"];
-  //const now = new Date();
 
   const handleChange = (dateChange) => {
-    // read in the react-form docs to avoid setValue -> have to ask AI for other solution
+    // read in the react-form docs to avoid setValue -> works fine with 'useState'
     setDate(dateChange);
     console.log(dateChange);
   };
@@ -69,7 +44,7 @@ export default function RC_MealLog() {
     try {
       const dataToSend = {
         ...data,
-        userId: user,
+        userId: id,
       };
       console.log(dataToSend);
 
@@ -100,8 +75,14 @@ export default function RC_MealLog() {
     }
   };
 
-  //   const token = jwt.getToken();
-  //   console.log(token);
+  //localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
+  const id = () => {
+    const jwt =
+      localStorage.getItem("auth_token") ||
+      sessionStorage.getItem("auth_token");
+    const token = jwtDecode(jwt, { header: false });
+    console.log(token.id);
+  };
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
@@ -183,7 +164,7 @@ export default function RC_MealLog() {
               <textarea
                 className={form.input}
                 placeholder="(This is optional)"
-                style={{ height: "unset" }}
+                style={{ height: "unset", paddingTop: "0.5em" }}
                 maxLength={500}
                 rows={5}
                 name="notes"
@@ -205,7 +186,12 @@ export default function RC_MealLog() {
             >
               Save
             </Button>
-            <Button onClick={onSubmit2}>Get log data and print</Button>
+            <input
+              type="button"
+              style={{ margin: "0 0 0 20px" }}
+              onClick={id}
+              value="Get log data and print"
+            ></input>
           </section>
         </form>
       </ColoredContainers>
