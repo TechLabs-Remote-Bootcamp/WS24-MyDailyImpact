@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { jwt } from "../../../utils/jwt";
 import { useForm, Controller } from "react-hook-form";
 import { ApiError, api } from "../../../utils/api";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
@@ -13,6 +14,7 @@ import "./RC_mealLog.scss";
 export default function RC_MealLog() {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date(Date.now()));
+  const [userIdent, setUserIdent] = useState();
 
   const {
     register,
@@ -24,7 +26,7 @@ export default function RC_MealLog() {
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
-      userId: "", // actually getting from the dashboard via <Link>
+      userId: "12", // actually getting from the dashboard via <Link>
       mealName: "",
       category: "Breakfast",
       date: date,
@@ -40,16 +42,33 @@ export default function RC_MealLog() {
     console.log(dateChange);
   };
 
+  function getId() {
+    const jwt =
+      localStorage.getItem("auth_token") ||
+      sessionStorage.getItem("auth_token");
+    if (!jwt) {
+      throw new Error("No auth token found");
+    }
+    const token = jwtDecode(jwt, { header: false });
+
+    if (!token.id) {
+      throw new Error("No user ID found in token");
+    }
+    console.log(token.id);
+    return token.id;
+  }
+
   const onSubmit = async (data) => {
     try {
       const dataToSend = {
         ...data,
-        userId: id,
+        userId: getId(),
       };
       console.log(dataToSend);
 
       const response = await api.post("/meal-logs", dataToSend);
       if (response) {
+        console.log("Meal successfully logged");
         navigate("/dashboard");
       }
     } catch (error) {
@@ -76,17 +95,9 @@ export default function RC_MealLog() {
   };
 
   //localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
-  const id = () => {
-    const jwt =
-      localStorage.getItem("auth_token") ||
-      sessionStorage.getItem("auth_token");
-    const token = jwtDecode(jwt, { header: false });
-    console.log(token.id);
-  };
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
-      console.log("Meal successfully logged");
       reset();
     }
   }, [formState, reset]);
@@ -189,7 +200,7 @@ export default function RC_MealLog() {
             <input
               type="button"
               style={{ margin: "0 0 0 20px" }}
-              onClick={id}
+              onClick={onSubmit2}
               value="Get log data and print"
             ></input>
           </section>
