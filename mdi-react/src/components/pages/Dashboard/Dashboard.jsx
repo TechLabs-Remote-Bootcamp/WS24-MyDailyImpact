@@ -73,9 +73,9 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="actions">
-            <Link to="/meal-logging" state={{ userId: { userId } }}>
+            <NavLink to="/meal-logging">
               <Button>Log Meal</Button>
-            </Link>
+            </NavLink>
             <NavLink to={"/meal-history"}>
               <Button>Meal History</Button>
             </NavLink>
