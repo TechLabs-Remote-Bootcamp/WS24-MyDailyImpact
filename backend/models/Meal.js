@@ -6,9 +6,10 @@ const mealSchema = new mongoose.Schema({
     required: [true, 'Meal name is required'],
     trim: true
   },
-  ingredients: {
-    type: [String],
-    default: [],
+  notes: {
+    type: String,
+    trim: true,
+    default: ''
   },
   category: {
     type: String, 

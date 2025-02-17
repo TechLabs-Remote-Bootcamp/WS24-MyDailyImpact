@@ -22,11 +22,6 @@ const userMealLogSchema = new mongoose.Schema({
     required: true,
     default: Date.now
   },
-  notes: {
-    type: String,
-    trim: true,
-    default: ''
-  }
 }, {
   timestamps: true,
   collection: 'user_meal_logs'

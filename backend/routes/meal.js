@@ -17,7 +17,6 @@ mealRouter.get('/:mealId', getMealById);
 mealRouter.post('/', 
     [
         check('name', 'Name is required').notEmpty(),
-        check('ingredients', 'Ingredients are required').notEmpty(),
         check('category', 'Category is required').notEmpty(),
     ],
     createMeal);
@@ -25,7 +24,6 @@ mealRouter.post('/',
 mealRouter.put('/:mealId', 
     [
         check('name', 'Name is required').notEmpty(),
-        check('ingredients', 'Ingredients are required').notEmpty(),
         check('category', 'Category is required').notEmpty(),
     ],
     updateMeal);
