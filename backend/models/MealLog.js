@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const userMealLogSchema = new mongoose.Schema({
+const mealLogSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -8,9 +8,8 @@ const userMealLogSchema = new mongoose.Schema({
   },
   mealName: {
     type: String,
-    trim: true,
     required: true,
-    default: ''
+    trim: true
   },
   category: {
     type: String,
@@ -22,11 +21,16 @@ const userMealLogSchema = new mongoose.Schema({
     required: true,
     default: Date.now
   },
+  notes: {
+    type: String,
+    trim: true,
+    default: ''
+  }
 }, {
   timestamps: true,
-  collection: 'user_meal_logs'
+  collection: 'meal_logs'
 });
 
-const UserMealLog = mongoose.model('UserMealLog', userMealLogSchema);
+const MealLog = mongoose.model('MealLog', mealLogSchema);
 
-export default UserMealLog;
+export default MealLog;
