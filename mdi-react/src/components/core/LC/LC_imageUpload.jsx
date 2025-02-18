@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import treeworld_big from "../images/treeWorld1250.png";
+import treeworld_big from "../../../images/treeWorld1250.png";
 import { GrUpload } from "react-icons/gr";
 import styles from "./LC_imageUpload.module.scss";
 

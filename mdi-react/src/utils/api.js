@@ -1,7 +1,8 @@
 // api.js
 import { jwt } from "./jwt";
 
-const API_BASE_URL = "/api";
+const API_LOGIN_URL = '/api';
+const API_BASE_URL = 'http://localhost:5001/api';
 
 export class ApiError extends Error {
   constructor(status, message) {
@@ -12,7 +13,6 @@ export class ApiError extends Error {
 
 // Improved response handler with better error checking
 export async function handleResponse(response) {
-  // First check if response is OK
   if (!response.ok) {
     throw new ApiError(
       response.status,
@@ -21,14 +21,24 @@ export async function handleResponse(response) {
   }
 
   // Check content type
-  const contentType = response.headers.get("content-type");
-  if (!contentType || !contentType.includes("application/json")) {
-    throw new Error("Response is not JSON");
-  }
-
+  let data;
   try {
-    const data = await response.json();
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      data = await response.json();
+      console.log("Response data:", data)
+      throw new Error("Response is not JSON");
+    } else {
+      data = await response.text();
+      try {
+        data = JSON.parse(data);
+      } catch (e) {
+        console.error('Response is not JSON:', data);
+        throw new Error('Invalid response format');
+      }
+    }
     return data;
+
   } catch (error) {
     console.error("Response parsing error:", error);
     throw new Error("Failed to parse server response");

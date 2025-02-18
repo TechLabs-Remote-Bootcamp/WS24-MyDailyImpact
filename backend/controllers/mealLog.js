@@ -1,77 +1,47 @@
-import UserMealLog from "../models/UserMealLog.js";
+import MealLog from "../models/MealLog.js";
 import { ApiError } from '../utils/errorHandler.js';
 
-export const getAllUserMealLogs = async (req, res, next) => {
+export const createMealLog = async (req, res, next) => {
   try {
-    const userMealLogs = await UserMealLog.find({});
-    res.json(userMealLogs);
+    const { userId, mealName, category, date, notes } = req.body;
+
+    const newMealLog = new MealLog({
+      userId,
+      mealName,
+      category,
+      date: date || Date.now(),
+      notes
+    });
+
+    const savedMealLog = await newMealLog.save();
+
+    res.status(201).json({
+      message: 'Meal logged successfully',
+      mealLog: savedMealLog
+    });
   } catch (error) {
     console.error(error);
-    next(new ApiError(500, 'Error fetching all user meal logs', error.message));
+    next(new ApiError(500, 'Error logging meal', error.message));
   }
 };
 
 export const getUserMealLogs = async (req, res, next) => {
   try {
-    const userMealLogs = await UserMealLog.find({ user: req.params.userId });
-    res.json(userMealLogs);
+    const userMealLogs = await MealLog.find({ userId: req.params.userId })
+      .sort({ date: -1 })
+      .lean();
+
+    if (userMealLogs.length === 0) {
+      return res.status(404).json({ message: 'No meal logs found for this user' });
+    }
+
+    res.json({
+      userId: req.params.userId,
+      totalLogs: userMealLogs.length,
+      meals: userMealLogs
+    });
   } catch (error) {
     console.error(error);
     next(new ApiError(500, 'Error fetching user meal logs', error.message));
-  }
-};
-
-export const getMealLogs = async (req, res, next) => {
-  try {
-    const userMealLogs = await UserMealLog.find({ meal: req.params.mealId });
-    res.json(userMealLogs);
-  } catch (error) {
-    console.error(error);
-    next(new ApiError(500, 'Error fetching meal logs', error.message));
-  }
-};
-
-export const createUserMealLog = async (req, res, next) => {
-  try {
-    const newUserMealLog = new UserMealLog(req.body);
-    const savedUserMealLog = await newUserMealLog.save();
-    res.status(201).json(savedUserMealLog);
-  } catch (error) {
-    console.error(error);
-    next(new ApiError(500, 'Error creating user meal log', error.message));
-  }
-};
-
-export const updateUserMealLog = async (req, res, next) => {
-  try {
-    const updatedUserMealLog = await UserMealLog.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-
-    if (!updatedUserMealLog) {
-      return next(new ApiError(404, 'User meal log not found'));
-    }
-
-    res.json(updatedUserMealLog);
-  } catch (error) {
-    console.error(error);
-    next(new ApiError(500, 'Error updating user meal log', error.message));
-  }
-};
-
-export const deleteUserMealLog = async (req, res, next) => {
-  try {
-    const deletedUserMealLog = await UserMealLog.findByIdAndDelete(req.params.id);
-
-    if (!deletedUserMealLog) {
-      return next(new ApiError(404, 'User meal log not found'));
-    }
-
-    res.json(deletedUserMealLog);
-  } catch (error) {
-    console.error(error);
-    next(new ApiError(500, 'Error deleting user meal log', error.message));
   }
 };

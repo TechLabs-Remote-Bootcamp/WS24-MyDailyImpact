@@ -1,38 +1,124 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { jwt } from "../../../utils/jwt";
+import { useForm, Controller } from "react-hook-form";
+import { ApiError, api } from "../../../utils/api";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
-
+import DatePicker from "react-datepicker";
 import form from "../../../styles/forms.module.scss";
-import { useState, useEffect } from "react";
-import { useForm, useFieldArray, Controller } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import "react-datepicker/dist/react-datepicker.css";
+import "./RC_mealLog.scss";
 
 export default function RC_MealLog() {
+  const navigate = useNavigate();
+  const [date, setDate] = useState(new Date(Date.now()));
+  const [userIdent, setUserIdent] = useState(null);
+  const mealTypes = ["Breakfast", "Lunch", "Dinner"];
+
   const {
     register,
-    formState,
+    control,
     formState: { errors, isSubmitSuccessful },
     handleSubmit,
     reset,
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
+      userId: "",
       mealName: "",
-      mealType: "Breakfast",
-      comment: "",
+      category: "Breakfast",
+      date: date,
+      notes: "",
     },
   });
 
-  const mealTypes = ["Breakfast", "Lunch", "Dinner"];
+  useEffect(() => {
+    try {
+      const id = getId();
+      setUserIdent(id);
+    } catch (error) {
+      console.error("Error:", error);
+      navigate("/login");
+    }
+  }, []); // Running once at the mount of the component
 
-  const onSubmitting = (data) => {
-    console.log(data);
+  function getId() {
+    const jwt =
+      localStorage.getItem("auth_token") ||
+      sessionStorage.getItem("auth_token");
+    if (!jwt) {
+      throw new Error("No auth token found");
+    }
+    const token = jwtDecode(jwt, { header: false });
+
+    if (!token.id) {
+      throw new Error("No user ID found in token");
+    }
+    console.log(token.id);
+    return token.id;
+  }
+
+  const onSubmit = async (data) => {
+    try {
+      const dataToSend = {
+        ...data,
+        userId: userIdent,
+      };
+      console.log(dataToSend);
+
+      const response = await api.post("/meal-logs", dataToSend);
+      if (response) {
+        console.log("Meal successfully logged");
+        reset({
+          mealName: "",
+          category: "Breakfast",
+          date: new Date(Date.now()),
+          notes: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      if (error instanceof ApiError) {
+        console.error("API Error Status:", error.status);
+        console.error("API Error Message:", error.message);
+      }
+    }
   };
 
-  // useEffect(() => {
-  //   if (formState.isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [formState, submittedData, reset]);
+  const saveAndBackToDashboard = async (event) => {
+    event.preventDefault();
+    await handleSubmit(onSubmit)();
+    // short delay before resetting to avoid jerking of the page load
+    setTimeout(() => {
+      reset();
+    }, 300); // 300ms delay
+    navigate("/dashboard");
+  };
+
+  const saveAndToNextLog = async (event) => {
+    event.preventDefault();
+    await handleSubmit(onSubmit)();
+    // short delay before resetting to avoid jerking of the page load
+    setTimeout(() => {
+      reset();
+    }, 300); // 300ms delay
+  };
+
+  // just for testing the get request
+  const onSubmit2 = async () => {
+    try {
+      const response = await api.get("/meal-logs");
+      console.log(response);
+    } catch (error) {
+      console.error("Error:", error);
+      if (error instanceof ApiError) {
+        console.error("API Error Status:", error.status);
+        console.error("API Error Message:", error.message);
+      }
+    }
+  };
 
   return (
     <>
@@ -42,7 +128,7 @@ export default function RC_MealLog() {
       >
         <form
           className={form["formpage-grid"]}
-          onSubmit={handleSubmit(onSubmitting)}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <section className={form.formSection}>
             <div className={form.inputSection}>
@@ -50,8 +136,38 @@ export default function RC_MealLog() {
               <input
                 className={form.input}
                 name="mealName"
-                {...register("mealName", { required: true, maxLength: 50 })}
+                defaultValue=""
+                {...register("mealName", {
+                  required: "This input is required.",
+                  maxLength: 50,
+                })}
               ></input>
+              {/* empty div to move the error text in the second grid column under the input field */}
+              <div></div>
+              {errors.mealName && (
+                <p className={form.errorText}>{errors.mealName.message}</p>
+              )}
+            </div>
+            <div className={form.inputSection}>
+              <label className={form.label}>Date:</label>
+              <Controller
+                name="date"
+                control={control}
+                defaultValue={date}
+                render={({ field }) => (
+                  <DatePicker
+                    portalId="calendar-root"
+                    showIcon
+                    toggleCalendarOnIconClick
+                    popperPlacement="bottom"
+                    style={{ padding: "0", margin: "0" }}
+                    selected={field.value}
+                    dateFormat="dd.MM.yyyy"
+                    placeholderText="Select date"
+                    onChange={(date) => field.onChange(date)}
+                  />
+                )}
+              />
             </div>
             <div className={form.inputSection}>
               <label className={form.label}>Meal of the day:</label>
@@ -60,9 +176,10 @@ export default function RC_MealLog() {
                   <label key={meal} className={form.radioLabel}>
                     <input
                       type="radio"
-                      name="mealType"
+                      name="category"
+                      defaultValue="Breakfast"
                       value={meal}
-                      {...register("mealType", { required: true })}
+                      {...register("category", { required: true })}
                       style={{
                         height: "1.2rem",
                         width: "1.2rem",
@@ -74,27 +191,33 @@ export default function RC_MealLog() {
               </div>
             </div>
             <div className={form.inputSection}>
-              <label className={form.label}>Comment:</label>
+              <label className={form.label}>Some notes:</label>
               <textarea
                 className={form.input}
-                style={{ height: "unset" }}
+                defaultValue=""
+                placeholder="(This is optional)"
+                style={{ height: "unset", paddingTop: "0.5em" }}
                 maxLength={500}
                 rows={5}
-                name="comment"
-                {...register("comment", { required: false, maxLength: 150 })}
+                name="notes"
+                {...register("notes", {
+                  required: false,
+                  maxLength: 150,
+                })}
               ></textarea>
             </div>
           </section>
           <section className={form.buttonSection}>
+            <Button type="button" onClick={saveAndBackToDashboard}>
+              Save meal
+            </Button>
             <Button
-              type="submit"
-              onClick={() => {
-                reset((formValues) => ({
-                  ...formValues,
-                }));
-              }}
+              type="button"
+              onClick={saveAndToNextLog}
+              //disabled={isSubmitting}
             >
-              Save
+              {/* {isSubmitting ? "Saving ..." : "Save and log next meal"} */}
+              Save and log next meal
             </Button>
           </section>
         </form>

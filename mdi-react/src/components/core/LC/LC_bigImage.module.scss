@@ -1,3 +1,8 @@
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .image-box {
   max-width: 85%;
   max-height: calc(100vh - 8rem);
@@ -12,6 +17,6 @@
 
 @media only screen and (max-width: 810px) {
   #treeWorld {
-    visibility: hidden;
+    display: none;
   }
 }

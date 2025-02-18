@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
-import { api } from '../utils/api';
-import { jwt } from '../utils/jwt';
+import { useState, useEffect, useCallback } from "react";
+import { api } from "../utils/api";
+import { jwt } from "../utils/jwt";
 
 const initialState = {
   isAuthenticated: false,
@@ -14,7 +14,7 @@ export function useAuth() {
 
   const initializeAuth = useCallback(() => {
     const token = jwt.getToken();
-    
+
     if (token && jwt.isTokenValid(token)) {
       const decoded = jwt.decodeToken(token);
       if (decoded) {
@@ -23,10 +23,10 @@ export function useAuth() {
           email: decoded.email,
           firstName: decoded.firstName,
           lastName: decoded.lastName,
-          salutation: decoded.salutation,
+          //salutation: decoded.salutation,
           birthday: decoded.birthday,
           gender: decoded.gender,
-          role: decoded.role || 'user',
+          role: decoded.role || "user",
         };
         setAuthState({
           isAuthenticated: true,
@@ -48,14 +48,14 @@ export function useAuth() {
   }, [initializeAuth]);
 
   const login = async (credentials) => {
-    setAuthState(prev => ({ ...prev, loading: true, error: null }));
-    
+    setAuthState((prev) => ({ ...prev, loading: true, error: null }));
+
     try {
-      console.log('Credentials before api.login:', credentials);
+      console.log("Credentials before api.login:", credentials);
       const response = await api.login(credentials);
-      
-      console.log('Received login response:', response);
-  
+
+      console.log("Received login response:", response);
+
       if (response.token && jwt.isTokenValid(response.token)) {
         jwt.setToken(response.token, credentials.rememberMe);
         const authUser = {
@@ -66,7 +66,7 @@ export function useAuth() {
           salutation: response.user.salutation,
           birthday: response.user.birthday,
           gender: response.user.gender,
-          role: response.user.role || 'user',
+          role: response.user.role || "user",
         };
         const newAuthState = {
           isAuthenticated: true,
@@ -77,13 +77,13 @@ export function useAuth() {
         setAuthState(newAuthState);
         return true;
       } else {
-        throw new Error('Invalid token received');
+        throw new Error("Invalid token received");
       }
     } catch (error) {
-      console.error('Login error:', error);
-      const message = error.message || 'An error occurred during login';
-      
-      setAuthState(prev => ({
+      console.error("Login error:", error);
+      const message = error.message || "An error occurred during login";
+
+      setAuthState((prev) => ({
         ...prev,
         isAuthenticated: false,
         user: null,
@@ -95,11 +95,11 @@ export function useAuth() {
   };
 
   const register = async (data) => {
-    setAuthState(prev => ({ ...prev, loading: true, error: null }));
-    
+    setAuthState((prev) => ({ ...prev, loading: true, error: null }));
+
     try {
       const { token, user } = await api.register(data);
-      
+
       if (token && jwt.isTokenValid(token)) {
         jwt.setToken(token, true);
         const authUser = {
@@ -110,7 +110,7 @@ export function useAuth() {
           salutation: user.salutation,
           birthday: user.birthday,
           gender: user.gender,
-          role: user.role || 'user',
+          role: user.role || "user",
         };
         const newAuthState = {
           isAuthenticated: true,
@@ -121,14 +121,15 @@ export function useAuth() {
         setAuthState(newAuthState);
         return true;
       } else {
-        throw new Error('Invalid token received');
+        throw new Error("Invalid token received");
       }
     } catch (error) {
-      const message = error instanceof Error 
-        ? error.message 
-        : 'An error occurred during registration';
-      
-      setAuthState(prev => ({
+      const message =
+        error instanceof Error
+          ? error.message
+          : "An error occurred during registration";
+
+      setAuthState((prev) => ({
         ...prev,
         isAuthenticated: false,
         user: null,

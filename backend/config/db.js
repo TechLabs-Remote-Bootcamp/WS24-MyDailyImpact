@@ -9,6 +9,7 @@ const connectDB = async () => {
       dbName: 'mydailyimpact_db', // Updated to match your database name
     };
 
+    // eslint-disable-next-line no-undef
     const conn = await mongoose.connect(process.env.MONGODB_URI, options);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
     return conn;
