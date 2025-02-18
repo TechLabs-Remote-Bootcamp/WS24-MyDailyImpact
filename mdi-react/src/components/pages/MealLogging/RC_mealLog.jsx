@@ -15,13 +15,11 @@ export default function RC_MealLog() {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date(Date.now()));
   const [userIdent, setUserIdent] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const mealTypes = ["Breakfast", "Lunch", "Dinner"];
 
   const {
     register,
     control,
-    formState,
     formState: { errors, isSubmitSuccessful },
     handleSubmit,
     reset,
@@ -80,7 +78,6 @@ export default function RC_MealLog() {
           date: new Date(Date.now()),
           notes: "",
         });
-        setDate(new Date(Date.now()));
       }
     } catch (error) {
       console.error("Error:", error);
@@ -94,19 +91,20 @@ export default function RC_MealLog() {
   const saveAndBackToDashboard = async (event) => {
     event.preventDefault();
     await handleSubmit(onSubmit)();
-    reset();
+    // short delay before resetting to avoid jerking of the page load
+    setTimeout(() => {
+      reset();
+    }, 300); // 300ms delay
     navigate("/dashboard");
   };
 
   const saveAndToNextLog = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
     await handleSubmit(onSubmit)();
     // short delay before resetting to avoid jerking of the page load
     setTimeout(() => {
       reset();
     }, 300); // 300ms delay
-    setIsSubmitting(false);
   };
 
   // just for testing the get request
