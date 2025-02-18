@@ -123,24 +123,6 @@ export default function RC_MealLog() {
     }
   };
 
-  //localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
-
-  // useEffect(() => {
-  //   if (formState.isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [formState, reset]);
-  // useEffect(() => {
-  //   if (formState.isSubmitSuccessful) {
-  //     reset({
-  //       mealName: "",
-  //       category: "Breakfast",
-  //       date: new Date(),
-  //       notes: "",
-  //     });
-  //   }
-  // }, [formState, reset]);
-
   return (
     <>
       <ColoredContainers
