@@ -14,7 +14,9 @@ import "./RC_mealLog.scss";
 export default function RC_MealLog() {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date(Date.now()));
-  const [userIdent, setUserIdent] = useState();
+  const [userIdent, setUserIdent] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const mealTypes = ["Breakfast", "Lunch", "Dinner"];
 
   const {
     register,
@@ -34,13 +36,15 @@ export default function RC_MealLog() {
     },
   });
 
-  const mealTypes = ["Breakfast", "Lunch", "Dinner"];
-
-  const handleChange = (dateChange) => {
-    // read in the react-form docs to avoid setValue -> works fine with 'useState'
-    setDate(dateChange);
-    console.log(dateChange);
-  };
+  useEffect(() => {
+    try {
+      const id = getId();
+      setUserIdent(id);
+    } catch (error) {
+      console.error("Error:", error);
+      navigate("/login");
+    }
+  }, []); // Running once at the mount of the component
 
   function getId() {
     const jwt =
@@ -58,18 +62,31 @@ export default function RC_MealLog() {
     return token.id;
   }
 
+  const handleChange = (dateChange) => {
+    // read in the react-form docs to avoid setValue -> works fine with 'useState'
+    setDate(dateChange);
+    console.log(dateChange);
+  };
+
   const onSubmit = async (data) => {
     try {
       const dataToSend = {
         ...data,
-        userId: getId(),
+        userId: userIdent,
       };
       console.log(dataToSend);
 
-      const response = await api.post("/meal-logs", dataToSend);
+      const response = await api.post("/api/meal-logs", dataToSend);
       if (response) {
+        console.log(response);
         console.log("Meal successfully logged");
-        navigate("/dashboard");
+        reset({
+          mealName: "",
+          category: "Breakfast",
+          date: new Date(Date.now()),
+          notes: "",
+        });
+        setDate(new Date(Date.now()));
       }
     } catch (error) {
       console.error("Error:", error);
@@ -80,10 +97,28 @@ export default function RC_MealLog() {
     }
   };
 
+  const saveAndBackToDashboard = async (event) => {
+    event.preventDefault();
+    await handleSubmit(onSubmit)();
+    reset();
+    navigate("/dashboard");
+  };
+
+  const saveAndToNextLog = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    await handleSubmit(onSubmit)();
+    // short delay before resetting to avoid jerking of the page load
+    setTimeout(() => {
+      reset();
+    }, 300); // 300ms delay
+    setIsSubmitting(false);
+  };
+
   // just for testing the get request
   const onSubmit2 = async () => {
     try {
-      const response = await api.get("/meal-logs");
+      const response = await api.get("/api/meal-logs");
       console.log(response);
     } catch (error) {
       console.error("Error:", error);
@@ -96,11 +131,21 @@ export default function RC_MealLog() {
 
   //localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
 
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset();
-    }
-  }, [formState, reset]);
+  // useEffect(() => {
+  //   if (formState.isSubmitSuccessful) {
+  //     reset();
+  //   }
+  // }, [formState, reset]);
+  // useEffect(() => {
+  //   if (formState.isSubmitSuccessful) {
+  //     reset({
+  //       mealName: "",
+  //       category: "Breakfast",
+  //       date: new Date(),
+  //       notes: "",
+  //     });
+  //   }
+  // }, [formState, reset]);
 
   return (
     <>
@@ -118,6 +163,7 @@ export default function RC_MealLog() {
               <input
                 className={form.input}
                 name="mealName"
+                defaultValue=""
                 {...register("mealName", {
                   required: "This input is required.",
                   maxLength: 50,
@@ -135,17 +181,17 @@ export default function RC_MealLog() {
                 name="date"
                 control={control}
                 defaultValue={date}
-                render={() => (
+                render={({ field }) => (
                   <DatePicker
                     portalId="calendar-root"
                     showIcon
                     toggleCalendarOnIconClick
                     popperPlacement="bottom"
                     style={{ padding: "0", margin: "0" }}
-                    selected={date}
+                    selected={field.value}
                     dateFormat="dd.MM.yyyy"
                     placeholderText="Select date"
-                    onChange={handleChange}
+                    onChange={(date) => field.onChange(date)}
                   />
                 )}
               />
@@ -158,6 +204,7 @@ export default function RC_MealLog() {
                     <input
                       type="radio"
                       name="category"
+                      defaultValue="Breakfast"
                       value={meal}
                       {...register("category", { required: true })}
                       style={{
@@ -174,6 +221,7 @@ export default function RC_MealLog() {
               <label className={form.label}>Some notes:</label>
               <textarea
                 className={form.input}
+                defaultValue=""
                 placeholder="(This is optional)"
                 style={{ height: "unset", paddingTop: "0.5em" }}
                 maxLength={500}
@@ -187,15 +235,15 @@ export default function RC_MealLog() {
             </div>
           </section>
           <section className={form.buttonSection}>
+            <Button type="button" onClick={saveAndBackToDashboard}>
+              Save meal
+            </Button>
             <Button
-              type="submit"
-              onClick={() => {
-                reset((formValues) => ({
-                  ...formValues,
-                }));
-              }}
+              type="button"
+              onClick={saveAndToNextLog}
+              disabled={isSubmitting}
             >
-              Save
+              {isSubmitting ? "Saving ..." : "Save and log next meal"}
             </Button>
             <input
               type="button"
