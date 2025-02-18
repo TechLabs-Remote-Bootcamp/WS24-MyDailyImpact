@@ -26,7 +26,7 @@ export default function RC_MealLog() {
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
-      userId: "12", // actually getting from the dashboard via <Link>
+      userId: "",
       mealName: "",
       category: "Breakfast",
       date: date,
