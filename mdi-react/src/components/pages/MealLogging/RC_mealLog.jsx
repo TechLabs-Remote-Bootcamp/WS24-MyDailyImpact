@@ -70,7 +70,6 @@ export default function RC_MealLog() {
 
       const response = await api.post("/meal-logs", dataToSend);
       if (response) {
-        console.log(response);
         console.log("Meal successfully logged");
         reset({
           mealName: "",
@@ -215,9 +214,10 @@ export default function RC_MealLog() {
             <Button
               type="button"
               onClick={saveAndToNextLog}
-              disabled={isSubmitting}
+              //disabled={isSubmitting}
             >
-              {isSubmitting ? "Saving ..." : "Save and log next meal"}
+              {/* {isSubmitting ? "Saving ..." : "Save and log next meal"} */}
+              Save and log next meal
             </Button>
           </section>
         </form>
