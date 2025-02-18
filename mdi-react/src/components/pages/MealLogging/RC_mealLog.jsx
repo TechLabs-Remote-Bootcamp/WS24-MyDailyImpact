@@ -239,12 +239,6 @@ export default function RC_MealLog() {
             >
               {isSubmitting ? "Saving ..." : "Save and log next meal"}
             </Button>
-            <input
-              type="button"
-              style={{ margin: "0 0 0 20px" }}
-              onClick={onSubmit2}
-              value="Get log data and print"
-            ></input>
           </section>
         </form>
       </ColoredContainers>
