@@ -62,12 +62,6 @@ export default function RC_MealLog() {
     return token.id;
   }
 
-  const handleChange = (dateChange) => {
-    // read in the react-form docs to avoid setValue -> works fine with 'useState'
-    setDate(dateChange);
-    console.log(dateChange);
-  };
-
   const onSubmit = async (data) => {
     try {
       const dataToSend = {
