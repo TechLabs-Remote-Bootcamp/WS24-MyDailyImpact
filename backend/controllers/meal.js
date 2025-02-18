@@ -28,7 +28,7 @@ export const getMealById = async (req, res, next) => {
 
 export const createMeal = async (req, res, next) => {
     try {
-        const { name, ingredients, category } = req.body;
+        const { name, notes, category } = req.body;
         const mealExists = await Meal.findOne({ name });
         if (mealExists) {
             return next(new ApiError(400, 'Meal already exists'));
@@ -36,7 +36,7 @@ export const createMeal = async (req, res, next) => {
         
         const meal = await Meal.create({
             name,
-            ingredients,
+            notes,
             category
         });
         
@@ -49,10 +49,10 @@ export const createMeal = async (req, res, next) => {
 
 export const updateMeal = async (req, res, next) => {
     try {
-        const { name, ingredients, category } = req.body;
+        const { name, notes, category } = req.body;
         const updatedMeal = await Meal.findByIdAndUpdate(req.params.mealId, {
             name,
-            ingredients,
+         notes,
             category
         }, { new: true });
         if (!updatedMeal) {
