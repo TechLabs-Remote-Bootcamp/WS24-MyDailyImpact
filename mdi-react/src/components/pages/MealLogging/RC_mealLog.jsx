@@ -20,7 +20,7 @@ export default function RC_MealLog() {
   const {
     register,
     control,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     handleSubmit,
     reset,
   } = useForm({
@@ -71,6 +71,7 @@ export default function RC_MealLog() {
       const response = await api.post("/meal-logs", dataToSend);
       if (response) {
         console.log("Meal successfully logged");
+        console.log("Response of log:", response);
         reset({
           mealName: "",
           category: "Breakfast",
@@ -109,7 +110,7 @@ export default function RC_MealLog() {
   // just for testing the get request
   const onSubmit2 = async () => {
     try {
-      const response = await api.get("/meal-logs");
+      const response = await api.get(`/meal-logs/${userIdent}`);
       console.log(response);
     } catch (error) {
       console.error("Error:", error);
