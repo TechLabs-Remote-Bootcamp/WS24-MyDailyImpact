@@ -1,3 +1,8 @@
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .image-box {
   max-width: 85%;
   max-height: calc(100vh - 8rem);
