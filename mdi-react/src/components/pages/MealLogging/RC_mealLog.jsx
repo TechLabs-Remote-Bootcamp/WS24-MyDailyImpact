@@ -76,7 +76,7 @@ export default function RC_MealLog() {
       };
       console.log(dataToSend);
 
-      const response = await api.post("/api/meal-logs", dataToSend);
+      const response = await api.post("/meal-logs", dataToSend);
       if (response) {
         console.log(response);
         console.log("Meal successfully logged");
@@ -118,7 +118,7 @@ export default function RC_MealLog() {
   // just for testing the get request
   const onSubmit2 = async () => {
     try {
-      const response = await api.get("/api/meal-logs");
+      const response = await api.get("/meal-logs");
       console.log(response);
     } catch (error) {
       console.error("Error:", error);
