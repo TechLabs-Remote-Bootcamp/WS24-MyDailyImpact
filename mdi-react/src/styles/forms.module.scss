@@ -92,9 +92,14 @@
   }
 
   .buttonSection {
+    display: flex;
+    //justify-content: end;
     justify-self: right;
     margin-top: 1rem;
-    margin-right: 2rem;
+
+    button {
+      margin-left: 1.5rem;
+    }
   }
 }
 
