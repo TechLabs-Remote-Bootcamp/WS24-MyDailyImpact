@@ -13,25 +13,6 @@ export class ApiError extends Error {
 
 // Improved response handler with better error checking
 export async function handleResponse(response) {
-  // let data1;
-  // try {
-  //   const contentType = response.headers.get('content-type');
-  //   if (contentType && contentType.includes('application/json')) {
-  //     data1 = await response.json();
-  //   } else {
-  //     data = await response.text();
-  //     try {
-  //       data = JSON.parse(data);
-  //     } catch (e) {
-  //       console.error('Response is not JSON:', data);
-  //       throw new Error('Invalid response format');
-  //     }
-  //   }
-  // } catch (error) {
-  //   console.error('Response parsing error:', error);
-  //   throw new Error('Failed to parse server response');
-  // }
-
   if (!response.ok) {
     throw new ApiError(
       response.status,
