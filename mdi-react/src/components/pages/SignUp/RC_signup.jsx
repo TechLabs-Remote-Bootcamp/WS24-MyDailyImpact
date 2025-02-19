@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ApiError, api } from "../../../utils/api";
+import { countriesApi } from "../../../utils/countriesApi";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import styles from "../../../styles/forms.module.scss";
 import form from "../../../styles/forms.module.scss";
-import { countriesApi } from "../../../utils/countriesApi";
 
 export default function RC_signup() {
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
+  const [date, setDate] = useState("");
 
   const {
     register,
@@ -45,6 +46,24 @@ export default function RC_signup() {
       console.error("Error fetching countries:", error.message);
       setCountries([]);
     }
+  };
+
+  useEffect(() => {
+    console.log(date);
+    const heute = new Date();
+    const jahr = heute.getFullYear();
+    const monat = String(heute.getMonth() + 1).padStart(2, "0"); // Monat beginnt bei 0, daher +1
+    const tag = String(heute.getDate()).padStart(2, "0");
+    // Datum im Format YYYY-MM-DD zusammenstellen
+    //const aktuellesDatum = `${jahr}-${monat}-${tag}`;
+    const aktuellesDatum = "2000-01-01";
+    setDate(aktuellesDatum);
+    console.log(date);
+  }, []);
+
+  // Handler für Änderungen im Eingabefeld
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
   };
 
   const onSubmit = async (data) => {
@@ -85,7 +104,6 @@ export default function RC_signup() {
                   message: "First name must be at least 2 characters",
                 },
               })}
-              placeholder="First Name"
             />
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>
@@ -104,7 +122,6 @@ export default function RC_signup() {
                   message: "Last name must be at least 2 characters",
                 },
               })}
-              placeholder="Last Name"
             />
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>
@@ -116,10 +133,12 @@ export default function RC_signup() {
             <label className={form.label}>Birthday:</label>
             <input
               type="date"
+              value={date}
               className={`${form.input} ${errors.birthday ? styles.error : ""}`}
               {...register("birthday", {
                 required: "Date of birth is required",
               })}
+              onChange={handleDateChange}
             />
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>
@@ -133,7 +152,7 @@ export default function RC_signup() {
               className={`${form.input} ${errors.gender ? styles.error : ""}`}
               {...register("gender", { required: "Gender is required" })}
             >
-              <option value="">Select Gender</option>
+              <option value="" />
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -152,7 +171,7 @@ export default function RC_signup() {
               }`}
               {...register("country", { required: "Country is required" })}
             >
-              <option value="">Select Country</option>
+              <option value="" />
               {countries.map((country) => (
                 <option key={country.Code} value={country.Code}>
                   {country.Country}
@@ -176,7 +195,6 @@ export default function RC_signup() {
                   message: "Please enter a valid email address",
                 },
               })}
-              placeholder="Email"
             />
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>
@@ -203,7 +221,6 @@ export default function RC_signup() {
                     "Password must contain at least one uppercase letter and one number",
                 },
               })}
-              placeholder="Password"
             />
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>
@@ -223,7 +240,6 @@ export default function RC_signup() {
                 validate: (value) =>
                   value === password || "Passwords do not match",
               })}
-              placeholder="Confirm Password"
             />
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>

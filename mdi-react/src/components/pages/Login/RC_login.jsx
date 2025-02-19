@@ -49,7 +49,7 @@ export default function RC_login() {
               <input
                 className={form.input}
                 type="email"
-                placeholder="Email"
+                //placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -59,7 +59,7 @@ export default function RC_login() {
               <input
                 className={form.input}
                 type="password"
-                placeholder="Password"
+                //placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
