@@ -172,11 +172,13 @@ export default function RC_signup() {
               {...register("country", { required: "Country is required" })}
             >
               <option value="" />
-              {countries.map((country) => (
-                <option key={country.Code} value={country.Code}>
-                  {country.Country}
-                </option>
-              ))}
+                {countries
+                  .sort((a, b) => a.Country.localeCompare(b.Country))
+                  .map((country) => (
+                    <option key={country.Code} value={country.Code}>
+                      {country.Country}
+                    </option>
+                  ))}
             </select>
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>
