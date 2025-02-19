@@ -34,16 +34,25 @@
         max-width: 40rem;
       }
     }
+    .rightBox {
+      margin: auto 0;
+      min-height: 70vh;
+      width: 85vw;
+      max-width: 90vw;
+    }
   }
 }
 
 @media only screen and (max-width: 810px) {
   .lrContainer {
     padding: 0;
-    margin: 2rem 4rem 4rem;
+    margin: 1.5rem 2rem 2rem;
+
     .rightBox {
       margin: auto 0;
       min-height: 70vh;
+      width: 85vw;
+      max-width: 90vw;
     }
   }
 }

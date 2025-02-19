@@ -113,7 +113,7 @@ export default function RC_signup() {
             )}
           </div>
           <div className={form.inputSection}>
-            <label className={form.label}>Date of Birth:</label>
+            <label className={form.label}>Birthday:</label>
             <input
               type="date"
               className={`${form.input} ${errors.birthday ? styles.error : ""}`}
