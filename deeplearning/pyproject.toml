@@ -16,5 +16,7 @@ dependencies = [
 dev = [
     "fastapi[standard]>=0.115.8",
     "ipykernel>=6.29.5",
+    "matplotlib>=3.9.4",
     "qdrant-client>=1.13.2",
+    "seaborn>=0.13.2",
 ]
