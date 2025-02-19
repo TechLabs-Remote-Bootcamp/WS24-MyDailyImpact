@@ -49,15 +49,16 @@ export default function RC_signup() {
   };
 
   useEffect(() => {
-    console.log(date);
-    const heute = new Date();
-    const jahr = heute.getFullYear();
-    const monat = String(heute.getMonth() + 1).padStart(2, "0"); // Monat beginnt bei 0, daher +1
-    const tag = String(heute.getDate()).padStart(2, "0");
-    // Datum im Format YYYY-MM-DD zusammenstellen
-    //const aktuellesDatum = `${jahr}-${monat}-${tag}`;
-    const aktuellesDatum = "2000-01-01";
-    setDate(aktuellesDatum);
+    // --- If the current date is wanted to be shown as default value in the birthday field when the page loads. Comment in if required.
+    // const today = new Date();
+    // const year = today.getFullYear();
+    // const month = String(today.getMonth() + 1).padStart(2, "0"); // month starts with 0, therefore +1
+    // const day = String(today.getDate()).padStart(2, "0");
+    // Compile date in the format YYYY-MM-DD:
+    //const currentDate = `${year}-${month}-${day}`;    //==> here it would always show the actual date
+    //setDate(currentDate);
+    const furtherBackDate = "2000-01-01"; // set hard coded date further back in time
+    setDate(furtherBackDate);
     console.log(date);
   }, []);
 
