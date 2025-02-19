@@ -22,6 +22,20 @@ from haystack_experimental.chat_message_stores.in_memory import InMemoryChatMess
 from haystack_experimental.components.retrievers import ChatMessageRetriever
 from haystack_experimental.components.writers import ChatMessageWriter
 
+# for QdrantEmbeddingRetriever
+from haystack.document_stores.types import DuplicatePolicy
+from haystack import Document
+from haystack import Pipeline
+from haystack.components.embedders import SentenceTransformersTextEmbedder, SentenceTransformersDocumentEmbedder
+from haystack_integrations.components.retrievers.qdrant import QdrantEmbeddingRetriever
+from haystack_integrations.document_stores.qdrant import QdrantDocumentStore
+
+# for user-query embedding
+from transformers import DistilBertTokenizer, DistilBertModel
+import torch
+from haystack import component
+from typing import List
+
 # Constants
 CHAT_TEMPLATE = """Given the conversation history and the provided documents, give a brief answer to the question.\n
                 Question: {{query}}\n
@@ -61,8 +75,6 @@ class Conversation:
         memory_store = InMemoryChatMessageStore()
 
         # Initialize components
-        text_embedder = MistralTextEmbedder(api_key=Secret.from_token(api_key))
-        retriever = InMemoryEmbeddingRetriever(document_store=document_store)
         prompt_builder = ChatPromptBuilder(variables=["query", "documents", "memories"], 
                                     required_variables=["query", "documents", "memories"])
         llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
@@ -73,8 +85,10 @@ class Conversation:
         pipeline.add_component("message_wrapper", ChatMessageWrapper())
         pipeline.add_component("query_rephrase_llm", rephrase_llm)
         pipeline.add_component("list_to_str_adapter", OutputAdapter(template="{{ replies[0] }}", output_type=str))
-        pipeline.add_component("text_embedder", text_embedder)
-        pipeline.add_component("retriever", retriever)
+
+        pipeline.add_component("retriever", QdrantEmbeddingRetriever(document_store=document_store))
+        pipeline.add_component("text_embedder", CustomDistilBertEmbedder() ) 
+                                     
         pipeline.add_component("prompt_builder", prompt_builder)
         pipeline.add_component("llm", llm)
         pipeline.add_component("memory_retriever", ChatMessageRetriever(memory_store))
@@ -117,18 +131,56 @@ class Conversation:
                 },
                 "memory_joiner": {"values": [ChatMessage.from_user(message)]}
             },
-            include_outputs_from=["llm", "query_rephrase_llm"]
+            include_outputs_from=["llm", "query_rephrase_llm", "retriever", "prompt_builder"]
         )
 
         return {
             "assistant_message": result["llm"]["replies"][0].text,
-            "rewritten_query": result["query_rephrase_llm"]["replies"][0].text
+            "rewritten_query": result["query_rephrase_llm"]["replies"][0].text,
+            "rag_documents": len(result["retriever"]['documents']),
+            "prompt_bild": result["prompt_builder"],
         }
 
     def get_history(self) -> List[ChatMessage]:
         """Get the conversation history."""
         memory_retriever = self.pipeline.get_component("memory_retriever")
         return memory_retriever.run()["messages"]
+
+
+
+@component
+class CustomDistilBertEmbedder:
+    def __init__(self):
+        # Initialisiere den Tokenizer und das Modell
+        self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
+        self.model = DistilBertModel.from_pretrained("distilbert-base-uncased")
+        self.model.eval()  # Setze das Modell in den Evaluierungsmodus
+        
+    def embed_text(self, text):
+        encoded_input = self.tokenizer(
+            text,
+            padding=True,
+            truncation=True,
+            max_length=512,
+            return_tensors='pt'
+        )
+        
+        with torch.no_grad():
+            output = self.model(**encoded_input)
+            
+        last_hidden_states = output.last_hidden_state
+        attention_mask = encoded_input["attention_mask"]
+        input_mask_expanded = attention_mask.unsqueeze(-1).expand(last_hidden_states.size()).float()
+        embedding = torch.sum(last_hidden_states * input_mask_expanded, 1) / torch.clamp(
+            input_mask_expanded.sum(1), min=1e-9
+        )
+        
+        return embedding.squeeze().numpy()
+
+    @component.output_types(embedding=List[float])
+    def run(self, query: str):
+        embedding = self.embed_text(query)
+        return {"embedding": embedding.tolist()}  
 
 
 class ConversationStore:
@@ -185,19 +237,19 @@ def setup_environment() -> str:
     return api_key
 
 
-def load_sample_data():
-    if not os.path.exists('essay.txt'):
-        response = requests.get('https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt', timeout=10)
-        with open('essay.txt', 'w', encoding='utf-8') as f:
-            f.write(response.text)
 
 
-def setup_document_store(api_key: str) -> InMemoryDocumentStore:
-    document_store = InMemoryDocumentStore()
-    docs = TextFileToDocument().run(sources=["essay.txt"])
-    split_docs = DocumentSplitter(split_by="passage", split_length=2).run(documents=docs["documents"])
-    embeddings = MistralDocumentEmbedder(api_key=Secret.from_token(api_key)).run(documents=split_docs["documents"])
-    DocumentWriter(document_store=document_store).run(documents=embeddings["documents"])
+def setup_document_store(url, index_name ) -> QdrantDocumentStore:
+
+    document_store = QdrantDocumentStore(
+        url,
+        index=index_name,
+        embedding_dim=768,
+        recreate_index=False,
+        return_embedding=True,
+        wait_result_from_api=True,
+    )
+
     return document_store
 
 def chat_loop(conversation: Conversation):
@@ -209,12 +261,15 @@ def chat_loop(conversation: Conversation):
        result = conversation.send_message(question)
        print(f"🎃 [Rewritten search query: {result['rewritten_query']} ]")
        print(f"🤖 {result['assistant_message']}")
+ #      print(f"☀️ {result['rag_documents']}" )
+#       print(f"PROMPT: {result['prompt_bild']}" )
+
+       
 
 
 def main():
    api_key = setup_environment()
-   load_sample_data()
-   document_store = setup_document_store(api_key)
+   document_store = setup_document_store("100.107.35.86","recipe_test")
    conversation = Conversation(api_key, document_store)
    chat_loop(conversation)
 

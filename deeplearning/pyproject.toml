@@ -6,10 +6,12 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "fastapi>=0.115.8",
-    "haystack-ai>=2.9.0",
+    "haystack-ai[qdrant]>=2.9.0",
     "mistral-haystack>=0.0.2",
     "mistralai>=1.5.0",
     "python-dotenv>=1.0.1",
+    "qdrant-haystack>=7.0.0",
+    "sentence-transformers>=3.4.1",
 ]
 
 [dependency-groups]
