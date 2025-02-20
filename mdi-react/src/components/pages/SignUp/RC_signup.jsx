@@ -62,7 +62,6 @@ export default function RC_signup() {
     console.log(date);
   }, []);
 
-  // Handler für Änderungen im Eingabefeld
   const handleDateChange = (event) => {
     setDate(event.target.value);
   };
