@@ -74,6 +74,8 @@ export default function RC_MealLog() {
       if (response) {
         console.log("Meal successfully logged");
         console.log("Response of log:", response);
+        console.log("3", logSuccess);
+        setLogSuccess(!logSuccess);
         reset({
           mealName: "",
           category: "Breakfast",
@@ -98,10 +100,10 @@ export default function RC_MealLog() {
     console.log("2", logSuccess);
     if (logSuccess) {
       // short delay before resetting to avoid jerking of the page load
-
+      setLogSuccess(!logSuccess);
       setTimeout(() => {
         reset();
-      }, 300); // 300ms delay
+      }, 100); // 100ms delay
       navigate("/dashboard");
     }
   };
@@ -116,7 +118,7 @@ export default function RC_MealLog() {
       // short delay before resetting to avoid jerking of the page load
       setTimeout(() => {
         reset();
-      }, 300); // 300ms delay
+      }, 100); // 100ms delay
     }
   };
 
