@@ -1,7 +1,7 @@
 // api.js
 import { jwt } from "./jwt";
 
-const API_LOGIN_URL = '/api';
+const API_LOGIN_URL = 'http://localhost:5001';
 const API_BASE_URL = 'http://localhost:5001/api';
 
 export class ApiError extends Error {
@@ -50,7 +50,7 @@ export const api = {
   async login(credentials) {
     try {
       console.log("Attempting login with credentials:", credentials);
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(`${API_LOGIN_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
