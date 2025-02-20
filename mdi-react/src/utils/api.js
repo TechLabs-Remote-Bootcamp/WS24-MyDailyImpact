@@ -1,8 +1,7 @@
 // api.js
 import { jwt } from "./jwt";
 
-const API_LOGIN_URL = 'http://localhost:5001';
-const API_BASE_URL = 'http://localhost:5001/api';
+const BASE_URL = 'http://localhost:5001';
 
 export class ApiError extends Error {
   constructor(status, message) {
@@ -50,7 +49,7 @@ export const api = {
   async login(credentials) {
     try {
       console.log("Attempting login with credentials:", credentials);
-      const response = await fetch(`${API_LOGIN_URL}/auth/login`, {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +71,7 @@ export const api = {
   // Registration method
   async register(data) {
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,10 +99,10 @@ export const api = {
   async get(endpoint) {
     try {
       const token = jwt.getToken();
-      console.log("Making GET request to:", `${API_BASE_URL}${endpoint}`);
+      console.log("Making GET request to:", `${BASE_URL}${endpoint}`);
       console.log("With token:", token ? "Present" : "Not present");
 
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
         method: "GET",
         credentials: "include",
         headers: this.setAuthHeader(token),
@@ -123,7 +122,7 @@ export const api = {
   async post(endpoint, data) {
     try {
       const token = jwt.getToken();
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
         method: "POST",
         credentials: "include",
         headers: this.setAuthHeader(token),
@@ -141,10 +140,10 @@ export const api = {
   async put(endpoint, data) {
     try {
       const token = jwt.getToken();
-      console.log("Making PUT request to:", `${API_BASE_URL}${endpoint}`);
+      console.log("Making PUT request to:", `${BASE_URL}${endpoint}`);
       console.log("With data:", data);
 
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
         method: "PUT",
         credentials: "include",
         headers: this.setAuthHeader(token),
@@ -171,7 +170,7 @@ export const api = {
     try {
       const token = jwt.getToken();
       console.log("Making PUT request to update profile");
-      const response = await fetch(`${API_BASE_URL}/auth/update-profile`, {
+      const response = await fetch(`${BASE_URL}/auth/update-profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -197,7 +196,7 @@ export const api = {
   async deleteAccount() {
     try {
       const token = jwt.getToken();
-      const response = await fetch(`${API_BASE_URL}/auth/delete-account`, {
+      const response = await fetch(`${BASE_URL}/auth/delete-account`, {
         method: "DELETE",
         credentials: "include",
         headers: this.setAuthHeader(token),
