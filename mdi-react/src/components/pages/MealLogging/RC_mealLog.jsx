@@ -69,7 +69,6 @@ export default function RC_MealLog() {
         userId: userIdent,
       };
       console.log(dataToSend);
-
       const response = await api.post("/api/meal-logs", dataToSend);
       if (response) {
         console.log("Meal successfully logged");
@@ -83,7 +82,6 @@ export default function RC_MealLog() {
           notes: "",
         });
       }
-      console.log("4", logSuccess);
     } catch (error) {
       console.error("Error:", error);
       if (error instanceof ApiError) {
@@ -95,9 +93,7 @@ export default function RC_MealLog() {
 
   const saveAndBackToDashboard = async (event) => {
     event.preventDefault();
-    console.log("1", logSuccess);
     await handleSubmit(onSubmit)();
-    console.log("2", logSuccess);
     if (logSuccess) {
       // short delay before resetting to avoid jerking of the page load
       setLogSuccess(!logSuccess);
@@ -111,10 +107,7 @@ export default function RC_MealLog() {
   const saveAndToNextLog = async (event) => {
     event.preventDefault();
     await handleSubmit(onSubmit)();
-    console.log("1", logSuccess);
     if (logSuccess) {
-      console.log("2", logSuccess);
-
       // short delay before resetting to avoid jerking of the page load
       setTimeout(() => {
         reset();
