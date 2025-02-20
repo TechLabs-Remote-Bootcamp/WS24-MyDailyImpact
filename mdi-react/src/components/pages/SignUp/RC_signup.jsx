@@ -5,6 +5,7 @@ import { ApiError, api } from "../../../utils/api";
 import { countriesApi } from "../../../utils/countriesApi";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
+import styles from "../../../styles/forms.module.scss";
 import form from "../../../styles/forms.module.scss";
 
 export default function RC_signup() {
@@ -61,7 +62,6 @@ export default function RC_signup() {
     console.log(date);
   }, []);
 
-  // Handler für Änderungen im Eingabefeld
   const handleDateChange = (event) => {
     setDate(event.target.value);
   };
@@ -96,7 +96,9 @@ export default function RC_signup() {
           <div className={form.inputSection}>
             <label className={form.label}>First Name:</label>
             <input
-              className={`${form.input} ${errors.firstName ? form.error : ""}`}
+              className={`${form.input} ${
+                errors.firstName ? styles.error : ""
+              }`}
               {...register("firstName", {
                 required: "First name is required",
                 minLength: {
@@ -114,7 +116,7 @@ export default function RC_signup() {
           <div className={form.inputSection}>
             <label className={form.label}>Last Name:</label>
             <input
-              className={`${form.input} ${errors.lastName ? form.error : ""}`}
+              className={`${form.input} ${errors.lastName ? styles.error : ""}`}
               {...register("lastName", {
                 required: "Last name is required",
                 minLength: {
@@ -149,7 +151,7 @@ export default function RC_signup() {
           <div className={form.inputSection}>
             <label className={form.label}>Gender:</label>
             <select
-              className={`${form.input} ${errors.gender ? form.error : ""}`}
+              className={`${form.input} ${errors.gender ? styles.error : ""}`}
               {...register("gender", { required: "Gender is required" })}
             >
               <option value="" />
@@ -166,70 +168,28 @@ export default function RC_signup() {
           <div className={form.inputSection}>
             <label className={form.label}>Country:</label>
             <select
-              className={`${form.input} ${
-                errors.country ? form.errorText : ""
-              }`}
+              className={`${form.input} ${errors.country ? styles.error : ""}`}
               {...register("country", { required: "Country is required" })}
             >
               <option value="" />
-                {countries
-                  .sort((a, b) => a.Country.localeCompare(b.Country))
-                  .map((country) => (
-                    <option key={country.Code} value={country.Code}>
-                      {country.Country}
-                    </option>
-                  ))}
+              {countries
+                .sort((a, b) => a.Country.localeCompare(b.Country))
+                .map((country) => (
+                  <option key={country.Code} value={country.Code}>
+                    {country.Country}
+                  </option>
+                ))}
             </select>
             {/* empty div to move the error text in the second grid column under the input field */}
             <div></div>
             {errors.country && (
               <span className={form.errorText}>{errors.country.message}</span>
             )}
-            <div className={form.inputSection}>
-              <label className={form.label}>Gender:</label>
-              <select
-                className={`${form.input} ${errors.gender ? form.error : ""}`}
-                {...register("gender", { required: "Gender is required" })}
-              >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-              {errors.gender && (
-                <span className={styles.errorText}>
-                  {errors.gender.message}
-                </span>
-              )}
-            </div>
-            <div className={form.inputSection}>
-              <label>Country:</label>
-              <select
-                className={`${form.input} ${
-                  errors.country ? form.error : ""
-                }`}
-                {...register("country", { required: "Country is required" })}
-              >
-                <option value="">Select Country</option>
-                {countries
-                  .sort((a, b) => a.Country.localeCompare(b.Country))
-                  .map((country) => (
-                    <option key={country.Code} value={country.Code}>
-                      {country.Country}
-                    </option>
-                  ))}
-              </select>
-              {errors.country && (
-                <span className={styles.errorText}>
-                  {errors.country.message}
-                </span>
-              )}
-            </div>
           </div>
           <div className={form.inputSection}>
             <label className={form.label}>Email:</label>
             <input
-              className={`${form.input} ${errors.email ? form.error : ""}`}
+              className={`${form.input} ${errors.email ? styles.error : ""}`}
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -248,9 +208,7 @@ export default function RC_signup() {
             <label className={form.label}>Password:</label>
             <input
               type="password"
-              className={`${form.input} ${
-                errors.password ? form.errorText : ""
-              }`}
+              className={`${form.input} ${errors.password ? styles.error : ""}`}
               {...register("password", {
                 required: "Password is required",
                 minLength: {
