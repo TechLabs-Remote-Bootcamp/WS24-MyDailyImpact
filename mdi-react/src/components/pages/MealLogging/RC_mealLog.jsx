@@ -15,6 +15,7 @@ export default function RC_MealLog() {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date(Date.now()));
   const [userIdent, setUserIdent] = useState(null);
+  const [logSuccess, setLogSuccess] = useState(false);
   const mealTypes = ["Breakfast", "Lunch", "Dinner"];
 
   const {
@@ -38,6 +39,7 @@ export default function RC_MealLog() {
     try {
       const id = getId();
       setUserIdent(id);
+      setLogSuccess(false);
     } catch (error) {
       console.error("Error:", error);
       navigate("/login");
@@ -67,11 +69,12 @@ export default function RC_MealLog() {
         userId: userIdent,
       };
       console.log(dataToSend);
-
-      const response = await api.post("/meal-logs", dataToSend);
+      const response = await api.post("/api/meal-logs", dataToSend);
       if (response) {
         console.log("Meal successfully logged");
         console.log("Response of log:", response);
+        console.log("3", logSuccess);
+        setLogSuccess(!logSuccess);
         reset({
           mealName: "",
           category: "Breakfast",
@@ -91,26 +94,31 @@ export default function RC_MealLog() {
   const saveAndBackToDashboard = async (event) => {
     event.preventDefault();
     await handleSubmit(onSubmit)();
-    // short delay before resetting to avoid jerking of the page load
-    setTimeout(() => {
-      reset();
-    }, 300); // 300ms delay
-    navigate("/dashboard");
+    if (logSuccess) {
+      // short delay before resetting to avoid jerking of the page load
+      setLogSuccess(!logSuccess);
+      setTimeout(() => {
+        reset();
+      }, 100); // 100ms delay
+      navigate("/dashboard");
+    }
   };
 
   const saveAndToNextLog = async (event) => {
     event.preventDefault();
     await handleSubmit(onSubmit)();
-    // short delay before resetting to avoid jerking of the page load
-    setTimeout(() => {
-      reset();
-    }, 300); // 300ms delay
+    if (logSuccess) {
+      // short delay before resetting to avoid jerking of the page load
+      setTimeout(() => {
+        reset();
+      }, 100); // 100ms delay
+    }
   };
 
   // just for testing the get request
   const onSubmit2 = async () => {
     try {
-      const response = await api.get(`/meal-logs/${userIdent}`);
+      const response = await api.get(`/api/meal-logs/${userIdent}`);
       console.log(response);
     } catch (error) {
       console.error("Error:", error);
@@ -137,11 +145,11 @@ export default function RC_MealLog() {
               <input
                 className={form.input}
                 name="mealName"
-                defaultValue=""
                 {...register("mealName", {
                   required: "This input is required.",
                   maxLength: 50,
                 })}
+                onChange={() => setLogSuccess((logSuccess) => !logSuccess)}
               ></input>
               {/* empty div to move the error text in the second grid column under the input field */}
               <div></div>
@@ -178,7 +186,6 @@ export default function RC_MealLog() {
                     <input
                       type="radio"
                       name="category"
-                      defaultValue="Breakfast"
                       value={meal}
                       {...register("category", { required: true })}
                       style={{
