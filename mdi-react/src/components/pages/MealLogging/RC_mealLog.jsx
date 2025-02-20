@@ -219,13 +219,8 @@ export default function RC_MealLog() {
             <Button type="button" onClick={saveAndBackToDashboard}>
               Save meal
             </Button>
-            <Button
-              type="button"
-              onClick={saveAndToNextLog}
-              //disabled={isSubmitting}
-            >
-              {/* {isSubmitting ? "Saving ..." : "Save and log next meal"} */}
-              Save and log next meal
+            <Button type="button" onClick={saveAndToNextLog}>
+              Save one by one
             </Button>
           </section>
         </form>
