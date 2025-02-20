@@ -5,7 +5,6 @@ import { ApiError, api } from "../../../utils/api";
 import { countriesApi } from "../../../utils/countriesApi";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
-import styles from "../../../styles/forms.module.scss";
 import form from "../../../styles/forms.module.scss";
 
 export default function RC_signup() {
@@ -115,7 +114,7 @@ export default function RC_signup() {
           <div className={form.inputSection}>
             <label className={form.label}>Last Name:</label>
             <input
-              className={`${form.input} ${errors.lastName ? styles.error : ""}`}
+              className={`${form.input} ${errors.lastName ? form.error : ""}`}
               {...register("lastName", {
                 required: "Last name is required",
                 minLength: {
@@ -150,7 +149,7 @@ export default function RC_signup() {
           <div className={form.inputSection}>
             <label className={form.label}>Gender:</label>
             <select
-              className={`${form.input} ${errors.gender ? styles.error : ""}`}
+              className={`${form.input} ${errors.gender ? form.error : ""}`}
               {...register("gender", { required: "Gender is required" })}
             >
               <option value="" />
@@ -186,6 +185,46 @@ export default function RC_signup() {
             {errors.country && (
               <span className={form.errorText}>{errors.country.message}</span>
             )}
+            <div className={form.inputSection}>
+              <label className={form.label}>Gender:</label>
+              <select
+                className={`${form.input} ${errors.gender ? form.error : ""}`}
+                {...register("gender", { required: "Gender is required" })}
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              {errors.gender && (
+                <span className={styles.errorText}>
+                  {errors.gender.message}
+                </span>
+              )}
+            </div>
+            <div className={form.inputSection}>
+              <label>Country:</label>
+              <select
+                className={`${form.input} ${
+                  errors.country ? form.error : ""
+                }`}
+                {...register("country", { required: "Country is required" })}
+              >
+                <option value="">Select Country</option>
+                {countries
+                  .sort((a, b) => a.Country.localeCompare(b.Country))
+                  .map((country) => (
+                    <option key={country.Code} value={country.Code}>
+                      {country.Country}
+                    </option>
+                  ))}
+              </select>
+              {errors.country && (
+                <span className={styles.errorText}>
+                  {errors.country.message}
+                </span>
+              )}
+            </div>
           </div>
           <div className={form.inputSection}>
             <label className={form.label}>Email:</label>
