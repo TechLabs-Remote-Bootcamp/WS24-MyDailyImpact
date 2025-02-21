@@ -1,14 +1,34 @@
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers.jsx";
-import Button from "../../core/Button/Button";
-import styles from "../../../styles/forms.module.scss";
+import styles from "./RC_contactUs.module.scss";
 
 export default function RC_contactUs() {
   return (
     <>
       <ColoredContainers h2Text="Contact Us" h3Text="">
-        <div>
-          <form className={styles["contact-us-form"]} action="">
-            <label>
+        <div className={styles["contact-us-container"]}>
+          <ul className={styles["contact-us-list"]}>
+            <li>Recommendations on how to improve our app?</li>
+            <li>Curious about how we came up with our calculations?</li>
+            <li>Have you found our app useful?</li>
+          </ul>
+          <p>Send us over an email at:</p>
+          <p>
+            <a
+              href="mailto:mydailyimpact@gmail.com"
+              className={styles["email"]}
+            >
+              mydailyimpact@gmail.com
+            </a>
+          </p>
+          <p>Looking forward to hearing from you! 🌱</p>
+        </div>
+      </ColoredContainers>
+    </>
+  );
+}
+
+/* 
+            <form className={styles["contact-us-form"]} action=""><label>
               Name:
               <input className={styles["input"]} placeholder="Name" />
             </label>
@@ -29,10 +49,5 @@ export default function RC_contactUs() {
                 placeholder="Write your message here"
               />
             </label>
-            <Button type="submit">Send</Button>
-          </form>
-        </div>
-      </ColoredContainers>
-    </>
-  );
-}
+            <Button type="submit">Send</Button> 
+            </form> */

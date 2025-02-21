@@ -1,0 +1,19 @@
+@use "../../../styles/colors.scss" as *;
+@use "../../../styles/fonts.scss" as *;
+
+.contact-us-container {
+  .contact-us-list {
+    li {
+      list-style-image: url("../../../images/Leaf_small.png");
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+      color: $primary-dark;
+      &:hover {
+        color: $secondary;
+      }
+    }
+  }
+  .email {
+    font-weight: bold;
+  }
+}
