@@ -2,7 +2,13 @@
 @use "../../../styles/fonts.scss" as *;
 
 .contact-us-container {
+  h5 {
+    font-weight: bold;
+    color: $primary-dark;
+    margin-bottom: 1rem;
+  }
   .contact-us-list {
+    margin: 1rem 0;
     li {
       list-style-image: url("../../../images/Leaf_small.png");
       margin-left: 1rem;
@@ -15,5 +21,6 @@
   }
   .email {
     font-weight: bold;
+    margin-left: 1rem;
   }
 }

@@ -6,12 +6,13 @@ export default function RC_contactUs() {
     <>
       <ColoredContainers h2Text="Contact Us" h3Text="">
         <div className={styles["contact-us-container"]}>
+          <h5>Do you have:</h5>
           <ul className={styles["contact-us-list"]}>
             <li>Recommendations on how to improve our app?</li>
             <li>Curious about how we came up with our calculations?</li>
             <li>Have you found our app useful?</li>
           </ul>
-          <p>Send us over an email at:</p>
+          <h5>Send us over an email at:</h5>
           <p>
             <a
               href="mailto:mydailyimpact@gmail.com"
