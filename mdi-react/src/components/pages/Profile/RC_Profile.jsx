@@ -11,7 +11,8 @@ export default function RC_Profile({ onEditClick }) {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
-  const { user, error: authError } = useAuth();
+  const [deleteError, setDeleteError] = useState(null);
+  const { user, error: authError, logout } = useAuth();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -28,13 +29,40 @@ export default function RC_Profile({ onEditClick }) {
       }
     };
 
-    // Only fetch if user is authenticated
     if (user) {
       fetchUserDetails();
     } else {
       setLoading(false);
     }
   }, [user]);
+
+  const handleDeleteAccount = async () => {
+    // Show confirmation dialog to prevent accidental deletions
+    const confirmed = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+
+    if (confirmed) {
+      try {
+        setLoading(true); // Show loading state
+        setDeleteError(null); // Reset any previous errors
+
+        // Call the delete account API endpoint
+        await api.deleteAccount();
+
+        // After successful deletion, log out the user
+        await logout();
+
+        // Redirect to home page
+        window.location.href = "/";
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        setDeleteError(error.message); // Store error for display
+      } finally {
+        setLoading(false); // Hide loading state
+      }
+    }
+  };
 
   if (loading) return <div>Loading profile information...</div>;
   if (authError || fetchError) {
@@ -76,6 +104,12 @@ export default function RC_Profile({ onEditClick }) {
           ))}
         </div>
         <Button onClick={onEditClick}>Edit Profile</Button>
+        <Button
+          onClick={handleDeleteAccount}
+          className={styles["delete-button"]}
+        >
+          Delete Account
+        </Button>
       </ColoredContainers>
     </div>
   );
