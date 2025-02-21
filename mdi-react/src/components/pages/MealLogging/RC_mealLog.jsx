@@ -54,7 +54,6 @@ export default function RC_MealLog() {
       throw new Error("No auth token found");
     }
     const token = jwtDecode(jwt, { header: false });
-
     if (!token.id) {
       throw new Error("No user ID found in token");
     }
