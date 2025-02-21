@@ -16,7 +16,8 @@ export default function RC_imprint() {
             Hafenweg 16 48155 Münster
           </p>
           <p>
-            <span className="bold">Contact: </span> info@techlabs.org
+            <span className="bold">Contact: </span> mydailyimpact@gmail.com;
+            info@techlabs.org
           </p>
           <p>
             <span className="bold">Responsible for this content: </span>
