@@ -26,28 +26,3 @@ export default function RC_contactUs() {
     </>
   );
 }
-
-/* 
-            <form className={styles["contact-us-form"]} action=""><label>
-              Name:
-              <input className={styles["input"]} placeholder="Name" />
-            </label>
-            <label>
-              Email:
-              <input
-                className={styles["input"]}
-                type="email"
-                placeholder="Email"
-              />
-            </label>
-            <label>
-              Message:
-              <textarea
-                className={styles["input"]}
-                cols="50"
-                rows="10"
-                placeholder="Write your message here"
-              />
-            </label>
-            <Button type="submit">Send</Button> 
-            </form> */
