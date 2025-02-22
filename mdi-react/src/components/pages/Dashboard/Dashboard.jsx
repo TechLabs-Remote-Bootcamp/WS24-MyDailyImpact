@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
+import { useImpactMetrics } from "../../../context/ImpactMetricsContext";
 import { NavLink, Navigate, Link } from "react-router";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
@@ -11,6 +12,7 @@ import "./Dashboard.scss";
 
 export default function Dashboard() {
   const { isAuthenticated, user, logout, loading, initializeAuth } = useAuth();
+  const { metrics, loadMetrics } = useImpactMetrics();
   let userId = "";
 
   useEffect(() => {
@@ -26,7 +28,10 @@ export default function Dashboard() {
     if (!isAuthenticated && !loading) {
       initializeAuth();
     }
-  }, [isAuthenticated, loading, initializeAuth, user]);
+    if (isAuthenticated && user?.id) {
+      loadMetrics(user.id);
+    }
+  }, [isAuthenticated, loading, initializeAuth, user, loadMetrics]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -53,22 +58,22 @@ export default function Dashboard() {
           <div className="stats">
             <div className="stat-item">
               <h4>Animals Saved</h4>
-              <p>23</p>
+              <p>{metrics.animalsSaved.toFixed(2)}</p>
               <img className="dashboard-img" src={PigImg} alt="pig" />
             </div>
             <div className="stat-item">
               <h4>CO2 Reduced (kg)</h4>
-              <p>156</p>
+              <p>{metrics.co2Reduced.toFixed(2)}</p>
               <img className="dashboard-img" src={CO2Img} alt="pig" />
             </div>
             <div className="stat-item">
               <h4>Water Saved (L)</h4>
-              <p>3,450</p>
+              <p>{metrics.waterSaved.toFixed(2)}</p>
               <img className="dashboard-img" src={WaterImg} alt="pig" />
             </div>
             <div className="stat-item">
               <h4>Forest Land Saved (m²)</h4>
-              <p>78</p>
+              <p>{metrics.forestLandSaved.toFixed(2)}</p>
               <img className="dashboard-img" src={TreeImg} alt="pig" />
             </div>
           </div>

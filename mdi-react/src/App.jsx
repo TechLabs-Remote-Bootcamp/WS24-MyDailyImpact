@@ -17,10 +17,11 @@ import MealLogging from "./components/pages/MealLogging/MealLogging";
 import Dashboard from "../src/components/pages/Dashboard/Dashboard";
 import MealHistory from "../src/components/pages/MealHistory/MealHistory";
 import Profile from "../src/components/pages/Profile/Profile";
+import { ImpactMetricsProvider } from "./context/ImpactMetricsContext";
 
 export default function App() {
   return (
-    <>
+    <ImpactMetricsProvider>
       <div className="head">
         <Header />
       </div>
@@ -45,6 +46,6 @@ export default function App() {
         {/* <div>hello</div> */}
         <Footer />
       </div>
-    </>
+    </ImpactMetricsProvider>
   );
 }
