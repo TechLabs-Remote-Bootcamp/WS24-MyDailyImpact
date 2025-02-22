@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { api } from "../utils/api";
 
 // Create context for impact metrics
@@ -34,30 +34,44 @@ export function ImpactMetricsProvider({ children }) {
     forestLandSaved: 0,
   });
 
-  const updateMetrics = async (mealType, userId) => {
-    const impact = IMPACT_VALUES[mealType];
-    const newMetrics = {
-      animalsSaved: metrics.animalsSaved + impact.animalsSaved,
-      co2Reduced: metrics.co2Reduced + impact.co2Reduced,
-      waterSaved: metrics.waterSaved + impact.waterSaved,
-      forestLandSaved: metrics.forestLandSaved + impact.forestLandSaved,
-    };
-
-    setMetrics(newMetrics);
-
+  const loadMetrics = async (userId) => {
     try {
-      await api.post(`/api/impact-metrics/${userId}`, newMetrics);
+      console.log("Loading metrics for user:", userId);
+      const response = await api.get(`/api/impact-metrics/${userId}`);
+      console.log("Loaded metrics:", response.data);
+
+      if (response.data) {
+        setMetrics({
+          animalsSaved: response.data.animalsSaved || 0,
+          co2Reduced: response.data.co2Reduced || 0,
+          waterSaved: response.data.waterSaved || 0,
+          forestLandSaved: response.data.forestLandSaved || 0,
+        });
+      }
     } catch (error) {
-      console.error("Error saving impact metrics:", error);
+      console.error("Error loading impact metrics:", error);
     }
   };
 
-  const loadMetrics = async (userId) => {
+  const updateMetrics = async (mealType, userId) => {
     try {
-      const response = await api.get(`/api/impact-metrics/${userId}`);
-      setMetrics(response.data);
+      const impact = IMPACT_VALUES[mealType];
+      const newMetrics = {
+        animalsSaved: Number(metrics.animalsSaved) + impact.animalsSaved,
+        co2Reduced: Number(metrics.co2Reduced) + impact.co2Reduced,
+        waterSaved: Number(metrics.waterSaved) + impact.waterSaved,
+        forestLandSaved:
+          Number(metrics.forestLandSaved) + impact.forestLandSaved,
+      };
+
+      const response = await api.post(`/api/impact-metrics/${userId}`, newMetrics);
+      if (response.data && response.data.metrics) {
+        setMetrics(response.data.metrics);
+      } else {
+        setMetrics(newMetrics);
+      }
     } catch (error) {
-      console.error("Error loading impact metrics:", error);
+      console.error("Error updating impact metrics:", error);
     }
   };
 

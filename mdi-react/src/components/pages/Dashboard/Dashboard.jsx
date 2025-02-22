@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { useImpactMetrics } from "../../../context/ImpactMetricsContext";
-import { NavLink, Navigate, Link } from "react-router";
+import { NavLink, Navigate } from "react-router-dom";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import PigImg from "../../../images/Pig.png";
@@ -29,6 +29,7 @@ export default function Dashboard() {
       initializeAuth();
     }
     if (isAuthenticated && user?.id) {
+      console.log("Loading metrics for authenticated user:", user.id);
       loadMetrics(user.id);
     }
   }, [isAuthenticated, loading, initializeAuth, user, loadMetrics]);
@@ -64,17 +65,21 @@ export default function Dashboard() {
             <div className="stat-item">
               <h4>CO2 Reduced (kg)</h4>
               <p>{metrics.co2Reduced.toFixed(2)}</p>
-              <img className="dashboard-img" src={CO2Img} alt="pig" />
+              <img className="dashboard-img" src={CO2Img} alt="C02 cloud" />
             </div>
             <div className="stat-item">
               <h4>Water Saved (L)</h4>
               <p>{metrics.waterSaved.toFixed(2)}</p>
-              <img className="dashboard-img" src={WaterImg} alt="pig" />
+              <img
+                className="dashboard-img"
+                src={WaterImg}
+                alt="water droplet"
+              />
             </div>
             <div className="stat-item">
               <h4>Forest Land Saved (m²)</h4>
               <p>{metrics.forestLandSaved.toFixed(2)}</p>
-              <img className="dashboard-img" src={TreeImg} alt="pig" />
+              <img className="dashboard-img" src={TreeImg} alt="tree" />
             </div>
           </div>
           <div className="actions">
