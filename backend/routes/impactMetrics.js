@@ -7,7 +7,9 @@ const router = express.Router();
 // GET user's impact metrics
 router.get("/api/impact-metrics/:userId", protect, async (req, res) => {
   try {
+    console.log("Fetching metrics for userId:", req.params.userId);
     let metrics = await ImpactMetrics.findOne({ userId: req.params.userId });
+    console.log("Found metrics:", metrics);
 
     // If no metrics exist yet, create default metrics
     if (!metrics) {

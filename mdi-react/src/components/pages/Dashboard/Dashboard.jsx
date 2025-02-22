@@ -16,23 +16,36 @@ export default function Dashboard() {
   let userId = "";
 
   useEffect(() => {
-    console.log(
-      "Dashboard useEffect - isAuthenticated:",
-      isAuthenticated,
-      "user:",
-      user,
-      "loading:",
-      loading
-    );
-    console.log(user);
-    if (!isAuthenticated && !loading) {
-      initializeAuth();
-    }
-    if (isAuthenticated && user?.id) {
-      console.log("Loading metrics for authenticated user:", user.id);
-      loadMetrics(user.id);
-    }
-  }, [isAuthenticated, loading, initializeAuth, user, loadMetrics]);
+    let isSubscribed = true;
+
+    const initializeData = async () => {
+      console.log(
+        "Dashboard useEffect - isAuthenticated:",
+        isAuthenticated,
+        "user:",
+        user,
+        "loading:",
+        loading
+      );
+      console.log(user);
+
+      if (!isAuthenticated && !loading) {
+        await initializeAuth();
+      }
+
+      // Only load metrics if we're authenticated and have a user ID
+      if (isAuthenticated && user?.id && isSubscribed) {
+        console.log("Loading metrics for authenticated user:", user.id);
+        await loadMetrics(user.id);
+      }
+    };
+
+    initializeData();
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [isAuthenticated, loading, initializeAuth]); // Removed user and loadMetrics from dependencies
 
   if (loading) {
     return <p>Loading...</p>;

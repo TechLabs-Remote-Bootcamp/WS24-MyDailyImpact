@@ -1,4 +1,3 @@
-// backend/models/ImpactMetrics.js
 import mongoose from "mongoose";
 
 const impactMetricsSchema = new mongoose.Schema(

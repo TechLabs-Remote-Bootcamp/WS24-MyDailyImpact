@@ -38,15 +38,18 @@ export function ImpactMetricsProvider({ children }) {
     try {
       console.log("Loading metrics for user:", userId);
       const response = await api.get(`/api/impact-metrics/${userId}`);
+      console.log("Raw response:", response);
       console.log("Loaded metrics:", response.data);
 
-      if (response.data) {
+      if (response) {
+        // The metrics are directly in the response since that's how we send them from the backend
         setMetrics({
-          animalsSaved: response.data.animalsSaved || 0,
-          co2Reduced: response.data.co2Reduced || 0,
-          waterSaved: response.data.waterSaved || 0,
-          forestLandSaved: response.data.forestLandSaved || 0,
+          animalsSaved: Number(response.animalsSaved) || 0,
+          co2Reduced: Number(response.co2Reduced) || 0,
+          waterSaved: Number(response.waterSaved) || 0,
+          forestLandSaved: Number(response.forestLandSaved) || 0,
         });
+        console.log("Metrics set to:", metrics); // Add this line to debug
       }
     } catch (error) {
       console.error("Error loading impact metrics:", error);
@@ -64,9 +67,13 @@ export function ImpactMetricsProvider({ children }) {
           Number(metrics.forestLandSaved) + impact.forestLandSaved,
       };
 
-      const response = await api.post(`/api/impact-metrics/${userId}`, newMetrics);
-      if (response.data && response.data.metrics) {
-        setMetrics(response.data.metrics);
+      const response = await api.post(
+        `/api/impact-metrics/${userId}`,
+        newMetrics
+      );
+      console.log("Update response:", response);
+      if (response && response.metrics) {
+        setMetrics(response.metrics);
       } else {
         setMetrics(newMetrics);
       }
