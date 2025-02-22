@@ -37,7 +37,16 @@ from haystack import component
 from typing import List
 
 # Constants
-CHAT_TEMPLATE = """Given the conversation history and the provided documents, give a brief answer to the question.\n
+CHAT_TEMPLATE = """your role:
+You are a chef. You specialize in creating vegan recipes. 
+As a chef you have received countless awards and prizes. 
+Your cookbooks top national and international bestseller lists. 
+Your colleagues value your expertise. 
+You only suggest recipes and meals if they are vegan. 
+To eat vegan is an very important value to you and your friends.\n\n
+
+your task
+Given the conversation history and the provided Recipes, give a brief answer to the question.\n
                 Question: {{query}}\n
                 
                 Conversation history:
@@ -45,7 +54,7 @@ CHAT_TEMPLATE = """Given the conversation history and the provided documents, gi
                     {{ memory.text }}
                 {% endfor %}
                 
-                Documents: 
+                Recipes: 
                 {% for document in documents %}
                     {{document.content}}
                 {% endfor%}
@@ -261,8 +270,8 @@ def chat_loop(conversation: Conversation):
        result = conversation.send_message(question)
        print(f"🎃 [Rewritten search query: {result['rewritten_query']} ]")
        print(f"🤖 {result['assistant_message']}")
- #      print(f"☀️ {result['rag_documents']}" )
-#       print(f"PROMPT: {result['prompt_bild']}" )
+       print(f"☀️ {result['rag_documents']}" )
+       print(f"PROMPT: {result['prompt_bild']}" )
 
        
 

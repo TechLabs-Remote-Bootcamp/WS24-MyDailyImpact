@@ -32,7 +32,7 @@ class ConversationResponse(BaseModel):
 async def lifespan(app: FastAPI):
    # Startup: Initialize document store and conversation store
    api_key = setup_environment()
-   document_store = setup_document_store(api_key)
+   document_store = setup_document_store("100.107.35.86","recipe_test")
    app.state.conversation_store = ConversationStore(document_store, api_key)
    
    yield
