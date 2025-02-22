@@ -7,7 +7,7 @@ This repository contains the deep learning feature of our project - a Recipe Gen
 - RAG-based recipe generation
 - Reranking for improved recipe relevance
 
-## setup for frontend
+## setup 
 1. you need to choose the right branch in git
 2. install uv
 
@@ -31,6 +31,7 @@ cd rag_pipeline/app
 ``` 
 uv run fastapi dev
 ```
+
 
 ## responsible Team Members
 - Kate
