@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { jwt } from "../../../utils/jwt";
 import { ApiError, api } from "../../../utils/api";
 import Button from "../../core/Button/Button";
+import Test from "./test";
 import {
   Table,
   Header,
@@ -155,7 +156,7 @@ export default function HistoryTable() {
           </>
         )}
       </Table> */}
-      <table>
+      {/* <table>
         <thead>
           <tr>
             <th>Date</th>
@@ -174,8 +175,8 @@ export default function HistoryTable() {
             </tr>
           ))}
         </tbody>
-      </table>
-
+      </table> */}
+      <Test></Test>
       <Button type="button" onClick={print}>
         Print logs
       </Button>
