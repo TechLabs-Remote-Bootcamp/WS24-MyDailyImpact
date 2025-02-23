@@ -4,19 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { jwt } from "../../../utils/jwt";
 import { ApiError, api } from "../../../utils/api";
 import Button from "../../core/Button/Button";
-import Test from "./test";
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from "@table-library/react-table-library/table";
-import { useTheme } from "@table-library/react-table-library/theme";
-import { getTheme } from "@table-library/react-table-library/baseline";
-import { usePagination } from "@table-library/react-table-library/pagination";
+import trash from "../../../images/tabler_trash.svg";
 import form from "../../../styles/forms.module.scss";
 import styles from "./HistoryTable.module.scss";
 
@@ -26,7 +14,6 @@ export default function HistoryTable() {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-  const theme = useTheme(getTheme());
   const logSchema = {
     mealName: "",
     category: "",
