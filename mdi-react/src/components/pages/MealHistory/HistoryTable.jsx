@@ -17,169 +17,128 @@ import {
 import { useTheme } from "@table-library/react-table-library/theme";
 import { getTheme } from "@table-library/react-table-library/baseline";
 import { usePagination } from "@table-library/react-table-library/pagination";
+import form from "../../../styles/forms.module.scss";
 import styles from "./HistoryTable.module.scss";
 
 export default function HistoryTable() {
-  const nodes = [
-    {
-      _id: "67b70d15b92424d24c70dad2",
-      userId: "67a9adbd385b8cacf1720289",
-      mealName: "Brezel",
-      category: "Breakfast",
-      date: "2024-08-14T10:07:41.000Z",
-      notes: "",
-      updatedAt: "2025-02-20T11:08:05.347Z",
-      user: "67a9adbd385b8cacf1720289",
-      __v: 0,
-    },
-    {
-      _id: "67b70d15b92424d24c70dad2",
-      userId: "67a9adbd385b8cacf1720289",
-      mealName: "Müsli",
-      category: "Lunch",
-      date: "2024-09-14T10:07:41.000Z",
-      notes: "",
-      updatedAt: "2025-02-20T11:08:05.347Z",
-      user: "67a9adbd385b8cacf1720289",
-      __v: 0,
-    },
-    {
-      _id: "67b70d15b92424d24c70dad2",
-      userId: "67a9adbd385b8cacf1720289",
-      mealName: "Curry",
-      category: "Dinner",
-      date: "2024-10-4T10:07:41.000Z",
-      notes: "",
-      updatedAt: "2025-02-20T11:08:05.347Z",
-      user: "67a9adbd385b8cacf1720289",
-      __v: 0,
-    },
-  ];
   const navigate = useNavigate();
   const [userIdent, setUserIdent] = useState(null);
-  const [logs, setLogs] = useState(nodes);
+  const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
   const theme = useTheme(getTheme());
-
-  // Just getting the User-ID
-  useEffect(() => {
-    try {
-      const id = getId();
-      setUserIdent(id);
-    } catch (error) {
-      console.error("Error:", error);
-      navigate("/login");
-    }
-  }, []); // Running once at the mount of the component
-
-  // This useEffect runs if userIdent changes
-  useEffect(() => {
-    if (userIdent) {
-      fetchData();
-    }
-  }, [userIdent]); // Dependent on userIdent
-
-  function getId() {
-    const jwt =
-      localStorage.getItem("auth_token") ||
-      sessionStorage.getItem("auth_token");
-    if (!jwt) {
-      throw new Error("No auth token found");
-    }
-    const token = jwtDecode(jwt, { header: false });
-    if (!token.id) {
-      throw new Error("No user ID found in token");
-    }
-    console.log(token.id);
-    return token.id;
-  }
-
-  const fetchData = async () => {
-    try {
-      const response = await api.get(`/api/meal-logs/${userIdent}`);
-      if (response) {
-        setLogs(response.meals);
-        console.log("Alle meals:", response.meals);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      if (error instanceof ApiError) {
-        console.error("API Error Status:", error.status);
-        console.error("API Error Message:", error.message);
-      }
-    } finally {
-      setLoading(false);
-      console.log("Jetzt:", logs.logs);
-    }
+  const logSchema = {
+    mealName: "",
+    category: "",
+    date: new Date(),
+    notes: "",
   };
+  let data = [];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Get user ID from token
+        const jwt =
+          localStorage.getItem("auth_token") ||
+          sessionStorage.getItem("auth_token");
+        if (!jwt) {
+          throw new Error("No auth token found");
+        }
+        const token = jwtDecode(jwt, { header: false });
+        console.log(token.id);
+        if (!token.id) {
+          throw new Error("No user ID found in token");
+        }
+
+        // Fetch meals data
+        const response = await api.get(`/api/meal-logs/${token.id}`);
+        if (response) {
+          setLogs(response.meals);
+          console.log(logs);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setError(
+          error instanceof ApiError ? error.message : "An API error occurred"
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+    // const convertToLogObject = () => {
+    //   if (!logs || logs.length === 0) {
+    //     console.log("Keine Logs zum Konvertieren vorhanden");
+    //     return [];
+    //   }
+    //   const convertedLogs = logs.map((log) => ({
+    //     mealName: log.mealName,
+    //     category: log.category,
+    //     date: formatDate(log.date),
+    //     notes: log.notes,
+    //     id: log._id, // Falls Sie die ID später brauchen
+    //     userId: log.userId, // Falls Sie die userId später brauchen
+    //   }));
+    //   console.log("Konvertierte Logs:", convertedLogs);
+    //   return convertedLogs;
+    // };
+
+    fetchData();
+    // data = convertToLogObject();
+    // console.log(data[2]);
+  }, []); // Only run once on mount
 
   // When data-set is still loading
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  const print = () => {
-    const data = logs;
-    console.log("data --", data[12].mealName);
-    return <p>{data}</p>;
-  };
-  return (
-    <section className={styles.tableContainer}>
-      {/* <Table data={logs} theme={theme}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Description</HeaderCell>
-                <HeaderCell>Category</HeaderCell>
-                <HeaderCell>Date</HeaderCell>
-                <HeaderCell>Notes</HeaderCell>
-              </HeaderRow>
-            </Header>
+  function formatDate(logDate) {
+    const dateObj = new Date(logDate);
+    const formattedDate = dateObj.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    return formattedDate;
+  }
 
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <Cell>{item.mealName}</Cell>
-                  <Cell>
-                    {item.date.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    })}
-                  </Cell>
-                  <Cell>{item.catogory}</Cell>
-                  <Cell>{item.notes}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table> */}
-      {/* <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Meal name</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {logs.map((item) => (
-            <tr key={item._id}>
-              <td>{item.date}</td>
-              <td>{item.category}</td>
-              <td>{item.mealName}</td>
-              <td>{item.notes}</td>
+  const print = () => {
+    console.log(data);
+    // const x = logs;
+    // console.log("data --", x[12].mealName);
+    // return <p>{data}</p>;
+  };
+
+  return (
+    <div className={styles["formpage-grid"]}>
+      <section className={styles.formSection}>
+        <table className={styles.tableContainer}>
+          <thead className={styles.tableHead}>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Meal name</th>
+              <th>Notes</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table> */}
-      <Test></Test>
-      <Button type="button" onClick={print}>
-        Print logs
-      </Button>
-    </section>
+          </thead>
+          <tbody className={styles.tabelBody}>
+            {logs.map((item) => (
+              <tr key={item._id}>
+                <td>{formatDate(item.date)}</td>
+                <td>{item.category}</td>
+                <td>{item.mealName}</td>
+                <td>{item.notes}</td>
+                <td>Icon</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+      <section className={form.buttonSection}>
+        <Button type="button">Print logs</Button>
+      </section>
+    </div>
   );
 }
