@@ -1,9 +1,74 @@
+@use "../../../styles/colors.scss" as *;
+@use "../../../styles/fonts.scss" as *;
+
 .historyContainer {
   width: 95vw;
   margin: 1rem 3rem;
 }
 
-.tableContainer {
-  margin: 1rem 2rem;
+.formSection {
+  background-color: $primary-extra-light;
+  border-radius: 15px;
+  padding: 0em 1em 1em 1em;
+  border: 3px solid $primary-medium;
   width: 100%;
+
+  .tableContainer {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    width: 100%;
+
+    /* spacing */
+    thead th:nth-child(1) {
+      width: 10%;
+      border-top-left-radius: 15px;
+    }
+
+    thead th:nth-child(2) {
+      width: 10%;
+    }
+
+    thead th:nth-child(3) {
+      width: 20%;
+    }
+
+    thead th:nth-child(4) {
+      width: 35%;
+    }
+
+    thead th:nth-child(5) {
+      width: 10%;
+      border-top-right-radius: 15px;
+    }
+
+    th,
+    td {
+      padding: 0.5em 1.2em;
+    }
+  }
+}
+
+.tableHead {
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+
+  tr {
+    line-height: 1.8em;
+    background-color: $primary-medium;
+    color: $white;
+  }
+
+  // th {
+  //   border-radius: 15px;
+  // }
+}
+
+.tableBody {
+  td {
+    padding: 2em;
+    line-height: 3.2rem;
+    border: 1px solid red;
+  }
 }
