@@ -36,6 +36,15 @@ import torch
 from haystack import component
 from typing import List
 
+# for reranking
+import torch
+import torch.nn as nn
+from haystack import component
+from typing import List, Dict
+from haystack import Document
+from transformers import BertTokenizer, BertModel
+
+
 # Constants
 CHAT_TEMPLATE = """your role:
 You are a chef. You specialize in creating vegan recipes. 
@@ -75,6 +84,51 @@ QUERY_REPHRASE_TEMPLATE = """
         Rewritten Query:
 """
 
+class RankingModel(nn.Module):
+    def __init__(self, input_dim):
+        super(RankingModel, self).__init__()
+        self.fc1 = nn.Linear(input_dim, 128)
+        self.fc2 = nn.Linear(128, 1)
+
+    def forward(self, query_embedding, doc_embedding):
+        combined = torch.cat((query_embedding, doc_embedding), dim=1)
+        x = torch.relu(self.fc1(combined))
+        return self.fc2(x)
+
+@component
+class BertReranker:
+    def __init__(self, model_path: str):
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+        self.bert_model = BertModel.from_pretrained("bert-base-uncased").to(self.device)
+        self.ranking_model = RankingModel(input_dim=1536).to(self.device)  # 768 * 2 for query and doc embeddings
+        self.ranking_model.load_state_dict(torch.load(model_path))
+        self.ranking_model.eval()
+
+    def get_embeddings(self, texts):
+        encoded_input = self.tokenizer(texts, padding=True, truncation=True, return_tensors="pt").to(self.device)
+        with torch.no_grad():
+            output = self.bert_model(**encoded_input)
+        embeddings = output.last_hidden_state.mean(dim=1)
+        return embeddings
+
+    @component.output_types(documents=List[Document])
+    def run(self, query: str, documents: List[Document]) -> Dict[str, List[Document]]:
+        query_embedding = self.get_embeddings([query]).squeeze(0)
+        reranked_docs = []
+
+        for doc in documents:
+            doc_embedding = torch.tensor(doc.embedding).to(self.device)
+            with torch.no_grad():
+                rerank_score = self.ranking_model(query_embedding, doc_embedding).squeeze().item()
+            reranked_docs.append((doc, rerank_score))
+
+        reranked_docs.sort(key=lambda x: x[1], reverse=True)
+        top_docs = [doc[0] for doc in reranked_docs[:10]]  # Keep top 10 documents
+        
+        return {"documents": top_docs}
+
+
 class Conversation:
     def __init__(self, api_key: str, document_store: InMemoryDocumentStore):
         self.pipeline = self._create_pipeline(api_key, document_store)
@@ -97,7 +151,12 @@ class Conversation:
 
         pipeline.add_component("retriever", QdrantEmbeddingRetriever(document_store=document_store))
         pipeline.add_component("text_embedder", CustomDistilBertEmbedder() ) 
-                                     
+
+        # Add reranker component
+        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../reranker/trained_model.pth')
+        pipeline.add_component("reranker", BertReranker(model_path=model_path))
+                
+
         pipeline.add_component("prompt_builder", prompt_builder)
         pipeline.add_component("llm", llm)
         pipeline.add_component("memory_retriever", ChatMessageRetriever(memory_store))
@@ -112,10 +171,13 @@ class Conversation:
         pipeline.connect("query_rephrase_llm.replies", "list_to_str_adapter")
         pipeline.connect("list_to_str_adapter", "text_embedder")
 
-        # RAG connections
+
+        # RAG connections with reranker
         pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
-        pipeline.connect("retriever.documents", "prompt_builder.documents")
-        pipeline.connect("prompt_builder.prompt", "llm.messages")
+        pipeline.connect("retriever.documents", "reranker.documents")  # Connect retriever to reranker
+        pipeline.connect("list_to_str_adapter", "reranker.query")     # Connect query to reranker
+        pipeline.connect("reranker.documents", "prompt_builder.documents")  # Connect reranker to prompt builder
+
 
         # Memory connections
         pipeline.connect("llm.replies", "memory_joiner")
@@ -140,13 +202,17 @@ class Conversation:
                 },
                 "memory_joiner": {"values": [ChatMessage.from_user(message)]}
             },
-            include_outputs_from=["llm", "query_rephrase_llm", "retriever", "prompt_builder"]
+            include_outputs_from=["llm", "query_rephrase_llm", "retriever","reranker", "prompt_builder"]
         )
 
         return {
             "assistant_message": result["llm"]["replies"][0].text,
             "rewritten_query": result["query_rephrase_llm"]["replies"][0].text,
-            "rag_documents": len(result["retriever"]['documents']),
+#            "rag_documents": len(result["retriever"]['documents']),
+#            "rag_documents": [doc.content.split(';')[0] for doc in result["retriever"]['documents']],
+#            "rag_documents": [doc.content.split(';')[0:5] for doc in result["retriever"]['documents']],
+#            "rag_documents": [(i+1, doc.content.split(';')[0].replace('Name: ', ''), doc.content.split(';')[4].replace('Description: ', '')) for i, doc in enumerate(result["retriever"]['documents'])],
+            "rag_documents": [(i+1, '🔥', doc.content.split(';')[0].replace('Name: ', '')) for i, doc in enumerate(result["retriever"]['documents'])],
             "prompt_bild": result["prompt_builder"],
         }
 
@@ -270,8 +336,8 @@ def chat_loop(conversation: Conversation):
        result = conversation.send_message(question)
        print(f"🎃 [Rewritten search query: {result['rewritten_query']} ]")
        print(f"🤖 {result['assistant_message']}")
-       print(f"☀️ {result['rag_documents']}" )
-       print(f"PROMPT: {result['prompt_bild']}" )
+       print(f"🔥 PROVIED RECIPES: {result['rag_documents']}" )
+#       print(f"🐦‍ PROMPT: {result['prompt_bild']}" )
 
        
 
