@@ -45,3 +45,39 @@ export const getUserMealLogs = async (req, res, next) => {
     next(new ApiError(500, 'Error fetching user meal logs', error.message));
   }
 };
+
+export const updateMealLog = async (req, res, next) => {
+  try {
+    const updatedMealLog = await MealLog.findByIdAndUpdate(
+      req.params.mealLogId,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedMealLog) {
+      return next(new ApiError(404, 'Meal log not found'));
+    }
+
+    res.json({
+      message: 'Meal log updated successfully',
+      mealLog: updatedMealLog
+    });
+  } catch (error) {
+    console.error(error);
+    next(new ApiError(500, 'Error updating meal log', error.message));
+  }
+}
+export const deleteMealLog = async (req, res, next) => {
+  try {
+    const deletedMealLog = await MealLog.findByIdAndDelete(req.params.mealLogId);
+
+    if (!deletedMealLog) {
+      return next(new ApiError(404, 'Meal log not found'));
+    }
+
+    res.json({ message: 'Meal log deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    next(new ApiError(500, 'Error deleting meal log', error.message));
+  }
+};

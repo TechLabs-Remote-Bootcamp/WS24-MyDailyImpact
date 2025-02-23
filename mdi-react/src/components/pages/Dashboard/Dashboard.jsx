@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../../../hooks/useAuth";
-import { NavLink, Navigate, Link } from "react-router";
+import { useImpactMetrics } from "../../../context/ImpactMetricsContext";
+import { NavLink, Navigate } from "react-router-dom";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import PigImg from "../../../images/Pig.png";
@@ -11,22 +12,40 @@ import "./Dashboard.scss";
 
 export default function Dashboard() {
   const { isAuthenticated, user, logout, loading, initializeAuth } = useAuth();
+  const { metrics, loadMetrics } = useImpactMetrics();
   let userId = "";
 
   useEffect(() => {
-    console.log(
-      "Dashboard useEffect - isAuthenticated:",
-      isAuthenticated,
-      "user:",
-      user,
-      "loading:",
-      loading
-    );
-    console.log(user);
-    if (!isAuthenticated && !loading) {
-      initializeAuth();
-    }
-  }, [isAuthenticated, loading, initializeAuth, user]);
+    let isSubscribed = true;
+
+    const initializeData = async () => {
+      console.log(
+        "Dashboard useEffect - isAuthenticated:",
+        isAuthenticated,
+        "user:",
+        user,
+        "loading:",
+        loading
+      );
+      console.log(user);
+
+      if (!isAuthenticated && !loading) {
+        await initializeAuth();
+      }
+
+      // Only load metrics if we're authenticated and have a user ID
+      if (isAuthenticated && user?.id && isSubscribed) {
+        console.log("Loading metrics for authenticated user:", user.id);
+        await loadMetrics(user.id);
+      }
+    };
+
+    initializeData();
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [isAuthenticated, loading, initializeAuth]); // Removed user and loadMetrics from dependencies
 
   if (loading) {
     return <p>Loading...</p>;
@@ -53,23 +72,27 @@ export default function Dashboard() {
           <div className="stats">
             <div className="stat-item">
               <h4>Animals Saved</h4>
-              <p>23</p>
+              <p>{metrics.animalsSaved.toFixed(2)}</p>
               <img className="dashboard-img" src={PigImg} alt="pig" />
             </div>
             <div className="stat-item">
               <h4>CO2 Reduced (kg)</h4>
-              <p>156</p>
-              <img className="dashboard-img" src={CO2Img} alt="pig" />
+              <p>{metrics.co2Reduced.toFixed(2)}</p>
+              <img className="dashboard-img" src={CO2Img} alt="C02 cloud" />
             </div>
             <div className="stat-item">
               <h4>Water Saved (L)</h4>
-              <p>3,450</p>
-              <img className="dashboard-img" src={WaterImg} alt="pig" />
+              <p>{metrics.waterSaved.toFixed(2)}</p>
+              <img
+                className="dashboard-img"
+                src={WaterImg}
+                alt="water droplet"
+              />
             </div>
             <div className="stat-item">
               <h4>Forest Land Saved (m²)</h4>
-              <p>78</p>
-              <img className="dashboard-img" src={TreeImg} alt="pig" />
+              <p>{metrics.forestLandSaved.toFixed(2)}</p>
+              <img className="dashboard-img" src={TreeImg} alt="tree" />
             </div>
           </div>
           <div className="actions">

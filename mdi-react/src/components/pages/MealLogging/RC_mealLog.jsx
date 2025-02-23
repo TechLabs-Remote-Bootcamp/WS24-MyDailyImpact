@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { jwt } from "../../../utils/jwt";
 import { useForm, Controller } from "react-hook-form";
 import { ApiError, api } from "../../../utils/api";
+import { useImpactMetrics } from "../../../context/ImpactMetricsContext";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
 import DatePicker from "react-datepicker";
@@ -16,6 +17,7 @@ export default function RC_MealLog() {
   const [date, setDate] = useState(new Date(Date.now()));
   const [userIdent, setUserIdent] = useState(null);
   const [logSuccess, setLogSuccess] = useState(false);
+  const { updateMetrics } = useImpactMetrics();
   const mealTypes = ["Breakfast", "Lunch", "Dinner"];
 
   const {
@@ -71,6 +73,7 @@ export default function RC_MealLog() {
       console.log(dataToSend);
       const response = await api.post("/api/meal-logs", dataToSend);
       if (response) {
+        await updateMetrics(data.category, userIdent);
         console.log("Meal successfully logged");
         console.log("Response of log:", response);
         console.log("3", logSuccess);
