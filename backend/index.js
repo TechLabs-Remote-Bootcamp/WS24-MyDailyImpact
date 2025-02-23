@@ -40,7 +40,7 @@ const startServer = async () => {
     // Error handling middleware
     app.use(errorHandler);
 
-    const PORT = process.env.APP_PORT || 5000;
+    const PORT = process.env.APP_PORT || 5001;
     app.listen(PORT, "127.0.0.1", () => {
       console.log(`Server running on port ${PORT}`);
     });
