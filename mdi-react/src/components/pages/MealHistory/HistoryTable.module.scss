@@ -97,6 +97,11 @@
   text-align: center;
   cursor: pointer;
 
+  button {
+    background-color: $primary-extra-light;
+    border: none;
+    padding: 0;
+  }
   svg {
     height: 1.4rem;
     width: 1.4rem;
