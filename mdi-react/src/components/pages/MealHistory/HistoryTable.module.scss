@@ -7,11 +7,14 @@
 }
 
 .formSection {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
   background-color: $primary-extra-light;
   border-radius: 15px;
   padding: 0em 1em 1em 1em;
   border: 3px solid $primary-medium;
   width: 100%;
+  align-content: center;
 
   .tableContainer {
     table-layout: fixed;
