@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { jwt } from "../../../utils/jwt";
 import { ApiError, api } from "../../../utils/api";
-import Button from "../../core/Button/Button";
-import trash from "../../../images/tabler_trash.svg";
-import form from "../../../styles/forms.module.scss";
 import styles from "./HistoryTable.module.scss";
 
 export default function HistoryTable() {
@@ -71,13 +67,6 @@ export default function HistoryTable() {
     });
     return formattedDate;
   }
-
-  const print = () => {
-    console.log(data);
-    // const x = logs;
-    // console.log("data --", x[12].mealName);
-    // return <p>{data}</p>;
-  };
 
   return (
     <div className={styles["formpage-grid"]}>
