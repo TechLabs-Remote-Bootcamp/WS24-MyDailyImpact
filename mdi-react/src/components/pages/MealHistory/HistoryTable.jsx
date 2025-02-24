@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { ApiError, api } from "../../../utils/api";
 import styles from "./HistoryTable.module.scss";
 
 export default function HistoryTable() {
-  const navigate = useNavigate();
   const [userIdent, setUserIdent] = useState(null);
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-  const logSchema = {
-    mealName: "",
-    category: "",
-    date: new Date(),
-    notes: "",
-  };
-  let data = [];
 
   useEffect(() => {
     const fetchData = async () => {
