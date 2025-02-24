@@ -40,6 +40,7 @@
     }
 
     thead th:nth-child(5) {
+      text-align: center;
       width: 10%;
       border-top-right-radius: 15px;
     }
@@ -93,8 +94,7 @@
 }
 
 .actions {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   cursor: pointer;
 
   svg {
