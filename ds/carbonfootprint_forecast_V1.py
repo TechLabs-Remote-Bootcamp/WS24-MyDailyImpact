@@ -1,7 +1,11 @@
+# Anna von Bank 24.02.2025
+# Code for carbonfootprint_forecast
+
 import pandas as pd
 import random
 from datetime import datetime, timedelta
 import numpy as np
+import matplotlib.pyplot as plt
 
 # -----------------------------
 # STEP 1: Create the Recipe Dataset
@@ -355,8 +359,203 @@ print(df_activity.info())
 # Sort activity records by timestamp
 # df_activity.to_csv("ds/data/synthetic_activity_dataset-v0.csv", index=False)
 
+# ---------------------------
+# EDA
+# ---------------------------
+import seaborn as sns
 
-#Total carbon footprint forecast
+
+# ---------------------------
+# 1. BASIC DATA INFORMATION
+# ---------------------------
+
+print("\n🔍 Basic Dataset Information:")
+print(df_activity.info())
+
+print("\n📌 First 5 Rows of Dataset:")
+print(df_activity.head())
+
+# Check for missing values
+missing_values = df_activity.isnull().sum()
+print("\n❗ Missing Values in Dataset:")
+print(missing_values[missing_values > 0])
+
+# Check unique users & meals
+print(f"\n👤 Unique Users: {df_activity['user_id'].nunique()}")
+print(f"🍽️ Unique Dishes: {df_activity['dish_name'].nunique()}")
+
+# ---------------------------
+# 2. DATA CLEANING
+# ---------------------------
+
+# Convert timestamp column to datetime
+df_activity["activity_timestamp"] = pd.to_datetime(df_activity["activity_timestamp"])
+
+# Convert lists stored as strings back to actual lists
+list_columns = ["ingredient_list", "substitutions_list", "carbon_footprint_original", "portion_size"]
+for col in list_columns:
+    if df_activity[col].dtype == "object":
+        df_activity[col] = df_activity[col].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+
+# Convert geo_location to tuple
+df_activity["geo_location"] = df_activity["geo_location"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+
+# ---------------------------
+# 3. COMPUTE CO₂ SAVINGS
+# ---------------------------
+
+# Check if required columns exist
+expected_columns = ["carbon_footprint_original", "substitutions_list"]
+for col in expected_columns:
+    if col not in df_activity.columns:
+        raise KeyError(f"Missing column in dataset: {col}")
+
+# Compute the original CO₂ footprint per meal
+df_activity["carbon_footprint_original_total"] = df_activity["carbon_footprint_original"].apply(sum)
+
+# Function to compute new CO₂ footprint after substitutions
+def calculate_new_footprint(row):
+    original_footprint = row["carbon_footprint_original"]
+    substitutions = row["substitutions_list"]
+    new_footprint = []
+    for i, sub in enumerate(substitutions):
+        if sub is not None:  # If substitution exists, assume a 30% CO₂ reduction
+            new_footprint.append(original_footprint[i] * 0.7)
+        else:
+            new_footprint.append(original_footprint[i])
+    return sum(new_footprint)
+
+# Apply function to compute new CO₂ footprint
+df_activity["carbon_footprint_new_total"] = df_activity.apply(calculate_new_footprint, axis=1)
+
+# Compute actual CO₂ savings
+df_activity["carbon_savings"] = df_activity["carbon_footprint_original_total"] - df_activity["carbon_footprint_new_total"]
+
+# ---------------------------
+# 4. DESCRIPTIVE STATISTICS
+# ---------------------------
+
+print("\n📊 Summary Statistics (Numerical Columns):")
+print(df_activity.describe())
+
+print("\n🔢 Summary Statistics (Categorical Columns):")
+print(df_activity.describe(include="object"))
+
+# ---------------------------
+# 5. VISUALIZATIONS
+# ---------------------------
+
+# 🔹 CO₂ Savings Distribution
+plt.figure(figsize=(10, 5))
+sns.histplot(df_activity["carbon_savings"], bins=30, kde=True, color="green")
+plt.title("Distribution of CO₂ Savings per Meal")
+plt.xlabel("CO₂ Savings (kg CO₂e)")
+plt.ylabel("Count")
+plt.show()
+
+# 🔹 CO₂ Savings Over Time
+
+# Aggregate CO₂ savings per month
+df_activity["activity_month"] = df_activity["activity_timestamp"].dt.to_period("M")
+df_savings_per_month = df_activity.groupby("activity_month")["carbon_savings"].sum().reset_index()
+
+plt.figure(figsize=(12, 6))
+sns.lineplot(x=df_savings_per_month["activity_month"].astype(str), y=df_savings_per_month["carbon_savings"], marker="o")
+plt.xticks(rotation=45)
+plt.title("CO₂ Savings Trend Over Time")
+plt.xlabel("Month")
+plt.ylabel("Total CO₂ Savings (kg CO₂e)")
+plt.grid(True)
+plt.show()
+
+# 🔹 CO₂ Savings Over Time per user
+# Aggregate CO₂ savings per month for each user
+df_activity["activity_month"] = df_activity["activity_timestamp"].dt.to_period("M")
+df_savings_per_user = df_activity.groupby(["user_id", "activity_month"])["carbon_savings"].sum().reset_index()
+
+# Convert activity_month to datetime for plotting
+df_savings_per_user["activity_month"] = pd.to_datetime(df_savings_per_user["activity_month"].astype(str))
+
+# Get unique users
+unique_users = df_savings_per_user["user_id"].unique()
+
+# Set up subplots (2 rows, 3 columns)
+fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(18, 10), sharex=True, sharey=True)
+
+# Flatten axes array for easy iteration
+axes = axes.flatten()
+
+# Create a separate plot for each user
+for i, user in enumerate(unique_users):
+    user_data = df_savings_per_user[df_savings_per_user["user_id"] == user]
+    sns.lineplot(ax=axes[i], x="activity_month", y="carbon_savings", data=user_data, marker="o", color="b")
+    axes[i].set_title(f"CO₂ Savings Over Time: {user}")
+    axes[i].set_xlabel("Month")
+    axes[i].set_ylabel("CO₂ Savings (kg CO₂e)")
+    axes[i].grid(True)
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+
+# 🔹 Meal Rating Distribution
+plt.figure(figsize=(8, 5))
+sns.histplot(df_activity["meal_rating"], bins=10, kde=True, color="blue")
+plt.title("Meal Rating Distribution")
+plt.xlabel("Meal Rating (1-5)")
+plt.ylabel("Count")
+plt.show()
+
+# 🔹 Count occurrences of each user
+user_counts = df_activity["user_id"].value_counts()
+plt.figure(figsize=(12, 6))
+sns.barplot(x=user_counts.index, y=user_counts.values, hue=user_counts.index, palette="mako", legend=False)
+plt.xticks(rotation=45)  # Rotate x-axis labels for better visibility
+plt.xlabel("User")
+plt.ylabel("Number of Meals Logged")
+plt.title("Meal Logs per User")
+plt.show()
+
+
+
+# ---------------------------
+# Visualization: World map of Geolocations
+# ---------------------------
+
+!pip install folium
+import folium
+from folium.plugins import HeatMap
+import ast
+
+# 🔹 VISUALIZATION: WORLD MAP OF GEOLOCATIONS
+
+# Ensure 'geo_location' column exists
+if "geo_location" not in df_activity.columns:
+    raise KeyError("Column 'geo_location' not found in df_activity.")
+
+# Check if the first value is a string, convert only if needed
+if isinstance(df_activity["geo_location"].iloc[0], str):
+    df_activity["geo_location"] = df_activity["geo_location"].apply(eval)
+
+# Extract latitudes and longitudes
+latitudes = df_activity["geo_location"].apply(lambda x: x[0])
+longitudes = df_activity["geo_location"].apply(lambda x: x[1])
+
+# Create a Folium map centered at the average location
+map_center = [np.mean(latitudes), np.mean(longitudes)]
+map_meal_activity = folium.Map(location=map_center, zoom_start=2)
+
+# Add markers for each meal activity
+for lat, lon in zip(latitudes, longitudes):
+    folium.Marker(location=[lat, lon], popup="Meal Activity").add_to(map_meal_activity)
+
+# Display the interactive map inside Jupyter Notebook
+display(map_meal_activity)
+
+# ---------------------------
+# Total carbon footprint forecast
+# ---------------------------
+
 import pandas as pd
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
@@ -364,45 +563,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 
-
-# Ensure the timestamp column is in the correct format
-df_activity["activity_timestamp"] = pd.to_datetime(df_activity["activity_timestamp"])
-
-# Check if the required columns exist in the dataset
-expected_columns = ["carbon_footprint_original", "substitutions_list"]
-for col in expected_columns:
-    if col not in df_activity.columns:
-        raise KeyError(f"Missing column in dataset: {col}")
-
-# Convert columns from string to lists if necessary
-if isinstance(df_activity["carbon_footprint_original"].iloc[0], str):
-    df_activity["carbon_footprint_original"] = df_activity["carbon_footprint_original"].apply(eval)
-if isinstance(df_activity["substitutions_list"].iloc[0], str):
-    df_activity["substitutions_list"] = df_activity["substitutions_list"].apply(eval)
-
-# Calculate the original CO₂ footprint per meal
-df_activity["carbon_footprint_original_total"] = df_activity["carbon_footprint_original"].apply(sum)
-
-# Calculate the new CO₂ footprint based on actual substitution values
-def calculate_new_footprint(row):
-    original_footprint = row["carbon_footprint_original"]
-    substitutions = row["substitutions_list"]
-    new_footprint = []
-    for i, sub in enumerate(substitutions):
-        if sub is not None:  # If a substitution exists, apply CO₂ reduction
-            new_footprint.append(original_footprint[i] * 0.7)  # Assume 30% reduction
-        else:
-            new_footprint.append(original_footprint[i])
-    return sum(new_footprint)
-
-df_activity["carbon_footprint_new_total"] = df_activity.apply(calculate_new_footprint, axis=1)
-
-# Calculate actual CO₂ savings
-df_activity["carbon_savings"] = df_activity["carbon_footprint_original_total"] - df_activity["carbon_footprint_new_total"]
-
-# Aggregate CO₂ savings per month for time series analysis
-df_activity["activity_month"] = df_activity["activity_timestamp"].dt.to_period("M")
-df_savings_per_month = df_activity.groupby("activity_month")["carbon_savings"].sum().reset_index()
 
 # Convert to datetime format for forecasting
 df_savings_per_month["activity_month"] = df_savings_per_month["activity_month"].astype(str)
@@ -472,7 +632,10 @@ print("\nExtended Forecast for Remaining 2025 Months using Best Model:")
 print(df_forecast_2025_remaining)
 
 
+
+# ---------------------------
 # Forecast for each person
+# ---------------------------
 
 import pandas as pd
 import numpy as np
@@ -481,51 +644,15 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 
-# Ensure the timestamp column is in the correct format
-df_activity["activity_timestamp"] = pd.to_datetime(df_activity["activity_timestamp"])
-
-# Check if the required columns exist in the dataset
-expected_columns = ["carbon_footprint_original", "substitutions_list", "user_id"]
-for col in expected_columns:
-    if col not in df_activity.columns:
-        raise KeyError(f"Missing column in dataset: {col}")
-
-# Convert columns from string to lists if necessary
-if isinstance(df_activity["carbon_footprint_original"].iloc[0], str):
-    df_activity["carbon_footprint_original"] = df_activity["carbon_footprint_original"].apply(eval)
-if isinstance(df_activity["substitutions_list"].iloc[0], str):
-    df_activity["substitutions_list"] = df_activity["substitutions_list"].apply(eval)
-
-# Calculate the original CO₂ footprint per meal
-df_activity["carbon_footprint_original_total"] = df_activity["carbon_footprint_original"].apply(sum)
-
-# Calculate the new CO₂ footprint based on actual substitution values
-def calculate_new_footprint(row):
-    original_footprint = row["carbon_footprint_original"]
-    substitutions = row["substitutions_list"]
-    new_footprint = []
-    for i, sub in enumerate(substitutions):
-        if sub is not None:  # If a substitution exists, apply CO₂ reduction
-            new_footprint.append(original_footprint[i] * 0.7)  # Assume 30% reduction
-        else:
-            new_footprint.append(original_footprint[i])
-    return sum(new_footprint)
-
-df_activity["carbon_footprint_new_total"] = df_activity.apply(calculate_new_footprint, axis=1)
-
-# Calculate actual CO₂ savings
-df_activity["carbon_savings"] = df_activity["carbon_footprint_original_total"] - df_activity["carbon_footprint_new_total"]
-
 # Aggregate CO₂ savings per month for each user
-df_activity["activity_month"] = df_activity["activity_timestamp"].dt.to_period("M")
-df_savings_per_month_user = df_activity.groupby(["user_id", "activity_month"])["carbon_savings"].sum().reset_index()
+df_savings_per_user = df_activity.groupby(["user_id", "activity_month"])["carbon_savings"].sum().reset_index()
 
-# Convert activity_month to datetime format for forecasting
-df_savings_per_month_user["activity_month"] = df_savings_per_month_user["activity_month"].astype(str)
-df_savings_per_month_user["activity_month"] = pd.to_datetime(df_savings_per_month_user["activity_month"])
+# Convert activity_month to datetime format
+df_savings_per_user["activity_month"] = pd.to_datetime(df_savings_per_user["activity_month"].astype(str))
 
-# Convert activity_month to a numerical index for ARIMA
-df_savings_per_month_user["month_index"] = df_savings_per_month_user["activity_month"].factorize()[0]
+# Create an index for forecasting models
+df_savings_per_user["month_index"] = df_savings_per_user["activity_month"].factorize()[0]
+
 
 # Function to evaluate model errors
 def evaluate_model(y_true, y_pred, model_name):
@@ -538,8 +665,8 @@ def evaluate_model(y_true, y_pred, model_name):
 user_results = {}
 best_models = {}
 forecast_2025_results = {}
-for user_id in df_savings_per_month_user["user_id"].unique():
-    user_data = df_savings_per_month_user[df_savings_per_month_user["user_id"] == user_id]
+for user_id in df_savings_per_user["user_id"].unique():
+    user_data = df_savings_per_user[df_savings_per_user["user_id"] == user_id]
     train_data = user_data[user_data["activity_month"] < "2025-01-01"]
     test_data = user_data[(user_data["activity_month"] >= "2025-01-01") & (user_data["activity_month"] < "2025-03-01")]
     
@@ -575,7 +702,7 @@ for user_id in df_savings_per_month_user["user_id"].unique():
 
 # Extended forecast for the rest of 2025 using the best model
 for user_id, best_model in best_models.items():
-    user_data = df_savings_per_month_user[df_savings_per_month_user["user_id"] == user_id]
+    user_data = df_savings_per_user[df_savings_per_user["user_id"] == user_id]
     train_data = user_data[user_data["activity_month"] < "2025-03-01"]
     future_months = pd.date_range(start="2025-03-01", periods=10, freq="ME")
     future_indices = np.arange(len(train_data), len(train_data) + len(future_months))
