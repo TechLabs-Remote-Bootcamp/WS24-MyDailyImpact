@@ -2,7 +2,7 @@
 @use "../../../styles/fonts.scss" as *;
 
 .historyContainer {
-  width: 95vw;
+  width: 90vw;
   margin: 1rem 3rem;
 }
 
@@ -19,10 +19,11 @@
     border-collapse: collapse;
     margin-top: 1rem;
     width: 100%;
+    cursor: default;
 
     /* spacing */
     thead th:nth-child(1) {
-      width: 10%;
+      width: 12%;
       border-top-left-radius: 15px;
     }
 
@@ -31,11 +32,11 @@
     }
 
     thead th:nth-child(3) {
-      width: 20%;
+      width: 18%;
     }
 
     thead th:nth-child(4) {
-      width: 35%;
+      width: 25%;
     }
 
     thead th:nth-child(5) {
@@ -47,12 +48,31 @@
     td {
       padding: 0.5em 1.2em;
     }
+
+    // Column labels
+    th {
+      font-weight: 300;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+
+    // Lines between the table rows
+    tr {
+      border: solid;
+      border-width: 2px 0;
+      border-color: $white;
+    }
+    tr:first-child {
+      border-top: none;
+    }
+    tr:last-child {
+      border-bottom: none;
+    }
   }
 }
 
 .tableHead {
   font-size: 1.3rem;
-  letter-spacing: 1px;
 
   tr {
     line-height: 1.8em;
@@ -69,6 +89,16 @@
   td {
     padding: 2em;
     line-height: 3.2rem;
-    border: 1px solid red;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  svg {
+    height: 1.4rem;
+    width: 1.4rem;
   }
 }
