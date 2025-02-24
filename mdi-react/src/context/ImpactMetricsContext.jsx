@@ -39,17 +39,15 @@ export function ImpactMetricsProvider({ children }) {
       console.log("Loading metrics for user:", userId);
       const response = await api.get(`/api/impact-metrics/${userId}`);
       console.log("Raw response:", response);
-      console.log("Loaded metrics:", response.data);
 
-      if (response) {
-        // The metrics are directly in the response since that's how we send them from the backend
+      if (response && response.metrics) {
         setMetrics({
-          animalsSaved: Number(response.animalsSaved) || 0,
-          co2Reduced: Number(response.co2Reduced) || 0,
-          waterSaved: Number(response.waterSaved) || 0,
-          forestLandSaved: Number(response.forestLandSaved) || 0,
+          animalsSaved: Number(response.metrics.animalsSaved) || 0,
+          co2Reduced: Number(response.metrics.co2Reduced) || 0,
+          waterSaved: Number(response.metrics.waterSaved) || 0,
+          forestLandSaved: Number(response.metrics.forestLandSaved) || 0,
         });
-        console.log("Metrics set to:", metrics); // Add this line to debug
+        console.log("Metrics set to:", metrics);
       }
     } catch (error) {
       console.error("Error loading impact metrics:", error);
@@ -72,6 +70,7 @@ export function ImpactMetricsProvider({ children }) {
         newMetrics
       );
       console.log("Update response:", response);
+      
       if (response && response.metrics) {
         setMetrics(response.metrics);
       } else {
