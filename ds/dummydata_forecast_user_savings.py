@@ -1,3 +1,6 @@
+#Predictive Model: Forecast user savings (land, water, CO2, animal lives) for the next month or year, assuming consistent meal patterns to further motivate people to eat a plant-based diet
+
+
 import pandas as pd
 import numpy as np
 

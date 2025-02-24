@@ -522,7 +522,7 @@ plt.show()
 # Visualization: World map of Geolocations
 # ---------------------------
 
-!pip install folium
+#!pip install folium
 import folium
 from folium.plugins import HeatMap
 import ast

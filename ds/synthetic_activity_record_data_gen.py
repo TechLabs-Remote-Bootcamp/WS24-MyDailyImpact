@@ -130,7 +130,7 @@ for dish in dish_names:
     recipes.append(recipe_record)
 
 df_recipes = pd.DataFrame(recipes)
-# print(df_recipes)  # Uncomment to inspect the recipe dataset
+print(df_recipes)  # Uncomment to inspect the recipe dataset
 
 # -----------------------------
 # STEP 2: Generate Activity Logs for Each Persona

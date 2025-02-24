@@ -66,7 +66,7 @@ def get_meat_per_day(df, country):
         raise ValueError(f"Land '{country}' not in DataFrame")
 
 # Example: calculate annual meat consumption for Albania
-country_input = 'Albania'
+country_input = 'Germany'
 try:
     meat_per_day = get_meat_per_day(df, country_input)
     
