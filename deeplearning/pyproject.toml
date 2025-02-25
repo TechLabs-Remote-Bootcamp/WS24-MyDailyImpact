@@ -12,6 +12,7 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "qdrant-haystack>=7.0.0",
     "sentence-transformers>=3.4.1",
+    "scikit-learn>=1.4.0",
 ]
 
 [dependency-groups]

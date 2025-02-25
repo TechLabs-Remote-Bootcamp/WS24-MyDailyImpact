@@ -1,8 +1,8 @@
-# pipeline.py
 import os
 from typing import Any, List, Dict
 from datetime import datetime
 from itertools import chain
+
 
 import requests
 from dotenv import load_dotenv
@@ -21,7 +21,7 @@ from haystack_integrations.components.generators.mistral import MistralChatGener
 from haystack_experimental.chat_message_stores.in_memory import InMemoryChatMessageStore
 from haystack_experimental.components.retrievers import ChatMessageRetriever
 from haystack_experimental.components.writers import ChatMessageWriter
-
+from qdrant_client import QdrantClient
 # for QdrantEmbeddingRetriever
 from haystack.document_stores.types import DuplicatePolicy
 from haystack import Document
@@ -38,23 +38,23 @@ from typing import List
 
 # Constants
 CHAT_TEMPLATE = """your role:
-You are a chef. You specialize in creating vegan recipes. 
-As a chef you have received countless awards and prizes. 
-Your cookbooks top national and international bestseller lists. 
-Your colleagues value your expertise. 
-You only suggest recipes and meals if they are vegan. 
-To eat vegan is an very important value to you and your friends.\n\n
+You are a chef. You specialize in creating vegan recipes.
+As a chef you have received countless awards and prizes.
+Your cookbooks top national and international bestseller lists.
+Your colleagues value your expertise.
+You only suggest recipes and meals if they are vegan.
+To eat vegan is a very important value to you and your friends.\n\n
 
 your task
 Given the conversation history and the provided Recipes, give a brief answer to the question.\n
                 Question: {{query}}\n
-                
+               
                 Conversation history:
                 {% for memory in memories %}
                     {{ memory.text }}
                 {% endfor %}
-                
-                Recipes: 
+               
+                Recipes:
                 {% for document in documents %}
                     {{document.content}}
                 {% endfor%}
@@ -78,13 +78,13 @@ QUERY_REPHRASE_TEMPLATE = """
 class Conversation:
     def __init__(self, api_key: str, document_store: InMemoryDocumentStore):
         self.pipeline = self._create_pipeline(api_key, document_store)
-        
+       
     def _create_pipeline(self, api_key: str, document_store: InMemoryDocumentStore) -> Pipeline:
         pipeline = Pipeline()
         memory_store = InMemoryChatMessageStore()
 
         # Initialize components
-        prompt_builder = ChatPromptBuilder(variables=["query", "documents", "memories"], 
+        prompt_builder = ChatPromptBuilder(variables=["query", "documents", "memories"],
                                     required_variables=["query", "documents", "memories"])
         llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
         rephrase_llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
@@ -96,7 +96,7 @@ class Conversation:
         pipeline.add_component("list_to_str_adapter", OutputAdapter(template="{{ replies[0] }}", output_type=str))
 
         pipeline.add_component("retriever", QdrantEmbeddingRetriever(document_store=document_store))
-        pipeline.add_component("text_embedder", CustomDistilBertEmbedder() ) 
+        pipeline.add_component("text_embedder", CustomDistilBertEmbedder() )
                                      
         pipeline.add_component("prompt_builder", prompt_builder)
         pipeline.add_component("llm", llm)
@@ -131,25 +131,32 @@ class Conversation:
         )
         template_message = ChatMessage.from_user(CHAT_TEMPLATE)
 
-        result = self.pipeline.run(
-            data={
-                "query_rephrase_prompt_builder": {"query": message},
-                "prompt_builder": {
-                    "template": [system_message, template_message],
-                    "query": message
+
+        try:
+            result = self.pipeline.run(
+                data={
+                    "query_rephrase_prompt_builder": {"query": message},
+                    "prompt_builder": {
+                        "template": [system_message, template_message],
+                        "query": message
+                    },
+                    "memory_joiner": {"values": [ChatMessage.from_user(message)]}
                 },
-                "memory_joiner": {"values": [ChatMessage.from_user(message)]}
-            },
-            include_outputs_from=["llm", "query_rephrase_llm", "retriever", "prompt_builder"]
-        )
+                include_outputs_from=["llm", "query_rephrase_llm", "retriever", "prompt_builder"]
+            )
 
-        return {
-            "assistant_message": result["llm"]["replies"][0].text,
-            "rewritten_query": result["query_rephrase_llm"]["replies"][0].text,
-            "rag_documents": len(result["retriever"]['documents']),
-            "prompt_bild": result["prompt_builder"],
-        }
 
+            return {
+                "assistant_message": result["llm"]["replies"][0].text,
+                "rewritten_query": result["query_rephrase_llm"]["replies"][0].text,
+                "rag_documents": len(result["retriever"]['documents']),
+                "prompt_bild": result["prompt_builder"],
+            }
+        except Exception as e:
+            # NEW: Add error logging
+            print(f"Error in Conversation.send_message: {e}")
+            raise  # Re-raise the exception to be handled by the caller
+           
     def get_history(self) -> List[ChatMessage]:
         """Get the conversation history."""
         memory_retriever = self.pipeline.get_component("memory_retriever")
@@ -164,7 +171,7 @@ class CustomDistilBertEmbedder:
         self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
         self.model = DistilBertModel.from_pretrained("distilbert-base-uncased")
         self.model.eval()  # Setze das Modell in den Evaluierungsmodus
-        
+       
     def embed_text(self, text):
         encoded_input = self.tokenizer(
             text,
@@ -173,17 +180,17 @@ class CustomDistilBertEmbedder:
             max_length=512,
             return_tensors='pt'
         )
-        
+       
         with torch.no_grad():
             output = self.model(**encoded_input)
-            
+           
         last_hidden_states = output.last_hidden_state
         attention_mask = encoded_input["attention_mask"]
         input_mask_expanded = attention_mask.unsqueeze(-1).expand(last_hidden_states.size()).float()
         embedding = torch.sum(last_hidden_states * input_mask_expanded, 1) / torch.clamp(
             input_mask_expanded.sum(1), min=1e-9
         )
-        
+       
         return embedding.squeeze().numpy()
 
     @component.output_types(embedding=List[float])
@@ -198,11 +205,11 @@ class ConversationStore:
         self.created_at: Dict[str, datetime] = {}
         self.document_store = document_store
         self.api_key = api_key
-    
+   
     def create_conversation(self, conversation_id: str) -> None:
         self.conversations[conversation_id] = Conversation(self.api_key, self.document_store)
         self.created_at[conversation_id] = datetime.utcnow()
-    
+   
     def get_conversation(self, conversation_id: str) -> Conversation:
         if conversation_id not in self.conversations:
             raise KeyError(f"Conversation {conversation_id} not found")
@@ -228,12 +235,12 @@ class ListJoiner:
     def run(self, values: Variadic[Any]):
         result = list(chain(*values))
         return {"values": result}
-    
+   
 @component
 class ChatMessageWrapper:
     def __init__(self):
         component.set_output_types(self, messages=List[ChatMessage])
-        
+       
     def run(self, text: str) -> List[ChatMessage]:
         return {"messages": [ChatMessage.from_user(text)]}
 
@@ -245,20 +252,17 @@ def setup_environment() -> str:
         raise ValueError("MISTRAL_API_KEY not found in environment variables")
     return api_key
 
-
-
-
-def setup_document_store(url, index_name ) -> QdrantDocumentStore:
-
+def setup_document_store(host="100.107.35.86", collection_name="recipe_test") -> QdrantDocumentStore:
     document_store = QdrantDocumentStore(
-        url,
-        index=index_name,
+        url=f"http://{host}:6333",  # Using standard Qdrant port
+        index=collection_name,
         embedding_dim=768,
         recreate_index=False,
         return_embedding=True,
         wait_result_from_api=True,
+        timeout=60.0  # Increased timeout
     )
-
+   
     return document_store
 
 def chat_loop(conversation: Conversation):
@@ -273,15 +277,11 @@ def chat_loop(conversation: Conversation):
        print(f"☀️ {result['rag_documents']}" )
        print(f"PROMPT: {result['prompt_bild']}" )
 
-       
-
-
 def main():
-   api_key = setup_environment()
-   document_store = setup_document_store("100.107.35.86","recipe_test")
-   conversation = Conversation(api_key, document_store)
-   chat_loop(conversation)
-
+    api_key = setup_environment()
+    document_store = setup_document_store(host="100.107.35.86", collection_name="recipe_test")
+    conversation = Conversation(api_key, document_store)
+    chat_loop(conversation)
 
 if __name__ == "__main__":
    main()
