@@ -102,7 +102,7 @@ class BertReranker:
         self.tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
         self.bert_model = BertModel.from_pretrained("bert-base-uncased").to(self.device)
         self.ranking_model = RankingModel(input_dim=1536).to(self.device)  # 768 * 2 for query and doc embeddings
-        self.ranking_model.load_state_dict(torch.load(model_path))
+        self.ranking_model.load_state_dict(torch.load(model_path, weights_only=False))
         self.ranking_model.eval()
 
     def get_embeddings(self, texts):
@@ -173,6 +173,10 @@ class Conversation:
 
 
         # RAG connections with reranker
+#        pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
+#        pipeline.connect("retriever.documents", "prompt_builder.documents")
+#        pipeline.connect("prompt_builder.prompt", "llm.messages")
+
         pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
         pipeline.connect("retriever.documents", "reranker.documents")  # Connect retriever to reranker
         pipeline.connect("list_to_str_adapter", "reranker.query")     # Connect query to reranker
