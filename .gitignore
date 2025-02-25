@@ -26,3 +26,6 @@ API-Documentation.md
 *.sln
 *.sw?
 *csv
+
+# Ignore local environment configurations
+myenv/
