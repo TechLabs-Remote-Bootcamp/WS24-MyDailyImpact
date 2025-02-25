@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { ApiError, api } from "../../../utils/api";
+import { useImpactMetrics } from "../../../context/ImpactMetricsContext";
 import styles from "./HistoryTable.module.scss";
 
 export default function HistoryTable() {
