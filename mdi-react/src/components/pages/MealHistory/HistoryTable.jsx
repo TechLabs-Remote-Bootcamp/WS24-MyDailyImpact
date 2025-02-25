@@ -9,6 +9,7 @@ export default function HistoryTable() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const { decreaseMetrics } = useImpactMetrics();
 
   const fetchData = async () => {
     try {
@@ -77,6 +78,12 @@ export default function HistoryTable() {
   async function deleteMealLog(mealId) {
     console.log(111, logs);
     try {
+      // Find the meal to be deleted to get its category (needed for metrics update)
+      const mealToDelete = logs.find((log) => log._id === mealId);
+      if (!mealToDelete) {
+        throw new Error("Meal not found");
+      }
+
       const response = await fetch(
         `http://localhost:5001/api/meal-logs/meal/${mealId}`,
         {
@@ -90,6 +97,12 @@ export default function HistoryTable() {
       }
       const data = await response.json();
       console.log("print data:", data);
+
+      // Update the impact metrics to reflect the deletion
+      if (token && token.id) {
+        await decreaseMetrics(mealToDelete.category, token.id);
+      }
+
       // Remove the deleted meal from the logs state
       setLogs(logs.filter((log) => log._id !== mealId));
       console.log(logs);

@@ -70,7 +70,7 @@ export function ImpactMetricsProvider({ children }) {
         newMetrics
       );
       console.log("Update response:", response);
-      
+
       if (response && response.metrics) {
         setMetrics(response.metrics);
       } else {
@@ -78,6 +78,43 @@ export function ImpactMetricsProvider({ children }) {
       }
     } catch (error) {
       console.error("Error updating impact metrics:", error);
+    }
+  };
+
+  // New function to decrease metrics when a meal is deleted
+  const decreaseMetrics = async (mealType, userId) => {
+    try {
+      const impact = IMPACT_VALUES[mealType];
+
+      // Calculate new metrics, ensuring they don't go below 0
+      const newMetrics = {
+        animalsSaved: Math.max(
+          0,
+          Number(metrics.animalsSaved) - impact.animalsSaved
+        ),
+        co2Reduced: Math.max(0, Number(metrics.co2Reduced) - impact.co2Reduced),
+        waterSaved: Math.max(0, Number(metrics.waterSaved) - impact.waterSaved),
+        forestLandSaved: Math.max(
+          0,
+          Number(metrics.forestLandSaved) - impact.forestLandSaved
+        ),
+      };
+
+      // Update metrics in the backend
+      const response = await api.post(
+        `/api/impact-metrics/${userId}`,
+        newMetrics
+      );
+      console.log("Decrease metrics response:", response);
+
+      // Update metrics in the state
+      if (response && response.metrics) {
+        setMetrics(response.metrics);
+      } else {
+        setMetrics(newMetrics);
+      }
+    } catch (error) {
+      console.error("Error decreasing impact metrics:", error);
     }
   };
 
