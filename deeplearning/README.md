@@ -7,40 +7,31 @@ This repository contains the deep learning feature of our project - a Recipe Gen
 - RAG-based recipe generation
 - Reranking for improved recipe relevance
 
+## setup 
+1. you need to choose the right branch in git
+2. install uv
 
-## Input/Output Specification
+3. go to the folder `deeplearning`. depending on your folder-structure it might be
+```
+cd deeplearning
+``` 
 
-### Input Format
-```python
-input_text = "Carrots, Mushrooms, Tofu"
+4. Syncing your virtual environment aligned with your project's dependency requirements with pyproject.toml
+``` 
+uv sync
+``` 
+
+
+5. go to the folder rag_pipeline/app
+```
+cd rag_pipeline/app
+``` 
+
+6. run the API (you don't need the extra step to Activate your environment)
+``` 
+uv run fastapi dev
 ```
 
-### Output Format
-The system generates a JavaScript object containing:
-```javascript
-{
-    "recipeName": "Stir-Fried Tofu with Carrots and Mushrooms",
-    "ingredients": [
-        "200g spaghetti",
-        "2 cloves garlic, minced",
-        "2 tablespoons olive oil",
-        "1 Carrot", 
-        "5 Mushrooms", 
-        "100g Tofu"
-    ],
-    "category": "Main Course"
-}
-```
-
-        
-   
-## Setup and Installation
-
-## Usage
-
-## Integration with Frontend
-
-## Testing
 
 ## responsible Team Members
 - Kate
