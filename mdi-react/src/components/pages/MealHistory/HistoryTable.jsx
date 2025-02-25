@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { ApiError, api } from "../../../utils/api";
 import styles from "./HistoryTable.module.scss";
 
-export default function HistoryTable() {
+export default function HistoryTable({ onDataSubmit }) {
   const [token, setToken] = useState(null);
   const [logs, setLogs] = useState([]);
   const [count, setCount] = useState(0);
@@ -44,9 +44,21 @@ export default function HistoryTable() {
     }
   };
 
+  const counting = () => {
+    setCount(logs.length);
+    console.log("count", count);
+    let x = document.getElementsByName("logRow");
+    console.log("x", x.length);
+    onDataSubmit(x.length);
+  };
+
   useEffect(() => {
     fetchData();
   }, []); // Only run once on mount
+
+  useEffect(() => {
+    counting();
+  }, [logs]); // Only run once on mount
 
   // When data-set is still loading
   if (loading) {
@@ -82,7 +94,8 @@ export default function HistoryTable() {
       // Remove the deleted meal from the logs state
       setLogs(logs.filter((log) => log._id !== mealId));
       console.log(logs);
-      return data;
+      setCount(logs.length);
+      console.log(20, setLogs.length, count);
     } catch (error) {
       console.error("Error:", error);
       setError("An error occurred while deleting the meal log");
@@ -103,7 +116,7 @@ export default function HistoryTable() {
         </thead>
         <tbody className={styles.tabelBody}>
           {logs.map((item) => (
-            <tr key={item._id}>
+            <tr key={item._id} name="logRow">
               <td>{formatDate(item.date)}</td>
               <td>{item.category}</td>
               <td>{item.mealName}</td>
