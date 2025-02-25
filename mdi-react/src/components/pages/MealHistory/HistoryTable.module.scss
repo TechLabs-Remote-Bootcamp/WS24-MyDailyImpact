@@ -6,12 +6,24 @@
   margin: 1rem 3rem;
 }
 
+.textLine {
+  color: $primary-medium;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  align-self: start;
+  margin: 0.8rem 0 0 0;
+}
+
 .formSection {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   background-color: $primary-extra-light;
   border-radius: 15px;
   padding: 0em 1em 1em 1em;
   border: 3px solid $primary-medium;
   width: 100%;
+  align-content: center;
 
   .tableContainer {
     table-layout: fixed;
@@ -97,6 +109,11 @@
   text-align: center;
   cursor: pointer;
 
+  button {
+    background-color: $primary-extra-light;
+    border: none;
+    padding: 0;
+  }
   svg {
     height: 1.4rem;
     width: 1.4rem;
