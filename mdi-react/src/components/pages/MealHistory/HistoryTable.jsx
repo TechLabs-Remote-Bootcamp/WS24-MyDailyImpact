@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { ApiError, api } from "../../../utils/api";
 import styles from "./HistoryTable.module.scss";
 
-export default function HistoryTable({ onDataSubmit }) {
+export default function HistoryTable() {
   const [token, setToken] = useState(null);
   const [logs, setLogs] = useState([]);
   const [count, setCount] = useState(0);
@@ -49,7 +49,6 @@ export default function HistoryTable({ onDataSubmit }) {
     console.log("count", count);
     let x = document.getElementsByName("logRow");
     console.log("x", x.length);
-    onDataSubmit(x.length);
   };
 
   useEffect(() => {
