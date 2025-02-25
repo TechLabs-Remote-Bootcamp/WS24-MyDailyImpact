@@ -120,7 +120,7 @@ export function ImpactMetricsProvider({ children }) {
 
   return (
     <ImpactMetricsContext.Provider
-      value={{ metrics, updateMetrics, loadMetrics }}
+      value={{ metrics, updateMetrics, decreaseMetrics, loadMetrics }}
     >
       {children}
     </ImpactMetricsContext.Provider>
