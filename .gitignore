@@ -26,3 +26,5 @@ API-Documentation.md
 *.sln
 *.sw?
 *csv
+
+venv39/
