@@ -1,0 +1,15 @@
+@use "../../../styles/colors.scss" as *;
+@use "../../../styles/fonts.scss" as *;
+
+.about-text {
+  font-family: $font-family-general;
+  padding-top: 1rem;
+
+  .highlighted {
+    color: $primary-medium;
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+}
