@@ -3,6 +3,7 @@ import treeworld_big from "../../../images/treeWorld1250.png";
 import { GrUpload } from "react-icons/gr";
 import styles from "./LC_imageUpload.module.scss";
 
+// Component is currently not used in the app. Waits for later using.
 export default function LC_imageUpload() {
   const [image, setImage] = useState("");
 

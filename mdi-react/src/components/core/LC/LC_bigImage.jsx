@@ -1,6 +1,7 @@
 import treeworld_big from "../../../images/treeWorld1250.png";
 import styles from "./LC_bigImage.module.scss";
 
+// props are for later using (f.e. for laying text over the image or let the image rotate)
 function LC_bigImage({ props }) {
   return (
     <div className={styles.imageContainer}>
