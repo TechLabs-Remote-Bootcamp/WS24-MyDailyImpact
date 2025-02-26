@@ -57,7 +57,7 @@ export default function HistoryTable() {
 
   useEffect(() => {
     counting();
-  }, [logs]); // Only run once on mount
+  }, [logs]); // Runs when logs are changing
 
   // When data-set is still loading
   if (loading) {
@@ -93,8 +93,8 @@ export default function HistoryTable() {
       // Remove the deleted meal from the logs state
       setLogs(logs.filter((log) => log._id !== mealId));
       console.log(logs);
-      setCount(logs.length);
-      console.log(20, setLogs.length, count);
+      // setCount(logs.length);
+      // console.log(20, setLogs.length, count);
     } catch (error) {
       console.error("Error:", error);
       setError("An error occurred while deleting the meal log");
