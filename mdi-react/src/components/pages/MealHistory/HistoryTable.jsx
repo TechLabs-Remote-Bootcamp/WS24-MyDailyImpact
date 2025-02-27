@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { ApiError, api } from "../../../utils/api";
+import { useImpactMetrics } from "../../../context/ImpactMetricsContext";
 import styles from "./HistoryTable.module.scss";
 
 export default function HistoryTable() {
@@ -9,6 +10,7 @@ export default function HistoryTable() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const { decreaseMetrics, loadMetrics } = useImpactMetrics();
 
   const fetchData = async () => {
     try {
@@ -75,8 +77,15 @@ export default function HistoryTable() {
   }
 
   async function deleteMealLog(mealId) {
-    console.log(111, logs);
+    console.log("Deleting meal:", mealId);
     try {
+      // Find the meal to be deleted to get its category (needed for metrics update)
+      const mealToDelete = logs.find((log) => log._id === mealId);
+      if (!mealToDelete) {
+        throw new Error("Meal not found");
+      }
+      console.log("Meal to delete:", mealToDelete);
+
       const response = await fetch(
         `http://localhost:5001/api/meal-logs/meal/${mealId}`,
         {
@@ -85,21 +94,46 @@ export default function HistoryTable() {
           headers: api.setAuthHeader(token),
         }
       );
-      if (!response) {
-        throw new Error("Failed to delete meal log");
+
+      if (!response.ok) {
+        throw new Error(
+          "Failed to delete meal log, status: " + response.status
+        );
       }
+
       const data = await response.json();
-      console.log("print data:", data);
+      console.log("Delete response data:", data);
+
+      // Update the impact metrics to reflect the deletion
+      if (token && token.id) {
+        console.log("Decreasing metrics for:", mealToDelete.category);
+        await decreaseMetrics(mealToDelete.category, token.id);
+
+        // Force reload metrics to ensure everything is up to date
+        await loadMetrics(token.id);
+        console.log("Metrics updated after deletion");
+      }
+
       // Remove the deleted meal from the logs state
       setLogs(logs.filter((log) => log._id !== mealId));
-      console.log(logs);
-      setCount(logs.length);
-      console.log(20, setLogs.length, count);
+      console.log("Updated logs after deletion");
+      setCount((prev) => prev - 1);
+
+      // Optional: Show a success message to the user
+      alert("Meal deleted successfully and impact metrics updated!");
     } catch (error) {
-      console.error("Error:", error);
-      setError("An error occurred while deleting the meal log");
+      console.error("Error deleting meal log:", error);
+      setError(
+        "An error occurred while deleting the meal log: " + error.message
+      );
+      alert("Failed to delete meal: " + error.message);
     }
   }
+
+  // Add a function to go back to dashboard (forcing a reload)
+  const backToDashboard = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <>
