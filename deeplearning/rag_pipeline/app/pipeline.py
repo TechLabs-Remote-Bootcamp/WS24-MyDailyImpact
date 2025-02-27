@@ -35,15 +35,9 @@ from transformers import DistilBertTokenizer, DistilBertModel
 import torch
 from haystack import component
 from typing import List
-
 # for reranking
-import torch
 import torch.nn as nn
-from haystack import component
-from typing import List, Dict
-from haystack import Document
-from transformers import BertTokenizer, BertModel
-
+import torch.nn.functional as F
 
 # Constants
 CHAT_TEMPLATE = """your role:
@@ -84,50 +78,48 @@ QUERY_REPHRASE_TEMPLATE = """
         Rewritten Query:
 """
 
-class RankingModel(nn.Module):
-    def __init__(self, input_dim):
-        super(RankingModel, self).__init__()
-        self.fc1 = nn.Linear(input_dim, 128)
-        self.fc2 = nn.Linear(128, 1)
-
-    def forward(self, query_embedding, doc_embedding):
-        combined = torch.cat((query_embedding, doc_embedding), dim=1)
-        x = torch.relu(self.fc1(combined))
-        return self.fc2(x)
+class SimilarityNN(nn.Module):
+    def __init__(self, embedding_dim):
+        super(SimilarityNN, self).__init__()
+        self.fc1 = nn.Linear(embedding_dim * 2, 512)
+        self.fc2 = nn.Linear(512, 128)
+        self.fc3 = nn.Linear(128, 1)  # Output a similarity score
+        self.relu = nn.ReLU()
+    
+    def forward(self, query_emb, doc_emb):
+        x = torch.cat([query_emb, doc_emb], dim=-1)  # Concatenate embeddings
+        x = self.relu(self.fc1(x))
+        x = self.relu(self.fc2(x))
+        x = self.fc3(x)  # Output score
+        return x
 
 @component
-class BertReranker:
-    def __init__(self, model_path: str):
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-        self.bert_model = BertModel.from_pretrained("bert-base-uncased").to(self.device)
-        self.ranking_model = RankingModel(input_dim=1536).to(self.device)  # 768 * 2 for query and doc embeddings
-        self.ranking_model.load_state_dict(torch.load(model_path, weights_only=False))
-        self.ranking_model.eval()
+class EnhancedSimilarityComponent:
+    def __init__(self, model):
+        self.model = model
 
-    def get_embeddings(self, texts):
-        encoded_input = self.tokenizer(texts, padding=True, truncation=True, return_tensors="pt").to(self.device)
-        with torch.no_grad():
-            output = self.bert_model(**encoded_input)
-        embeddings = output.last_hidden_state.mean(dim=1)
-        return embeddings
+    @component.output_types(top_documents=List[Document])
+    def run(self, query_embedding: List[float], documents: List[Document]) -> Dict[str, Any]:
 
-    @component.output_types(documents=List[Document])
-    def run(self, query: str, documents: List[Document]) -> Dict[str, List[Document]]:
-        query_embedding = self.get_embeddings([query]).squeeze(0)
-        reranked_docs = []
+        # tests if documents have Embeddings  
+        print(f"recieved documents: {len(documents)}")
+        docs_with_embeddings = [doc for doc in documents if doc.embedding is not None]
+        print(f"documents with Embeddings: {len(docs_with_embeddings)}")
+        if not docs_with_embeddings:
+            print("no Embeddings found.")
 
-        for doc in documents:
-            doc_embedding = torch.tensor(doc.embedding).to(self.device)
-            with torch.no_grad():
-                rerank_score = self.ranking_model(query_embedding, doc_embedding).squeeze().item()
-            reranked_docs.append((doc, rerank_score))
-
-        reranked_docs.sort(key=lambda x: x[1], reverse=True)
-        top_docs = [doc[0] for doc in reranked_docs[:10]]  # Keep top 10 documents
+        reference_embeddings = [doc.embedding for doc in documents if doc.embedding is not None]
+        similarities = []
+        query_tensor = torch.tensor(query_embedding).float()
         
-        return {"documents": top_docs}
+        for ref_emb in reference_embeddings:
+            ref_tensor = torch.tensor(ref_emb).float()
+            similarity_score = self.model(query_tensor, ref_tensor).item()
+            similarities.append(similarity_score)
 
+        top_10_indices = sorted(range(len(similarities)), key=lambda i: similarities[i], reverse=True)[:10]
+        
+        return {"top_documents": [documents[i] for i in top_10_indices]}
 
 class Conversation:
     def __init__(self, api_key: str, document_store: InMemoryDocumentStore):
@@ -143,20 +135,27 @@ class Conversation:
         llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
         rephrase_llm = MistralChatGenerator(api_key=Secret.from_token(api_key), model='mistral-large-latest')
 
+        # for reranker
+        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../reranker/similarity_nn.pth')
+        model = SimilarityNN(embedding_dim=768)
+        model.load_state_dict(torch.load(model_path))
+        model.eval()
+        similarity_component = EnhancedSimilarityComponent(model=model)
+
         # Add components
         pipeline.add_component("query_rephrase_prompt_builder", PromptBuilder(template=QUERY_REPHRASE_TEMPLATE))
         pipeline.add_component("message_wrapper", ChatMessageWrapper())
         pipeline.add_component("query_rephrase_llm", rephrase_llm)
         pipeline.add_component("list_to_str_adapter", OutputAdapter(template="{{ replies[0] }}", output_type=str))
 
-        pipeline.add_component("retriever", QdrantEmbeddingRetriever(document_store=document_store))
+#        pipeline.add_component("retriever", QdrantEmbeddingRetriever(document_store=document_store))
+        pipeline.add_component("retriever", QdrantEmbeddingRetriever(document_store=document_store, top_k=25, return_embedding=True))
+
+# for reranker
+        pipeline.add_component("similarity_component", instance=similarity_component)
+
         pipeline.add_component("text_embedder", CustomDistilBertEmbedder() ) 
-
-        # Add reranker component
-        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../reranker/trained_model.pth')
-        pipeline.add_component("reranker", BertReranker(model_path=model_path))
-                
-
+                                     
         pipeline.add_component("prompt_builder", prompt_builder)
         pipeline.add_component("llm", llm)
         pipeline.add_component("memory_retriever", ChatMessageRetriever(memory_store))
@@ -171,21 +170,23 @@ class Conversation:
         pipeline.connect("query_rephrase_llm.replies", "list_to_str_adapter")
         pipeline.connect("list_to_str_adapter", "text_embedder")
 
-
-        # RAG connections with reranker
-#        pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
-#        pipeline.connect("retriever.documents", "prompt_builder.documents")
-#        pipeline.connect("prompt_builder.prompt", "llm.messages")
-
+        # RAG connections
         pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
-        pipeline.connect("retriever.documents", "reranker.documents")  # Connect retriever to reranker
-        pipeline.connect("list_to_str_adapter", "reranker.query")     # Connect query to reranker
-        pipeline.connect("reranker.documents", "prompt_builder.documents")  # Connect reranker to prompt builder
 
+# 2. version
+#        pipeline.connect("retriever.documents", "prompt_builder.documents")
+# 3.b. version
+        pipeline.connect("retriever.documents", "similarity_component.documents")
+        pipeline.connect("text_embedder.embedding", "similarity_component.query_embedding") 
+        pipeline.connect("similarity_component.top_documents", "prompt_builder.documents")
+    
+
+        pipeline.connect("prompt_builder.prompt", "llm.messages")
 
         # Memory connections
         pipeline.connect("llm.replies", "memory_joiner")
         pipeline.connect("memory_joiner", "memory_writer")
+# gehört laut claude.ai höher??
         pipeline.connect("memory_retriever", "prompt_builder.memories")
 
         return pipeline
@@ -206,7 +207,7 @@ class Conversation:
                 },
                 "memory_joiner": {"values": [ChatMessage.from_user(message)]}
             },
-            include_outputs_from=["llm", "query_rephrase_llm", "retriever","reranker", "prompt_builder"]
+            include_outputs_from=["llm", "query_rephrase_llm", "retriever", "prompt_builder"]
         )
 
         return {
@@ -341,7 +342,7 @@ def chat_loop(conversation: Conversation):
        print(f"🎃 [Rewritten search query: {result['rewritten_query']} ]")
        print(f"🤖 {result['assistant_message']}")
        print(f"🔥 PROVIED RECIPES: {result['rag_documents']}" )
-#       print(f"🐦‍ PROMPT: {result['prompt_bild']}" )
+       print(f"🐦 PROMPT: {result['prompt_bild']}" )
 
        
 
