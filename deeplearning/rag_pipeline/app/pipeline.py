@@ -101,13 +101,6 @@ class EnhancedSimilarityComponent:
     @component.output_types(top_documents=List[Document])
     def run(self, query_embedding: List[float], documents: List[Document]) -> Dict[str, Any]:
 
-        # tests if documents have Embeddings  
-        print(f"recieved documents: {len(documents)}")
-        docs_with_embeddings = [doc for doc in documents if doc.embedding is not None]
-        print(f"documents with Embeddings: {len(docs_with_embeddings)}")
-        if not docs_with_embeddings:
-            print("no Embeddings found.")
-
         reference_embeddings = [doc.embedding for doc in documents if doc.embedding is not None]
         similarities = []
         query_tensor = torch.tensor(query_embedding).float()
@@ -119,6 +112,9 @@ class EnhancedSimilarityComponent:
 
         top_10_indices = sorted(range(len(similarities)), key=lambda i: similarities[i], reverse=True)[:10]
         
+        print([similarities[i] for i in top_10_indices])  # Top-10 similarity scores
+
+
         return {"top_documents": [documents[i] for i in top_10_indices]}
 
 class Conversation:
@@ -138,7 +134,7 @@ class Conversation:
         # for reranker
         model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../reranker/similarity_nn.pth')
         model = SimilarityNN(embedding_dim=768)
-        model.load_state_dict(torch.load(model_path))
+        model.load_state_dict(torch.load(model_path)) 
         model.eval()
         similarity_component = EnhancedSimilarityComponent(model=model)
 
@@ -207,7 +203,7 @@ class Conversation:
                 },
                 "memory_joiner": {"values": [ChatMessage.from_user(message)]}
             },
-            include_outputs_from=["llm", "query_rephrase_llm", "retriever", "prompt_builder"]
+            include_outputs_from=["llm", "query_rephrase_llm", "retriever", "similarity_component", "prompt_builder"]
         )
 
         return {
@@ -218,6 +214,7 @@ class Conversation:
 #            "rag_documents": [doc.content.split(';')[0:5] for doc in result["retriever"]['documents']],
 #            "rag_documents": [(i+1, doc.content.split(';')[0].replace('Name: ', ''), doc.content.split(';')[4].replace('Description: ', '')) for i, doc in enumerate(result["retriever"]['documents'])],
             "rag_documents": [(i+1, '🔥', doc.content.split(';')[0].replace('Name: ', '')) for i, doc in enumerate(result["retriever"]['documents'])],
+            "similarity_component": [(i+1, '💧', doc.content.split(';')[0].replace('Name: ', '')) for i, doc in enumerate(result["similarity_component"]['top_documents'])], 
             "prompt_bild": result["prompt_builder"],
         }
 
@@ -341,8 +338,11 @@ def chat_loop(conversation: Conversation):
        result = conversation.send_message(question)
        print(f"🎃 [Rewritten search query: {result['rewritten_query']} ]")
        print(f"🤖 {result['assistant_message']}")
-       print(f"🔥 PROVIED RECIPES: {result['rag_documents']}" )
-       print(f"🐦 PROMPT: {result['prompt_bild']}" )
+      # print(f"🔥 {result['rag_documents']}" )
+       print("🔥 " + "\n🔥 ".join(f"{idx}. {name}" for idx, emoji, name in result['rag_documents']))
+#       print(f"💧 {result['similarity_component']}"),
+       print("💧 " + "\n💧 ".join(f"{idx}. {name}" for idx, emoji, name in result['similarity_component']))
+#       print(f"🐦 PROMPT: {result['prompt_bild']}" )
 
        
 
