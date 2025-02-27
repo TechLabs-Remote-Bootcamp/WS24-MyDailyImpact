@@ -59,7 +59,7 @@ export default function HistoryTable() {
 
   useEffect(() => {
     counting();
-  }, [logs]); // Only run once on mount
+  }, [logs]); // Runs when logs are changing
 
   // When data-set is still loading
   if (loading) {
@@ -116,11 +116,13 @@ export default function HistoryTable() {
 
       // Remove the deleted meal from the logs state
       setLogs(logs.filter((log) => log._id !== mealId));
+      console.log(logs);
       console.log("Updated logs after deletion");
       setCount((prev) => prev - 1);
 
       // Optional: Show a success message to the user
       alert("Meal deleted successfully and impact metrics updated!");
+
     } catch (error) {
       console.error("Error deleting meal log:", error);
       setError(

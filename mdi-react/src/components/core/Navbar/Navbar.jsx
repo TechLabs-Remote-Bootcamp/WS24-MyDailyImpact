@@ -1,3 +1,5 @@
+// A alternative leaves navbar for tablet or mobile size; currently not used
+
 // import styles from "./Navbar.module.scss";
 // import { NavLink } from "react-router-dom";
 

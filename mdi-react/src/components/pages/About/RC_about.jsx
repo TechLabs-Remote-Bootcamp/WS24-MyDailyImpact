@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
+import styles from "./RC_about.module.scss";
 
 export default function RC_about() {
   return (
     <div>
       <ColoredContainers h2Text="About Us" h3Text="Using tech for good">
-        <div className="about-text">
+        <div className={styles["about-text"]}>
           <p>
             MyDailyImpact is a calculator and tracking app that shows users the
             impact they have on animals and the environment when they switch
             each meat-based meal for a plant-based one.
           </p>
-          <p className="primary">
+          <p className={styles.highlighted}>
             The purpose of this app is to{" "}
-            <span className="bold">
+            <span className={styles.bold}>
               encourage people to incorporate more plant-based meals into their
               day by displaying the number of animals and amount of CO2, forest
               land, and water they have saved over the course of their impact
@@ -25,11 +26,7 @@ export default function RC_about() {
           </p>
           <p>
             This app was developed by a team of
-            <Link
-              to="https://www.techlabs.org/"
-              target="_blank"
-              className="bold"
-            >
+            <Link to="https://www.techlabs.org/" target="_blank">
               {" "}
               TechLabs{" "}
             </Link>

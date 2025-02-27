@@ -5,22 +5,29 @@
 .home-text {
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+
+  h5 {
+    font-weight: 600;
+    color: $primary;
+  }
 }
 
 .home-list {
+  margin-top: 0.8rem;
   list-style-type: none;
   padding: 0;
-  font-weight: bold;
+  font-weight: 600;
+
   li {
     list-style-image: url("../../../images/Leaf_small.png");
     margin-left: 2rem;
     margin-bottom: 1rem;
-    color: $primary-dark;
+    color: $primary-medium;
+
     &:hover {
       color: $secondary;
     }
-  }
-  :last-child {
-    margin-bottom: 1.5rem;
   }
 }

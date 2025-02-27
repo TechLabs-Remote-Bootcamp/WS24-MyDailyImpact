@@ -2,15 +2,19 @@
 @use "../../../styles/fonts.scss" as *;
 
 .privacy-container {
+  margin-top: 1rem;
+
   h5 {
-    font-weight: bold;
-    color: $primary-dark;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    color: $primary;
   }
+
   .privacy-text {
     font-size: 1rem;
     max-height: 25rem;
     overflow-y: scroll;
+    padding-right: 0.8em;
+
     li {
       list-style: disc;
     }

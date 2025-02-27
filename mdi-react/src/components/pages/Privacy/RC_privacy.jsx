@@ -3,12 +3,12 @@ import styles from "./RC_privacy.module.scss";
 
 export default function RC_privacy() {
   return (
-    <div className={styles["privacy-container"]}>
-      <ColoredContainers h2Text="Privacy Policy for MyDailyImpact" h3Text="">
+    <ColoredContainers h2Text="Privacy Policy for MyDailyImpact" h3Text="">
+      <div className={styles["privacy-container"]}>
         <div className={styles["privacy-text"]}>
           <p>Last Updated: February 21, 2025</p>
           <p>
-            MyDailyImpact ("we," "our," or "us") is committed to protecting your
+            MyDailyImpact {`(we, our or us)`} is committed to protecting your
             privacy. This Privacy Policy explains how we collect, use, and
             safeguard your information when you use our application.
           </p>
@@ -80,7 +80,10 @@ export default function RC_privacy() {
           <p>
             For questions about this Privacy Policy or your personal data,
             please contact us at:
-            <a href="mailto:mydailyimpact@gmail.com"> mydailyimpact@gmail.com</a>
+            <a href="mailto:mydailyimpact@gmail.com">
+              {" "}
+              mydailyimpact@gmail.com
+            </a>
           </p>
 
           <p>
@@ -89,7 +92,7 @@ export default function RC_privacy() {
             and Data Science students.
           </p>
         </div>
-      </ColoredContainers>
-    </div>
+      </div>
+    </ColoredContainers>
   );
 }

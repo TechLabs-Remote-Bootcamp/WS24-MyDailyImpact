@@ -2,25 +2,23 @@
 @use "../../../styles/fonts.scss" as *;
 
 .contact-us-container {
+  margin-top: 1rem;
+
   h5 {
-    font-weight: bold;
-    color: $primary-dark;
+    font-weight: 700;
+    color: $primary;
     margin-bottom: 1rem;
   }
   .contact-us-list {
     margin: 1rem 0;
+
     li {
       list-style-image: url("../../../images/Leaf_small.png");
       margin-left: 1rem;
-      margin-bottom: 1rem;
-      color: $primary-dark;
-      &:hover {
-        color: $secondary;
-      }
+      margin-bottom: 1.2rem;
     }
   }
   .email {
-    font-weight: bold;
     margin-left: 1rem;
   }
 }
