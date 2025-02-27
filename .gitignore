@@ -27,4 +27,4 @@ API-Documentation.md
 *.sw?
 *csv
 
-myenv/
+myenv
