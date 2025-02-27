@@ -7,32 +7,59 @@ This repository contains the deep learning feature of our project - a Recipe Gen
 - RAG-based recipe generation
 - Reranking for improved recipe relevance
 
-## setup 
-1. you need to choose the right branch in git
-2. install uv
+## Setup Guide
 
-3. go to the folder `deeplearning`. depending on your folder-structure it might be
+### 1. Environment Setup
+
+#### 1.1. Repository Configuration
+Switch to the appropriate branch in git
+
+#### 1.2. install uv
+This project uses UV as its package manager. Ensure you have the UV package manager installed on your system. If not, please refer to the [official UV documentation](https://docs.astral.sh/uv/getting-started/) for installation instructions.
+
+
+#### 1.3. Navigate to Project Directory
+Navigate to the `deeplearning` project directory:
+
 ```
-cd deeplearning
-``` 
+# Verify your current location
+pwd
 
-4. Syncing your virtual environment aligned with your project's dependency requirements with pyproject.toml
+# Access the project directory. Note: The exact path may vary depending on your folder structure.
+cd deeplearning
+```
+
+
+#### 1.4. Configure Virtual Environment
+Synchronize your virtual environment with the project dependencies specified in pyproject.toml
 ``` 
 uv sync
 ``` 
 
+### 2. Qdrant Server Connection Setup
 
-5. go to the folder rag_pipeline/app
+### 3. API Usage Setup
+
+#### 3.1. Navigate to Application Directory
+Navigate to the API application directory:
+
 ```
-cd rag_pipeline/app
-``` 
+# Verify your current location
+pwd
 
-6. run the API (you don't need the extra step to Activate your environment)
+# Access the application folder. Note: The exact path may vary depending on your folder structure.
+cd deeplearning/rag_pipeline/app/
+```
+
+#### 3.2. Launch the API Server
+Start the FastAPI development server:
 ``` 
 uv run fastapi dev
 ```
+Note: The virtual environment is automatically activated by UV, so no separate activation step is required.
 
 
 ## responsible Team Members
 - Kate
 - Ella
+
