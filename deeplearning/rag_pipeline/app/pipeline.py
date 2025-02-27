@@ -108,12 +108,11 @@ class EnhancedSimilarityComponent:
         for ref_emb in reference_embeddings:
             ref_tensor = torch.tensor(ref_emb).float()
             similarity_score = self.model(query_tensor, ref_tensor).item()
-            similarities.append(similarity_score)
+            similarities.append(similarity_score)        
 
         top_10_indices = sorted(range(len(similarities)), key=lambda i: similarities[i], reverse=True)[:10]
-        
-        print([similarities[i] for i in top_10_indices])  # Top-10 similarity scores
 
+        print([similarities[i] for i in top_10_indices])  # Top-10 similarity scores
 
         return {"top_documents": [documents[i] for i in top_10_indices]}
 
