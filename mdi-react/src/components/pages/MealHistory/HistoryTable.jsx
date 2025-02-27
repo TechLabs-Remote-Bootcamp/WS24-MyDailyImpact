@@ -46,20 +46,9 @@ export default function HistoryTable() {
     }
   };
 
-  const counting = () => {
-    setCount(logs.length);
-    console.log("count", count);
-    let x = document.getElementsByName("logRow");
-    console.log("x", x.length);
-  };
-
   useEffect(() => {
     fetchData();
   }, []); // Only run once on mount
-
-  useEffect(() => {
-    counting();
-  }, [logs]); // Runs when logs are changing
 
   // When data-set is still loading
   if (loading) {
@@ -115,14 +104,16 @@ export default function HistoryTable() {
       }
 
       // Remove the deleted meal from the logs state
+      console.log(logs.length);
       setLogs(logs.filter((log) => log._id !== mealId));
-      console.log(logs);
+      console.log(logs.length);
+      console.log("a", count);
       console.log("Updated logs after deletion");
       setCount((prev) => prev - 1);
+      console.log("b", count);
 
       // Optional: Show a success message to the user
       alert("Meal deleted successfully and impact metrics updated!");
-
     } catch (error) {
       console.error("Error deleting meal log:", error);
       setError(
