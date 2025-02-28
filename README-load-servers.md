@@ -23,12 +23,12 @@ In the same bash or terminal:
 
 In the same bash or terminal:
 - `cd deeplearning/rag_pipeline/app`
-- `pip install -r requirements.txt`
+- `pip install -r requirement.txt`
 
 
 ### 4. Start the FastAPI server: 
 
-In the same bash or terminal:
+In the same bash or terminal (you should be in deeplearning/rag_pipeline/app):
 - `uvicorn main:app --host 0.0.0.0 --port 8000 --reload`
 
 ### 5. Start the backend server:
