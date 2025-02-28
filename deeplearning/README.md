@@ -36,11 +36,31 @@ Synchronize your virtual environment with the project dependencies specified in 
 uv sync
 ``` 
 
-### 2. Qdrant Server Connection Setup
+### 2. Mistral API Key Setup
+The RAG pipeline requires a Mistral API key to function properly.
 
-### 3. API Usage Setup
+1. Create a Mistral API key by registering at Mistral AI Platform
+2. Once you have your API key, create a `.env` file in the project root directory:
+```
+# Navigate to the project root
+cd deeplearning
 
-#### 3.1. Navigate to Application Directory
+# Create and edit .env file
+touch .env
+```
+
+3. Add your Mistral API key to the .env file:
+``` 
+CopyMISTRAL_API_KEY=your_api_key_here
+```
+Note: The .env file is already included in the .gitignore to prevent accidentally sharing the API key.
+
+
+### 3. Qdrant Server Connection Setup
+
+### 4. API Usage Setup
+
+#### 4.1. Navigate to Application Directory
 Navigate to the API application directory:
 
 ```
@@ -51,7 +71,7 @@ pwd
 cd deeplearning/rag_pipeline/app/
 ```
 
-#### 3.2. Launch the API Server
+#### 4.2. Launch the API Server
 Start the FastAPI development server:
 ``` 
 uv run fastapi dev
