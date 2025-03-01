@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
+import DeleteButton from "../../core/Button/Delete-button";
 import styles from "./RC_Profile.module.scss";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../utils/api";
@@ -104,12 +105,12 @@ export default function RC_Profile({ onEditClick }) {
           ))}
         </div>
         <Button onClick={onEditClick}>Edit Profile</Button>
-        <Button
+        <DeleteButton
           onClick={handleDeleteAccount}
           className={styles["delete-button"]}
         >
           Delete Account
-        </Button>
+        </DeleteButton>
       </ColoredContainers>
     </div>
   );
