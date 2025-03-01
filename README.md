@@ -1,8 +1,7 @@
 # Loading FastAPI (from AI), backend, and frontend servers to have the old version of the app’s chatbot render correctly
 
 This is the old working version of the chatbot the AI team created before they made their more advanced RAG chatbot.
-
-Note: If you encounter any errors or messages during the setup process in which you need more information (e.g., Mistral API Key, MongoDB connection string), please contact the team lead Vivian (vivianmargothsandler@gmail.com).
+**Note: while having some responsiveness, this version of the app is not totally responsive. To see our totally responsive app, please see the main branch**
 
 ## Instructions to create and activate the virtual environment and load the servers:
 
@@ -30,19 +29,33 @@ In the same bash or terminal:
 - `pip install -r requirement.txt`
 
 
-### 4. Start the FastAPI server: 
+### 4. Create a .env file in the root directory with the following variables:
 
-In the same bash or terminal (you should be in deeplearning/rag_pipeline/app):
+ ```
+APP_PORT=5001
+MONGODB_URI=mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+MISTRAL_API_KEY=mistral_api_key
+
+```
+**NOTE: please contact the team lead Vivian (vivianmargothsandler@gmail.com) to acquire these private keys**
+
+
+### 5. Start the FastAPI server: 
+
+In the same bash or terminal from step 3 (you should be in your virtual environment and in the directory deeplearning/rag_pipeline/app):
 - `uvicorn main:app --host 0.0.0.0 --port 8000 --reload`
 
-### 5. Start the backend server:
+
+### 6. Start the backend server:
 
 - open new bash or new terminal
 - `cd backend`
 - install dependencies (`npm install`)
 - `npm run server`
 
-### 6. Start the frontend/React development server:
+
+### 7. Start the frontend/React development server:
 
 - open new bash or new terminal
 - `cd mdi-react`
