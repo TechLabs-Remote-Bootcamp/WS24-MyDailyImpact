@@ -4,6 +4,9 @@
 .imprint-container {
   margin: 1rem 1rem 0;
   font-size: 1rem;
+  max-height: 25rem;
+  overflow-y: scroll;
+  padding-right: 0.8em;
 
   h5 {
     font-weight: 600;
