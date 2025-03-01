@@ -222,7 +222,7 @@ class Conversation:
         memory_retriever = self.pipeline.get_component("memory_retriever")
         return memory_retriever.run()["messages"]
 
-
+from sklearn.preprocessing import normalize
 
 @component
 class CustomDistilBertEmbedder:
@@ -232,6 +232,9 @@ class CustomDistilBertEmbedder:
         self.model = DistilBertModel.from_pretrained("distilbert-base-uncased")
         self.model.eval()  # Setze das Modell in den Evaluierungsmodus
         
+    def normalize_embedding(self, embedding):
+        return normalize(embedding.reshape(1, -1), norm='l2').flatten()
+    
     def embed_text(self, text):
         encoded_input = self.tokenizer(
             text,
@@ -250,8 +253,10 @@ class CustomDistilBertEmbedder:
         embedding = torch.sum(last_hidden_states * input_mask_expanded, 1) / torch.clamp(
             input_mask_expanded.sum(1), min=1e-9
         )
+
+        embedding = self.normalize_embedding(embedding.numpy())
         
-        return embedding.squeeze().numpy()
+        return embedding
 
     @component.output_types(embedding=List[float])
     def run(self, query: str):
