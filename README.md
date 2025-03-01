@@ -1,5 +1,8 @@
 # Loading FastAPI (from AI), backend, and frontend servers to have the old version of the app’s chatbot render correctly
 
+This was the old working version of the chatbot the AI team created before they made their RAG chatbot.
+Note: If you encounter any errors or messages during the setup process in which you need a Mistral API Key or MongoDB connection string, please contact the team lead Vivian (vivianmargothsandler@gmail.com)
+
 ## Instructions to create and activate the virtual environment and load the servers:
 
 ### 1. Create a virtual environment in the root of the project:
