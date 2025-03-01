@@ -91,4 +91,4 @@ After you have merged your code to the main branch, **please delete that branch*
    npm run dev
    ```
 
-7. Open your browser and navigate to `http://localhost:5173``
+7. Open your browser and navigate to `http://localhost:5173`
