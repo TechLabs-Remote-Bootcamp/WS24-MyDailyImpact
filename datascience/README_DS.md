@@ -9,6 +9,35 @@ This folder contains the data science features of our project:
 The features are coded in Python and not integrated into the rest of the app due to limitations in time and experience.
 
 ## Virtual Environment
+Please make sure you have forked the repo, clone it on your computer, and then set up a new virtual environment.
+Python 3.11.3 is recommended here, but another compatible Python version can also be used.
+
+The added __requirements.txt__ contains all libraries and dependencies we need to execute the code. 
+
+### **`macOS`** type the following commands: 
+
+- Install the virtual environment and the required packages by following commands:
+
+    ```BASH
+    pyenv local 3.11.3
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install --upgrade pip
+    pip install -r requirements.txt
+    ```
+### **`WindowsOS`** type the following commands:
+
+- Install the virtual environment and the required packages by following commands.
+
+    For `Git-Bash` CLI :
+  
+    ```Bash
+    pyenv local 3.11.3
+    python -m venv .venv
+    source .venv/Scripts/activate
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+    ```
 
 ## Features
  ### Impact Calculation
