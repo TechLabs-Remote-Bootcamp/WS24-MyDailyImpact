@@ -36,7 +36,7 @@ import pandas as pd
 import numpy as np
 
 # load dataframe
-df = pd.read_csv('ds/data/meat-supply-per-person.csv')
+df = pd.read_csv('datascience\impact_calc\data\meat-supply-per-person.csv')
 print(df.head())
 
 # drop columns

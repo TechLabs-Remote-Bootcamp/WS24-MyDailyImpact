@@ -5,7 +5,7 @@
 import pandas as pd
 
 # File path to the dataset
-file_path = "SuEatableLife_Food_Fooprint_database.xlsx"  # Replace this with your actual file path
+file_path = r"datascience\impact_calc\data\SuEatableLife_Food_Fooprint_database.xlsx"  # Replace this with your actual file path
 
 # Step 1: Load the data
 # Read the Excel file and load the relevant sheet containing water footprint data

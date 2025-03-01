@@ -43,8 +43,8 @@ import pandas as pd
 
 
 ############################### 1. Calculate weights of different types of animal product (e.g. poultry, pig, beef, etc) based on the world consumption data (2021). 
-df_meat_type = pd.read_csv('ds\data\per-capita-meat-type.csv')
-population = pd.read_csv('ds\data\population-per-country.csv',header=2)
+df_meat_type = pd.read_csv('datascience\impact_calc\data\per-capita-meat-type.csv')
+population = pd.read_csv('datascience\impact_calc\data\population-per-country.csv',header=2)
 
 # Data transformation
 population = population[['Country Code','Country Name','2023']].rename(columns={'2023':'Population'})
@@ -62,9 +62,9 @@ pct_per_type = pct_per_type.rename({'Meat, poultry ':'Poultry Meat', 'Meat, beef
 
 
 #################################### 2. Aggregate impact per kg food per food category
-df_co2 = pd.read_csv('ds/data/greenhouse-gas-emissions-per-kilogram-of-food-product.csv',index_col='Entity')
-df_land = pd.read_csv('ds/data/land-use-per-kilogram-of-food-product.csv',index_col='Entity')
-df_water = pd.read_csv('ds/data/freshwater-withdrawals-per-kilogram-of-food-product.csv',index_col='Entity')
+df_co2 = pd.read_csv('datascience/impact_calc/data/greenhouse-gas-emissions-per-kilogram-of-food-product.csv',index_col='Entity')
+df_land = pd.read_csv('datascience/impact_calc/data/land-use-per-kilogram-of-food-product.csv',index_col='Entity')
+df_water = pd.read_csv('datascience/impact_calc/data/freshwater-withdrawals-per-kilogram-of-food-product.csv',index_col='Entity')
 
 # combine three file to one dataframe and rearrange the columns
 df = pd.concat([df_co2,df_land,df_water],axis = 1)
