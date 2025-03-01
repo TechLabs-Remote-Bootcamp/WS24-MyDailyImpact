@@ -7,41 +7,79 @@ This repository contains the deep learning feature of our project - a Recipe Gen
 - RAG-based recipe generation
 - Reranking for improved recipe relevance
 
+## Setup Guide
 
-## Input/Output Specification
+### 1. Environment Setup
 
-### Input Format
-```python
-input_text = "Carrots, Mushrooms, Tofu"
+#### 1.1. Repository Configuration
+Switch to the appropriate branch in git
+
+#### 1.2. install uv
+This project uses UV as its package manager. Ensure you have the UV package manager installed on your system. If not, please refer to the [official UV documentation](https://docs.astral.sh/uv/getting-started/) for installation instructions.
+
+
+#### 1.3. Navigate to Project Directory
+Navigate to the `deeplearning` project directory:
+
+```
+# Verify your current location
+pwd
+
+# Access the project directory. Note: The exact path may vary depending on your folder structure.
+cd deeplearning
 ```
 
-### Output Format
-The system generates a JavaScript object containing:
-```javascript
-{
-    "recipeName": "Stir-Fried Tofu with Carrots and Mushrooms",
-    "ingredients": [
-        "200g spaghetti",
-        "2 cloves garlic, minced",
-        "2 tablespoons olive oil",
-        "1 Carrot", 
-        "5 Mushrooms", 
-        "100g Tofu"
-    ],
-    "category": "Main Course"
-}
+
+#### 1.4. Configure Virtual Environment
+Synchronize your virtual environment with the project dependencies specified in pyproject.toml
+``` 
+uv sync
+``` 
+
+### 2. Mistral API Key Setup
+The RAG pipeline requires a Mistral API key to function properly.
+
+1. Create a Mistral API key by registering at Mistral AI Platform
+2. Once you have your API key, create a `.env` file in the project root directory:
+```
+# Navigate to the project root
+cd deeplearning
+
+# Create and edit .env file
+touch .env
 ```
 
-        
-   
-## Setup and Installation
+3. Add your Mistral API key to the .env file:
+``` 
+CopyMISTRAL_API_KEY=your_api_key_here
+```
+Note: The .env file is already included in the .gitignore to prevent accidentally sharing the API key.
 
-## Usage
 
-## Integration with Frontend
+### 3. Qdrant Server Connection Setup
 
-## Testing
+### 4. API Usage Setup
+
+#### 4.1. Navigate to Application Directory
+Navigate to the API application directory:
+
+```
+# Verify your current location
+pwd
+
+# Access the application folder. Note: The exact path may vary depending on your folder structure.
+cd deeplearning/rag_pipeline/app/
+```
+
+#### 4.2. Launch the API Server
+Start the FastAPI development server:
+``` 
+uv run fastapi dev
+```
+Note: The virtual environment is automatically activated by UV, so no separate activation step is required.
+
 
 ## responsible Team Members
 - Kate
 - Ella
+
