@@ -1,0 +1,1 @@
+The archive folder includes alternative ways to create synthetic user data and some old code for future reference.
