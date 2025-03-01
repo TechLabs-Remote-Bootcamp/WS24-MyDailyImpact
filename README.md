@@ -1,7 +1,8 @@
 # Loading FastAPI (from AI), backend, and frontend servers to have the old version of the app’s chatbot render correctly
 
 This is the old working version of the chatbot the AI team created before they made their more advanced RAG chatbot.
-**Note: while having some responsiveness, this version of the app is not totally responsive. To see our totally responsive app, please see the main branch**
+
+**Note: while having some responsiveness, this version of the app is not totally responsive. To see our totally responsive app, please see the main branch.**
 
 ## Instructions to create and activate the virtual environment and load the servers:
 
