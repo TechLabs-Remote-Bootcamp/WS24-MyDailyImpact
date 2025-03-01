@@ -39,12 +39,14 @@ In the same bash or terminal (you should be in deeplearning/rag_pipeline/app):
 
 - open new bash or new terminal
 - `cd backend`
+- install dependencies (`npm install`)
 - `npm run server`
 
 ### 6. Start the frontend/React development server:
 
 - open new bash or new terminal
 - `cd mdi-react`
+- install dependencies (`npm install`)
 - `npm run dev`
 
 ---
