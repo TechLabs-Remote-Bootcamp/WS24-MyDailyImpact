@@ -63,3 +63,9 @@
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .user-information-container {
+    margin-top: 1rem;
+  }
+}
