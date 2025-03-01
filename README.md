@@ -2,7 +2,7 @@
 
 This is the old working version of the chatbot the AI team created before they made their more advanced RAG chatbot.
 
-**Note: while having some responsiveness, this version of the app is not totally responsive. To see our totally responsive app, please see the main branch.**
+**NOTE: while having some responsiveness, this version of the app is not totally responsive. The purpose of this branch is to see what a functioning chatbot looks like on our app. To see our totally responsive app, please see the main branch.**
 
 ## Instructions to create and activate the virtual environment and load the servers:
 
