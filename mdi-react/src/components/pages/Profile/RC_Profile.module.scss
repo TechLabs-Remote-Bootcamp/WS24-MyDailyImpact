@@ -2,12 +2,70 @@
 @use "../../../styles/fonts.scss" as *;
 
 .user-information-container {
-  min-width: 10%;
+  width: 100%;
   .user-information {
     margin-bottom: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+
+    .field {
+      min-width: 100px;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+    }
+
     .input {
       color: $secondary-medium;
       font-weight: bold;
+      flex-grow: 1;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      max-width: calc(100% - 120px);
     }
+  }
+}
+
+/* Adjust layout for tablet screens */
+@media only screen and (max-width: 768px) {
+  .user-information-container {
+    .user-information {
+      .field {
+        min-width: 90px;
+      }
+
+      .input {
+        max-width: calc(100% - 100px); /* ADDED: Adjust maximum width */
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .user-information-container {
+    font-size: 1rem;
+
+    .user-information {
+      flex-direction: column;
+      margin-bottom: 1rem;
+
+      .field {
+        width: 100%;
+        margin-bottom: 0.2rem;
+      }
+
+      .input {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .user-information-container {
+    margin-top: 1rem;
   }
 }

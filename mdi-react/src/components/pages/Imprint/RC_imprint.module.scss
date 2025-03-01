@@ -3,8 +3,14 @@
 
 .imprint-container {
   margin: 1rem 1rem 0;
-  font-size: 1rem;
 
+  .imprint-text {
+    font-size: 1rem;
+    max-height: 38rem;
+    overflow-y: scroll;
+    padding-right: 0.8em;
+    height: auto;
+  }
   h5 {
     font-weight: 600;
     color: $primary;

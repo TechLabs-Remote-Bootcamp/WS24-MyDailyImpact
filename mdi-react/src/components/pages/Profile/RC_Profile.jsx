@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import ColoredContainers from "../../core/ColoredContainers/Colored-Containers";
 import Button from "../../core/Button/Button";
+import DeleteButton from "../../core/Button/Delete-button";
 import styles from "./RC_Profile.module.scss";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../utils/api";
@@ -104,62 +105,13 @@ export default function RC_Profile({ onEditClick }) {
           ))}
         </div>
         <Button onClick={onEditClick}>Edit Profile</Button>
-        <Button
+        <DeleteButton
           onClick={handleDeleteAccount}
           className={styles["delete-button"]}
         >
           Delete Account
-        </Button>
+        </DeleteButton>
       </ColoredContainers>
     </div>
   );
-
-  // return (
-  //   <div className="RC_home">
-  //     <ColoredContainers h2Text="User profile">
-  //       <div className={styles["user-information-container"]}>
-  //         <li className={styles["user-information"]}>
-  //           <span className={styles["field"]}>First Name: </span>
-  //           <span className={styles["input"]}>
-  //             {profileData.firstName || "N/A"}
-  //           </span>
-  //         </li>
-  //         <li className={styles["user-information"]}>
-  //           <span className={styles["field"]}>Last Name: </span>
-  //           <span className={styles["input"]}>
-  //             {profileData.lastName || "N/A"}
-  //           </span>
-  //         </li>
-  //         <li className={styles["user-information"]}>
-  //           <span className={styles["field"]}>Birthday: </span>
-  //           <span className={styles["input"]}>
-  //             {profileData.birthday || "N/A"}
-  //           </span>
-  //         </li>
-  //         <li className={styles["user-information"]}>
-  //           <span className={styles["field"]}>Gender: </span>
-  //           <span className={styles["input"]}>
-  //             {profileData.gender || "N/A"}
-  //           </span>
-  //         </li>
-  //         <li className={styles["user-information"]}>
-  //           <span className={styles["field"]}>Country: </span>
-  //           <span className={styles["input"]}>
-  //             {profileData.country || "N/A"}
-  //           </span>
-  //         </li>
-  //         <li className={styles["user-information"]}>
-  //           <span className={styles["field"]}>Email: </span>
-  //           <span className={styles["input"]}>
-  //             {profileData.email || "N/A"}
-  //           </span>
-  //         </li>
-  //         <li className={styles["user-information"]}>
-  //           <span className={styles["field"]}>Password: </span>
-  //           <span className={styles["input"]}>••••••••</span>
-  //         </li>
-  //       </div>
-  //     </ColoredContainers>
-  //   </div>
-  // );
 }

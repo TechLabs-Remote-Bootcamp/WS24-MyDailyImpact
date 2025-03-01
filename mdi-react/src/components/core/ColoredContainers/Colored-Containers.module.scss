@@ -9,11 +9,8 @@
   grid-template-rows: auto 2.2em auto 2.2em auto;
   color: $white;
   min-width: 25rem;
-
-  // div {
-  //   border-radius: 26px;
-  //   padding: 1rem 1.8rem;
-  // }
+  max-width: 100%;
+  margin: 0 auto;
 
   .react-datepicker {
     padding: none;
@@ -71,6 +68,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 
     a {
       text-decoration: none;
@@ -87,6 +86,8 @@
 
 @media only screen and (max-width: 810px) {
   .colorContainer {
+    min-width: unset;
+    width: 100%;
     .greenBox {
       h2 {
         font-size: 1.75rem;
@@ -127,6 +128,8 @@
       grid-row: 4 / 6;
       border: 2px solid $primary-medium;
       font-size: 1.25rem;
+      padding: 1rem 1.4rem;
+      padding-top: 2.5em;
     }
   }
 }
@@ -134,14 +137,17 @@
 @media only screen and (max-width: 500px) {
   .colorContainer {
     .greenBox {
+      padding: 1.2rem 1.4rem;
       h2 {
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
     }
 
     .blueBox {
+      padding: 1rem 1.4rem;
       h3 {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
       }
     }
 
@@ -149,7 +155,42 @@
       grid-column: 1 / 6;
       grid-row: 4 / 6;
       border: 2px solid $primary-medium;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
+      padding: 0.8rem 1.2rem;
+      padding-top: 2.2em;
+      width: calc(100% - 2.4rem);
+      margin: 0 auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .colorContainer {
+    .greenBox {
+      padding: 1rem 1.2rem;
+
+      h2 {
+        font-size: 1.4rem;
+        letter-spacing: 0.05rem;
+      }
+    }
+
+    .blueBox {
+      padding: 0.8rem 1.2rem;
+      line-height: 2rem;
+
+      h3 {
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+      }
+    }
+
+    .textBox {
+      padding: 0.7rem 1rem;
+      padding-top: 2em;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      width: calc(100% - 2rem);
     }
   }
 }

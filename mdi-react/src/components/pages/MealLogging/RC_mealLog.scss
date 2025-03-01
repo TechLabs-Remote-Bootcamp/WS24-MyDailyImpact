@@ -18,7 +18,7 @@
 }
 
 .react-datepicker-wrapper {
-  width: 50%;
+  width: 100%;
 }
 
 .react-datepicker {
@@ -32,10 +32,12 @@
   position: relative;
   line-height: 10px;
   padding: 0;
+  font-size: 1rem;
+  width: 100%;
 }
 
 .react-datepicker__input-container {
-  width: unset;
+  width: 100%;
 
   input {
     border-color: $primary-medium;
@@ -45,6 +47,7 @@
     border-radius: 10px;
     border: 1px solid $primary-medium;
     font-size: 1.2rem;
+    width: 100%;
 
     &:focus-visible {
       outline: 2px solid $primary-medium;
@@ -90,4 +93,35 @@
 
 #calendar-root .react-datepicker-popper {
   z-index: 10;
+}
+
+@media only screen and (max-width: 500px) {
+  .react-datepicker-wrapper {
+    .react-datepicker__input-container {
+      input {
+        height: 2.5rem; 
+        font-size: 1rem; 
+        padding: 0.2em 0.8em; 
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .formpage-grid .buttonSection {
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 0.5rem;
+    
+    .button {
+      margin: 0.2rem; 
+      font-size: 0.8rem !important; 
+      padding: 0.5em 0.8em !important; 
+    }
+  }
+  
+  .react-datepicker__calendar-icon {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
 }
