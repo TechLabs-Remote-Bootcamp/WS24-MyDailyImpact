@@ -10,6 +10,7 @@ export default function HistoryTable() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const [cardView, setCardView] = useState(false);
   const { decreaseMetrics, loadMetrics } = useImpactMetrics();
 
   const fetchData = async () => {
@@ -45,6 +46,19 @@ export default function HistoryTable() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const checkWindowSize = () => {
+      setCardView(window.innerWidth <= 480);
+    };
+
+    checkWindowSize();
+
+    window.addEventListener("resize", checkWindowSize);
+
+    // Clean up
+    return () => window.removeEventListener("resize", checkWindowSize);
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -123,16 +137,33 @@ export default function HistoryTable() {
     }
   }
 
-  // Add a function to go back to dashboard (forcing a reload)
-  const backToDashboard = () => {
-    navigate("/dashboard");
+  const toggleView = () => {
+    setCardView(!cardView);
   };
 
+  // Add a function to go back to dashboard (forcing a reload)
+  // const backToDashboard = () => {
+  //   navigate("/dashboard");
+  // };
+
   return (
-    <>
+    <div className={styles.historyContainer}>
       <p className={styles.textLine}>Total logs: {count}</p>
+
+      {/* CHANGE: Added view toggle button that only appears on small screens */}
+      <div className={styles.viewToggle}>
+        <button onClick={toggleView}>
+          {cardView ? "Switch to Table View" : "Switch to Card View"}
+        </button>
+      </div>
+
       <section className={styles.formSection}>
-        <table className={styles.tableContainer}>
+        {/* CHANGE: Added conditional class for card view */}
+        <table
+          className={`${styles.tableContainer} ${
+            cardView ? styles.cardView : ""
+          }`}
+        >
           <thead className={styles.tableHead}>
             <tr>
               <th>Date</th>
@@ -142,15 +173,20 @@ export default function HistoryTable() {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody className={styles.tabelBody}>
+          <tbody className={styles.tableBody}>
             {logs.map((item) => (
               <tr key={item._id} name="logRow">
-                <td>{formatDate(item.date)}</td>
-                <td>{item.category}</td>
-                <td>{item.mealName}</td>
-                <td>{item.notes}</td>
-                <td className={styles.actions}>
-                  <button onClick={() => deleteMealLog(item._id)}>
+                {/* CHANGE: Added data-label attributes for mobile card view */}
+                <td data-label="Date">{formatDate(item.date)}</td>
+                <td data-label="Category">{item.category}</td>
+                <td data-label="Meal name">{item.mealName}</td>
+                <td data-label="Notes">{item.notes}</td>
+                <td data-label="Action" className={styles.actions}>
+                  {/* CHANGE: Added aria-label for accessibility */}
+                  <button
+                    onClick={() => deleteMealLog(item._id)}
+                    aria-label="Delete meal"
+                  >
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -171,6 +207,6 @@ export default function HistoryTable() {
           </tbody>
         </table>
       </section>
-    </>
+    </div>
   );
 }

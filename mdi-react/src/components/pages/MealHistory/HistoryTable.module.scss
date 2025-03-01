@@ -2,8 +2,10 @@
 @use "../../../styles/fonts.scss" as *;
 
 .historyContainer {
-  width: 90vw;
-  margin: 1rem 3rem;
+  width: 100%;
+  max-width: 90vw;
+  margin: 1rem auto;
+  padding: 0 1rem;
 }
 
 .textLine {
@@ -24,10 +26,12 @@
   border: 3px solid $primary-medium;
   width: 100%;
   align-content: center;
+  overflow-x: auto;
 
   .tableContainer {
     table-layout: fixed;
     width: 100%;
+    min-width: 650px;
     border-collapse: collapse;
     margin-top: 1rem;
     width: 100%;
@@ -96,8 +100,8 @@
 
 .tableBody {
   td {
-    padding: 2em;
-    line-height: 3.2rem;
+    padding: 0.8em;
+    line-height: 1.5rem;
   }
 }
 
@@ -106,12 +110,102 @@
   cursor: pointer;
 
   button {
-    background-color: $primary-extra-light;
+    background-color: transparent;
     border: none;
-    padding: 0;
+    padding: 0.5rem;
+    cursor: pointer;
   }
   svg {
     height: 1.4rem;
     width: 1.4rem;
+  }
+}
+
+.viewToggle {
+  display: none;
+  margin-bottom: 1rem;
+
+  button {
+    background-color: $primary-medium;
+    color: $white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 768px) {
+  // CHANGE: Restore original margins on larger screens
+  .historyContainer {
+    margin: 1rem 3rem;
+  }
+
+  // CHANGE: Increase padding and line height for table cells on larger screens
+  .tableBody td {
+    padding: 1.2em;
+    line-height: 2rem;
+  }
+}
+
+// Small screens (max-width: 767px)
+@media (max-width: 767px) {
+  // CHANGE: Reduce font sizes for table headers
+  .tableHead {
+    font-size: 1rem;
+  }
+
+  // CHANGE: Make column labels smaller
+  .tableContainer th {
+    font-size: 0.9rem;
+  }
+}
+
+// Very small screens (max-width: 480px)
+@media (max-width: 480px) {
+  // CHANGE: Show view toggle button on small screens
+  .viewToggle {
+    display: block;
+  }
+
+  // CHANGE: Add card view styles for mobile screens (major addition)
+  .tableContainer.cardView {
+    min-width: unset;
+
+    // Hide table headers in card view
+    thead {
+      display: none;
+    }
+
+    // Convert rows to cards
+    tbody tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid $primary-medium;
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+
+    // Style cells as labeled fields
+    td {
+      display: flex;
+      text-align: left;
+      padding: 0.3rem 0.5rem;
+
+      // Use data-label attribute to create field labels
+      &:before {
+        content: attr(data-label);
+        font-weight: bold;
+        width: 40%;
+        display: inline-block;
+      }
+    }
+
+    // Align actions to the right
+    .actions {
+      justify-content: flex-end;
+      display: flex;
+    }
   }
 }
