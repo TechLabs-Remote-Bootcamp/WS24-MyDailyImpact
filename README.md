@@ -80,7 +80,7 @@ After you have merged your code to the main branch, **please delete that branch*
    npm run server
    ```
 
-5. Navigate to the `mdi-react` directory and install frontend dependencies:
+5. Open a  new terminal, navigate to the `mdi-react` directory and install frontend dependencies:
     ```bash
     cd mdi-react
     npm install
