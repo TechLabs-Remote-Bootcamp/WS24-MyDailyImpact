@@ -151,6 +151,7 @@ Ourworldindata.org was particularly helpful, as it contained numerous datasets f
 
 ![Daily meat consumption per person, 2021](datascience/images/daily-meat-consumption-per-person.png "Daily meat consumption per person, 2021")
 
+![Per capita meat consumption by type, World, 1960 to 2021](datascience/images/per-capita-meat-consumption-by-type-kilograms-per-year.png "Per capita meat consumption by type, World, 1960 to 2021")
 
 At the same time, some weaknesses in integrating this data into the app were also recognised.
 Apart from technical aspects (as the integration was not part of our learning track), there was also the question of the extent to which splitting farm animals into different types of meat would not make the result too fragmented to be visualised in the app. Therefore, this was not done and only the proportion of a generalised ‘land animal’ was visualised. 
@@ -162,11 +163,15 @@ The synthetic user data includes time series of user logs for 6 different users.
 
 Total meal logged per user:
 
+![Total meal logged per user](datascience/images/Meal_Logs_per_User.png "Total meal logged per user")
 
 CO2 Savings over time per user:
 
+![CO2 Savings over time per user](datascience/images/CO2_over_time.png "CO2 Savings over time per user")
+
 Geographic Distribution of Meal Activities:
 
+![Geographic Distribution of Meal Activities](datascience/images/world_map.png "Geographic Distribution of Meal Activities")
 
 The following predictions were made based on the synthetic user data:
 
@@ -182,17 +187,17 @@ Here is a brief summary:
 
 To develop model, as a step of feature selection, the correlation of the features is analyzed:
 
-
+![Heatmap](datascience/images/Heatmap.png "Heatmap")
 
 Then, logistic regression and random forest models were used to determine the probability of a churn based on the user's inactivity. Multiple performance metrics are checked for each of the models.
 
-
+![Model Performance Metrics](datascience/images/Model_performance_metrics.png "Model Performance Metrics")
 
 **Analysis of carbon footprint**: This analysis demonstrates the power of data-driven forecasting in evaluating the CO₂ impact of shifting from meat-based meals to plant-based alternatives. By applying time-series models to historical CO₂ savings data, we evaluated different forecasting approaches, and selected the most accurate models for both overall savings and individual user contributions. By extending the forecast into 2025, we gain valuable insights into how CO₂ savings might evolve over time. These predictions could encourage the users to change more meals and maximize carbon footprint reductions.
 ARIMA and XGBoot Regression were chosen for the carbon savings prediction. Initially, SARIMAX (Seasonal ARIMA with Exogenous Variables) was considered, but the Augmented Dickey-Fuller (ADF) test confirmed that the time series is stationary (i.e., no significant trend or seasonality). SARIMAX is most useful for non-stationary, seasonal time series, making it unnecessary for this dataset.
 The best-performing model was selected based on Mean Absolute Error (MAE), Mean Squared Error (MSE), and RMSE. Using this model, an extended forecast for 2025 was generated:
 
-
+![Forecast](datascience/images/Forecast.png "Forecast")
 
 Due to the synthetic and very unbalanced data set, the results are exemplary, and with a view to the future, further valuable insights can certainly be gained with real data.
 
