@@ -6,9 +6,13 @@ MyDailyImpact is an app where users can track their impact for every time they e
 
 ## Demos
 
-### App demo: https://drive.google.com/file/d/1fzXw7727m7eS1qdScomGzaXF_Ih1CL3d/view?usp=sharing
+### Overall app demo: 
+
+https://drive.google.com/file/d/1fzXw7727m7eS1qdScomGzaXF_Ih1CL3d/view?usp=sharing
 
 ### AI chatbot demo: 
+
+https://drive.google.com/file/d/1cSGiq3ByMm8vgTVGnIvWuB8nh9-nnmAY/view?usp=sharing
 
 ## Installation
 
