@@ -23,7 +23,6 @@ export function useAuth() {
           email: decoded.email,
           firstName: decoded.firstName,
           lastName: decoded.lastName,
-          //salutation: decoded.salutation,
           birthday: decoded.birthday,
           gender: decoded.gender,
           role: decoded.role || "user",
