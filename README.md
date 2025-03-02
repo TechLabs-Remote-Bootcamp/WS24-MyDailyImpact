@@ -304,7 +304,7 @@ Due to time constraints and being unable to fully integrate the RAG chatbot deve
 
 ## Demos
 
-App: https://drive.google.com/file/d/1cSGiq3ByMm8vgTVGnIvWuB8nh9-nnmAY/view?usp=sharing
+App: https://drive.google.com/file/d/1fzXw7727m7eS1qdScomGzaXF_Ih1CL3d/view?usp=sharing
 
 AI chatbot: https://drive.google.com/file/d/1cSGiq3ByMm8vgTVGnIvWuB8nh9-nnmAY/view?usp=sharing
 
