@@ -176,8 +176,28 @@ For development purposes only:
 - Obtain Mistral API Key: ask Team-Member Ella or Obtain from Mistral AI Platform
 - Qdrant database
 
-## Project Structure
+## 7. Project Structure
 The deeplearning-folder is organized into several directories:
+``` 
+deeplearning/
+├── .venv/                                    # Virtual environment
+├── data/                                     # Recipe data and datasets
+├── rag_pipeline/                             # Main RAG implementation
+│   ├── app/                                  # FastAPI application
+│   │   ├── main.py                           # Main application entry point
+│   │   └── pipeline.py                       # Core RAG pipeline implementation
+│   ├── visualization_pipeline/               # Pipeline visualization tools
+│   │   └── visualization_pipeline_script.py  # Script for generating pipeline visualizations
+│   └── gradio_chat.py                        # Gradio chat interface for testing
+├── reranker/                                 # Neural network reranker
+│   └── similarity_nn.pth                     # Trained model weights
+├── .env                                      # Environment API keys
+├── .python-version                           # Python version specification
+├── pyproject.toml                            # Project dependencies 
+├── uv.lock                                   # UV lock file for dependencies
+└── README.md                                 # Project documentation of the deeplearning-team
+```
+
 
 ## Responsible Team Members
 - Kate
