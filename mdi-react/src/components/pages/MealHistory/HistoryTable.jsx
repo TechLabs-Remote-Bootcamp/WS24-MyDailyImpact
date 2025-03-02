@@ -48,7 +48,7 @@ export default function HistoryTable() {
 
   useEffect(() => {
     fetchData();
-  }, []); // Only run once on mount
+  }, []);
 
   // When data-set is still loading
   if (loading) {
