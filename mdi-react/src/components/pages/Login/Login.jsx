@@ -22,11 +22,6 @@ export default function Login() {
                 </Link>
               </span>
             </p>
-            <p>
-              <Link className={styles.link} to="/forgot-password">
-                Forgot password?
-              </Link>
-            </p>
           </div>
         </div>
       }

@@ -12,7 +12,6 @@ import SignUp from "../src/components/pages/SignUp/SignUp";
 import ContactUs from "./components/pages/ContactUs/ContactUs";
 import Imprint from "../src/components/pages/Imprint/Imprint";
 import Privacy from "../src/components/pages/Privacy/Privacy";
-import ForgotPassword from "../src/components/pages/ForgotPassword/ForgotPassword";
 import MealLogging from "./components/pages/MealLogging/MealLogging";
 import Dashboard from "../src/components/pages/Dashboard/Dashboard";
 import MealHistory from "../src/components/pages/MealHistory/MealHistory";
@@ -34,7 +33,6 @@ export default function App() {
           <Route path="/contact-us" element={<ContactUs />}></Route>
           <Route path="/imprint" element={<Imprint />}></Route>
           <Route path="/privacy" element={<Privacy />}></Route>
-          <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/recipeBot" element={<RecipeBot />}></Route>
           <Route path="/meal-logging" element={<MealLogging />}></Route>
