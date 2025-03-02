@@ -1,8 +1,14 @@
+![logo](mdi-react/src/images/MDI_logo.png "MyDailyImpact")
+
 # Loading FastAPI (from AI), backend, and frontend servers to have the old version of the app’s chatbot render correctly
 
 This is the old working version of the chatbot the AI team created before they made their more advanced RAG chatbot.
 
 **NOTE: while having some responsiveness, this version of the app is not totally responsive. The purpose of this branch is to see what a functioning chatbot looks like on our app. To see our totally responsive app, please see the main branch.**
+
+### Demo:
+
+https://drive.google.com/file/d/1cSGiq3ByMm8vgTVGnIvWuB8nh9-nnmAY/view?usp=sharing
 
 ## Instructions to clone this branch, create and activate the virtual environment, and load the servers to view and use the chatbot:
 
