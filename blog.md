@@ -149,7 +149,7 @@ All API endpoints underwent thorough testing using Postman to verify functionali
 Our first goal was to develop a **scoring system to make users’ impact measurable**. The impact per category per meal was calculated based on open-source data from statistic bureaus and research papers.
 Ourworldindata.org was particularly helpful, as it contained numerous datasets from the Food and Agriculture Organisation of the United Nations (FAO) that were up-to-date and easy to compare. When calculating the number of animal lives saved, for example, the meat consumption of different countries could be compared and included in the calculation, as different eating habits and social circumstances also determine the amount of meat consumed. 
 
-
+![Daily meat consumption per person, 2021](datascience/images/daily-meat-consumption-per-person.png "Daily meat consumption per person, 2021")
 
 
 At the same time, some weaknesses in integrating this data into the app were also recognised.
