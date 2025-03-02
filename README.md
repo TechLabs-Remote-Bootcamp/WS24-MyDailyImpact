@@ -14,6 +14,7 @@
 - [Data-Science](#data-science)
 - [Deep-Learning](#deep-learning)
 - [Deployment](#deployment)
+- [Demos](#demos)
 - [Conclusion](#conclusion)
 - [Team](#team)
 
@@ -301,6 +302,11 @@ This collaborative project demonstrates our ability to integrate modern NLP tech
 
 Due to time constraints and being unable to fully integrate the RAG chatbot developed by the deep learning team into the app, the team is holding off on deployment until this has been fixed and the advanced chatbot is integrated. We anticipate having the app deployed by the end of March 2025.
 
+## Demos
+
+App: https://drive.google.com/file/d/1cSGiq3ByMm8vgTVGnIvWuB8nh9-nnmAY/view?usp=sharing
+
+AI chatbot: https://drive.google.com/file/d/1cSGiq3ByMm8vgTVGnIvWuB8nh9-nnmAY/view?usp=sharing
 
 ## Conclusion
 
