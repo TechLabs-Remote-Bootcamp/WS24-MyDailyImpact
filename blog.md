@@ -64,6 +64,13 @@ Throughout the making of this app, the design changed slightly for various reaso
 
 ![Overview of our Figma project](mdi-react/src/images/FigmaScreenshot_MyDailyImpact.png "My Daily Impact Figma Prototype")
 
+Overview of our Figma project
+
+
+![An original wireframe](mdi-react/src/images/MyDailyImpact_About_Page.png "An original wireframe")
+
+One of our original wireframes
+
 Link to our [Figma project](https://www.figma.com/design/I2vOtpjWD5j5rK6xvlTpKc/MyDailyImpact?node-id=0-1&t=LKLUXXBgkZMK387W-1).
 
 Link to our [Miro Board UI Library Brainstorm](https://miro.com/app/board/uXjVL1DhiZw=/). 
