@@ -15,7 +15,7 @@ This is the old working version of the chatbot the AI team created before they m
 
 ### 2. Create a virtual environment in the root of the project:
 
-- open bash or terminal
+In the same bash or terminal:
 - (Git Bash/Windows) `python -m venv venv`
 - (macOS/Linux) `python3 -m venv venv`
 
