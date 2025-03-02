@@ -113,7 +113,7 @@ export default function HistoryTable() {
       console.log("b", count);
 
       // Optional: Show a success message to the user
-      alert("Meal deleted successfully and impact metrics updated!");
+      //alert("Meal deleted successfully and impact metrics updated!");
     } catch (error) {
       console.error("Error deleting meal log:", error);
       setError(
@@ -122,11 +122,6 @@ export default function HistoryTable() {
       alert("Failed to delete meal: " + error.message);
     }
   }
-
-  // Add a function to go back to dashboard (forcing a reload)
-  const backToDashboard = () => {
-    navigate("/dashboard");
-  };
 
   return (
     <>
