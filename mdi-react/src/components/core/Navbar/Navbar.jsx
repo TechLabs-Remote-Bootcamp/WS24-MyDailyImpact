@@ -1,4 +1,4 @@
-// A alternative leaves navbar for tablet or mobile size; currently not used
+// A alternative leaves navbar for tablet or mobile size; currently not used, but maybe interesting for tablet size in further implementation
 
 // import styles from "./Navbar.module.scss";
 // import { NavLink } from "react-router-dom";
