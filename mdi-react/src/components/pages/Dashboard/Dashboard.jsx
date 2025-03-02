@@ -33,7 +33,6 @@ export default function Dashboard() {
         await initializeAuth();
       }
 
-      // Only load metrics if we're authenticated and have a user ID
       if (isAuthenticated && user?.id && isSubscribed) {
         console.log("Loading metrics for authenticated user:", user.id);
         await loadMetrics(user.id);
@@ -45,7 +44,7 @@ export default function Dashboard() {
     return () => {
       isSubscribed = false;
     };
-  }, [isAuthenticated, loading, initializeAuth]); // Removed user and loadMetrics from dependencies
+  }, [isAuthenticated, loading, initializeAuth]);
 
   if (loading) {
     return <p>Loading...</p>;

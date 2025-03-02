@@ -41,7 +41,6 @@ export default function App() {
         </Routes>
       </div>
       <div className="foot">
-        {/* <div>hello</div> */}
         <Footer />
       </div>
     </ImpactMetricsProvider>

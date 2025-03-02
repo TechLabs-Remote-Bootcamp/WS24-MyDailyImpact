@@ -97,11 +97,10 @@ export default function RC_MealLog() {
     event.preventDefault();
     await handleSubmit(onSubmit)();
     if (logSuccess) {
-      // short delay before resetting to avoid jerking of the page load
       setLogSuccess(!logSuccess);
       setTimeout(() => {
         reset();
-      }, 100); // 100ms delay
+      }, 100); 
       navigate("/dashboard");
     }
   };
@@ -110,10 +109,9 @@ export default function RC_MealLog() {
     event.preventDefault();
     await handleSubmit(onSubmit)();
     if (logSuccess) {
-      // short delay before resetting to avoid jerking of the page load
       setTimeout(() => {
         reset();
-      }, 100); // 100ms delay
+      }, 100);
     }
   };
 

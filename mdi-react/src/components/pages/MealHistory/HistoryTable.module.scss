@@ -204,7 +204,6 @@
     display: block;
   }
 
-  // Fix for vertical character stacking issue on mobile
   .tableContainer.cardView {
     min-width: unset;
     width: 100%;
@@ -215,16 +214,14 @@
       display: none;
     }
 
-    // Fix for vertical character stacking issue in card view
     td {
-      display: flex; // Change to flex to better control label-value layout
+      display: flex; 
       align-items: baseline;
       text-align: left;
       padding: 0.5rem;
       margin-bottom: 0.5rem;
       font-size: 1rem;
       position: relative;
-      // These properties prevent text from stacking vertically character by character
       white-space: normal;
       width: auto;
       word-break: normal;
@@ -235,7 +232,7 @@
       }
     }
 
-    // Fix for card layout to prevent vertical stacking
+
     tbody tr {
       display: block;
       margin-bottom: 1rem;
@@ -244,14 +241,13 @@
       padding: 1.2rem 1rem 0.7rem;
       background-color: white;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      // These width settings help prevent vertical character stacking
       width: 100%;
       min-width: unset;
       max-width: 100%;
-      position: relative; // For proper positioning of the action button
+      position: relative; 
     }
 
-    // Fix button display to prevent layout issues
+
     .actions {
       width: 100%;
       display: flex;
@@ -266,7 +262,6 @@
         justify-content: center;
       }
 
-      // Ensure SVG displays correctly to prevent layout issues
       svg {
         display: block;
         min-width: 20px;
