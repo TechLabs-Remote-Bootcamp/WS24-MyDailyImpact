@@ -20,7 +20,7 @@ Our MyDailyImpact app allows users to track their contribution to a sustainable 
 
 ## 2. Technologies Used
 
-- **Javascript**: Programming language
+- **Javascript/JavaScript Extension (JSX)**: Programming language
 - **React**: Javascript library for web user interfaces
 - **Vite**: Fast Javascript build tool with out-of-the-box support for common web patterns
 - **SCSS**: CSS extension
