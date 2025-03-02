@@ -62,7 +62,7 @@ export default function HistoryTable() {
 
   useEffect(() => {
     fetchData();
-  }, []); // Only run once on mount
+  }, []);
 
   // When data-set is still loading
   if (loading) {
@@ -117,7 +117,7 @@ export default function HistoryTable() {
       setCount((prev) => prev - 1);
 
       // Optional: Show a success message to the user
-      alert("Meal deleted successfully and impact metrics updated!");
+      //alert("Meal deleted successfully and impact metrics updated!");
     } catch (error) {
       console.error("Error deleting meal log:", error);
       setError(

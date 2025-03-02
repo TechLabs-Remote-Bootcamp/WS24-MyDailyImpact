@@ -3,7 +3,7 @@ import HistoryTable from "./HistoryTable.jsx";
 import styles from "./HistoryTable.module.scss";
 
 export default function MealHistory() {
-  // If there would be the need for more design controlled content text in the blue box
+  // If there would be the need for more design controlled content text in the blue box at some point later
   //   just comment in the lines and adjust the text or implement analogue to the green box
   const h3Content = (
     <>

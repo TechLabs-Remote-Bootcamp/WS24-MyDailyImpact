@@ -46,7 +46,7 @@ export default function RC_MealLog() {
       console.error("Error:", error);
       navigate("/login");
     }
-  }, []); // Running once at the mount of the component
+  }, []);
 
   function getId() {
     const jwt =
@@ -116,20 +116,6 @@ export default function RC_MealLog() {
       }, 100); // 100ms delay
     }
   };
-
-  // // just for testing the get request
-  // const onSubmit2 = async () => {
-  //   try {
-  //     const response = await api.get(`/api/meal-logs/${userIdent}`);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     if (error instanceof ApiError) {
-  //       console.error("API Error Status:", error.status);
-  //       console.error("API Error Message:", error.message);
-  //     }
-  //   }
-  // };
 
   return (
     <>
