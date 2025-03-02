@@ -1,4 +1,4 @@
-# WS24-MyDailyImpact
+![logo](mdi-react/src/images/MDI_logo.png "MyDailyImpact")
 
 ## Summary
 
