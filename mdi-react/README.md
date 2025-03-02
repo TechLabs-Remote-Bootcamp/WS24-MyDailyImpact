@@ -18,6 +18,8 @@
 
 Our MyDailyImpact app allows users to track their contribution to a sustainable plant-based lifestyle, meal by meal. In the frontend, the project was implemented with Vite and React.
 
+**Demo**: https://drive.google.com/file/d/1fzXw7727m7eS1qdScomGzaXF_Ih1CL3d/view?usp=sharing
+
 ## 2. Technologies Used
 
 - **Javascript/JavaScript Extension (JSX)**: Programming language
