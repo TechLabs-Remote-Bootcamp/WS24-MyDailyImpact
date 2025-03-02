@@ -2,6 +2,13 @@
 @use "./styles/fonts.scss" as *;
 @use "./custom.scss" as *;
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .head {
   position: sticky;
   top: 0;
@@ -14,7 +21,6 @@
     margin: 0 auto;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    // grid-template-columns: 100vw;   //This was causing horizontal scroll bar!
     grid-template-areas:
       "header"
       "content"
@@ -68,12 +74,10 @@ header {
   .content {
     grid-area: vertical-content;
     min-height: 0;
-    // width: 100%;
   }
 
   .foot {
     grid-area: mobile-footer;
     align-self: end;
-    // width: 100%;
   }
 }

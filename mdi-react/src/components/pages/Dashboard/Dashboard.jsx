@@ -90,7 +90,7 @@ export default function Dashboard() {
               />
             </div>
             <div className="stat-item">
-              <h4>Forest Land Saved (m²)</h4>
+              <h4>Forestland Saved (m²)</h4>
               <p>{metrics.forestLandSaved.toFixed(2)}</p>
               <img className="dashboard-img" src={TreeImg} alt="tree" />
             </div>

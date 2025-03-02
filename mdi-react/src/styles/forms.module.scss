@@ -12,7 +12,7 @@
   }
   a {
     color: $primary;
-    font-weight: bold;
+    font-weight: 600;
     transition: all 100ms ease-in-out;
     &:hover {
       color: $secondary-medium;
@@ -45,8 +45,7 @@
       user-select: text;
       margin: 1em 0;
       align-items: baseline;
-      min-width: 0;
-      width: 95%;
+      width: 100%;
     }
 
     .radioGroup {
@@ -77,6 +76,7 @@
       border-radius: 10px;
       border: 1px solid $primary-medium;
       font-size: 1.2rem;
+      width: 100%;
 
       &:focus-visible {
         outline: 2px solid $primary-medium;
@@ -122,5 +122,66 @@
       justify-self: start;
       padding-bottom: 0.1em;
     }
+  }
+}
+
+
+@media only screen and (max-width: 500px) {
+  .form-container {
+    width: 100%;
+  }
+  
+  .formpage-grid {
+    width: 100%;
+    
+    .formSection {
+      width: 95%;
+      padding-top: 1rem;
+      
+      .inputSection {
+        width: 100%;
+        margin: 0.5em 0;
+      }
+      
+      .input {
+        height: 2.5rem;
+        font-size: 1rem;
+        padding: 0.2em 0.8em;
+      }
+      
+      .label {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+      
+      .radioGroup {
+        gap: 0.4rem;
+      }
+      
+      .radioLabel {
+        font-size: 0.9rem;
+        gap: 0.6rem;
+        
+        &::before {
+          height: 24px;
+          width: 24px;
+        }
+      }
+    }
+    
+    .buttonSection {
+      justify-self: center;
+      margin-top: 0.8rem;
+      
+      button {
+        margin-left: 1rem;
+        font-size: 0.9rem;
+        padding: 0.6em 1em;
+      }
+    }
+  }
+  
+  .errorText {
+    font-size: 0.85rem;
   }
 }
