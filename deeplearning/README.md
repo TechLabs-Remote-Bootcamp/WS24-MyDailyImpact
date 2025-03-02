@@ -5,10 +5,16 @@
 1. [Summary](#1-summary)
 2. [Technologies Used](#2-technologies-used)
 3. [Installation](#3-installation)
+   - [Project Structure](#project-structure)
+   - [Prerequisites](#prerequisites)
+   - [Setup Instructions](#setup-instructions)
 4. [Running the Application](#4-running-the-application)
 5. [API Endpoints](#5-api-endpoints)
 6. [API Keys (Development Only)](#6-api-keys-development-only)
-
+7. [Current Deployment Status](#7-current-deployment-status)
+8. [Responsible Team Members](#8-responsible-team-members)
+ 
+ 
 
 ## 1. Summary
 The Recipe Generator is a plant-based recipe recommendation system that uses Retrieval-Augmented Generation (RAG) combined with a custom neural network reranker to provide personalized vegan recipes. Users can input available ingredients and dietary preferences to receive relevant, high-quality plant-based recipe suggestions from our chatbot "Planty".
@@ -24,6 +30,30 @@ The Recipe Generator is a plant-based recipe recommendation system that uses Ret
 - **UV**: Package manager for dependency management
 
 ## 3. Installation
+
+### Project Structure
+The deeplearning-folder is organized into several directories:
+``` 
+deeplearning/
+├── .venv/                                    # Virtual environment
+├── data/                                     # Recipe data and datasets
+├── rag_pipeline/                             # Main RAG implementation
+│   ├── app/                                  # FastAPI application
+│   │   ├── main.py                           # Main application entry point
+│   │   └── pipeline.py                       # Core RAG pipeline implementation
+│   ├── visualization_pipeline/               # Pipeline visualization tools
+│   │   └── visualization_pipeline_script.py  # Script for generating pipeline visualizations
+│   └── gradio_chat.py                        # Gradio chat interface for testing
+├── reranker/                                 # Neural network reranker components
+│   ├── similarity_nn.pth                     # Trained neural network model
+│   └── trained_reranker.py                   # Reranker implementation
+├── .env                                      # Environment API keys
+├── .python-version                           # Python version specification
+├── pyproject.toml                            # Project dependencies 
+├── uv.lock                                   # UV lock file for dependencies
+└── README.md                                 # Project documentation of the deeplearning-team
+```
+
 
 ### Prerequisites
 - Python 3.9+
@@ -176,29 +206,49 @@ For development purposes only:
 - Obtain Mistral API Key: ask Team-Member Ella or Obtain from Mistral AI Platform
 - Qdrant database
 
-## 7. Project Structure
-The deeplearning-folder is organized into several directories:
-``` 
-deeplearning/
-├── .venv/                                    # Virtual environment
-├── data/                                     # Recipe data and datasets
-├── rag_pipeline/                             # Main RAG implementation
-│   ├── app/                                  # FastAPI application
-│   │   ├── main.py                           # Main application entry point
-│   │   └── pipeline.py                       # Core RAG pipeline implementation
-│   ├── visualization_pipeline/               # Pipeline visualization tools
-│   │   └── visualization_pipeline_script.py  # Script for generating pipeline visualizations
-│   └── gradio_chat.py                        # Gradio chat interface for testing
-├── reranker/                                 # Neural network reranker
-│   └── similarity_nn.pth                     # Trained model weights
-├── .env                                      # Environment API keys
-├── .python-version                           # Python version specification
-├── pyproject.toml                            # Project dependencies 
-├── uv.lock                                   # UV lock file for dependencies
-└── README.md                                 # Project documentation of the deeplearning-team
+
+## 7. Current Deployment Status
+
+**Note:** The application is currently in development and not yet publicly hosted. If you would like to test the application:
+
+1. Contact Team-Member T. V. from the Backend team to get Tailscale access to the development server
+2. Once you have Tailscale access, you can connect to the Qdrant database at `100.107.35.86`
+
+### 7.1 Qdrant Database Setup
+
+The recipe data is stored in the Qdrant vector database. We've processed and stored approximately 16000 vegan recipes with their embeddings. Here's a simplified overview of how the data was prepared and stored:
+
+```python
+# Data loading
+vegan_recipes = pd.read_csv("data/before_embedding_vegan_recipes.csv")
+
+# Load embeddings
+with open("data/recipes_data.json", "r") as f:
+    vector_recipes = json.load(f)
+vector_recipes_dict = {elem['RecipeId']: elem['VectorData'] for elem in vector_recipes}
+
+# Connect to Qdrant
+document_store = QdrantDocumentStore(
+    "100.107.35.86",
+    index="recipe_test",
+    embedding_dim=768,
+    recreate_index=True,
+    return_embedding=True,
+    wait_result_from_api=True,
+)
+
+# Prepare and store documents
+list_documents = []
+for i in range(len(vegan_recipes)):
+    recipe_id = vegan_recipes.iloc[i]["RecipeId"]
+    recipe_text = vegan_recipes.iloc[i]["merged_text"]
+    recipe_vector = vector_recipes_dict[recipe_id]
+
+    list_documents.append(Document(content=recipe_text, embedding=recipe_vector))
+
+document_store.write_documents(list_documents)
 ```
 
-
-## Responsible Team Members
+## 8. Responsible Team Members
 - Kate
 - Ella
