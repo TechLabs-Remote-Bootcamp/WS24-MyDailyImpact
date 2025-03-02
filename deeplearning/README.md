@@ -100,10 +100,80 @@ The Gradio interface provides a user-friendly way to:
 
 ## 5. API Endpoints
 
+### 5.1 Create Conversation
+- **Endpoint**: `/v1/conversations`
+- **Method**: POST
+- **Description**: Creates a new conversation session
+- **Response Example**:
+```json
+{
+  "conversation_id": "12345-67890-abcde"
+}
+```
+
+### 5.2 Delete Conversation
+- **Endpoint**: `/v1/conversations/{conversation_id}`
+- **Method**: DELETE
+- **Description**: Deletes a conversation
+- **Response**: 204 No Content
+
+
+### 5.3 Send Message
+- **Endpoint**: `/v1/conversations/{conversation_id}/messages`
+- **Method**: POST
+- **Request Body**:
+```json
+{
+  "content": "What can I make with tomatoes, basil, and pasta?"
+}
+```
+- **Response Example**:
+```json
+{
+  "content": "I'd recommend a simple Tomato Basil Pasta. Here's how to make it:\n\nIngredients:\n- 8 oz pasta\n- 2 cups cherry tomatoes, halved\n- 1/4 cup fresh basil, chopped\n- 2 cloves garlic, minced\n- 2 tbsp olive oil\n- Salt and pepper to taste\n\nInstructions:\n1. Cook pasta according to package directions.\n2. In a pan, heat olive oil and sauté garlic until fragrant.\n3. Add tomatoes and cook until slightly softened.\n4. Toss with cooked pasta, fresh basil, salt, and pepper.\n5. Serve immediately.\n\nWould you like to try something else with these ingredients?",
+  "metadata": {
+    "rewritten_query": "vegan pasta recipes with tomatoes and basil"
+  }
+}
+```
+
+### 5.4 Get Conversation History
+- **Endpoint**: `/v1/conversations/{conversation_id}`
+- **Method**: GET
+- **Description**: Retrieves the full conversation history
+- **Response Example**:
+```json
+{
+  "conversation_id": "12345-67890-abcde",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What can I make with tomatoes, basil, and pasta?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd recommend a simple Tomato Basil Pasta. Here's how to make it:..."
+    }
+  ],
+  "created_at": "2025-03-02T14:30:45.123456"
+}
+```
+
+### 5.5 Health Check
+- **Endpoint**: `/v1/health`
+- **Method**: GET
+- **Description**: Checks if the API is running properly
+- **Response Example**:
+```json
+{
+  "status": "ok"
+}
+```
+
 
 ## 6. API Keys and connection to Database (Development Only)
 For development purposes only:
-- Mistral API Key: Obtain from Mistral AI Platform or ask Ella
+- Obtain Mistral API Key: ask Team-Member Ella or Obtain from Mistral AI Platform
 - Qdrant database
 
 ## Project Structure
