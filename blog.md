@@ -6,7 +6,7 @@
 - [Problem](#problem)
 - [Solution](#solution)
 - [Limitations](#limitations)
-- [WD](#WD)
+- [Web Development](#web-development)
     - [Frontend](#frontend)
     - [Backend](#backend)
 - [Data-Science](#data-science)
@@ -53,7 +53,7 @@ Also, our intent was to integrate the AI RAG (retrieval-augmented generation) ch
 
 Finally, we would like to inform users that our impact metrics, while being obtained using real data and calculations, are estimates. There are various ways to calculate, for example, how many animals are saved by not consuming animal products. We went with the calculation that we believed to be the most accurate, while considering our time constraints (as was mentioned above, we were unable to show different metrics for each country). Nevertheless, we believe these estimations to be a good measure of one’s impact, but they remain as estimations and should be understood as such by our users.
 
-## WD
+## Web Development
 
 The Web Development team consisted of frontend and backend team members who ensured the app would provide a delightful and smooth UI experience with authentication and useful functionalities.
 
