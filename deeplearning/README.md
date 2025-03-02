@@ -1,77 +1,79 @@
-# Recipe Generator - Deep Learning Feature
 
-## Overview
-This repository contains the deep learning feature of our project - a Recipe Generator. The system uses RAG (Retrieval-Augmented Generation) and a reranker to generate vegan recipes based on available ingredients.
+# MyDailyImpact - Recipe Generator (Deep Learning)
 
-## Features
-- RAG-based recipe generation
-- Reranking for improved recipe relevance
+## Table of Contents
+1. [Summary](#1-summary)
+2. [Technologies Used](#2-technologies-used)
+3. [Installation](#3-installation)
+4. [Running the Application](#4-running-the-application)
+5. [API Endpoints](#5-api-endpoints)
+6. [API Keys (Development Only)](#6-api-keys-development-only)
 
-## Setup Guide
 
-### 1. Environment Setup
+## 1. Summary
+The Recipe Generator is a plant-based recipe recommendation system that uses Retrieval-Augmented Generation (RAG) combined with a custom neural network reranker to provide personalized vegan recipes. Users can input available ingredients and dietary preferences to receive relevant, high-quality plant-based recipe suggestions from our chatbot "Planty".
 
-#### 1.1. Repository Configuration
-Switch to the appropriate branch in git
+## 2. Technologies Used
+- **Python**: Core programming language
+- **FastAPI**: API framework for integration with the main application
+- **Haystack**: For building the RAG pipeline
+- **Mistral LLM**: Natural language understanding and response generation
+- **Qdrant**: Vector database for efficient recipe retrieval
+- **DistilBERT**: For generating embeddings
+- **PyTorch**: Framework for custom neural network reranker
+- **UV**: Package manager for dependency management
 
-#### 1.2. install uv
+## 3. Installation
+
+### Prerequisites
+- Python 3.9+
+- UV package manager
+
+### Setup Instructions
+
+#### 3.1 Clone the Repository
+
+#### 3.2 Setup Virtual Environment:
+Install UV Package Manager: 
 This project uses UV as its package manager. Ensure you have the UV package manager installed on your system. If not, please refer to the [official UV documentation](https://docs.astral.sh/uv/getting-started/) for installation instructions.
 
-
-#### 1.3. Navigate to Project Directory
-Navigate to the `deeplearning` project directory:
-
-```
-# Verify your current location
-pwd
-
-# Access the project directory. Note: The exact path may vary depending on your folder structure.
+Navigate to the deeplearning directory:
+``` 
 cd deeplearning
 ```
 
-
-#### 1.4. Configure Virtual Environment
-Synchronize your virtual environment with the project dependencies specified in pyproject.toml
+Synchronize dependencies:
 ``` 
 uv sync
-``` 
+```
 
-### 2. Mistral API Key Setup
+#### 3.3 API Key Setup
 The RAG pipeline requires a Mistral API key to function properly.
 
-1. Create a Mistral API key by registering at Mistral AI Platform
-2. Once you have your API key, create a `.env` file in the project root directory:
-```
-# Navigate to the project root
-cd deeplearning
-
-# Create and edit .env file
-touch .env
-```
-
-3. Add your Mistral API key to the .env file:
+1. Create a Mistral API key by registering at Mistral AI Platform 
+2. Navigate to the deeplearning directory:
 ``` 
-CopyMISTRAL_API_KEY=your_api_key_here
+cd deeplearning
+```
+3. Save the Mistral API key in a `.env` file
+```
+MISTRAL_API_KEY=your_api_key_here
 ```
 Note: The .env file is already included in the .gitignore to prevent accidentally sharing the API key.
 
 
-### 3. Qdrant Server Connection Setup
+#### 3.4 Qdrant Setup
+The Qdrant vector database is used for storing and retrieving recipe embeddings:
 
-### 4. API Usage Setup
 
-#### 4.1. Navigate to Application Directory
-Navigate to the API application directory:
+## 4. Running the Application
 
-```
-# Verify your current location
-pwd
-
-# Access the application folder. Note: The exact path may vary depending on your folder structure.
+### 4.1 Start the FastAPI Server
+Navigate to the app directory:
+``` 
 cd deeplearning/rag_pipeline/app/
 ```
 
-#### 4.2. Launch the API Server
 Start the FastAPI development server:
 ``` 
 uv run fastapi dev
@@ -79,7 +81,34 @@ uv run fastapi dev
 Note: The virtual environment is automatically activated by UV, so no separate activation step is required.
 
 
-## responsible Team Members
+### 4.2 Run the Gradio Chat Interface
+The project includes a Gradio-based chat interface for **testing the API**:
+```
+cd deeplearning/rag_pipeline/
+
+uv run --with gradio gradio_chat.py
+```
+
+The Gradio interface provides a user-friendly way to:
+- Create new conversations
+- Send messages to the recipe generator
+- View conversation history
+- Delete conversations
+
+### 4.3 Access Points
+
+
+## 5. API Endpoints
+
+
+## 6. API Keys and connection to Database (Development Only)
+For development purposes only:
+- Mistral API Key: Obtain from Mistral AI Platform or ask Ella
+- Qdrant database
+
+## Project Structure
+The deeplearning-folder is organized into several directories:
+
+## Responsible Team Members
 - Kate
 - Ella
-
