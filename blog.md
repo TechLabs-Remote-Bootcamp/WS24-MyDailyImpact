@@ -9,8 +9,8 @@
 - [WD](#WD)
     - [Frontend](#frontend)
     - [Backend](#backend)
-- [Data Science](#data-scienceDS)
-- [Deep Learning](#deep-learningDL)
+- [Data-Science](#data-science)
+- [Deep-Learning](#deep-learning)
 - [Deployment](#deployment)
 - [Conclusion](#conclusion)
 - [Team](#team)
@@ -144,7 +144,7 @@ We deployed a Docker container running Qdrant vector database to support the dee
 All API endpoints underwent thorough testing using Postman to verify functionality and performance. Comprehensive API documentation was created and is available at: https://documenter.getpostman.com/view/26399217/2sAYX6p2Qq#intro
 
 
-## Data Science
+## Data-Science
 
 Our first goal was to develop a **scoring system to make users’ impact measurable**. The impact per category per meal was calculated based on open-source data from statistic bureaus and research papers.
 Ourworldindata.org was particularly helpful, as it contained numerous datasets from the Food and Agriculture Organisation of the United Nations (FAO) that were up-to-date and easy to compare. When calculating the number of animal lives saved, for example, the meat consumption of different countries could be compared and included in the calculation, as different eating habits and social circumstances also determine the amount of meat consumed. 
@@ -196,7 +196,7 @@ The best-performing model was selected based on Mean Absolute Error (MAE), Mean 
 
 Due to the synthetic and very unbalanced data set, the results are exemplary, and with a view to the future, further valuable insights can certainly be gained with real data.
 
-## Deep Learning
+## Deep-Learning
 
 ### Overview
 We developed a plant-based recipe generator that combines retrieval-augmented generation (RAG) with a custom neural network reranker to provide high-quality, personalized vegan recipes. 
