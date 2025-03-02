@@ -46,7 +46,7 @@ export default function RC_MealLog() {
       console.error("Error:", error);
       navigate("/login");
     }
-  }, []); // Running once at the mount of the component
+  }, []);
 
   function getId() {
     const jwt =
