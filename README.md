@@ -4,18 +4,23 @@ This is the old working version of the chatbot the AI team created before they m
 
 **NOTE: while having some responsiveness, this version of the app is not totally responsive. The purpose of this branch is to see what a functioning chatbot looks like on our app. To see our totally responsive app, please see the main branch.**
 
-## Instructions to create and activate the virtual environment and load the servers:
+## Instructions to clone this branch, create and activate the virtual environment, and load the servers to view and use the chatbot:
 
-### 1. Create a virtual environment in the root of the project:
+### 1. Clone this branch of the project:
 
+- `git clone -b old-version-chatbot https://github.com/TechLabs-Remote-Bootcamp/WS24-MyDailyImpact.git`
+- open bash or terminal
+- navigate to the project's directory (`cd WS24-MyDailyImpact`)
+
+
+### 2. Create a virtual environment in the root of the project:
 
 - open bash or terminal
 - (Git Bash/Windows) `python -m venv venv`
 - (macOS/Linux) `python3 -m venv venv`
 
 
-### 2. Activate the virtual environment:
-
+### 3. Activate the virtual environment:
 
 In the same bash or terminal:
 - (GitBash) `source ./venv/Scripts/activate`
@@ -23,14 +28,14 @@ In the same bash or terminal:
 - (macOS/Linux) `source venv/bin/activate`
 
 
-### 3. Install dependencies:
+### 4. Install dependencies:
 
 In the same bash or terminal:
 - `cd deeplearning/rag_pipeline/app`
 - `pip install -r requirement.txt`
 
 
-### 4. Create a .env file in the root directory with the following variables:
+### 5. Create a .env file in the root directory with the following variables:
 
  ```
 APP_PORT=5001
@@ -39,16 +44,16 @@ JWT_SECRET=your_jwt_secret
 MISTRAL_API_KEY=mistral_api_key
 
 ```
-**NOTE: please contact the team lead Vivian (vivianmargothsandler@gmail.com) to acquire these private keys**
+**NOTE: please contact the team lead Vivian (vivianmargothsandler@gmail.com) to acquire these private keys.**
 
 
-### 5. Start the FastAPI server: 
+### 6. Start the FastAPI server: 
 
-In the same bash or terminal from step 3 (you should be in your virtual environment and in the directory deeplearning/rag_pipeline/app):
+In the same bash or terminal from step 4 (you should be in your virtual environment and in the directory deeplearning/rag_pipeline/app):
 - `uvicorn main:app --host 0.0.0.0 --port 8000 --reload`
 
 
-### 6. Start the backend server:
+### 7. Start the backend server:
 
 - open new bash or new terminal
 - `cd backend`
@@ -56,7 +61,7 @@ In the same bash or terminal from step 3 (you should be in your virtual environm
 - `npm run server`
 
 
-### 7. Start the frontend/React development server:
+### 8. Start the frontend/React development server:
 
 - open new bash or new terminal
 - `cd mdi-react`
