@@ -10,7 +10,7 @@
    - [Setup Instructions](#setup-instructions)
 4. [Running the Application](#4-running-the-application)
 5. [API Endpoints](#5-api-endpoints)
-6. [API Keys (Development Only)](#6-api-keys-development-only)
+6. [API Keys and Connection to Database (Development Only)](#6-api-keys-and-connection-to-database-development-only)
 7. [Current Deployment Status](#7-current-deployment-status)
 8. [Responsible Team Members](#8-responsible-team-members)
  
@@ -95,6 +95,11 @@ Note: The .env file is already included in the .gitignore to prevent accidentall
 #### 3.4 Qdrant Setup
 The Qdrant vector database is used for storing and retrieving recipe embeddings:
 
+   - The application is already configured to use a Qdrant instance at `100.107.35.86`
+   - This server is accessible via Tailscale only
+   - Contact T.V. from the Backend team to get Tailscale access
+   - The database contains ~16000 vegan recipes with their embeddings
+   - Data is stored in the `recipe_test` collection
 
 ## 4. Running the Application
 
@@ -200,11 +205,14 @@ The Gradio interface provides a user-friendly way to:
 }
 ```
 
-
-## 6. API Keys and connection to Database (Development Only)
+## 6. API Keys and Connection to Database (Development Only)
 For development purposes only:
-- Obtain Mistral API Key: ask Team-Member Ella or Obtain from Mistral AI Platform
-- Qdrant database
+- Obtain **Mistral API Key**: ask Team-Member Ella or Obtain from Mistral AI Platform
+- **Qdrant Database Connection**:
+  - The Qdrant server is hosted on T.V.'s server at `100.107.35.86`
+  - You need Tailscale access to connect to this server
+  - Contact T.V. from the Backend team to request access credentials
+  - The recipe data is stored in the `recipe_test` collection with 768-dimensional embeddings
 
 
 ## 7. Current Deployment Status
