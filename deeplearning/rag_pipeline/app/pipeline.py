@@ -112,7 +112,7 @@ class EnhancedSimilarityComponent:
 
         top_10_indices = sorted(range(len(similarities)), key=lambda i: similarities[i], reverse=True)[:10]
 
-        print([similarities[i] for i in top_10_indices])  # Top-10 similarity scores
+#        print([similarities[i] for i in top_10_indices])  # Top-10 similarity scores
 
         return {"top_documents": [documents[i] for i in top_10_indices]}
 
