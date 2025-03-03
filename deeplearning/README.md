@@ -9,6 +9,9 @@
    - [Prerequisites](#prerequisites)
    - [Setup Instructions](#setup-instructions)
 4. [Running the Application](#4-running-the-application)
+   - [Start the FastAPI Server](#41-start-the-fastapi-server)
+   - [Run the Gradio Chat Interface](#42-run-the-gradio-chat-interface)
+   - [Access Points](#43-access-points)
 5. [API Endpoints](#5-api-endpoints)
 6. [API Keys and Connection to Database (Development Only)](#6-api-keys-and-connection-to-database-development-only)
 7. [Current Deployment Status](#7-current-deployment-status)
@@ -35,7 +38,6 @@ The Recipe Generator is a plant-based recipe recommendation system that uses Ret
 The deeplearning-folder is organized into several directories:
 ``` 
 deeplearning/
-├── .venv/                                    # Virtual environment
 ├── data/                                     # Recipe data and datasets
 │   ├── data_synthesis2.ipynb 
 │   ├── data_preprocessing.ipynb              # Notebook for data preprocessing
@@ -50,6 +52,7 @@ deeplearning/
 ├── reranker/                                 # Neural network reranker components
 │   ├── similarity_nn.pth                     # Trained neural network model
 │   └── trained_reranker.py                   # Reranker implementation
+├── .venv/                                    # Virtual environment
 ├── .env                                      # Environment API keys
 ├── .python-version                           # Python version specification
 ├── pyproject.toml                            # Project dependencies 
@@ -88,7 +91,7 @@ The RAG pipeline requires a Mistral API key to function properly.
 ``` 
 cd deeplearning
 ```
-3. Save the Mistral API key in a `.env` file
+3. Create a `.env`  file in the root directory with the Mistral API key as variable:
 ```
 MISTRAL_API_KEY=your_api_key_here
 ```
@@ -134,6 +137,7 @@ The Gradio interface provides a user-friendly way to:
 - Delete conversations
 
 ### 4.3 Access Points
+- Gradio chat interface: `http://localhost:7860`
 
 
 ## 5. API Endpoints
@@ -145,7 +149,7 @@ The Gradio interface provides a user-friendly way to:
 - **Response Example**:
 ```json
 {
-  "conversation_id": "12345-67890-abcde"
+  "conversation_id": "ce6f7bcb-9179-408e-ab22-376333267d1b"
 }
 ```
 
@@ -162,7 +166,7 @@ The Gradio interface provides a user-friendly way to:
 - **Request Body**:
 ```json
 {
-  "content": "What can I make with tomatoes, basil, and pasta?"
+  "content": "Give me a recipe for tomatoes, basil, and pasta."
 }
 ```
 - **Response Example**:
@@ -170,7 +174,7 @@ The Gradio interface provides a user-friendly way to:
 {
   "content": "I'd recommend a simple Tomato Basil Pasta. Here's how to make it:\n\nIngredients:\n- 8 oz pasta\n- 2 cups cherry tomatoes, halved\n- 1/4 cup fresh basil, chopped\n- 2 cloves garlic, minced\n- 2 tbsp olive oil\n- Salt and pepper to taste\n\nInstructions:\n1. Cook pasta according to package directions.\n2. In a pan, heat olive oil and sauté garlic until fragrant.\n3. Add tomatoes and cook until slightly softened.\n4. Toss with cooked pasta, fresh basil, salt, and pepper.\n5. Serve immediately.\n\nWould you like to try something else with these ingredients?",
   "metadata": {
-    "rewritten_query": "vegan pasta recipes with tomatoes and basil"
+    "rewritten_query": "Give me a recipe for tomatoes, basil, and pasta."
   }
 }
 ```
@@ -182,11 +186,11 @@ The Gradio interface provides a user-friendly way to:
 - **Response Example**:
 ```json
 {
-  "conversation_id": "12345-67890-abcde",
+  "conversation_id": "ce6f7bcb-9179-408e-ab22-376333267d1b",
   "messages": [
     {
       "role": "user",
-      "content": "What can I make with tomatoes, basil, and pasta?"
+      "content": "Give me a recipe for tomatoes, basil, and pasta.?"
     },
     {
       "role": "assistant",
