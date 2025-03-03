@@ -280,7 +280,7 @@ This project showcases our expertise in natural language processing, machine lea
 - Implemented efficient batch processing and evaluation metrics to optimize model performance
 
 ### Integration with Main Application
-- Seamlessly integrated with the frontend through a robust API architecture
+- Created a robust API architecture
 - Queries processed through our backend pipeline retrieve and rank relevant documents before generating personalized responses
 - Designed for natural conversational flow, allowing users to refine their requests and receive contextually relevant suggestions
 
@@ -321,10 +321,6 @@ Despite some challenges during the last 10 weeks, the MyDailyImpact team used th
 Mentors:
 - Rashmi D'Souza
 - Amir Kahmseh
-
-Track-Mentor:
-- Zubin John
-
 
 ## References
 
