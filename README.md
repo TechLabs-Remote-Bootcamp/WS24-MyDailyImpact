@@ -322,6 +322,10 @@ Mentors:
 - Rashmi D'Souza
 - Amir Kahmseh
 
+Track-Mentor:
+- Zubin John
+
+
 ## References
 
 Dent, M. (2020). “The meat industry is unsustainable.” IDTechEx. Available online at: https://www.idtechex.com/en/research-article/the-meat-industry-is-unsustainable/20231.
