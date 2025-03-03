@@ -37,6 +37,9 @@ The deeplearning-folder is organized into several directories:
 deeplearning/
 ├── .venv/                                    # Virtual environment
 ├── data/                                     # Recipe data and datasets
+│   ├── data_synthesis2.ipynb 
+│   ├── data_preprocessing.ipynb              # Notebook for data preprocessing
+│   └── merge_data.ipynb                      # uploading data to Qdrant-database
 ├── rag_pipeline/                             # Main RAG implementation
 │   ├── app/                                  # FastAPI application
 │   │   ├── main.py                           # Main application entry point
