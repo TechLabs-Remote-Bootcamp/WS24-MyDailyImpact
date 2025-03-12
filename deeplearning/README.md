@@ -214,7 +214,7 @@ The Gradio interface provides a user-friendly way to:
 
 ## 6. API Keys and Connection to Database (Development Only)
 For development purposes only:
-- Obtain **Mistral API Key**: ask Team-Member Ella or Obtain from Mistral AI Platform
+- Obtain **Mistral API Key**: ask Team-Member E. or Obtain from Mistral AI Platform
 - **Qdrant Database Connection**:
   - The Qdrant server is hosted on T.V.'s server at `100.107.35.86`
   - You need Tailscale access to connect to this server
@@ -266,4 +266,4 @@ document_store.write_documents(list_documents)
 
 ## 8. Responsible Team Members
 - Kate
-- Ella
+- E.
