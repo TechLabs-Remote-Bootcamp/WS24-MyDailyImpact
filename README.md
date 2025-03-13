@@ -314,7 +314,7 @@ Despite some challenges during the last 10 weeks, the MyDailyImpact team used th
 
 ## Team
 - DL: Kate Kozelkova, E. Prossinger
-- DS: Menglan Liu, Vanessa Türker, Anna von Bank
+- DS: Menglan Liu, Vanessa Türker, A. von Bank
 - WD (FE): Vivian Sandler, Christine Stockert
 - WD (BE): Tomislav Varga
 

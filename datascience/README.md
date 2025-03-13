@@ -76,7 +76,7 @@ datascience/
 
 ## Team Members
 - Vanessa Turker
-- Anna von Bank
+- A. von Bank
 - Menglan Liu
 - Zubin John (mentor)
 - Rashmi Carol Dsouza (mentor)
