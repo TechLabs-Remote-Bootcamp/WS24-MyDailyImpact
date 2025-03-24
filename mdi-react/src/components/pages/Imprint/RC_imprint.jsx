@@ -9,7 +9,7 @@ export default function RC_imprint() {
           <h5>Owners: </h5>
           <p>
             Techlabs Bootcamp team members, Vivian Sandler, Christine Stockert,
-            Tomislav Varga, Ruchie Roell, Vanessa Türker, Menglan Liu, Anna von
+            Tomislav Varga, Vanessa Türker, Menglan Liu, A. von
             Bank, Elisabeth Prossinger, Kate Kozelkova
           </p>
 
