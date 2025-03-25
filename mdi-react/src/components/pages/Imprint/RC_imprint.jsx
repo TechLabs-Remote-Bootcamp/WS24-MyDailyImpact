@@ -14,7 +14,7 @@ export default function RC_imprint() {
           </p>
 
           <h5>Contact: </h5>
-          <p>mydailyimpact@gmail.com
+          <p>mydailyimpact@gmail.com</p>
             
           <h5>Responsible for this content: </h5>
           <p>Team members listed above</p>
